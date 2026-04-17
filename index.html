@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-17" />
   <meta name="citation_publication_date" content="2026-04-17" />
   <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T21:17:05+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T21:17:05+00:00" />
+  <meta name="dc.modified" content="2026-04-17T21:27:37+00:00" />
+  <meta property="article:modified_time" content="2026-04-17T21:27:37+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/59c267373440b5afda710d095254f03a23c615a1/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/59c267373440b5afda710d095254f03a23c615a1/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/59c267373440b5afda710d095254f03a23c615a1/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -680,13 +680,6 @@ Top row: curated CHD benchmark (550 pathways, 18-pathway CHD reference) comparin
 (<strong>D</strong>) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 5,124 pathways scored). Seed Fisher (corrected) and BIFO full-arm both rank WP_CILIOPATHIES first; Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 3,340, 4,429, and 4,544 respectively.</figcaption>
 </figure>
 </div>
-<div id="fig:schematic" class="fignos">
-<figure>
-<img src="images/fig7_schematic.png" style="width:100.0%" alt="Figure 4: Two-layer graph architecture and the role of Pathway Contribution bridge edges. Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3." />
-<figcaption aria-hidden="true"><span>Figure 4:</span> <strong>Two-layer graph architecture and the role of Pathway Contribution bridge edges.</strong>
-Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3.</figcaption>
-</figure>
-</div>
 <h2 id="baseline-comparison">4 Baseline comparison</h2>
 <p>To evaluate BIFO against conventional enrichment approaches applied to the same graph-derived gene sets, we implemented four baselines evaluated on the identical 550-pathway universe: (B0) degree-weighted seed overlap, (B1) seed-only hypergeometric enrichment, (B2) 1-hop neighborhood hypergeometric enrichment, and (B3) preranked GSEA on raw PPR scores. All Fisher-based tests used Benjamini–Hochberg FDR correction. The BIFO full-arm result (B4) is shown for direct comparison.</p>
 <table style="width:98%;">
@@ -764,8 +757,8 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <p><em>Standard enrichment fails in both the small-sample regime (seed Fisher: unstable overlap) and the large-neighborhood regime (neighborhood Fisher: no discrimination). BIFO-conditioned propagation avoids both failure modes by structuring the graph before scoring. These results are consistent with the three-arm ablation finding in Section 3: pathway-ranking performance improves when admissible bridge edges are present in the propagating graph, and collapses when they are absent.</em></p>
 <div id="fig:baseline_heatmap" class="fignos">
 <figure>
-<img src="images/fig4_baseline_heatmap.png" style="width:100.0%" alt="Figure 5: Baseline enrichment method comparison — KF-CHD and KF-NBL cohorts. Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO; excludes NCC custom pathways pending DDKG integration). (A) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column (darker = better); Mean Ref Rank colour is inverted so lower rank shows darker. — denotes zero or not applicable. (B) KF-NBL heatmap, same layout as A. (C) WP_CILIOPATHIES rank under BIFO full-arm and Seed Fisher (corrected): both methods rank WP_CILIOPATHIES first in both cohorts, confirming convergent cilia-signal recovery despite different ranking mechanisms. Seed Fisher distributes detection more broadly across the 21-pathway reference at higher P@k; BIFO concentrates signal on the peak cilia pathway (peak rank 1 in both cohorts)." />
-<figcaption aria-hidden="true"><span>Figure 5:</span> <strong>Baseline enrichment method comparison — KF-CHD and KF-NBL cohorts.</strong>
+<img src="images/fig4_baseline_heatmap.png" style="width:100.0%" alt="Figure 4: Baseline enrichment method comparison — KF-CHD and KF-NBL cohorts. Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO; excludes NCC custom pathways pending DDKG integration). (A) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column (darker = better); Mean Ref Rank colour is inverted so lower rank shows darker. — denotes zero or not applicable. (B) KF-NBL heatmap, same layout as A. (C) WP_CILIOPATHIES rank under BIFO full-arm and Seed Fisher (corrected): both methods rank WP_CILIOPATHIES first in both cohorts, confirming convergent cilia-signal recovery despite different ranking mechanisms. Seed Fisher distributes detection more broadly across the 21-pathway reference at higher P@k; BIFO concentrates signal on the peak cilia pathway (peak rank 1 in both cohorts)." />
+<figcaption aria-hidden="true"><span>Figure 4:</span> <strong>Baseline enrichment method comparison — KF-CHD and KF-NBL cohorts.</strong>
 Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO; excludes NCC custom pathways pending DDKG integration).
 (<strong>A</strong>) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column (darker = better); Mean Ref Rank colour is inverted so lower rank shows darker. <code>—</code> denotes zero or not applicable.
 (<strong>B</strong>) KF-NBL heatmap, same layout as A.
@@ -836,8 +829,8 @@ Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neig
 <p>In both C4 controls, the source pathway ranked first under BIFO, confirming that degree_norm scoring correctly identifies the most semantically proximal pathway when seeds are drawn from that pathway's own membership. These results demonstrate that BIFO operates on graph topology independent of disease-gene curation.</p>
 <div id="fig:c4_controls" class="fignos">
 <figure>
-<img src="images/fig5_c4_controls.png" style="width:100.0%" alt="Figure 6: C4 pathway-split controls — curated CHD benchmark. Two pathway-family controls using seeds drawn from curated pathway gene lists rather than CHD variant genes. C4/Notch: 30 Notch pathway seeds against 11 Notch/developmental reference pathways (recovery task). C4/MAPK: 63 MAPK seeds against 10 MAPK reference pathways (orthogonal control). (A) Precision@10: Notch 0.50, MAPK 0.10. BIFO recovers within-family signal (Notch) and attenuates orthogonal signal (MAPK) appropriately. (B) Enrichment@10 over background: Notch 25.0×, MAPK 5.5×. (C) Mean rank of target pathways under BIFO-conditioned vs. raw PPR. Raw PPR achieves lower (better) mean rank in both controls. (D) Rank improvement is negative in both controls (Notch −31.5, MAPK −54.4). This is the expected mechanism of BIFO conditioning: Pathway Contribution bridge edges redistribute rank mass toward cross-family pathway neighbourhoods, which produces the +99.1 rank improvement on heterogeneous CHD variant seeds (3 C) but slightly dilutes within-family concentration when seeds already share a pathway identity." />
-<figcaption aria-hidden="true"><span>Figure 6:</span> <strong>C4 pathway-split controls — curated CHD benchmark.</strong>
+<img src="images/fig5_c4_controls.png" style="width:100.0%" alt="Figure 5: C4 pathway-split controls — curated CHD benchmark. Two pathway-family controls using seeds drawn from curated pathway gene lists rather than CHD variant genes. C4/Notch: 30 Notch pathway seeds against 11 Notch/developmental reference pathways (recovery task). C4/MAPK: 63 MAPK seeds against 10 MAPK reference pathways (orthogonal control). (A) Precision@10: Notch 0.50, MAPK 0.10. BIFO recovers within-family signal (Notch) and attenuates orthogonal signal (MAPK) appropriately. (B) Enrichment@10 over background: Notch 25.0×, MAPK 5.5×. (C) Mean rank of target pathways under BIFO-conditioned vs. raw PPR. Raw PPR achieves lower (better) mean rank in both controls. (D) Rank improvement is negative in both controls (Notch −31.5, MAPK −54.4). This is the expected mechanism of BIFO conditioning: Pathway Contribution bridge edges redistribute rank mass toward cross-family pathway neighbourhoods, which produces the +99.1 rank improvement on heterogeneous CHD variant seeds (3 C) but slightly dilutes within-family concentration when seeds already share a pathway identity." />
+<figcaption aria-hidden="true"><span>Figure 5:</span> <strong>C4 pathway-split controls — curated CHD benchmark.</strong>
 Two pathway-family controls using seeds drawn from curated pathway gene lists rather than CHD variant genes. C4/Notch: 30 Notch pathway seeds against 11 Notch/developmental reference pathways (recovery task). C4/MAPK: 63 MAPK seeds against 10 MAPK reference pathways (orthogonal control).
 (<strong>A</strong>) Precision@10: Notch 0.50, MAPK 0.10. BIFO recovers within-family signal (Notch) and attenuates orthogonal signal (MAPK) appropriately.
 (<strong>B</strong>) Enrichment@10 over background: Notch 25.0×, MAPK 5.5×.
@@ -955,8 +948,8 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 </blockquote>
 <div id="fig:resampling" class="fignos">
 <figure>
-<img src="images/fig6_resampling.png" style="width:100.0%" alt="Figure 7: BIFO pathway recovery is stable across 3,003 seed partitions — curated CHD benchmark. Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Primary split (red dashed line in each panel) is the manuscript benchmark split. Box = IQR; whiskers = min/max. (A) Precision@10 distribution across all 3,003 splits. 95.1% of splits achieve P@10 ≥ 0.30; 51.8% achieve P@10 ≥ 0.50; primary split P@10 = 0.70. (B) BIFO Average Precision distribution (primary = 0.408). (C) Seed Fisher Average Precision distribution (primary = 0.431). (D) Rank improvement distribution (raw PPR rank − conditioned PPR rank): all 3,003 splits show positive rank improvement (100% positive); primary split +99.2. BIFO beats Seed Fisher on AP in 22.9% of splits." />
-<figcaption aria-hidden="true"><span>Figure 7:</span> <strong>BIFO pathway recovery is stable across 3,003 seed partitions — curated CHD benchmark.</strong>
+<img src="images/fig6_resampling.png" style="width:100.0%" alt="Figure 6: BIFO pathway recovery is stable across 3,003 seed partitions — curated CHD benchmark. Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Primary split (red dashed line in each panel) is the manuscript benchmark split. Box = IQR; whiskers = min/max. (A) Precision@10 distribution across all 3,003 splits. 95.1% of splits achieve P@10 ≥ 0.30; 51.8% achieve P@10 ≥ 0.50; primary split P@10 = 0.70. (B) BIFO Average Precision distribution (primary = 0.408). (C) Seed Fisher Average Precision distribution (primary = 0.431). (D) Rank improvement distribution (raw PPR rank − conditioned PPR rank): all 3,003 splits show positive rank improvement (100% positive); primary split +99.2. BIFO beats Seed Fisher on AP in 22.9% of splits." />
+<figcaption aria-hidden="true"><span>Figure 6:</span> <strong>BIFO pathway recovery is stable across 3,003 seed partitions — curated CHD benchmark.</strong>
 Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Primary split (red dashed line in each panel) is the manuscript benchmark split. Box = IQR; whiskers = min/max.
 (<strong>A</strong>) Precision@10 distribution across all 3,003 splits. 95.1% of splits achieve P@10 ≥ 0.30; 51.8% achieve P@10 ≥ 0.50; primary split P@10 = 0.70.
 (<strong>B</strong>) BIFO Average Precision distribution (primary = 0.408).
@@ -973,6 +966,13 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 <p>AUROC is near-ceiling (1.000) on this benchmark due to the small held-out set and strongly connected seed neighborhood. These metrics will be more discriminating at full-cohort scale with variant-derived seeds.</p>
 <p><strong><em>Extension study: DisGeNET</em></strong></p>
 <p>The planned DisGeNET extension will test whether adding the evidence-layer sources creates new admissible mechanistic paths to the pathway layer, or whether structural dependence on Pathway Contribution edges persists. This is a structural hypothesis, not a performance optimization.</p>
+<div id="fig:schematic" class="fignos">
+<figure>
+<img src="images/fig7_schematic.png" style="width:100.0%" alt="Figure 7: Two-layer graph architecture and the role of Pathway Contribution bridge edges. Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3." />
+<figcaption aria-hidden="true"><span>Figure 7:</span> <strong>Two-layer graph architecture and the role of Pathway Contribution bridge edges.</strong>
+Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3.</figcaption>
+</figure>
+</div>
 <blockquote>
 <p><em>⚑ [SLOT: Kids First CHD variant-derived seeds] — see Section 8 below.</em></p>
 <p><em>⚑ [SLOT: Kids First NB variant-derived seeds] — see Section 8.3 below.</em></p>
@@ -1243,27 +1243,27 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Fig 4</strong></td>
-<td style="text-align: left;">Two-layer architecture schematic</td>
-<td style="text-align: left;">Conceptual (Python/matplotlib)</td>
-<td style="text-align: left;">Final (fig7_schematic.png)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 5</strong></td>
 <td style="text-align: left;">Baseline comparison heatmap (KF-CHD + KF-NBL)</td>
 <td style="text-align: left;">baseline_comparison.csv</td>
 <td style="text-align: left;">Final (fig4 v3)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 6</strong></td>
+<tr class="even">
+<td style="text-align: left;"><strong>Fig 5</strong></td>
 <td style="text-align: left;">C4 pathway-split controls</td>
 <td style="text-align: left;">c4_*/pathway_metrics.json</td>
 <td style="text-align: left;">Final (fig5 v2)</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 7</strong></td>
+<tr class="odd">
+<td style="text-align: left;"><strong>Fig 6</strong></td>
 <td style="text-align: left;">CHD resampling distribution (3,003 splits)</td>
 <td style="text-align: left;">resampling_summary.json</td>
-<td style="text-align: left;">Final (crossbar); violin re-run pending per-split CSV</td>
+<td style="text-align: left;">Final (violin)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Fig 7</strong></td>
+<td style="text-align: left;">Two-layer architecture schematic</td>
+<td style="text-align: left;">Conceptual (Python/matplotlib)</td>
+<td style="text-align: left;">Final (fig7_schematic.png)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Fig 8</strong></td>
