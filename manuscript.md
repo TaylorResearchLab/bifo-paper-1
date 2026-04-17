@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-17" />
   <meta name="citation_publication_date" content="2026-04-17" />
   <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T11:41:01+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T11:41:01+00:00" />
+  <meta name="dc.modified" content="2026-04-17T11:44:11+00:00" />
+  <meta property="article:modified_time" content="2026-04-17T11:44:11+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/8e17a64650a3d12f703466f6d68c1358b1f82d7d/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8e17a64650a3d12f703466f6d68c1358b1f82d7d/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8e17a64650a3d12f703466f6d68c1358b1f82d7d/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/e4e47b781dc48f5f4ed903d4709f02e9de52f83e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e4e47b781dc48f5f4ed903d4709f02e9de52f83e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e4e47b781dc48f5f4ed903d4709f02e9de52f83e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -406,8 +406,8 @@ mass 1/\|S\| over seed nodes, zero elsewhere), and restart probability
 > **f = (1 − α) · Ã᷊ · f + α · s**
 
 where Ã᷊ is the transpose of Ã (propagation follows edge direction). The
-fixed point is computed by iteration: f\_{t+1} = (1−α)Ã᷊f_t + αs,
-terminating when ‖f\_{t+1} − f_t‖₁ \< 10⁻¹⁰ or after 500 iterations.
+fixed point is computed by iteration: f_{t+1} = (1−α)Ã᷊f_t + αs,
+terminating when ‖f_{t+1} − f_t‖₁ \< 10⁻¹⁰ or after 500 iterations.
 Convergence was achieved in all benchmark runs.
 
 The restart probability α = 0.5 was set before benchmark freeze and was
@@ -449,7 +449,7 @@ being counted as a member of an MSigDB pathway). Duplicate memberships
 are removed.
 
 After size filtering (minimum 8, maximum 300 members) and name-pattern
-exclusion (patterns: \_Q2, \_Q3, \_Q4, \_Q5, \_Q6, MIR), 550 pathways
+exclusion (patterns: _Q2, _Q3, _Q4, _Q5, _Q6, MIR), 550 pathways
 constitute the evaluation universe. The minimum-member filter excludes
 pathways too small for enrichment analysis to be meaningful; the
 maximum-member filter excludes pathways so large that membership is
@@ -1701,13 +1701,13 @@ sections above.
   **Fig 2**  Four-arm gene         results\*.json, score vectors Data ready; figure
              recovery                                            TBD
 
-  **Fig 3**  Three-arm ablation    pathway_metrics\_\*.json      Data ready; figure
+  **Fig 3**  Three-arm ablation    pathway_metrics_\*.json      Data ready; figure
              --- main result                                     TBD
 
   **Fig 4**  Baseline comparison   baseline_comparison.json      Data ready; figure
              heatmap                                             TBD
 
-  **Fig 5**  C4 pathway-split      c4\_\*/pathway_metrics.json   Data ready; figure
+  **Fig 5**  C4 pathway-split      c4_\*/pathway_metrics.json   Data ready; figure
              controls                                            TBD
 
   **Fig 6**  CHD resampling        chd_resampling_summary.json   Data ready; figure
@@ -1723,13 +1723,13 @@ sections above.
   **Table    Four-arm gene-level   results\*.json                Complete
   2**        recovery                                            
 
-  **Table    Three-arm pathway     pathway_metrics\_\*.json      Complete
+  **Table    Three-arm pathway     pathway_metrics_\*.json      Complete
   3**        ablation                                            
 
   **Table    Baseline comparison   baseline_comparison.json      Complete
   4**                                                            
 
-  **Table    C4 pathway-split      c4\_\*/pathway_metrics.json   Complete
+  **Table    C4 pathway-split      c4_\*/pathway_metrics.json   Complete
   5**        controls                                            
 
   **Table    Resampling            chd_resampling_summary.json   Complete
@@ -1739,7 +1739,7 @@ sections above.
   **Supp     YAML predicate        bifo_ddkg_mapping.yaml        Needs formatting
   S1**       classification                                      
 
-  **Supp     Top-10 pathway lists  pathway_scores\_\*.csv        Data ready; table
+  **Supp     Top-10 pathway lists  pathway_scores_\*.csv        Data ready; table
   S2**       per arm                                             TBD
 
   **Supp     Kids First CHD        TBD                           Pending --- see slot
