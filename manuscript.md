@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-17" />
   <meta name="citation_publication_date" content="2026-04-17" />
   <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T19:45:21+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T19:45:21+00:00" />
+  <meta name="dc.modified" content="2026-04-17T20:06:01+00:00" />
+  <meta property="article:modified_time" content="2026-04-17T20:06:01+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f159641f863077671abb26dbe38e0093941ecc5c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f159641f863077671abb26dbe38e0093941ecc5c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f159641f863077671abb26dbe38e0093941ecc5c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/46e842474d52a4614176609da063fead1875c2c5/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/46e842474d52a4614176609da063fead1875c2c5/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/46e842474d52a4614176609da063fead1875c2c5/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
