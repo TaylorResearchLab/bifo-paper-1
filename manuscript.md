@@ -15,10 +15,13 @@ lang: en-US
 date-meta: '2026-04-17'
 author-meta:
 - Deanne M. Taylor
-- Benjamin Stear
 - Taha Mohseni Ahooyi
+- Benjamin Stear
 - Yuanchao Zhang
 - Aditya Lahiri
+- Alan Simmons
+- Tiffany J. Callahan
+- Jonathan C. Silverstein
 header-includes: |
   <!--
   Manubot generated metadata rendered from header-includes-template.html.
@@ -33,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-17" />
   <meta name="citation_publication_date" content="2026-04-17" />
   <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T11:00:59+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T11:00:59+00:00" />
+  <meta name="dc.modified" content="2026-04-17T11:29:09+00:00" />
+  <meta property="article:modified_time" content="2026-04-17T11:29:09+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -45,23 +48,29 @@ header-includes: |
   <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
   <meta name="citation_author_institution" content="Department of Pediatrics, University of Pennsylvania Perelman School of Medicine" />
   <meta name="citation_author_orcid" content="0000-0002-3302-4610" />
-  <meta name="citation_author" content="Benjamin Stear" />
-  <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
   <meta name="citation_author" content="Taha Mohseni Ahooyi" />
+  <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
+  <meta name="citation_author" content="Benjamin Stear" />
   <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
   <meta name="citation_author" content="Yuanchao Zhang" />
   <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
   <meta name="citation_author" content="Aditya Lahiri" />
   <meta name="citation_author_institution" content="Department of Biomedical Informatics, Children&#39;s Hospital of Philadelphia" />
+  <meta name="citation_author" content="Alan Simmons" />
+  <meta name="citation_author_institution" content="Department of Biomedical Informatics, University of Pittsburgh Medical Center, Pittsburgh, PA" />
+  <meta name="citation_author" content="Tiffany J. Callahan" />
+  <meta name="citation_author_institution" content="Manas AI, New York, NY" />
+  <meta name="citation_author" content="Jonathan C. Silverstein" />
+  <meta name="citation_author_institution" content="Department of Biomedical Informatics, University of Pittsburgh Medical Center, Pittsburgh, PA" />
   <link rel="canonical" href="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta property="og:url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta property="twitter:url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/7101669b5e18c5bbd498c4577e63384978bda4c2/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7101669b5e18c5bbd498c4577e63384978bda4c2/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7101669b5e18c5bbd498c4577e63384978bda4c2/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/e0ba8a67c88ea7d17829d14c30e76a1bad2acb7f/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e0ba8a67c88ea7d17829d14c30e76a1bad2acb7f/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e0ba8a67c88ea7d17829d14c30e76a1bad2acb7f/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
