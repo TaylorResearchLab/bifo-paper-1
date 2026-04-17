@@ -1,0 +1,66 @@
+name: Manubot
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      BUILD_PDF:
+        description: 'Generate PDF output'
+        required: false
+        default: 'true'
+      BUILD_DOCX:
+        description: 'Generate DOCX output'
+        required: false
+        default: 'false'
+
+jobs:
+  manubot:
+    name: Build manuscript
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_PULL_REQUEST_SHA: ${{ github.event.pull_request.head.sha }}
+      SPELLCHECK: false
+    defaults:
+      run:
+        shell: bash --login {0}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Environment Variables (Workflow Dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "BUILD_PDF=${{ github.event.inputs.BUILD_PDF }}" >> $GITHUB_ENV
+          echo "BUILD_DOCX=${{ github.event.inputs.BUILD_DOCX }}" >> $GITHUB_ENV
+
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: manubot
+          environment-file: build/environment.yml
+          auto-activate-base: false
+          miniforge-version: latest
+
+      - name: Install Manubot
+        run: bash ci/install.sh
+
+      - name: Build Manuscript
+        run: bash build/build.sh
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: manuscript
+          path: output
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        run: bash ci/deploy.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
