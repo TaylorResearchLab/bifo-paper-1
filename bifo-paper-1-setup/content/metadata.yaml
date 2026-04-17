@@ -1,0 +1,52 @@
+title: >-
+  BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed
+  Pathway Analysis of Rare Variant Cohort Data
+
+keywords:
+  - knowledge graph
+  - pathway enrichment
+  - personalized PageRank
+  - rare variants
+  - congenital heart defects
+  - neuroblastoma
+  - ciliopathy
+  - DDKG
+  - UBKG
+  - bioinformatics
+
+lang: en-US
+
+authors:
+  - name: Deanne M. Taylor
+    initials: DMT
+    orcid: 0000-0002-3302-4610
+    github: taylordm
+    affiliations:
+      - Department of Biomedical Informatics, Children's Hospital of Philadelphia
+      - Department of Pediatrics, University of Pennsylvania Perelman School of Medicine
+    corresponding: true
+    email: taylordm@chop.edu
+
+  - name: Benjamin Stear
+    initials: BS
+    github: benstear
+    affiliations:
+      - Department of Biomedical Informatics, Children's Hospital of Philadelphia
+
+  - name: Taha Mohseni Ahooyi
+    initials: TMA
+    github: tma1
+    affiliations:
+      - Department of Biomedical Informatics, Children's Hospital of Philadelphia
+
+  - name: Yuanchao Zhang
+    initials: YZ
+    github: logstar
+    affiliations:
+      - Department of Biomedical Informatics, Children's Hospital of Philadelphia
+
+  - name: Aditya Lahiri
+    initials: AL
+    github: adilahiri
+    affiliations:
+      - Department of Biomedical Informatics, Children's Hospital of Philadelphia

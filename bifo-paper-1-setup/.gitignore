@@ -1,0 +1,7 @@
+output/
+ci/cache/
+build/references.json
+build/citations.tsv
+*.pyc
+__pycache__/
+.DS_Store

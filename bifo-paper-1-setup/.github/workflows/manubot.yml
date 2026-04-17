@@ -1,0 +1,50 @@
+name: Manubot
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  manubot:
+    name: Build manuscript
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Manubot
+        run: |
+          pip install --upgrade pip
+          pip install manubot[all]
+
+      - name: Build manuscript
+        run: |
+          manubot process \
+            --content-directory=content \
+            --output-directory=output \
+            --cache-directory=ci/cache \
+            --log-level=INFO
+
+      - name: Upload manuscript artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: manuscript
+          path: output/
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output
+          publish_branch: gh-pages
