@@ -47,9 +47,6 @@ jobs:
           auto-activate-base: false
           miniforge-version: latest
 
-      - name: Install Manubot
-        run: bash ci/install.sh
-
       - name: Build Manuscript
         run: bash build/build.sh
 
