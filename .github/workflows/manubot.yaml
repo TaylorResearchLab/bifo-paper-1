@@ -58,7 +58,9 @@ jobs:
 
       - name: Prepare output for Pages
         if: github.ref == 'refs/heads/main'
-        run: cp output/manuscript.html output/index.html
+        run: |
+          cp output/manuscript.html output/index.html
+          cp -r content/images output/images
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
