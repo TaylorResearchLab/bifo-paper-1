@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-17" />
   <meta name="citation_publication_date" content="2026-04-17" />
   <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T20:58:53+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T20:58:53+00:00" />
+  <meta name="dc.modified" content="2026-04-17T20:58:56+00:00" />
+  <meta property="article:modified_time" content="2026-04-17T20:58:56+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/2f9b3b77011685009eb6641c1cba819e7bc418d8/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2f9b3b77011685009eb6641c1cba819e7bc418d8/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2f9b3b77011685009eb6641c1cba819e7bc418d8/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0ca386f27fdc430c88e96a3a5a815d1ff1bd5d8/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0ca386f27fdc430c88e96a3a5a815d1ff1bd5d8/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0ca386f27fdc430c88e96a3a5a815d1ff1bd5d8/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -238,11 +238,6 @@
 <p>The ablation operator conditions edges_raw.csv (94,790 edges) independently of the membership edges, producing 26,059 kept edges of which 16,026 are propagating (with the same 10,033 non-propagating class exclusions applied). This operator excludes all Pathway Contribution edges by construction because those edges appear only in the membership edge file, not in edges_raw. The ablation therefore isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes.</p>
 <p>The mechanistic-only operator applies an additional filter to the full kept-edge set, retaining only edges whose classification tier is mechanistic (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes including direct molecular interaction subsets of Perturbational Effect). This operator excludes Pathway Contribution, Observational Association, and all weak-mechanistic edges from the PPR adjacency matrix. Its composition and the pathway-scoring outcome under this operator are reported in Results Section 3.</p>
 <p>For all operators, adjacency matrices are built as sparse directed binary matrices (edge weight = 1, no differential weighting by flow class). Self-loops are excluded. Row normalization is applied before transpose to produce the column-stochastic matrix used in the PPR recurrence.</p>
-<p><strong>Formal definition of the BIFO conditioning operator.</strong> Let G = (V, E) be the input property graph with node set V and edge set E, where each edge e = (u, v, p) carries predicate p and endpoint SABs s_u, s_v. BIFO conditioning defines a constraint operator C that produces the conditioned propagation graph G_C = (V, E_C), where:</p>
-<blockquote>
-<p>E_C = { e ∈ E : flow_class(predicate(e)) ∈ F_admissible ∧ SAB(source(e)) resolved ∧ SAB(target(e)) resolved }</p>
-</blockquote>
-<p>F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). The operator is graph-agnostic: it depends only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. This means G_C can be computed independently for any property graph whose edges carry DDKG-compatible predicates, enabling the same conditioning rules to be applied to graphs of arbitrary scale — including the full KF-CHD and KF-NBL exports (Section 10).</p>
 <h2 id="personalized-pagerank-propagation">3 Personalized PageRank propagation</h2>
 <p>Signal propagation uses personalized PageRank (PPR), also known as random walk with restart. PPR models the probability that a random walk starting from the seed set visits each node in the graph, with a restart probability α that returns the walk to the seeds at each step. High α keeps signal concentrated near the seeds; low α allows signal to diffuse further into the graph. The balance between local concentration and global diffusion is the mechanism by which BIFO's structural constraints shape the output: by conditioning which edges are in the operator, BIFO determines which paths the random walk can follow.</p>
 <p>Given row-normalized adjacency matrix Ã (n × n), seed vector s (uniform mass 1/|S| over seed nodes, zero elsewhere), and restart probability α, the PPR score vector f satisfies:</p>
@@ -320,13 +315,7 @@
 <h3 id="three-arm-ablation-design">5.3 Three-arm ablation design</h3>
 <p>The three-arm ablation design systematically varies the PPR operator while holding the scoring stage constant across all arms. This design enables direct causal attribution: differences in pathway-level metrics between arms are attributable solely to the presence or absence of specific edge classes in the propagating graph, not to differences in the scoring method, pathway universe, or reference set. The three arms are: (1) Full — BIFO-conditioned operator on edges_merged (94,309 propagating edges, including Pathway Contribution bridge edges); (2) Ablation — BIFO-conditioned operator on edges_raw only (16,026 propagating edges, no Pathway Contribution bridge edges by construction); (3) Mechanistic-only — BIFO-conditioned operator restricted to classification=mechanistic edges (9,710 propagating edges, excluding Pathway Contribution, Observational Association, and weak-mechanistic classes).</p>
 <h2 id="baseline-enrichment-methods">6 Baseline enrichment methods</h2>
-<p>Three conventional enrichment baselines and one graph-structure baseline are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data — not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set.</p>
-<p><strong><em>B0: Degree-weighted seed overlap (graph membership baseline)</em></strong></p>
-<p>For each pathway p, the score is the sum of conditioned-graph node degrees of seed genes that are direct members of p, normalised by pathway size:</p>
-<blockquote>
-<p>score(p) = Σ_{g ∈ seeds ∩ members(p)} degree_conditioned(g) / √(|members(p)|)</p>
-</blockquote>
-<p>where degree_conditioned(g) is the out-degree of gene g in the BIFO-conditioned propagation graph G_C. Pathways are ranked by descending score. This baseline uses graph structure (node connectivity) but not graph propagation: it scores pathways based on how well-connected the directly overlapping seed genes are within the conditioned graph, without running PPR. It provides a lower bound on graph-guided methods and isolates the contribution of propagation beyond local connectivity. B0 is closely related to degree_norm (which uses PPR scores rather than degrees) and can be computed directly from the conditioning output. <em>Results pending implementation in baseline_enrichment.py; the B0 row in Table 4 will be filled in after the next benchmark run.</em></p>
+<p>Three conventional enrichment baselines are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data — not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set.</p>
 <p><strong><em>B1: Seed-only hypergeometric enrichment</em></strong></p>
 <p>For each pathway p, a one-tailed hypergeometric test is applied with N = gene universe size (~13,000 C-prefixed nodes appearing as edge endpoints in edges_merged), K = |members(p) ∩ universe|, n = |seeds ∩ universe|, and k = |members(p) ∩ seeds|. This tests whether the seed genes are over-represented among pathway members relative to the background rate. Pathways are ranked by ascending p-value; Benjamini–Hochberg FDR correction is applied across all 550 pathways jointly. This baseline represents what a bioinformatician would do with just the seed gene list and no graph information.</p>
 <p><strong><em>B2: 1-hop neighborhood hypergeometric enrichment</em></strong></p>
@@ -418,7 +407,7 @@
 <p>All benchmark parameters were locked before analysis began. The frozen package (benchmark_freeze/) comprises 17 files including the three pipeline scripts, the YAML mapping (v0.7.1), the run script, and nine seed/heldout/reference files for the three benchmark cohorts. The run script is self-contained: given nodes.csv, edges_raw.csv, and pathway_membership_edges.csv, it produces every main-benchmark output including all baseline comparisons and C4 controls without manual steps.</p>
 <p>No parameter was modified after the first successful full run. The C4 random seed (42), pathway universe filters (min=8, max=300 members, name patterns), score variant (degree_norm), and α (0.5) were all fixed before the first benchmark run and documented in BENCHMARK_MANIFEST.md alongside expected output metrics. The manifest serves as a reproducibility contract: if any output metric differs from the manifest values, the run is considered non-reproducible.</p>
 <h3 id="scope-of-benchmark-graph">8.3 Scope of benchmark graph</h3>
-<p>The benchmark graph is a controlled projection of the full DDKG, not a comprehensive export. Results reported here are specific to this graph slice and SAB vocabulary selection. The mechanistic-layer finding (pathway structural inaccessibility under mechanistic-only propagation) is a property of this graph's topology under the current SAB selection and should not be generalised to DDKG as a whole without validation on expanded exports incorporating different source vocabularies. Importantly, this result is informative rather than merely cautionary: it reveals that curated pathway membership relationships (Pathway Contribution edges) occupy a structurally distinct layer from mechanistic gene-gene relationships in this knowledge graph architecture, and that formal admission of bridge edges as a propagation-eligible class is what enables signal transfer across layers. This architectural insight holds regardless of whether future expanded exports alter the specific inaccessibility result.</p>
+<p>The benchmark graph is a controlled projection of the full DDKG, not a comprehensive export. Results reported here are specific to this graph slice and SAB vocabulary selection. The mechanistic-layer finding (pathway structural inaccessibility under mechanistic-only propagation) is a property of this graph's topology under the current SAB selection and should not be generalized to DDKG as a whole without validation on expanded exports incorporating different source vocabularies.</p>
 <h2 id="chd-exhaustive-resampling-analysis">9 CHD exhaustive resampling analysis</h2>
 <p>The CHD curated benchmark evaluates BIFO performance from a single hand-selected seed set, which raises the natural question of whether results are specific to that particular 10-gene configuration. To address this, we evaluate all C(15,10) = 3,003 possible 10-gene/5-gene partitions of the 15-gene CHD pool (10 original seeds + 5 original held-out genes). The exhaustive enumeration is made feasible by an in-memory design that builds the PPR operators once and varies only the seed vectors across all splits.</p>
 <h3 id="computational-design">9.1 Computational design</h3>
@@ -536,7 +525,6 @@
 </table>
 <p><strong>Table 1.</strong> <em>Graph conditioning statistics. All values from benchmark run V5. Of the 104,342 kept edges, 94,309 enter the PPR operator as propagating edges; 10,033 are retained in the conditioning output (kept_edges.csv) but excluded from propagation — comprising Observational Association edges (9,909) that pass flow classification but are excluded by operator construction, and a small set of contextual edges (124). The ablation arm conditions edges_raw.csv independently, producing 26,059 kept edges of which 16,026 are propagating (the remainder are the same non-propagating classes).</em></p>
 <p>Of the 94,309 propagating edges in the conditioned arm, 80,200 (85.0%) were classified as Pathway Contribution, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. Signal Transduction accounted for 5,786 (6.1%) and Perturbational Effect for 5,392 (5.7%), with Transcription, Signal Termination, and minor classes comprising the remainder.</p>
-<p>While Pathway Contribution edges dominate numerically, the ablation experiment (Section 3) establishes that they do not generate signal independently: removing bridge edges while preserving all other admissible mechanistic classes reduces P@10 from 0.70 to 0.60, and mechanistic-only propagation — which contains no Pathway Contribution edges — yields exactly zero pathway scores across all 550 pathways. The bridge edges are necessary conduits for transferring mechanistic signal from gene-level propagation to the pathway annotation layer; without upstream mechanistic signal to relay, they have no effect on their own.</p>
 <div id="fig:conditioning" class="fignos">
 <figure>
 <img src="images/fig1_conditioning.png" style="width:100.0%" alt="Figure 1: BIFO conditioning coverage — curated CHD benchmark graph. (A) Edge funnel from 174,352 merged input edges through entity resolution and flow-class conditioning to 94,309 propagating edges (54.1% retention) used by the PPR operator. (B) Dropped edges stratified by cause: unmapped predicates (37,448; 21.5%) and unresolved entities (32,214; 18.5%) account for nearly all losses; non-flow classifications contribute &lt;1%. (C) Flow-class distribution of propagating edges. Pathway Contribution bridge edges (dark blue; 80,200 edges; 85.0% of propagating edges) are the architectural element enabling gene→pathway signal transfer; mechanistic classes (Signal Transduction, Perturbational Effect, Transcription, etc.) comprise the remaining 15%. (D) Concept-node entity resolution: 18,897 of 34,523 nodes (54.7%) resolve to a source vocabulary; the remainder are Level-1 unresolvable under the current SAB selection." />
@@ -688,7 +676,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 </figure>
 </div>
 <h2 id="baseline-comparison">4 Baseline comparison</h2>
-<p>To evaluate BIFO against conventional enrichment approaches applied to the same graph-derived gene sets, we implemented four baselines evaluated on the identical 550-pathway universe: (B0) degree-weighted seed overlap, (B1) seed-only hypergeometric enrichment, (B2) 1-hop neighborhood hypergeometric enrichment, and (B3) preranked GSEA on raw PPR scores. All Fisher-based tests used Benjamini–Hochberg FDR correction. The BIFO full-arm result (B4) is shown for direct comparison.</p>
+<p>To evaluate BIFO against conventional enrichment approaches applied to the same graph-derived gene sets, we implemented three baselines evaluated on the identical 550-pathway universe: (B1) seed-only hypergeometric enrichment, (B2) 1-hop neighborhood hypergeometric enrichment, and (B3) preranked GSEA on raw PPR scores. All Fisher-based tests used Benjamini–Hochberg FDR correction. The BIFO full-arm result (B4) is shown for direct comparison.</p>
 <table style="width:98%;">
 <colgroup>
 <col style="width: 31%" />
@@ -708,14 +696,6 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;"><strong>Mean rank</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Degree overlap (B0)</strong></td>
-<td style="text-align: left;">pending</td>
-<td style="text-align: left;">pending</td>
-<td style="text-align: left;">pending</td>
-<td style="text-align: left;">pending</td>
-<td style="text-align: left;">pending</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;"><strong>Seed-only Fisher</strong></td>
 <td style="text-align: left;">0.300</td>
 <td style="text-align: left;">0.200</td>
@@ -723,7 +703,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;">0.156</td>
 <td style="text-align: left;">120</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><strong>1-hop neighborhood Fisher</strong></td>
 <td style="text-align: left;">0.000</td>
 <td style="text-align: left;">0.000</td>
@@ -731,7 +711,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;">0.037</td>
 <td style="text-align: left;">243</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Raw PPR preranked GSEA</td>
 <td style="text-align: left;">0.100</td>
 <td style="text-align: left;">0.050</td>
@@ -739,7 +719,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;">0.117</td>
 <td style="text-align: left;">162</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Conditioned PPR GSEA</td>
 <td style="text-align: left;">0.100</td>
 <td style="text-align: left;">0.050</td>
@@ -747,7 +727,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;">0.114</td>
 <td style="text-align: left;">110</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><strong>BIFO full-arm (degree_norm)</strong></td>
 <td style="text-align: left;"><strong>0.700</strong></td>
 <td style="text-align: left;"><strong>0.350</strong></td>
@@ -757,7 +737,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 </tr>
 </tbody>
 </table>
-<p><strong>Table 4.</strong> <em>Baseline comparison for the CHD curated benchmark. All methods evaluated on identical 550-pathway universe (background 3.3%). Avg. Prec. = average precision (area under the precision–recall curve over all ranks). B0 (degree-weighted seed overlap) results pending implementation in baseline_enrichment.py; see Methods §6.</em></p>
+<p><strong>Table 4.</strong> <em>Baseline comparison for the CHD curated benchmark. All methods evaluated on identical 550-pathway universe (background 3.3%). Avg. Prec. = average precision (area under the precision–recall curve over all ranks).</em></p>
 <p>Seed-only Fisher (B1) achieved P@10 = 0.30 but produced non-specific top hits (bladder cancer, TP63 targets, TNF response), reflecting the instability of hypergeometric enrichment with a ten-gene query: even minimal pathway overlap produces floor-level p-values, placing cancer-associated gene sets above cardiac pathways.</p>
 <p>Neighborhood Fisher (B2) failed entirely (P@10 = 0.000, AP = 0.037). The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes — 86% of the gene universe — so virtually every pathway had non-trivial neighborhood overlap, eliminating all discriminating power. This demonstrates the neighborhood-inflation problem: graph-derived gene sets are too broad for conventional enrichment without prior signal concentration.</p>
 <p>Raw PPR preranked GSEA (B3) recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P@10 = 0.10, NDCG@10 = 0.220), confirming that graph propagation encodes pathway-relevant signal even before BIFO conditioning. BIFO full-arm (B4) outperformed all baselines across every metric: P@10 = 0.70 (2.3× seed Fisher), NDCG@10 = 0.757 (3.4× raw GSEA), AP = 0.403 (2.6× seed Fisher). The improvement over conditioned PPR GSEA (B3b; AP = 0.114) isolates the contribution of the degree_norm scoring function beyond propagation alone.</p>
@@ -967,8 +947,8 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 <h2 id="limitations-and-extension-path">7 Limitations and extension path</h2>
 <p><strong><em>Graph scope</em></strong></p>
 <p>The benchmark graph is a 1-hop neighborhood export from a defined DDKG SAB subset. Entity resolution covered 54.7% of concept nodes; DisGeNET vocabularies (DGNAGE, DGNGCM, DGNGV) were intentionally excluded to isolate ontology-aligned mechanistic and pathway representations from association-derived evidence layers.</p>
-<p><strong><em>Mechanistic arm scope and structural interpretation</em></strong></p>
-<p>The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies to the present benchmark graph and SAB selection. Rather than a limitation, this reveals an architectural property of ontology-aligned biomedical knowledge graphs: mechanistic edges encode directed biological process flow within the molecular layer (gene–gene signaling, protein interactions, regulatory cascades), while a formally distinct edge class — Pathway Contribution bridges — is required to connect that molecular layer to pathway-level annotations. This separation is not an artefact of incomplete edge coverage; it is a consequence of how curated pathway memberships are represented in the DDKG. The result motivates BIFO’s explicit admission of bridge edges as a coherent, propagation-eligible flow class: without formally recognising and admitting them, no graph propagation method operating on mechanistic edges alone can reach pathway concept nodes in this knowledge graph architecture. Future exports incorporating DisGeNET may introduce additional edges between gene-level and pathway-level nodes through association-layer paths; whether structural dependence on Pathway Contribution edges persists under expanded SAB selections is the core question of the planned extension study (§7, Extension study: DisGeNET).</p>
+<p><strong><em>Mechanistic arm scope</em></strong></p>
+<p>The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies specifically to the present benchmark graph and SAB selection. This is a statement about this graph's topology, not about mechanistic propagation in DDKG generally.</p>
 <p><strong><em>Gene-level recovery ceiling</em></strong></p>
 <p>AUROC is near-ceiling (1.000) on this benchmark due to the small held-out set and strongly connected seed neighborhood. These metrics will be more discriminating at full-cohort scale with variant-derived seeds.</p>
 <p><strong><em>Extension study: DisGeNET</em></strong></p>
@@ -1243,27 +1223,27 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Fig 4</strong></td>
-<td style="text-align: left;">Two-layer architecture schematic</td>
-<td style="text-align: left;">Conceptual (Python/matplotlib)</td>
-<td style="text-align: left;">Final (fig7_schematic.png)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 5</strong></td>
 <td style="text-align: left;">Baseline comparison heatmap (KF-CHD + KF-NBL)</td>
 <td style="text-align: left;">baseline_comparison.csv</td>
 <td style="text-align: left;">Final (fig4 v3)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 6</strong></td>
+<tr class="even">
+<td style="text-align: left;"><strong>Fig 5</strong></td>
 <td style="text-align: left;">C4 pathway-split controls</td>
 <td style="text-align: left;">c4_*/pathway_metrics.json</td>
 <td style="text-align: left;">Final (fig5 v2)</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 7</strong></td>
+<tr class="odd">
+<td style="text-align: left;"><strong>Fig 6</strong></td>
 <td style="text-align: left;">CHD resampling distribution (3,003 splits)</td>
 <td style="text-align: left;">resampling_summary.json</td>
 <td style="text-align: left;">Final (crossbar); violin re-run pending per-split CSV</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Fig 7</strong></td>
+<td style="text-align: left;">Two-layer architecture schematic</td>
+<td style="text-align: left;">Conceptual (BioRender)</td>
+<td style="text-align: left;">Pending BioRender build</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Fig 8</strong></td>
@@ -1293,7 +1273,7 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 <td style="text-align: left;"><strong>Table 4</strong></td>
 <td style="text-align: left;">Baseline comparison (curated benchmark)</td>
 <td style="text-align: left;">baseline_comparison.json</td>
-<td style="text-align: left;">Complete; B0 row pending</td>
+<td style="text-align: left;">Complete</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Table 5</strong></td>
