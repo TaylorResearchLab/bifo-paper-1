@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-17'
+date-meta: '2026-04-18'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-17" />
-  <meta name="citation_publication_date" content="2026-04-17" />
-  <meta property="article:published_time" content="2026-04-17" />
-  <meta name="dc.modified" content="2026-04-17T21:27:37+00:00" />
-  <meta property="article:modified_time" content="2026-04-17T21:27:37+00:00" />
+  <meta name="dc.date" content="2026-04-18" />
+  <meta name="citation_publication_date" content="2026-04-18" />
+  <meta property="article:published_time" content="2026-04-18" />
+  <meta name="dc.modified" content="2026-04-18T06:56:49+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T06:56:49+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3af5ab9f70fdbae6e5a4343fcb09e185892aed17/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -285,7 +285,7 @@ The three-arm ablation design systematically varies the PPR operator while holdi
 
 ## 6 Baseline enrichment methods
 
-Three conventional enrichment baselines and one graph-structure baseline are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data --- not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set.
+Three conventional enrichment baselines and one graph-structure baseline are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data --- not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set. The `baseline_enrichment.py` script accepts two flags that control baseline behaviour: `--kept-edges` enables B0 (requires the conditioning output); `--small-universe` switches Fisher baselines to the pathway-member universe and log-space p-values, required for KF cohort runs (see B1 below).
 
 ***B0: Degree-weighted seed overlap (graph membership baseline)***
 
@@ -293,11 +293,13 @@ For each pathway p, the score is the sum of conditioned-graph node degrees of se
 
 > score(p) = Σ\_{g ∈ seeds ∩ members(p)} degree\_conditioned(g) / √(\|members(p)\|)
 
-where degree\_conditioned(g) is the out-degree of gene g in the BIFO-conditioned propagation graph G_C. Pathways are ranked by descending score. This baseline uses graph structure (node connectivity) but not graph propagation: it scores pathways based on how well-connected the directly overlapping seed genes are within the conditioned graph, without running PPR. It provides a lower bound on graph-guided methods and isolates the contribution of propagation beyond local connectivity. B0 is closely related to degree_norm (which uses PPR scores rather than degrees) and can be computed directly from the conditioning output. *Results pending implementation in baseline\_enrichment.py; the B0 row in Table 4 will be filled in after the next benchmark run.*
+where degree\_conditioned(g) is the out-degree of gene g in the BIFO-conditioned propagation graph G_C. Pathways are ranked by descending score. This baseline uses graph structure (node connectivity) but not graph propagation: it scores pathways based on how well-connected the directly overlapping seed genes are within the conditioned graph, without running PPR. It provides a lower bound on graph-guided methods and isolates the contribution of propagation beyond local connectivity. B0 is closely related to degree_norm (which uses PPR scores rather than degrees) and is computed from the conditioning output via the `--kept-edges` flag in baseline_enrichment.py.
 
 ***B1: Seed-only hypergeometric enrichment***
 
 For each pathway p, a one-tailed hypergeometric test is applied with N = gene universe size (\~13,000 C-prefixed nodes appearing as edge endpoints in edges_merged), K = \|members(p) ∩ universe\|, n = \|seeds ∩ universe\|, and k = \|members(p) ∩ seeds\|. This tests whether the seed genes are over-represented among pathway members relative to the background rate. Pathways are ranked by ascending p-value; Benjamini--Hochberg FDR correction is applied across all 550 pathways jointly. This baseline represents what a bioinformatician would do with just the seed gene list and no graph information.
+
+**Gene universe design and the `--small-universe` flag.** The curated benchmark uses the large universe (all \~13,000 C-prefixed nodes) with standard-precision `hypergeom.sf`, which produces the honest Fisher result: non-specific hits (cancer gene sets, transcription factor targets) dominate because a ten-gene query cannot discriminate against a large background. For KF cohort analyses (1,276--1,395 seeds against \~22,600-gene universe), this implementation causes p-value floor collapse --- `hypergeom.sf` returns 0.0 for every pathway with meaningful overlap, eliminating rank discrimination entirely. The `--small-universe` flag switches to the pathway-member-only universe (\~4K--22K genes depending on the graph), K = \|members(p)\| (all members, not universe-intersected), and log-space computation (`hypergeom.logsf`) to recover correct relative ordering. The two modes test different statistical hypotheses and produce numerically incomparable results; the curated benchmark always uses the default large universe to reproduce the frozen manuscript numbers.
 
 ***B2: 1-hop neighborhood hypergeometric enrichment***
 
@@ -567,7 +569,7 @@ To evaluate BIFO against conventional enrichment approaches applied to the same 
   --------------------------------- ----------- ----------- ------------- ---------------- ---------------
   **Method**                        **P@10**    **P@20**    **NDCG@10**   **Avg. Prec.**   **Mean rank**
 
-  **Degree overlap (B0)**           pending     pending     pending       pending          pending
+  **Degree overlap (B0)**           0.400       0.400       0.492         0.342            84
 
   **Seed-only Fisher**              0.300       0.200       0.215         0.156            120
 
@@ -580,9 +582,11 @@ To evaluate BIFO against conventional enrichment approaches applied to the same 
   **BIFO full-arm (degree_norm)**   **0.700**   **0.350**   **0.757**     **0.403**        **113**
   --------------------------------- ----------- ----------- ------------- ---------------- ---------------
 
-**Table 4.** *Baseline comparison for the CHD curated benchmark. All methods evaluated on identical 550-pathway universe (background 3.3%). Avg. Prec. = average precision (area under the precision--recall curve over all ranks). B0 (degree-weighted seed overlap) results pending implementation in baseline_enrichment.py; see Methods §6.*
+**Table 4.** *Baseline comparison for the CHD curated benchmark. All methods evaluated on identical 550-pathway universe (background 3.3%). Avg. Prec. = average precision (area under the precision--recall curve over all ranks).*
 
 Seed-only Fisher (B1) achieved P@10 = 0.30 but produced non-specific top hits (bladder cancer, TP63 targets, TNF response), reflecting the instability of hypergeometric enrichment with a ten-gene query: even minimal pathway overlap produces floor-level p-values, placing cancer-associated gene sets above cardiac pathways.
+
+The degree-weighted seed overlap baseline (B0) scored pathways by the sum of conditioned-graph out-degrees of overlapping seed genes normalised by pathway size, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.342). BIFO outperforms B0 on both P@10 (0.70 vs. 0.40) and AP (0.403 vs. 0.342), isolating the contribution of PPR propagation beyond local graph connectivity.
 
 Neighborhood Fisher (B2) failed entirely (P@10 = 0.000, AP = 0.037). The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes --- 86% of the gene universe --- so virtually every pathway had non-trivial neighborhood overlap, eliminating all discriminating power. This demonstrates the neighborhood-inflation problem: graph-derived gene sets are too broad for conventional enrichment without prior signal concentration.
 
