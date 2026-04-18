@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T10:04:16+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T10:04:16+00:00" />
+  <meta name="dc.modified" content="2026-04-18T10:21:25+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T10:21:25+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/8c8529faddf524a31f897c3af63299210e7a22f2/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8c8529faddf524a31f897c3af63299210e7a22f2/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8c8529faddf524a31f897c3af63299210e7a22f2/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1400,6 +1400,443 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
      BH correction:
        [@doi:10.1111/j.2517-6161.1995.tb02031.x]  Benjamini & Hochberg 1995
 -->
+<h2 id="supplementary-code-and-data-repository">Supplementary: Code and Data Repository</h2>
+<p>All code, configuration, benchmark data, and pre-computed results supporting
+this manuscript are available at:</p>
+<p><strong>https://github.com/TaylorResearchLab/bifo-graph</strong></p>
+<p>The repository is organized according to FAIR data principles: all benchmark
+inputs are versioned and shipped with the repository; all analysis parameters
+are documented in <code>config/bifo_ddkg_mapping.yaml</code> (v0.7.1); all pipeline
+scripts are self-contained with documented inputs and outputs; and a
+self-contained end-to-end test (<code>examples/minimal_test/</code>) is provided for
+validation without requiring access to the full graph database.</p>
+<h3 id="s6.1-pipeline-scripts-pipeline">S6.1 Pipeline scripts (<code>pipeline/</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 28%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Script</th>
+<th>Purpose</th>
+<th>Paper section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bifo_conditioning.py</code></td>
+<td>BIFO edge conditioning (entity resolution, flow class filtering) and PPR propagation. Primary analysis script.</td>
+<td>Methods §2, §3</td>
+</tr>
+<tr class="even">
+<td><code>score_pathways.py</code></td>
+<td>Pathway scoring from PPR score vectors using degree_norm and alternative variants</td>
+<td>Methods §4</td>
+</tr>
+<tr class="odd">
+<td><code>baseline_enrichment.py</code></td>
+<td>Enrichment baselines B0–B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts <code>--kept-edges</code> and <code>--small-universe</code> flags</td>
+<td>Methods §6</td>
+</tr>
+<tr class="even">
+<td><code>chd_resampling_exhaustive.py</code></td>
+<td>Exhaustive in-memory resampling over all C(15,10) = 3,003 possible 10-gene/5-gene partitions of the CHD gene pool</td>
+<td>Methods §9</td>
+</tr>
+<tr class="odd">
+<td><code>kf_resampling.py</code></td>
+<td>Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort)</td>
+<td>Methods §10.7</td>
+</tr>
+<tr class="even">
+<td><code>seed_cui_lookup.py</code></td>
+<td>Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs</td>
+<td>Methods §10.2</td>
+</tr>
+<tr class="odd">
+<td><code>generate_export_cypher.py</code></td>
+<td>Generate cohort-specific Neo4j export Cypher queries from a seed gene list</td>
+<td>Methods §10.3</td>
+</tr>
+<tr class="even">
+<td><code>build_ncc_membership_edges.py</code></td>
+<td>Build NCC/cilia pathway membership edge files from curated gene sets</td>
+<td>Methods §10.4</td>
+</tr>
+<tr class="odd">
+<td><code>build_cilia_reference.py</code></td>
+<td>Build the cilia pathway reference set by matching pathway names against cilia-related terms</td>
+<td>Methods §10.4</td>
+</tr>
+<tr class="even">
+<td><code>clean_cypher_output.py</code></td>
+<td>Clean artifact characters introduced by cypher-shell CSV export</td>
+<td>Methods §10.3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.2-shell-pipeline-wrappers-scripts">S6.2 Shell pipeline wrappers (<code>scripts/</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 29%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Script</th>
+<th>Stage</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>run_full_pipeline.sh</code></td>
+<td>All</td>
+<td>End-to-end pipeline for one cohort (chd or nbl). Calls all stage scripts in sequence</td>
+</tr>
+<tr class="even">
+<td><code>setup_workspace.sh</code></td>
+<td>0</td>
+<td>Create output directory structure</td>
+</tr>
+<tr class="odd">
+<td><code>run_kf_chd_export.sh</code></td>
+<td>1</td>
+<td>Neo4j export for KF-CHD cohort</td>
+</tr>
+<tr class="even">
+<td><code>run_kf_nbl_export.sh</code></td>
+<td>1</td>
+<td>Neo4j export for KF-NBL cohort</td>
+</tr>
+<tr class="odd">
+<td><code>clean_files.sh</code></td>
+<td>2.1</td>
+<td>Clean cypher-shell output CSVs</td>
+</tr>
+<tr class="even">
+<td><code>build_ncc_edges.sh</code></td>
+<td>2.2</td>
+<td>Build NCC/cilia membership edges</td>
+</tr>
+<tr class="odd">
+<td><code>merge_files.sh</code></td>
+<td>2.3</td>
+<td>Merge edge CSV files into <code>edges_merged.csv</code></td>
+</tr>
+<tr class="even">
+<td><code>run_seed_lookup.sh</code></td>
+<td>2.4</td>
+<td>Map gene symbols to CUIs</td>
+</tr>
+<tr class="odd">
+<td><code>run_conditioning.sh</code></td>
+<td>3</td>
+<td>BIFO conditioning + PPR propagation</td>
+</tr>
+<tr class="even">
+<td><code>run_scoring.sh</code></td>
+<td>4</td>
+<td>Pathway scoring</td>
+</tr>
+<tr class="odd">
+<td><code>run_baseline.sh</code></td>
+<td>5</td>
+<td>Baseline enrichment comparison</td>
+</tr>
+<tr class="even">
+<td><code>run_resampling.sh</code></td>
+<td>6</td>
+<td>Bootstrap resampling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.3-configuration-config">S6.3 Configuration (<code>config/</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>config/bifo_ddkg_mapping.yaml</code></td>
+<td>BIFO flow class definitions, v0.7.1. Contains 251 predicate-to-flow entries, 96 explicit non-flow designations, and 46 observational edge definitions across 5 classification tiers. This file is the primary scientific artifact of the BIFO framework; all conditioning results are determined by its contents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.4-neo4j-export-queries-cypher">S6.4 Neo4j export queries (<code>cypher/</code>)</h3>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 45%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Cohort/benchmark</th>
+<th>Graph export</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chd_curated_export_queries.cypher</code></td>
+<td>CHD curated benchmark</td>
+<td>1-hop neighborhood of 15 CHD seed and held-out genes</td>
+</tr>
+<tr class="even">
+<td><code>c4_notch_export_queries.cypher</code></td>
+<td>C4/Notch control</td>
+<td>REACTOME_SIGNALING_BY_NOTCH member neighborhood</td>
+</tr>
+<tr class="odd">
+<td><code>c4_mapk_export_queries.cypher</code></td>
+<td>C4/MAPK control</td>
+<td>REACTOME_MAPK_FAMILY_SIGNALING_CASCADES member neighborhood</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_export_queries.cypher</code></td>
+<td>KF-CHD cohort</td>
+<td>1-hop neighborhood of KF-CHD variant gene seeds</td>
+</tr>
+<tr class="odd">
+<td><code>kf_nbl_export_queries.cypher</code></td>
+<td>KF-NBL cohort</td>
+<td>1-hop neighborhood of KF-NBL variant gene seeds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.5-benchmark-and-cohort-data-data">S6.5 Benchmark and cohort data (<code>data/</code>)</h3>
+<p><strong>Curated CHD benchmark (<code>data/benchmark/</code>)</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chd_curated_edges_raw.csv.zip</code></td>
+<td>94,790 seed-centered mechanistic and association edges for the curated CHD benchmark graph</td>
+</tr>
+<tr class="even">
+<td><code>chd_curated_pathway_membership_edges.csv.zip</code></td>
+<td>79,562 gene-to-pathway membership edges (MSigDB, WikiPathways, GO)</td>
+</tr>
+<tr class="odd">
+<td><code>chd_pathway_reference.txt</code></td>
+<td>18 CHD reference pathway CUIs used for evaluation</td>
+</tr>
+<tr class="even">
+<td><code>c4_notch_seed_nodes.txt</code></td>
+<td>30 HGNC gene CUIs — 70% split of REACTOME_SIGNALING_BY_NOTCH members (numpy seed=42)</td>
+</tr>
+<tr class="odd">
+<td><code>c4_notch_heldout_nodes.txt</code></td>
+<td>14 held-out gene CUIs — 30% split of REACTOME_SIGNALING_BY_NOTCH</td>
+</tr>
+<tr class="even">
+<td><code>c4_notch_pathway_reference.txt</code></td>
+<td>11 Notch-family reference pathway CUIs</td>
+</tr>
+<tr class="odd">
+<td><code>c4_mapk_seed_nodes.txt</code></td>
+<td>63 HGNC gene CUIs — 70% split of REACTOME_MAPK_FAMILY_SIGNALING_CASCADES</td>
+</tr>
+<tr class="even">
+<td><code>c4_mapk_heldout_nodes.txt</code></td>
+<td>28 held-out gene CUIs — 30% split of REACTOME_MAPK_FAMILY_SIGNALING_CASCADES</td>
+</tr>
+<tr class="odd">
+<td><code>c4_mapk_pathway_reference.txt</code></td>
+<td>10 MAPK-family reference pathway CUIs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-CHD cohort (<code>data/cohorts/chd/</code>)</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>kf_chd_seeds_maf001.txt</code></td>
+<td>Primary seed gene list: 1,287 HGNC genes with AutoGVP P/LP variants at MAF ≤0.001, n≥1 carrier (primary analysis)</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_seeds_maf001_n2.txt</code></td>
+<td>Carrier-filtered seeds: 387 genes with n≥2 carriers at MAF ≤0.001</td>
+</tr>
+<tr class="odd">
+<td><code>kf_chd_seeds_maf001_n3.txt</code></td>
+<td>Carrier-filtered seeds: 146 genes with n≥3 carriers at MAF ≤0.001</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_seeds_maf01.txt</code></td>
+<td>Broader-filter seeds at MAF ≤0.01</td>
+</tr>
+<tr class="odd">
+<td><code>kf_chd_seeds.txt</code></td>
+<td>Original unfiltered seed gene list</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_seed_cuis.txt</code></td>
+<td>CUI-resolved seed list (pipeline input for conditioning)</td>
+</tr>
+<tr class="odd">
+<td><code>kf_chd_seed_nodes.csv.zip</code></td>
+<td>Full seed node metadata from DDKG export</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_ncc_reference.txt</code></td>
+<td>NCC cilia pathway reference set for KF-CHD evaluation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-NBL cohort (<code>data/cohorts/nbl/</code>)</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>kf_nbl_seeds_maf001.txt</code></td>
+<td>Primary seed gene list: 1,406 HGNC genes with AutoGVP P/LP variants at MAF ≤0.001, n≥1 carrier</td>
+</tr>
+<tr class="even">
+<td><code>kf_nbl_seeds_maf001_n2.txt</code></td>
+<td>Carrier-filtered seeds: 401 genes with n≥2 carriers at MAF ≤0.001</td>
+</tr>
+<tr class="odd">
+<td><code>kf_nbl_seeds_maf001_n3.txt</code></td>
+<td>Carrier-filtered seeds: 147 genes with n≥3 carriers at MAF ≤0.001</td>
+</tr>
+<tr class="even">
+<td><code>kf_nbl_seeds_maf01.txt</code></td>
+<td>Broader-filter seeds at MAF ≤0.01</td>
+</tr>
+<tr class="odd">
+<td><code>kf_nbl_seeds.txt</code></td>
+<td>Original unfiltered seed gene list</td>
+</tr>
+<tr class="even">
+<td><code>kf_nbl_ncc_reference.txt</code></td>
+<td>NCC cilia pathway reference set for KF-NBL evaluation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.6-pre-computed-results-results">S6.6 Pre-computed results (<code>results/</code>)</h3>
+<p><strong>CHD benchmark (<code>results/chd_benchmark/</code>)</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chd_resampling_summary.json</code></td>
+<td>Summary statistics for all 3,003 exhaustive CHD seed-split results: per-metric distributions (mean, SD, min, P25, median, P75, max), robustness counts, and primary split percentile ranks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-CHD conditioning outputs (<code>results/kf_chd/</code>)</strong></p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>results.json</code></td>
+<td>Four-arm PPR gene-level recovery metrics (AUROC, AUPRC, entropy, nonzero fraction)</td>
+</tr>
+<tr class="even">
+<td><code>results_node_index.json</code></td>
+<td>Node CUI → matrix index mapping for score vector interpretation</td>
+</tr>
+<tr class="odd">
+<td><code>results_kept_edges.csv.zip</code></td>
+<td>BIFO-conditioned kept edges with flow class and propagating flag annotations</td>
+</tr>
+<tr class="even">
+<td><code>results_scores_cond.npy</code></td>
+<td>Conditioned (BIFO full-arm) PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_scores_raw.npy</code></td>
+<td>Raw (unconditioned) PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_scores_meta.npy</code></td>
+<td>Metadata-filtered PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_scores_rand.npy</code></td>
+<td>Random sparsification control PPR score vector</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s6.7-minimal-test-examplesminimal_test">S6.7 Minimal test (<code>examples/minimal_test/</code>)</h3>
+<p>A self-contained end-to-end validation run using a 15-gene CHD seed set. Does
+not require a Neo4j connection for the scoring stages. Running <code>bash run_test.sh</code>
+from this directory executes BIFO conditioning and pathway scoring and writes
+outputs to <code>test_output/</code>. Expected outputs and success criteria are documented
+in <code>examples/minimal_test/README.md</code>.</p>
+<h3 id="s6.8-fair-compliance-notes">S6.8 FAIR compliance notes</h3>
+<p><strong>Findable:</strong> Repository is publicly available at
+https://github.com/TaylorResearchLab/bifo-graph with a persistent DOI via
+Zenodo (DOI: TBD at publication).</p>
+<p><strong>Accessible:</strong> All benchmark data and pre-computed results are available
+without authentication. KF cohort variant data requires dbGaP authorization
+(phs001138, phs001436) per Kids First data access policy.</p>
+<p><strong>Interoperable:</strong> Edge and node files use standard CSV format with documented
+column headers. Score vectors use NumPy binary format (.npy). Configuration uses
+YAML. All file formats are documented in this supplement and in the repository
+README.</p>
+<p><strong>Reusable:</strong> The BIFO conditioning operator (<code>bifo_conditioning.py</code>) and YAML
+mapping (<code>bifo_ddkg_mapping.yaml</code>) are graph-agnostic and can be applied to any
+property graph whose edges carry DDKG-compatible predicates. Code is released
+under MIT License; benchmark data under CC BY 4.0.</p>
 <!-- default theme -->
 
 <style>
