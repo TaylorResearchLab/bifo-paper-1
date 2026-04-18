@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T23:02:19+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T23:02:19+00:00" />
+  <meta name="dc.modified" content="2026-04-18T23:09:53+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T23:09:53+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb799e692fa790ccb40ab0054e4bb084676df189/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb799e692fa790ccb40ab0054e4bb084676df189/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb799e692fa790ccb40ab0054e4bb084676df189/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -408,7 +408,7 @@ Export queries were generated dynamically from each seed list using generate_exp
 
 ### 10.4 Pathway scoring and discovery evaluation
 
-Pathway scoring used the degree_norm scoring variant against a universe of 5,124 pathways for KF-CHD and 5,203 pathways for KF-NBL, each passing minimum-member (≥8) and name-pattern filters. No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 20-pathway cilia reference set derived by matching pathway names against cilia-related terms (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 19 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
+Pathway scoring used the degree_norm scoring variant against a universe of 5,104 pathways for KF-CHD and 5,183 pathways for KF-NBL, each passing minimum-member (≥8) and name-pattern filters. No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 19-pathway cilia reference set derived by matching pathway names against cilia-related terms (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 18 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
 
 ### 10.5 Baseline enrichment methods for KF cohort analysis
 
@@ -432,7 +432,7 @@ All five methods were evaluated on identical pathway universes to enable direct 
 
 To assess the stability of cilia pathway recovery and the relationship between seed set size and signal, a bootstrap resampling analysis was performed for both cohorts. For each of three seed sizes (n=10, 20, 30), 500 bootstrap draws were made by sampling uniformly without replacement from the full seed CUI pool. For each draw, BIFO scoring and seed-only Fisher enrichment were run using the identical pathway universe and cilia reference set as the primary analysis. The primary cohort run (full 1,276/1,395-gene seed set) was also evaluated as a reference point (boot_id = −1).
 
-Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 20-pathway cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
+Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 19-pathway cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
 
 The bootstrap analysis was designed to address two questions: (1) whether cilia pathway recovery requires aggregate cohort-scale variant burden or can emerge from small random gene subsets; and (2) whether BIFO or standard Fisher enrichment is more sensitive for detecting cilia signal at small seed sizes. Results are reported in Section 8.4.
 
@@ -556,7 +556,7 @@ Top row: curated CHD benchmark (550 pathways, 18-pathway CHD reference) comparin
 (**A**) Precision@10: Full 0.70, Ablation 0.60, Mechanistic 0.00.
 (**B**) Enrichment@10 over background rate: Full 21.4×, Ablation 18.3×, Mechanistic 0×.
 (**C**) Rank improvement (raw PPR rank − conditioned PPR rank): Full +99.1 positions, Mechanistic +34.7 (uninterpretable; see text), Ablation −11.2.
-(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 5,124 pathways scored). Seed Fisher (corrected) and BIFO full-arm both rank WP_CILIOPATHIES first; Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 3,340, 4,429, and 4,544 respectively.
+(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 5,104 pathways scored). Seed Fisher (corrected) and BIFO full-arm both rank WP_CILIOPATHIES first; Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 3,325, 4,414, and 4,529 respectively.
 ](images/fig3_ablation.png){#fig:ablation width="100%"}
 
 ## 4 Baseline comparison
@@ -710,43 +710,43 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 
 ### 8.1 Fisher enrichment at cohort scale: implementation matters
 
-Applying seed-only hypergeometric enrichment (B1) to the 1,276-gene KF-CHD variant set requires careful implementation. A naive implementation using standard-precision p-value computation causes float underflow: with 1,276 seeds against a \~22,628-gene universe, scipy.stats.hypergeom.sf returns 0.0 for any pathway with meaningful overlap, collapsing rank discrimination entirely and placing WP_CILIOPATHIES (61/170 members; BH p = 9.68×10⁻³¹) at rank 768 alongside hundreds of non-specific pathways. Once corrected to use log-space hypergeometric computation (hypergeom.logsf) with a pathway-member-only gene universe, Fisher correctly recovers WP_CILIOPATHIES at rank 1 of 4,551 pathways (BH p = 9.68×10⁻³¹, overlap = 61/170 members). WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR ranks 3rd (BH p = 8.29×10⁻¹⁴) and WP_JOUBERT_SYNDROME ranks 4th (BH p = 8.29×10⁻¹⁴), confirming that cilia enrichment signal is present and detectable by both approaches when Fisher is correctly implemented.
+Applying seed-only hypergeometric enrichment (B1) to the 1,276-gene KF-CHD variant set requires careful implementation. A naive implementation using standard-precision p-value computation causes float underflow: with 1,276 seeds against a \~22,628-gene universe, scipy.stats.hypergeom.sf returns 0.0 for any pathway with meaningful overlap, collapsing rank discrimination entirely and placing WP_CILIOPATHIES (61/170 members; BH p = 9.68×10⁻³¹) at rank 768 alongside hundreds of non-specific pathways. Once corrected to use log-space hypergeometric computation (hypergeom.logsf) with a pathway-member-only gene universe, Fisher correctly recovers WP_CILIOPATHIES at rank 1 of 4,535 pathways (BH p = 9.68×10⁻³¹, overlap = 61/170 members). WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR ranks 3rd (BH p = 8.29×10⁻¹⁴) and WP_JOUBERT_SYNDROME ranks 4th (BH p = 8.29×10⁻¹⁴), confirming that cilia enrichment signal is present and detectable by both approaches when Fisher is correctly implemented.
 
-Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighborhood expands to \~58,846 genes --- essentially the full graph --- giving near-identical p-values to all pathways. Preranked GSEA on raw PPR scores (B3) ranked WP_CILIOPATHIES at position 3,340; on conditioned PPR scores (B3b) at position 4,429. Gene-level PPR scores without BIFO\'s pathway-level degree normalization do not concentrate signal specifically on cilia pathway concept nodes.
+Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighborhood expands to \~58,846 genes --- essentially the full graph --- giving near-identical p-values to all pathways. Preranked GSEA on raw PPR scores (B3) ranked WP_CILIOPATHIES at position 3,325; on conditioned PPR scores (B3b) at position 4,414. Gene-level PPR scores without BIFO\'s pathway-level degree normalization do not concentrate signal specifically on cilia pathway concept nodes.
 
 **Table 8.1. KF-CHD method comparison --- WP_CILIOPATHIES rank and cilia pathway recovery**
 
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
   **Method**                    **WP_CILIOPATHIES rank**   **Top-5 includes cilia?**   **Key statistic**
 
-  seed_fisher (B1, corrected)   1 / 4,551                  Yes (ranks 1, 3, 4)         BH p=9.68×10⁻³¹; overlap=61/170
+  seed_fisher (B1, corrected)   1 / 4,535                  Yes (ranks 1, 3, 4)         BH p=9.68×10⁻³¹; overlap=61/170
 
   neighborhood_fisher (B2)      not top-50                 No                          58,846-gene neighborhood; no discrimination
 
-  raw_ppr_gsea (B3)             3,340 / 4,551              No                          Gene-level PPR insufficient
+  raw_ppr_gsea (B3)             3,325 / 4,535              No                          Gene-level PPR insufficient
 
-  cond_ppr_gsea (B3b)           4,429 / 4,551              No                          Conditioned scores insufficient
+  cond_ppr_gsea (B3b)           4,414 / 4,535              No                          Conditioned scores insufficient
 
-  BIFO full-arm (B4)            1 / 5,124                  Yes (rank 1)                degree_norm=6.26×10⁻⁶; not hub-flagged
+  BIFO full-arm (B4)            1 / 5,104                  Yes (rank 1)                degree_norm=6.26×10⁻⁶; not hub-flagged
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
 
 Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMARY_CILIUM_CRISPR (3), WP_JOUBERT_SYNDROME (4), REACTOME_DISORDERS_TRANSMEMBRANE (5). BIFO top-5: WP_CILIOPATHIES (1), YOSHIMURA_MAPK8 (2; hub-flagged), NABA_MATRISOME (3; hub-flagged), Ionophore activity (4), REACTOME_DISEASES_OF_METABOLISM (5; hub-flagged).
 
 ### 8.2 BIFO recovers ciliopathy signal in discovery mode
 
-Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,124 pathways (degree_norm = 6.26×10⁻⁶; not hub-flagged). This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the \~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.
+Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (degree_norm = 6.26×10⁻⁶; not hub-flagged). This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the \~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.
 
-BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 22 native cilia, ciliopathy, and hedgehog pathway annotations in the 5,124-pathway universe, all 22 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
+BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 19 cilia, ciliopathy, and hedgehog pathway annotations in the 5,104-pathway universe, all 19 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
 
-\[⚑ Supplementary Table S3: Full top-20 ranked pathways per method for KF-CHD. To be typeset from kf_chd_results/baseline_comparison.csv.\]
+\[⚑ Supplementary Table ST3: Full top-20 ranked pathways per method for KF-CHD and KF-NBL. To be typeset from kf_chd_results/baseline_comparison.csv.\]
 
-\[⚑ Supplementary Table S4: Head-to-head rank comparison --- seed_fisher rank vs. BIFO rank for all 4,551 pathways, sorted by BIFO rank.\]
+\[⚑ Supplementary Table ST4: Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL. All 19 cilia, ciliopathy, and hedgehog pathways with BIFO rank, degree_norm score, member gene count, and hub flag.\]
 
-\[⚑ Supplementary Table S5: Full cilia pathway cluster ranking under BIFO for KF-CHD. All 22 native cilia/ciliopathy/hedgehog pathways with BIFO rank, degree_norm score, member gene count, and hub flag.\]
+\[⚑ Supplementary Table ST5: Head-to-head rank comparison --- seed_fisher rank vs. BIFO rank for all 4,535 pathways, sorted by BIFO rank.\]
 
 ### 8.3 Cross-cohort convergence: KF-NBL independent replication
 
-Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,203 scored pathways), WP_CILIOPATHIES ranked first of 5,203 pathways --- an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,633 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th.
+Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,183 scored pathways), WP_CILIOPATHIES ranked first of 5,183 pathways --- an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,617 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th.
 
 The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecting shared rare Mendelian disease gene carrier burden at MAF ≤0.001 rather than disease-specific biology. At a stricter n≥2 carrier count filter, the overlap decreases to 117 of 387 CHD genes (30%) while both cohorts still yield WP_CILIOPATHIES at rank 1 --- the cilia signal is present in both the shared and cohort-specific variant components. The convergence on the same top pathway across two biologically distinct pediatric diseases is consistent with the known developmental role of cilia in both cardiac septation and neural crest migration, and with the companion U24 cross-cohort analysis (Stear et al. 2026) which independently identified cilia enrichment in KF cohorts using permutation-based GSEA.
 
@@ -759,11 +759,11 @@ The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecti
 
   Conditioned edges                             2,482,752                     2,647,055
 
-  Pathways scored                               5,124                         5,203
+  Pathways scored                               5,104                         5,183
 
-  WP_CILIOPATHIES rank --- BIFO                 1 / 5,124                     1 / 5,203
+  WP_CILIOPATHIES rank --- BIFO                 1 / 5,104                     1 / 5,183
 
-  WP_CILIOPATHIES rank --- Fisher (corrected)   1 / 4,551 (BH p=9.68×10⁻³¹)   1 / 4,633 (BH p=8.13×10⁻³²)
+  WP_CILIOPATHIES rank --- Fisher (corrected)   1 / 4,535 (BH p=9.68×10⁻³¹)   1 / 4,617 (BH p=8.13×10⁻³²)
 
   Cilia seed genes in pool                      22                            19
 
@@ -774,7 +774,7 @@ The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecti
 
 To assess whether cilia pathway recovery is robust to seed set size, 500 bootstrap draws at each of three seed sizes (n=10, 20, 30) were drawn from each cohort\'s full seed pool. Results reveal a consistent pattern across both cohorts: neither BIFO nor Fisher reliably recovers cilia pathways from small random gene subsets, but both converge at full cohort scale.
 
-At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.20 against the 20-pathway cilia reference (50× background enrichment) with AP = 0.090 and rank improvement = +303 (conditioning helps vs. raw propagation). Fisher achieves P@10 = 0.30 and AP = 0.150. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO\'s positive rank improvement (+303 CHD, +193 NBL) confirms that graph conditioning adds value over raw propagation, while Fisher\'s higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
+At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.20 against the 19-pathway cilia reference (50× background enrichment) with AP = 0.090 and rank improvement = +303 (conditioning helps vs. raw propagation). Fisher achieves P@10 = 0.30 and AP = 0.150. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO\'s positive rank improvement (+303 CHD, +193 NBL) confirms that graph conditioning adds value over raw propagation, while Fisher\'s higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
 
 The core finding is that the cilia signal in these cohorts is distributed across many genes and requires aggregate cohort-scale variant burden to emerge. Neither method recovers it reliably from n=10--30 randomly drawn genes, and both converge at cohort scale. This is consistent with a polygenic developmental signal embedded in heterogeneous rare variant background --- BIFO\'s graph propagation concentrates this distributed signal through shared pathway neighborhoods, while Fisher requires sufficient overlap count to produce significant statistics.
 
@@ -803,9 +803,9 @@ The core finding is that the cilia signal in these cohorts is distributed across
 ![
 **Cross-cohort convergence: KF-CHD and KF-NBL independently recover cilia pathways.**
 (**A**) WP_CILIOPATHIES ranks first under both BIFO full-arm and corrected Seed Fisher in both cohorts.
-(**B**) BIFO pathway rank scatter (top 3,000 shown) with cilia pathways highlighted in red (n = 22). Cilia pathways cluster in the top-left corner of both axes, indicating concordant prioritization across cohorts; non-cilia pathways (grey) scatter along the diagonal.
+(**B**) BIFO pathway rank scatter (top 3,000 shown) with cilia pathways highlighted in red (n = 19). Cilia pathways cluster in the top-left corner of both axes, indicating concordant prioritization across cohorts; non-cilia pathways (grey) scatter along the diagonal.
 (**C**) Cilia pathway cluster: BIFO rank of each detected cilia-related pathway in KF-CHD (blue circle) vs. KF-NBL (orange triangle). All detected cilia pathways rank in the top half of the scored pathway universe in both cohorts.
-(**D**) Bootstrap resampling against a 20-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.
+(**D**) Bootstrap resampling against a 19-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.
 ](images/fig8_crosscohort.png){#fig:crosscohort width="100%"}
 
 
@@ -850,15 +850,15 @@ The following figures and tables support the Results sections above.
 
   **Table 8.4**   Bootstrap resampling — BIFO vs. Fisher               kf\_\*/resampling_results.csv       Complete (inline §8.4)
 
-  **Supp S1**     YAML predicate classification                        bifo_ddkg_mapping.yaml              Needs formatting
+  **Supp ST1**     YAML predicate classification                        bifo_ddkg_mapping.yaml              Needs formatting
 
-  **Supp S2**     Top-10 pathway lists per arm                         pathway_scores\_\*.csv              Data ready; table TBD
+  **Supp ST2**     Top-10 pathway lists per arm                         pathway_scores\_\*.csv              Data ready; table TBD
 
-  **Supp S3**     Full top-20 ranked pathways per method, KF-CHD       kf_chd_results/baseline_comparison  Data ready; table TBD
+  **Supp ST3**     Full top-20 ranked pathways per method, KF-CHD       kf_chd_results/baseline_comparison  Data ready; table TBD
 
-  **Supp S4**     Head-to-head rank comparison (Fisher vs BIFO)        kf_chd_results/baseline_comparison  Data ready; table TBD
+  **Supp ST4**     Full cilia pathway cluster ranking under BIFO        kf_chd_results/pathway_scores       Data ready; table TBD
 
-  **Supp S5**     Full cilia pathway cluster ranking under BIFO        kf_chd_results/pathway_scores       Data ready; table TBD
+  **Supp ST5**     Head-to-head rank comparison (Fisher vs BIFO)        kf_chd_results/baseline_comparison  Data ready; table TBD
   --------------- ---------------------------------------------------- ----------------------------------- -------------------------
 
 
