@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T15:57:38+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T15:57:38+00:00" />
+  <meta name="dc.modified" content="2026-04-18T16:10:48+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T16:10:48+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/548a28d26d7558f936cad2b5e57e3d14268c36d0/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/548a28d26d7558f936cad2b5e57e3d14268c36d0/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/548a28d26d7558f936cad2b5e57e3d14268c36d0/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -426,7 +426,7 @@ Five baseline methods were evaluated against the identical pathway universe rest
 
 ### 10.6 Comparison design and rank analysis
 
-All five methods were evaluated on identical pathway universes to enable direct rank comparison. The primary comparison metric is the rank of WP_CILIOPATHIES and other cilia-related pathways under each method in discovery mode. Secondary comparisons examine the top-20 ranked pathways per method (Supplementary Table S3), the head-to-head rank correlation between seed_fisher and BIFO for all pathways (Supplementary Table S4), and the full cilia pathway cluster ranking under BIFO (Supplementary Table S5).
+All five methods were evaluated on identical pathway universes to enable direct rank comparison. The primary comparison metric is the rank of WP_CILIOPATHIES and other cilia-related pathways under each method in discovery mode. Secondary comparisons examine the top-20 ranked pathways per method (Supplementary Table ST3), the head-to-head rank correlation between seed_fisher and BIFO for all pathways (Supplementary Table ST5), and the full cilia pathway cluster ranking under BIFO (Supplementary Table ST4).
 
 ### 10.7 Bootstrap resampling analysis
 
