@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T08:39:06+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T08:39:06+00:00" />
+  <meta name="dc.modified" content="2026-04-18T08:48:09+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T08:48:09+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -145,7 +145,7 @@ All analyses used the Data Distillery Knowledge Graph (DDKG), built on the Unifi
 
 For the present benchmark, the graph was queried as a 1-hop neighborhood centered on 15 CHD-associated seed and held-out genes. This produced two edge files: (1) edges_raw.csv containing 94,790 seed-to-neighbor mechanistic and association edges, and (2) pathway_membership_edges.csv containing 79,562 gene-to-pathway membership edges derived from MSigDB, WikiPathways, and Gene Ontology annotations. These were merged into edges_merged.csv (174,352 edges). Node metadata was exported in nodes.csv (34,523 concept nodes). The 1-hop design was chosen to produce a graph of tractable size with known provenance; it does not represent the full DDKG connectivity.
 
-Three DisGeNET source vocabularies (DGNAGE: age-stratified gene-disease associations; DGNGCM: clinical mutation associations; DGNGV: genomic variant associations) were intentionally excluded. The rationale is scientific, not technical: excluding these sources isolates ontology-aligned mechanistic and pathway representations from association-derived evidence layers, enabling clean attribution of information flow to specific edge classes. The effect of including DisGeNET is reserved as a controlled extension study with a defined structural hypothesis (see Results §7).
+Three association-derived evidence vocabularies (DGNAGE: age-stratified gene-disease associations; DGNGCM: clinical mutation associations; DGNGV: genomic variant associations) were intentionally excluded. The rationale is scientific, not technical: excluding these sources isolates ontology-aligned mechanistic and pathway representations from association-derived evidence layers, enabling clean attribution of information flow to specific edge classes.
 
 ## 2 BIFO conditioning
 
@@ -596,7 +596,7 @@ Raw PPR preranked GSEA (B3) recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P
 
 ![
 **Baseline enrichment method comparison — KF-CHD and KF-NBL cohorts.**
-Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO; excludes NCC custom pathways pending DDKG integration).
+Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO).
 (**A**) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column (darker = better); Mean Ref Rank colour is inverted so lower rank shows darker. `—` denotes zero or not applicable.
 (**B**) KF-NBL heatmap, same layout as A.
 (**C**) WP_CILIOPATHIES rank under BIFO full-arm and Seed Fisher (corrected): both methods rank WP_CILIOPATHIES first in both cohorts, confirming convergent cilia-signal recovery despite different ranking mechanisms. Seed Fisher distributes detection more broadly across the 21-pathway reference at higher P@k; BIFO concentrates signal on the peak cilia pathway (peak rank 1 in both cohorts).
