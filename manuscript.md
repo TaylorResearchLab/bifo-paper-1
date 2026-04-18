@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T11:54:10+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T11:54:10+00:00" />
+  <meta name="dc.modified" content="2026-04-18T13:10:01+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T13:10:01+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f5b6f522e4da32f3684a1ba70ff56da324fde8ac/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f5b6f522e4da32f3684a1ba70ff56da324fde8ac/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f5b6f522e4da32f3684a1ba70ff56da324fde8ac/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fa69633108aab3fa3ab811e8c498b9386a03daf9/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fa69633108aab3fa3ab811e8c498b9386a03daf9/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fa69633108aab3fa3ab811e8c498b9386a03daf9/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -398,7 +398,7 @@ This creates a fundamental tension for enrichment testing. When carrier frequenc
 
 Germline variant data were obtained from two Kids First pediatric cohorts: KF-CHD (Pediatric Cardiac Genomics Consortium, phs001138, n=697 probands with congenital heart defects) and KF-NBL (Discovering the Genetic Basis of Human Neuroblastoma, phs001436, n=460 probands with neuroblastoma). Whole-genome sequencing was performed using Kids First harmonization pipelines aligned to GRCh38/GENCODE v39.
 
-Variants were filtered retaining GATK PASS calls with genotype quality ≥20 and read depth ≥10. AutoGVP P/LP classification was applied integrating ClinVar and modified InterVar for hierarchical ACMG-AMP criteria assessment. Population allele frequency filtering used gnomAD v3.1 MAF ≤0.001, matching the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026). Genes harboring ≥1 qualifying variant in any proband were aggregated per cohort. Nineteen high-frequency background disease genes (ABCA4, USH2A, G6PD, TTN, FLG, and fourteen additional recessive deafness/retinal/skin loci) were excluded. This yielded 1,287 seed genes for KF-CHD and 1,406 seed genes for KF-NBL.
+Variants were filtered retaining GATK PASS calls with genotype quality ≥20 and read depth ≥10. AutoGVP P/LP classification was applied integrating ClinVar and modified InterVar for hierarchical ACMG-AMP criteria assessment. Population allele frequency filtering used gnomAD v3.1 MAF ≤0.001, matching the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026). Genes harboring ≥1 qualifying variant in any proband were aggregated per cohort. Twenty high-frequency background disease genes were excluded — specifically, genes among the most prevalent recessive disease carrier loci in population-scale sequencing (carrier frequency >1% in gnomAD), representing incidental findings unrelated to the disease of interest. The excluded genes encode proteins associated with hereditary hearing loss (GJB2, MYO15A, MYO1A, MYO3A, MYO7A, USH2A), retinal dystrophy (ABCA4), skin barrier dysfunction (FLG, KRT71, KRT86, TCHH, PADI3), metabolic disease (G6PD, PAH, BCHE), and structural/connective tissue disorders (TTN, OBSCN, COL4A5, TBL1Y, CD36). This yielded 1,287 seed genes for KF-CHD and 1,406 seed genes for KF-NBL.
 
 At the MAF ≤0.001, n≥1 threshold, 570 of 1,287 CHD seed genes (44.3%) are also present in the NBL seed set. This inter-cohort overlap reflects the shared background of Mendelian disease gene carriers present in any pediatric sequencing cohort at this allele frequency threshold and is not specific to either disease. Carrier count-filtered seed sets (n≥2: 387 CHD / 401 NBL genes, 30% overlap; n≥3: 146 CHD / 147 NBL genes, 27% overlap) show reduced but persistent overlap, consistent with shared rare variant burden being a property of the population rather than the disease.
 
