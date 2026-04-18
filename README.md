@@ -2,11 +2,15 @@
 
 **BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data**
 
-Deanne M. Taylor^^, Benjamin Stear, Taha Mohseni Ahooyi, Yuanchao Zhang, Aditya Lahiri, Alan Simmons, Tiffany Callahan, Jonathan Silverstein
+Deanne M. Taylor1,2 ^^, Benjamin Stear 1, Taha Mohseni Ahooyi 1, Yuanchao Zhang 1, Aditya Lahiri 1, Alan Simmons 3, Tiffany Callahan4, Jonathan Silverstein 3
 
-Department of Biomedical Informatics, Children's Hospital of Philadelphia  
-Department of Pediatrics, University of Pennsylvania Perelman School of Medicine (DMT)
+1. Department of Biomedical Informatics, Children's Hospital of Philadelphia  
+2. Department of Pediatrics, University of Pennsylvania Perelman School of Medicine
+3. University of Pittsburgh Medical Center
+4. Manas AI, NY NY
+
 ^^corresponding author
+
 ---
 
 ## Manuscript
