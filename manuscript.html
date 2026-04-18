@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T16:51:38+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T16:51:38+00:00" />
+  <meta name="dc.modified" content="2026-04-18T23:02:19+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T23:02:19+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/91ee05e354fa75721bd6a6dbced333a2d34aa840/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1417,7 +1417,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <p><strong>Node SAB priority ordering.</strong> All node export queries resolve each concept to a single source vocabulary (SAB) using a CASE-ordered preference: HGNC (0) &gt; NCBIGENE (1) &gt; MSIGDB (2) &gt; REACTOME (3) &gt; GO (4) &gt; MONDO (5) &gt; OMIM (6) &gt; all others (99). This ordering ensures that gene concepts resolve to their HGNC identifier when available, which is required for entity class assignment in <code>bifo_conditioning.py</code>.</p>
 <p><strong>Edge filtering.</strong> All edge export queries exclude <code>CODE</code>, <code>PREF_TERM</code>, <code>STY</code>, and <code>ISA</code> relationship types, which carry graph infrastructure rather than biological content. These are the same relationship types excluded during BIFO conditioning; excluding them at export reduces file size without affecting downstream results.</p>
 <p><strong>Pathway membership edges.</strong> Pathway membership edges connect two hop-1 nodes (a pathway concept and a gene concept) and are therefore absent from the seed↔︎hop1 edge export. They are collected in a separate targeted query using six membership predicates: <code>pathway_associated_with_gene</code>, <code>inverse_pathway_associated_with_gene</code>, <code>has_signature_gene</code>, <code>inverse_has_signature_gene</code>, <code>process_involves_gene</code>, and <code>gene_plays_role_in_process</code>. These predicates correspond to the Pathway Contribution flow class in BIFO and are the structural bridge edges between the mechanistic gene layer and the pathway annotation layer.</p>
-<p><strong>Post-export merge.</strong> After cleaning, edge files are merged using pandas concat (not shell cat) to preserve CSV headers and avoid duplicate header rows. For KF cohort runs the merge combines the raw edge file, the pathway membership edge file, and any NCC cilia membership edges into a single <code>edges_all.csv</code> input for <code>bifo_conditioning.py</code>. Merge commands are documented in comments at the end of each cypher file.</p>
+<p><strong>Post-export merge.</strong> After cleaning, edge files are merged using pandas concat (not shell cat) to preserve CSV headers and avoid duplicate header rows. For KF cohort runs the merge combines the raw edge file and the pathway membership edge file into a single <code>edges_all.csv</code> input for <code>bifo_conditioning.py</code>. Merge commands are documented in comments at the end of each cypher file.</p>
 <p><strong>Export files by benchmark:</strong></p>
 <table style="width:100%;">
 <colgroup>
@@ -1470,29 +1470,3380 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <p><strong>Note on KF cohort query generation.</strong> The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using <code>generate_export_cypher.py</code> rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.</p>
 <hr />
 <h2 id="supplementary-tables">Supplementary Tables</h2>
-<p><em>Tables ST1–ST4 will be populated from pipeline output files. ST5 consists of downloadable CSV files and is not typeset.</em></p>
+<p><em>ST5 consists of downloadable CSV files and is not typeset.</em></p>
 <h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark">ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
-<p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference set: 18 pathways. Reference pathways are indicated in the Ref. column. Full 550-pathway scores are available in <code>results/chd_benchmark/pathway_scores_*.csv</code>.</p>
-<p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/pathway_scores_*.csv</code>]</em></p>
-<p>Columns: Rank | Pathway name | Score (degree_norm) | Member count | Ref.</p>
-<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
-<p>Extends Table 4 in the main text. All five enrichment methods evaluated on the identical 550-pathway universe. Methods: B0 degree overlap, B1 seed Fisher, B2 neighborhood Fisher, B3 raw PPR GSEA, B3b conditioned PPR GSEA, B4 BIFO full-arm. CHD reference pathway membership indicated in the Ref. column.</p>
-<p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/baseline_comparison.csv</code>]</em></p>
-<p>Columns: Pathway name | B0 rank | B1 rank | B2 rank | B3 rank | B3b rank | B4 (BIFO) rank | Ref.</p>
+<p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count).</p>
+<p><strong>Full BIFO</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score (degree_norm)</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>2.233e-04</td>
+<td>8</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WP_HEART_DEVELOPMENT</td>
+<td>MSIGDB</td>
+<td>2.142e-04</td>
+<td>37</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_YAP1_AND_WWTR1_TAZ_STIMULATED_GENE_EXPRESSION</td>
+<td>MSIGDB</td>
+<td>1.845e-04</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WP_CARDIAC_PROGENITOR_DIFFERENTIATION</td>
+<td>MSIGDB</td>
+<td>1.630e-04</td>
+<td>32</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>BIOCARTA_NFAT_PATHWAY</td>
+<td>MSIGDB</td>
+<td>1.589e-04</td>
+<td>27</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>WP_22Q112_COPY_NUMBER_VARIATION_SYNDROME</td>
+<td>MSIGDB</td>
+<td>1.093e-04</td>
+<td>35</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_MUSCLE_CONTRACTION</td>
+<td>MSIGDB</td>
+<td>1.005e-04</td>
+<td>85</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Cardiac Muscle Contraction</td>
+<td>GO</td>
+<td>9.440e-05</td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_CARDIAC_CONDUCTION</td>
+<td>MSIGDB</td>
+<td>9.104e-05</td>
+<td>39</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>MEISSNER_BRAIN_HCP_WITH_H3K27ME3</td>
+<td>MSIGDB</td>
+<td>8.695e-05</td>
+<td>145</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ablation (no bridge edges)</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score (degree_norm)</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>1.523e-04</td>
+<td>8</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WP_HEART_DEVELOPMENT</td>
+<td>MSIGDB</td>
+<td>1.259e-04</td>
+<td>37</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_YAP1_AND_WWTR1_TAZ_STIMULATED_GENE_EXPRESSION</td>
+<td>MSIGDB</td>
+<td>1.121e-04</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WP_CARDIAC_PROGENITOR_DIFFERENTIATION</td>
+<td>MSIGDB</td>
+<td>9.378e-05</td>
+<td>32</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>BIOCARTA_NFAT_PATHWAY</td>
+<td>MSIGDB</td>
+<td>9.293e-05</td>
+<td>27</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>WP_22Q112_COPY_NUMBER_VARIATION_SYNDROME</td>
+<td>MSIGDB</td>
+<td>6.837e-05</td>
+<td>35</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_MUSCLE_CONTRACTION</td>
+<td>MSIGDB</td>
+<td>5.456e-05</td>
+<td>85</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Cardiac Muscle Contraction</td>
+<td>GO</td>
+<td>5.370e-05</td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>RIZ_ERYTHROID_DIFFERENTIATION_HBZ</td>
+<td>MSIGDB</td>
+<td>5.171e-05</td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>RIZ_ERYTHROID_DIFFERENTIATION_HEMGN</td>
+<td>MSIGDB</td>
+<td>5.171e-05</td>
+<td>12</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mechanistic-only</strong></p>
+<p><em>All 550 pathway scores are exactly zero under mechanistic-only propagation. Pathway nodes are structurally unreachable from seed genes through mechanistic edges alone; gene-to-pathway connectivity requires Pathway Contribution bridge edges. P@10 = 0.00, Enrichment@10 = 0×.</em></p>
+<hr />
+<h3 id="st2-baseline-enrichment-method-comparison-curated-chd-benchmark">ST2 — Baseline enrichment method comparison, curated CHD benchmark</h3>
+<p>Top-20 ranked pathways under each enrichment method, evaluated on the identical 550-pathway universe. CHD reference pathways marked with ✓. Score/stat column: degree_norm for B0 and B4; hypergeometric stat for B1/B2; enrichment score for B3/B3b.</p>
+<p><strong>B0 — Degree-weighted seed overlap</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>1150.8163</td>
+<td>8</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WP_HEART_DEVELOPMENT</td>
+<td>MSIGDB</td>
+<td>1111.5016</td>
+<td>37</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>PID_HES_HEY_PATHWAY</td>
+<td>MSIGDB</td>
+<td>1032.5000</td>
+<td>16</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WANG_THOC1_TARGETS_DN</td>
+<td>MSIGDB</td>
+<td>904.8355</td>
+<td>11</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_PRE_NOTCH_PROCESSING_IN_GOLGI</td>
+<td>MSIGDB</td>
+<td>879.3333</td>
+<td>9</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>REACTOME_YAP1_AND_WWTR1_TAZ_STIMULATED_GENE_EXPRESSION</td>
+<td>MSIGDB</td>
+<td>856.3063</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_NOTCH4_INTRACELLULAR_DOMAIN_REGULATES_TRANSCRIPTION</td>
+<td>MSIGDB</td>
+<td>834.2088</td>
+<td>10</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>WP_CARDIAC_PROGENITOR_DIFFERENTIATION</td>
+<td>MSIGDB</td>
+<td>806.6321</td>
+<td>32</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>FUKUSHIMA_TNFSF11_TARGETS</td>
+<td>MSIGDB</td>
+<td>761.5250</td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>HALLMARK_NOTCH_SIGNALING</td>
+<td>MSIGDB</td>
+<td>761.5250</td>
+<td>12</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>WP_CANONICAL_AND_NONCANONICAL_NOTCH_SIGNALING</td>
+<td>MSIGDB</td>
+<td>681.1287</td>
+<td>15</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>WP_NOTCH_SIGNALING</td>
+<td>MSIGDB</td>
+<td>659.5000</td>
+<td>16</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>WP_ENDODERM_DIFFERENTIATION</td>
+<td>MSIGDB</td>
+<td>653.0103</td>
+<td>40</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>PID_NOTCH_PATHWAY</td>
+<td>MSIGDB</td>
+<td>621.7826</td>
+<td>18</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_PRE_NOTCH_EXPRESSION_AND_PROCESSING</td>
+<td>MSIGDB</td>
+<td>621.7826</td>
+<td>18</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_ACTIVATED_NOTCH1_TRANSMITS_SIGNAL_TO_THE_NUCLEUS</td>
+<td>MSIGDB</td>
+<td>615.8900</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>WP_NOTCH1_REGULATION_OF_HUMAN_ENDOTHELIAL_CELL_CALCIFICATION</td>
+<td>MSIGDB</td>
+<td>615.8900</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>LUND_SILENCED_BY_METHYLATION</td>
+<td>MSIGDB</td>
+<td>615.8900</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>REACTOME_NOTCH1_INTRACELLULAR_DOMAIN_REGULATES_TRANSCRIPTION</td>
+<td>MSIGDB</td>
+<td>615.8900</td>
+<td>8</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>WP_PTF1A_RELATED_REGULATORY_PATHWAY</td>
+<td>MSIGDB</td>
+<td>615.8900</td>
+<td>8</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>B1 — Seed-only Fisher (hypergeometric)</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>LINDGREN_BLADDER_CANCER_CLUSTER_3_DN</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>53</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>PEREZ_TP63_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>104</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>PHONG_TNF_RESPONSE_VIA_P38_COMPLETE</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>50</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>LU_TUMOR_ANGIOGENESIS_UP</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>9</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>PID_NOTCH_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>16</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>REACTOME_ACTIVATED_NOTCH1_TRANSMITS_SIGNAL_TO_THE_NUCLEUS</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>7</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_RNA_POLYMERASE_II_TRANSCRIPTION</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>227</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>FUKUSHIMA_TNFSF11_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>10</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_SIGNALING_BY_NOTCH</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>42</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_SIGNALING_BY_NOTCH1</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>13</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_SIGNALING_BY_NOTCH1_PEST_DOMAIN_MUTANTS_IN_CANCER</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>11</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_SIGNALING_BY_NOTCH2</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>10</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_SIGNALING_BY_NOTCH3</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>17</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_SIGNALING_BY_NOTCH4</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>19</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>ZHOU_INFLAMMATORY_RESPONSE_FIMA_UP</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>173</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_DISEASES_OF_SIGNAL_TRANSDUCTION_BY_GROWTH_FACTOR_RECEPTORS_AND_SECOND_MESSENGERS</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>103</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>ZWANG_CLASS_3_TRANSIENTLY_INDUCED_BY_EGF</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>75</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>REACTOME_TRANSCRIPTIONAL_REGULATION_BY_RUNX3</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>21</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>GOZGIT_ESR1_TARGETS_DN</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>238</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>VART_KSHV_INFECTION_ANGIOGENIC_MARKERS_UP</td>
+<td>MSIGDB</td>
+<td>0.000e+00</td>
+<td>73</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>B2 — 1-hop neighborhood Fisher</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>SHEPARD_CRASH_AND_BURN_MUTANT_DN</td>
+<td>MSIGDB</td>
+<td>3.468e-04</td>
+<td>68</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>MEISSNER_BRAIN_HCP_WITH_H3K27ME3</td>
+<td>MSIGDB</td>
+<td>3.810e-04</td>
+<td>140</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>HOLLERN_SQUAMOUS_BREAST_TUMOR</td>
+<td>MSIGDB</td>
+<td>5.597e-04</td>
+<td>91</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_UP</td>
+<td>MSIGDB</td>
+<td>0.0018</td>
+<td>276</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>PURBEY_TARGETS_OF_CTBP1_NOT_SATB1_DN</td>
+<td>MSIGDB</td>
+<td>0.0019</td>
+<td>114</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>SMID_BREAST_CANCER_LUMINAL_B_DN</td>
+<td>MSIGDB</td>
+<td>0.0021</td>
+<td>247</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>LEE_BMP2_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>0.0024</td>
+<td>254</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>VECCHI_GASTRIC_CANCER_ADVANCED_VS_EARLY_DN</td>
+<td>MSIGDB</td>
+<td>0.0035</td>
+<td>64</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>ACEVEDO_METHYLATED_IN_LIVER_CANCER_DN</td>
+<td>MSIGDB</td>
+<td>0.0036</td>
+<td>292</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>HUPER_BREAST_BASAL_VS_LUMINAL_UP</td>
+<td>MSIGDB</td>
+<td>0.0039</td>
+<td>36</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>OISHI_CHOLANGIOMA_STEM_CELL_LIKE_DN</td>
+<td>MSIGDB</td>
+<td>0.0044</td>
+<td>116</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>SHEPARD_BMYB_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.0053</td>
+<td>34</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>VERHAAK_AML_WITH_NPM1_MUTATED_UP</td>
+<td>MSIGDB</td>
+<td>0.0058</td>
+<td>60</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>BLANCO_MELO_BRONCHIAL_EPITHELIAL_CELLS_INFLUENZA_A_DEL_NS1_INFECTION_UP</td>
+<td>MSIGDB</td>
+<td>0.0096</td>
+<td>208</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>RIGGI_EWING_SARCOMA_PROGENITOR_UP</td>
+<td>MSIGDB</td>
+<td>0.0107</td>
+<td>135</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Intercellular Communication Process</td>
+<td>GO</td>
+<td>0.0110</td>
+<td>153</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Developmental process</td>
+<td>GO</td>
+<td>0.0122</td>
+<td>54</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>SHEPARD_BMYB_MORPHOLINO_DN</td>
+<td>MSIGDB</td>
+<td>0.0159</td>
+<td>73</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>PEDERSEN_METASTASIS_BY_ERBB2_ISOFORM_7</td>
+<td>MSIGDB</td>
+<td>0.0205</td>
+<td>127</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>BOCHKIS_FOXA2_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.0221</td>
+<td>117</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>B3 — Raw PPR preranked GSEA</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>0.9680</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WANG_NFKB_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.9653</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>LEE_CALORIE_RESTRICTION_MUSCLE_UP</td>
+<td>MSIGDB</td>
+<td>0.9646</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>LIN_TUMOR_ESCAPE_FROM_IMMUNE_ATTACK</td>
+<td>MSIGDB</td>
+<td>0.9543</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Hematopoiesis</td>
+<td>GO</td>
+<td>0.9541</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>SASAKI_TARGETS_OF_TP73_AND_TP63</td>
+<td>MSIGDB</td>
+<td>0.9506</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>SHETH_LIVER_CANCER_VS_TXNIP_LOSS_PAM5</td>
+<td>MSIGDB</td>
+<td>0.9465</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>REACTOME_STAT5_ACTIVATION_DOWNSTREAM_OF_FLT3_ITD_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.9385</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>VALK_AML_CLUSTER_2</td>
+<td>MSIGDB</td>
+<td>0.9361</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>WP_NEOVASCULARISATION_PROCESSES</td>
+<td>MSIGDB</td>
+<td>0.9354</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE</td>
+<td>MSIGDB</td>
+<td>0.9319</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_ACTIVATED_NOTCH1_TRANSMITS_SIGNAL_TO_THE_NUCLEUS</td>
+<td>MSIGDB</td>
+<td>0.9317</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_PD_1_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9304</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>WP_NOTCH1_REGULATION_OF_HUMAN_ENDOTHELIAL_CELL_CALCIFICATION</td>
+<td>MSIGDB</td>
+<td>0.9300</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_INTERLEUKIN_20_FAMILY_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9273</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_REGULATION_OF_IFNG_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9253</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>MA_MYELOID_DIFFERENTIATION_UP</td>
+<td>MSIGDB</td>
+<td>0.9238</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>SWEET_KRAS_ONCOGENIC_SIGNATURE</td>
+<td>MSIGDB</td>
+<td>0.9237</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>PID_IL5_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.9224</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_NOTCH3_ACTIVATION_AND_TRANSMISSION_OF_SIGNAL_TO_THE_NUCLEUS</td>
+<td>MSIGDB</td>
+<td>0.9212</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>B3b — Conditioned PPR preranked GSEA</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>HALLMARK_WNT_BETA_CATENIN_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9737</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>REACTOME_PD_1_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9705</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>SASAKI_TARGETS_OF_TP73_AND_TP63</td>
+<td>MSIGDB</td>
+<td>0.9662</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>REACTOME_NOTCH4_INTRACELLULAR_DOMAIN_REGULATES_TRANSCRIPTION</td>
+<td>MSIGDB</td>
+<td>0.9660</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>0.9628</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>VALK_AML_CLUSTER_2</td>
+<td>MSIGDB</td>
+<td>0.9601</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>FONTAINE_FOLLICULAR_THYROID_ADENOMA_UP</td>
+<td>MSIGDB</td>
+<td>0.9595</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>WP_NEOVASCULARISATION_PROCESSES</td>
+<td>MSIGDB</td>
+<td>0.9582</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Hematopoiesis</td>
+<td>GO</td>
+<td>0.9572</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>MA_MYELOID_DIFFERENTIATION_UP</td>
+<td>MSIGDB</td>
+<td>0.9549</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_INTERLEUKIN_20_FAMILY_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9540</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_REGULATION_OF_IFNA_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9520</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>LIN_TUMOR_ESCAPE_FROM_IMMUNE_ATTACK</td>
+<td>MSIGDB</td>
+<td>0.9498</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>FUKUSHIMA_TNFSF11_TARGETS</td>
+<td>MSIGDB</td>
+<td>0.9492</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>GUO_HEX_TARGETS_DN</td>
+<td>MSIGDB</td>
+<td>0.9490</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>WANG_CLIM2_TARGETS_DN</td>
+<td>MSIGDB</td>
+<td>0.9470</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>WP_CANCER_IMMUNOTHERAPY_BY_PD1_BLOCKADE</td>
+<td>MSIGDB</td>
+<td>0.9468</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Protein dephosphorylation</td>
+<td>GO</td>
+<td>0.9467</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>PETROVA_PROX1_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>0.9457</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_REGULATION_OF_IFNG_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.9456</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>B4 — BIFO full-arm (degree_norm)</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>BRUNEAU_SEPTATION_VENTRICULAR</td>
+<td>MSIGDB</td>
+<td>2.230e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WP_HEART_DEVELOPMENT</td>
+<td>MSIGDB</td>
+<td>2.140e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_YAP1_AND_WWTR1_TAZ_STIMULATED_GENE_EXPRESSION</td>
+<td>MSIGDB</td>
+<td>1.840e-04</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WP_CARDIAC_PROGENITOR_DIFFERENTIATION</td>
+<td>MSIGDB</td>
+<td>1.630e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>BIOCARTA_NFAT_PATHWAY</td>
+<td>MSIGDB</td>
+<td>1.590e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>WP_22Q112_COPY_NUMBER_VARIATION_SYNDROME</td>
+<td>MSIGDB</td>
+<td>1.090e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_MUSCLE_CONTRACTION</td>
+<td>MSIGDB</td>
+<td>1.000e-04</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Cardiac Muscle Contraction</td>
+<td>GO</td>
+<td>9.400e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_CARDIAC_CONDUCTION</td>
+<td>MSIGDB</td>
+<td>9.100e-05</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>MEISSNER_BRAIN_HCP_WITH_H3K27ME3</td>
+<td>MSIGDB</td>
+<td>8.700e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>RIZ_ERYTHROID_DIFFERENTIATION_HBZ</td>
+<td>MSIGDB</td>
+<td>8.300e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>RIZ_ERYTHROID_DIFFERENTIATION_HEMGN</td>
+<td>MSIGDB</td>
+<td>8.200e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>LEE_AGING_CEREBELLUM_DN</td>
+<td>MSIGDB</td>
+<td>8.100e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>KAAB_FAILED_HEART_VENTRICLE_DN</td>
+<td>MSIGDB</td>
+<td>7.900e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>DNA Binding</td>
+<td>GO</td>
+<td>7.700e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>CHEN_LVAD_SUPPORT_OF_FAILING_HEART_DN</td>
+<td>MSIGDB</td>
+<td>7.600e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Myogenesis</td>
+<td>GO</td>
+<td>7.400e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Transcriptional Regulation</td>
+<td>GO</td>
+<td>7.400e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>INGRAM_SHH_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>7.100e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>WP_MESODERMAL_COMMITMENT_PATHWAY</td>
+<td>MSIGDB</td>
+<td>6.900e-05</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h3 id="st3-top-20-ranked-pathways-per-method-kf-chd-and-kf-nbl-cohorts">ST3 — Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts</h3>
-<p>Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated in discovery mode. KF-CHD (5,124 pathways scored) and KF-NBL (5,203 pathways scored) shown side by side. Cilia reference pathways indicated in the Cilia ref. column.</p>
-<p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/baseline_comparison.csv</code> and <code>kf_run_nbl/baseline_comparison.csv</code>]</em></p>
-<p>Columns: Method | Rank | Pathway name | Score | Member count | Cilia ref.</p>
+<p>Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 5,104 pathways scored; KF-NBL: 5,183 pathways scored. Cilia reference pathways marked with ✓.</p>
+<p><strong>KF-CHD</strong></p>
+<p><em>Seed Fisher corrected (B1)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>WP_CILIOPATHIES</td>
+<td>MSIGDB</td>
+<td>2.127e-34</td>
+<td>170</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>REACTOME_DISEASES_OF_METABOLISM</td>
+<td>MSIGDB</td>
+<td>2.416e-32</td>
+<td>243</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR</td>
+<td>MSIGDB</td>
+<td>6.369e-17</td>
+<td>94</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WP_JOUBERT_SYNDROME</td>
+<td>MSIGDB</td>
+<td>7.285e-17</td>
+<td>76</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS</td>
+<td>MSIGDB</td>
+<td>2.431e-16</td>
+<td>171</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION</td>
+<td>MSIGDB</td>
+<td>4.609e-16</td>
+<td>297</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_ECM_PROTEOGLYCANS</td>
+<td>MSIGDB</td>
+<td>7.570e-16</td>
+<td>76</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Transmembrane Transport</td>
+<td>GO</td>
+<td>2.149e-15</td>
+<td>251</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>DNA Repair</td>
+<td>GO</td>
+<td>3.341e-15</td>
+<td>209</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>HSIAO_LIVER_SPECIFIC_GENES</td>
+<td>MSIGDB</td>
+<td>3.594e-15</td>
+<td>245</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_SLC_TRANSPORTER_DISORDERS</td>
+<td>MSIGDB</td>
+<td>1.190e-14</td>
+<td>97</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>1.942e-14</td>
+<td>237</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_METABOLISM_OF_VITAMINS_AND_COFACTORS</td>
+<td>MSIGDB</td>
+<td>2.852e-14</td>
+<td>186</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>NABA_CORE_MATRISOME</td>
+<td>MSIGDB</td>
+<td>9.494e-14</td>
+<td>266</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>WP_FATTY_ACID_BETA_OXIDATION</td>
+<td>MSIGDB</td>
+<td>1.081e-13</td>
+<td>33</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>HOSHIDA_LIVER_CANCER_SUBCLASS_S3</td>
+<td>MSIGDB</td>
+<td>4.870e-13</td>
+<td>258</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>WP_AMINO_ACID_METABOLISM</td>
+<td>MSIGDB</td>
+<td>8.959e-13</td>
+<td>84</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>KAUFFMANN_DNA_REPAIR_GENES</td>
+<td>MSIGDB</td>
+<td>1.910e-12</td>
+<td>229</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>WP_NEPHROTIC_SYNDROME</td>
+<td>MSIGDB</td>
+<td>3.012e-12</td>
+<td>44</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>WP_DNA_REPAIR_PATHWAYS_FULL_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.623e-12</td>
+<td>120</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Neighborhood Fisher (B2)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>ZWANG_DOWN_BY_2ND_EGF_PULSE</td>
+<td>MSIGDB</td>
+<td>1.036e-24</td>
+<td>284</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>DEBIASI_APOPTOSIS_BY_REOVIRUS_INFECTION_UP</td>
+<td>MSIGDB</td>
+<td>2.702e-23</td>
+<td>280</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>JINESH_BLEBBISHIELD_VS_LIVE_CONTROL_DN</td>
+<td>MSIGDB</td>
+<td>4.310e-23</td>
+<td>294</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>GENTILE_UV_HIGH_DOSE_DN</td>
+<td>MSIGDB</td>
+<td>4.595e-23</td>
+<td>278</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>TORCHIA_TARGETS_OF_EWSR1_FLI1_FUSION_UP</td>
+<td>MSIGDB</td>
+<td>8.278e-23</td>
+<td>251</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>ZHOU_INFLAMMATORY_RESPONSE_FIMA_DN</td>
+<td>MSIGDB</td>
+<td>9.985e-23</td>
+<td>267</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>WEST_ADRENOCORTICAL_TUMOR_UP</td>
+<td>MSIGDB</td>
+<td>1.684e-22</td>
+<td>281</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>BORCZUK_MALIGNANT_MESOTHELIOMA_UP</td>
+<td>MSIGDB</td>
+<td>6.753e-22</td>
+<td>291</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>CHEN_HOXA5_TARGETS_9HR_UP</td>
+<td>MSIGDB</td>
+<td>1.084e-21</td>
+<td>215</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_FC_EPSILON_RECEPTOR_FCERI_SIGNALING</td>
+<td>MSIGDB</td>
+<td>1.797e-21</td>
+<td>183</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>WALLACE_PROSTATE_CANCER_RACE_UP</td>
+<td>MSIGDB</td>
+<td>4.506e-21</td>
+<td>291</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>LEE_RECENT_THYMIC_EMIGRANT</td>
+<td>MSIGDB</td>
+<td>5.973e-21</td>
+<td>218</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_DEUBIQUITINATION</td>
+<td>MSIGDB</td>
+<td>1.101e-20</td>
+<td>233</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_ANTIGEN_PROCESSING_UBIQUITINATION_PROTEASOME_DEGRADATION</td>
+<td>MSIGDB</td>
+<td>2.283e-20</td>
+<td>299</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>PASQUALUCCI_LYMPHOMA_BY_GC_STAGE_UP</td>
+<td>MSIGDB</td>
+<td>5.150e-20</td>
+<td>274</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>HORIUCHI_WTAP_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>1.641e-19</td>
+<td>291</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>WP_GPCRS_CLASS_A_RHODOPSINLIKE</td>
+<td>MSIGDB</td>
+<td>2.051e-19</td>
+<td>246</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>RAO_BOUND_BY_SALL4</td>
+<td>MSIGDB</td>
+<td>3.645e-19</td>
+<td>220</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>REACTOME_SIGNALING_BY_WNT</td>
+<td>MSIGDB</td>
+<td>3.880e-19</td>
+<td>266</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>PURBEY_TARGETS_OF_CTBP1_NOT_SATB1_UP</td>
+<td>MSIGDB</td>
+<td>9.115e-19</td>
+<td>284</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Raw PPR GSEA (B3)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>REACTOME_CHYLOMICRON_REMODELING</td>
+<td>MSIGDB</td>
+<td>0.9133</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>REACTOME_TERMINAL_PATHWAY_OF_COMPLEMENT</td>
+<td>MSIGDB</td>
+<td>0.8849</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_SYNTHESIS_OF_16_20_HYDROXYEICOSATETRAENOIC_ACIDS_HETE</td>
+<td>MSIGDB</td>
+<td>0.8802</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>WP_COMPOSITION_OF_LIPID_PARTICLES</td>
+<td>MSIGDB</td>
+<td>0.8674</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_SIGNALING_BY_FGFR3_FUSIONS_IN_CANCER</td>
+<td>MSIGDB</td>
+<td>0.8452</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Activation of Membrane Attack Complex</td>
+<td>GO</td>
+<td>0.8428</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>MARIADASON_RESPONSE_TO_BUTYRATE_CURCUMIN_SULINDAC_TSA_1</td>
+<td>MSIGDB</td>
+<td>0.8364</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>REACTOME_SIGNALING_BY_FGFR4_IN_DISEASE</td>
+<td>MSIGDB</td>
+<td>0.8363</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>WP_CODEINE_AND_MORPHINE_METABOLISM</td>
+<td>MSIGDB</td>
+<td>0.8316</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>BIOCARTA_PLK3_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8236</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_EGFR_TRANSACTIVATION_BY_GASTRIN</td>
+<td>MSIGDB</td>
+<td>0.8235</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_CYP2E1_REACTIONS</td>
+<td>MSIGDB</td>
+<td>0.8215</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>WP_BILE_ACIDS_SYNTHESIS_AND_ENTEROHEPATIC_CIRCULATION</td>
+<td>MSIGDB</td>
+<td>0.8209</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_TYPE_I_HEMIDESMOSOME_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>0.8200</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_MAPK3_ERK1_ACTIVATION</td>
+<td>MSIGDB</td>
+<td>0.8170</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>BIOCARTA_PLATELETAPP_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8148</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>REACTOME_INLA_MEDIATED_ENTRY_OF_LISTERIA_MONOCYTOGENES_INTO_HOST_CELLS</td>
+<td>MSIGDB</td>
+<td>0.8095</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>BOWIE_RESPONSE_TO_EXTRACELLULAR_MATRIX</td>
+<td>MSIGDB</td>
+<td>0.8073</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>REACTOME_DOWNREGULATION_OF_ERBB4_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8055</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>INAMURA_LUNG_CANCER_SCC_UP</td>
+<td>MSIGDB</td>
+<td>0.8039</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Conditioned PPR GSEA (B3b)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>REACTOME_SIGNALING_BY_PDGFRA_TRANSMEMBRANE_JUXTAMEMBRANE_AND_KINASE_DOMAIN_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.9138</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>PID_INTEGRIN4_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8992</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>BIOCARTA_PLATELETAPP_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8990</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>BIOCARTA_CDMAC_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8894</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_INLA_MEDIATED_ENTRY_OF_LISTERIA_MONOCYTOGENES_INTO_HOST_CELLS</td>
+<td>MSIGDB</td>
+<td>0.8875</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>REACTOME_EGFR_TRANSACTIVATION_BY_GASTRIN</td>
+<td>MSIGDB</td>
+<td>0.8833</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_SIGNALING_BY_FGFR4_IN_DISEASE</td>
+<td>MSIGDB</td>
+<td>0.8812</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>BIOCARTA_STAT3_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8784</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_MAPK1_ERK2_ACTIVATION</td>
+<td>MSIGDB</td>
+<td>0.8783</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_MAPK3_ERK1_ACTIVATION</td>
+<td>MSIGDB</td>
+<td>0.8783</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>BIOCARTA_P53_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8775</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_SIGNALING_BY_ERBB2_ECD_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.8751</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>BIOCARTA_ATM_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8732</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_SIGNALING_BY_FGFR3_FUSIONS_IN_CANCER</td>
+<td>MSIGDB</td>
+<td>0.8723</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_INTERLEUKIN_6_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8712</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_DOWNREGULATION_OF_ERBB4_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8681</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS</td>
+<td>MSIGDB</td>
+<td>0.8678</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>REACTOME_SIGNALING_BY_KIT_IN_DISEASE</td>
+<td>MSIGDB</td>
+<td>0.8648</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>WP_ALPHA_6_BETA_4_SIGNALING_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8640</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>ZHU_SKIL_TARGETS_DN</td>
+<td>MSIGDB</td>
+<td>0.8638</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>BIFO full-arm (B4)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>WP_CILIOPATHIES</td>
+<td>MSIGDB</td>
+<td>6.000e-06</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>YOSHIMURA_MAPK8_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>NABA_MATRISOME</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_DISEASES_OF_METABOLISM</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Transmembrane Transport</td>
+<td>GO</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>DODD_NASOPHARYNGEAL_CARCINOMA_UP</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>REACTOME_TRANSPORT_OF_SMALL_MOLECULES</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>HSIAO_LIVER_SPECIFIC_GENES</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_DEVELOPMENTAL_BIOLOGY</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_SLC_TRANSPORTER_DISORDERS</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>PID_RHODOPSIN_PATHWAY</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>PUJANA_BRCA1_PCC_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>BENPORATH_ES_WITH_H3K27ME3</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>MEISSNER_BRAIN_HCP_WITH_H3K4ME3_AND_H3K27ME3</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>PUJANA_ATM_PCC_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>NABA_CORE_MATRISOME</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-NBL</strong></p>
+<p><em>Seed Fisher corrected (B1)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>WP_CILIOPATHIES</td>
+<td>MSIGDB</td>
+<td>1.755e-35</td>
+<td>169</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>REACTOME_DISEASES_OF_METABOLISM</td>
+<td>MSIGDB</td>
+<td>4.419e-26</td>
+<td>242</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>WP_AMINO_ACID_METABOLISM</td>
+<td>MSIGDB</td>
+<td>2.190e-23</td>
+<td>86</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>KAUFFMANN_DNA_REPAIR_GENES</td>
+<td>MSIGDB</td>
+<td>2.367e-18</td>
+<td>229</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>WP_JOUBERT_SYNDROME</td>
+<td>MSIGDB</td>
+<td>3.893e-18</td>
+<td>75</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>HOSHIDA_LIVER_CANCER_SUBCLASS_S3</td>
+<td>MSIGDB</td>
+<td>7.898e-16</td>
+<td>260</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>WP_DNA_REPAIR_PATHWAYS_FULL_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.755e-15</td>
+<td>120</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>PUJANA_BREAST_CANCER_LIT_INT_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.825e-15</td>
+<td>100</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>DNA Repair</td>
+<td>GO</td>
+<td>2.141e-14</td>
+<td>211</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>8.494e-14</td>
+<td>236</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>REACTOME_CILIUM_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>9.160e-14</td>
+<td>194</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Transmembrane Transport</td>
+<td>GO</td>
+<td>1.668e-13</td>
+<td>249</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>CAIRO_LIVER_DEVELOPMENT_DN</td>
+<td>MSIGDB</td>
+<td>1.937e-13</td>
+<td>215</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_DNA_REPAIR</td>
+<td>MSIGDB</td>
+<td>2.966e-13</td>
+<td>280</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>HALLMARK_ADIPOGENESIS</td>
+<td>MSIGDB</td>
+<td>3.711e-13</td>
+<td>185</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_ORGANELLE_BIOGENESIS_AND_MAINTENANCE</td>
+<td>MSIGDB</td>
+<td>1.584e-12</td>
+<td>264</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>HALLMARK_XENOBIOTIC_METABOLISM</td>
+<td>MSIGDB</td>
+<td>2.223e-12</td>
+<td>195</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>HSIAO_LIVER_SPECIFIC_GENES</td>
+<td>MSIGDB</td>
+<td>5.474e-12</td>
+<td>245</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>WAKASUGI_HAVE_ZNF143_BINDING_SITES</td>
+<td>MSIGDB</td>
+<td>8.162e-12</td>
+<td>54</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION</td>
+<td>MSIGDB</td>
+<td>9.358e-12</td>
+<td>296</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Neighborhood Fisher (B2)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>WP_GPCRS_CLASS_A_RHODOPSINLIKE</td>
+<td>MSIGDB</td>
+<td>2.725e-25</td>
+<td>238</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>WALLACE_PROSTATE_CANCER_RACE_UP</td>
+<td>MSIGDB</td>
+<td>2.143e-24</td>
+<td>290</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>ZWANG_DOWN_BY_2ND_EGF_PULSE</td>
+<td>MSIGDB</td>
+<td>6.510e-23</td>
+<td>285</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>QI_PLASMACYTOMA_UP</td>
+<td>MSIGDB</td>
+<td>3.155e-22</td>
+<td>248</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_ANTIGEN_PROCESSING_UBIQUITINATION_PROTEASOME_DEGRADATION</td>
+<td>MSIGDB</td>
+<td>1.968e-21</td>
+<td>294</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>REACTOME_IMMUNOREGULATORY_INTERACTIONS_BETWEEN_A_LYMPHOID_AND_A_NON_LYMPHOID_CELL</td>
+<td>MSIGDB</td>
+<td>3.985e-21</td>
+<td>186</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>DEBIASI_APOPTOSIS_BY_REOVIRUS_INFECTION_UP</td>
+<td>MSIGDB</td>
+<td>4.110e-21</td>
+<td>284</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>BOYLAN_MULTIPLE_MYELOMA_C_D_DN</td>
+<td>MSIGDB</td>
+<td>3.118e-20</td>
+<td>269</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_NEDDYLATION</td>
+<td>MSIGDB</td>
+<td>1.330e-19</td>
+<td>226</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>BORCZUK_MALIGNANT_MESOTHELIOMA_UP</td>
+<td>MSIGDB</td>
+<td>3.718e-19</td>
+<td>294</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>IVANOVA_HEMATOPOIESIS_MATURE_CELL</td>
+<td>MSIGDB</td>
+<td>4.243e-19</td>
+<td>273</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>PASQUALUCCI_LYMPHOMA_BY_GC_STAGE_UP</td>
+<td>MSIGDB</td>
+<td>7.042e-19</td>
+<td>271</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>COLDREN_GEFITINIB_RESISTANCE_DN</td>
+<td>MSIGDB</td>
+<td>1.536e-18</td>
+<td>217</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>RAY_TUMORIGENESIS_BY_ERBB2_CDC25A_DN</td>
+<td>MSIGDB</td>
+<td>1.955e-18</td>
+<td>253</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>TORCHIA_TARGETS_OF_EWSR1_FLI1_FUSION_DN</td>
+<td>MSIGDB</td>
+<td>2.183e-18</td>
+<td>300</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>LU_EZH2_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>2.389e-18</td>
+<td>273</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>REACTOME_PEPTIDE_LIGAND_BINDING_RECEPTORS</td>
+<td>MSIGDB</td>
+<td>2.547e-18</td>
+<td>191</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>REACTOME_SIGNALING_BY_ROBO_RECEPTORS</td>
+<td>MSIGDB</td>
+<td>4.531e-18</td>
+<td>213</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>Apoptosis</td>
+<td>GO</td>
+<td>5.290e-18</td>
+<td>263</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_ANTI_INFLAMMATORY_RESPONSE_FAVOURING_LEISHMANIA_PARASITE_INFECTION</td>
+<td>MSIGDB</td>
+<td>6.985e-18</td>
+<td>219</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Raw PPR GSEA (B3)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>REACTOME_CHYLOMICRON_REMODELING</td>
+<td>MSIGDB</td>
+<td>0.9052</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>REACTOME_TERMINAL_PATHWAY_OF_COMPLEMENT</td>
+<td>MSIGDB</td>
+<td>0.8879</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>WP_COMPOSITION_OF_LIPID_PARTICLES</td>
+<td>MSIGDB</td>
+<td>0.8697</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>REACTOME_ACTIVATED_NTRK3_SIGNALS_THROUGH_RAS</td>
+<td>MSIGDB</td>
+<td>0.8647</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_SHC_RELATED_EVENTS_TRIGGERED_BY_IGF1R</td>
+<td>MSIGDB</td>
+<td>0.8511</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Activation of Membrane Attack Complex</td>
+<td>GO</td>
+<td>0.8500</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_EGFR_TRANSACTIVATION_BY_GASTRIN</td>
+<td>MSIGDB</td>
+<td>0.8367</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>REACTOME_HDL_REMODELING</td>
+<td>MSIGDB</td>
+<td>0.8352</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>REACTOME_CHYLOMICRON_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>0.8322</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_SYNTHESIS_OF_16_20_HYDROXYEICOSATETRAENOIC_ACIDS_HETE</td>
+<td>MSIGDB</td>
+<td>0.8195</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>BIOCARTA_ATM_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8148</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>GOUYER_TATI_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>0.8132</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_TYPE_I_HEMIDESMOSOME_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>0.8105</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>LEE_LIVER_CANCER_HEPATOBLAST</td>
+<td>MSIGDB</td>
+<td>0.8103</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_SIGNALING_BY_PDGFRA_TRANSMEMBRANE_JUXTAMEMBRANE_AND_KINASE_DOMAIN_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.8085</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_PTK6_REGULATES_RTKS_AND_THEIR_EFFECTORS_AKT1_AND_DOK1</td>
+<td>MSIGDB</td>
+<td>0.8067</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>REACTOME_MYOCLONIC_EPILEPSY_OF_LAFORA</td>
+<td>MSIGDB</td>
+<td>0.8043</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>WP_TAMOXIFEN_METABOLISM</td>
+<td>MSIGDB</td>
+<td>0.8016</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>WP_BLOOD_CLOTTING_CASCADE</td>
+<td>MSIGDB</td>
+<td>0.7948</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_SIGNALING_BY_FGFR3_FUSIONS_IN_CANCER</td>
+<td>MSIGDB</td>
+<td>0.7942</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>Conditioned PPR GSEA (B3b)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>REACTOME_SIGNALING_BY_PDGFRA_TRANSMEMBRANE_JUXTAMEMBRANE_AND_KINASE_DOMAIN_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.9056</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>BIOCARTA_CDMAC_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.9039</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_SHC_RELATED_EVENTS_TRIGGERED_BY_IGF1R</td>
+<td>MSIGDB</td>
+<td>0.9012</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>BIOCARTA_NPP1_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8806</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>BIOCARTA_P53_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8792</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>BIOCARTA_RACCYCD_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8785</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>REACTOME_MISMATCH_REPAIR</td>
+<td>MSIGDB</td>
+<td>0.8769</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>WP_OSTEOPONTIN_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8753</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>BIOCARTA_ATM_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8738</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_DOWNREGULATION_OF_ERBB2_ERBB3_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8732</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>BIOCARTA_PLATELETAPP_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8718</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>REACTOME_EGFR_TRANSACTIVATION_BY_GASTRIN</td>
+<td>MSIGDB</td>
+<td>0.8677</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>REACTOME_SIGNAL_ATTENUATION</td>
+<td>MSIGDB</td>
+<td>0.8651</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_SIGNALING_BY_ERBB2_ECD_MUTANTS</td>
+<td>MSIGDB</td>
+<td>0.8649</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_SIGNALING_BY_FGFR4_IN_DISEASE</td>
+<td>MSIGDB</td>
+<td>0.8647</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_SIGNALING_BY_FGFR3_FUSIONS_IN_CANCER</td>
+<td>MSIGDB</td>
+<td>0.8647</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>REACTOME_ACTIVATED_NTRK3_SIGNALS_THROUGH_RAS</td>
+<td>MSIGDB</td>
+<td>0.8634</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS</td>
+<td>MSIGDB</td>
+<td>0.8603</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>BIOCARTA_AMI_PATHWAY</td>
+<td>MSIGDB</td>
+<td>0.8600</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_DOWNREGULATION_OF_ERBB4_SIGNALING</td>
+<td>MSIGDB</td>
+<td>0.8599</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>BIFO full-arm (B4)</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Pathway name</th>
+<th>SAB</th>
+<th>Score / stat</th>
+<th>Members</th>
+<th>Cilia ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>WP_CILIOPATHIES</td>
+<td>MSIGDB</td>
+<td>6.000e-06</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>YOSHIMURA_MAPK8_TARGETS_UP</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>REACTOME_TRANSPORT_OF_SMALL_MOLECULES</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>NABA_MATRISOME</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>REACTOME_DISEASES_OF_METABOLISM</td>
+<td>MSIGDB</td>
+<td>5.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>PUJANA_BRCA1_PCC_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Signal Transduction</td>
+<td>GO</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>DESERT_PERIPORTAL_HEPATOCELLULAR_CARCINOMA_SUBCLASS_UP</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Transmembrane Transport</td>
+<td>GO</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>BENPORATH_SUZ12_TARGETS</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>PUJANA_ATM_PCC_NETWORK</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>BENPORATH_EED_TARGETS</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>BLALOCK_ALZHEIMERS_DISEASE_UP</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>DODD_NASOPHARYNGEAL_CARCINOMA_DN</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>DODD_NASOPHARYNGEAL_CARCINOMA_UP</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>PID_CONE_PATHWAY</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>MOOTHA_HUMAN_MITODB_6_2002</td>
+<td>MSIGDB</td>
+<td>4.000e-06</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl">ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
-<p>All 22 native cilia, ciliopathy, and hedgehog pathway annotations in the scored universe, ordered by KF-CHD BIFO rank. Hub-flagged pathways (high-degree graph hubs not driven by specific cilia signal) are indicated.</p>
-<p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/pathway_scores_standard.csv</code> and <code>kf_run_nbl/pathway_scores_standard.csv</code>]</em></p>
-<p>Columns: Pathway name | Source DB | KF-CHD BIFO rank | KF-CHD score | KF-NBL BIFO rank | KF-NBL score | Member count | Hub flag</p>
+<p>All 19 cilia, ciliopathy, and hedgehog pathway annotations from the scored universe, defined by the curated cilia reference set (<code>data/cohorts/kf_cilia_reference_msigdb.txt</code>), ordered by KF-CHD BIFO rank. Score = degree_norm. Hub-flagged pathways (degree_flag = True) reflect high-degree graph connectivity rather than specific cilia biology.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pathway name</th>
+<th>Source DB</th>
+<th>KF-CHD rank</th>
+<th>KF-CHD score</th>
+<th>KF-NBL rank</th>
+<th>KF-NBL score</th>
+<th>Members</th>
+<th>Hub</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>WP_CILIOPATHIES</td>
+<td>MSIGDB</td>
+<td>1</td>
+<td>6.260e-06</td>
+<td>1</td>
+<td>5.956e-06</td>
+<td>170</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR</td>
+<td>MSIGDB</td>
+<td>23</td>
+<td>3.862e-06</td>
+<td>64</td>
+<td>3.039e-06</td>
+<td>94</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>WP_JOUBERT_SYNDROME</td>
+<td>MSIGDB</td>
+<td>55</td>
+<td>3.221e-06</td>
+<td>47</td>
+<td>3.306e-06</td>
+<td>76</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>REACTOME_CILIUM_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>87</td>
+<td>3.002e-06</td>
+<td>76</td>
+<td>2.935e-06</td>
+<td>194</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>YAUCH_HEDGEHOG_SIGNALING_PARACRINE_DN</td>
+<td>MSIGDB</td>
+<td>243</td>
+<td>2.280e-06</td>
+<td>163</td>
+<td>2.436e-06</td>
+<td>240</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>REACTOME_CARGO_TRAFFICKING_TO_THE_PERICILIARY_MEMBRANE</td>
+<td>MSIGDB</td>
+<td>378</td>
+<td>1.949e-06</td>
+<td>1296</td>
+<td>1.098e-06</td>
+<td>51</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE</td>
+<td>MSIGDB</td>
+<td>395</td>
+<td>1.916e-06</td>
+<td>202</td>
+<td>2.306e-06</td>
+<td>94</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>REACTOME_SIGNALING_BY_HEDGEHOG</td>
+<td>MSIGDB</td>
+<td>458</td>
+<td>1.816e-06</td>
+<td>493</td>
+<td>1.699e-06</td>
+<td>147</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>WP_CILIARY_LANDSCAPE</td>
+<td>MSIGDB</td>
+<td>521</td>
+<td>1.713e-06</td>
+<td>483</td>
+<td>1.706e-06</td>
+<td>211</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>REACTOME_BBSOME_MEDIATED_CARGO_TARGETING_TO_CILIUM</td>
+<td>MSIGDB</td>
+<td>679</td>
+<td>1.530e-06</td>
+<td>2070</td>
+<td>8.222e-07</td>
+<td>23</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>REACTOME_INTRAFLAGELLAR_TRANSPORT</td>
+<td>MSIGDB</td>
+<td>906</td>
+<td>1.362e-06</td>
+<td>636</td>
+<td>1.551e-06</td>
+<td>50</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>YAUCH_HEDGEHOG_SIGNALING_PARACRINE_UP</td>
+<td>MSIGDB</td>
+<td>914</td>
+<td>1.354e-06</td>
+<td>1214</td>
+<td>1.136e-06</td>
+<td>140</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>WP_HEDGEHOG_SIGNALING_PATHWAY</td>
+<td>MSIGDB</td>
+<td>959</td>
+<td>1.324e-06</td>
+<td>797</td>
+<td>1.405e-06</td>
+<td>43</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>WP_INTRAFLAGELLAR_TRANSPORT_PROTEINS_BINDING_TO_DYNEIN</td>
+<td>MSIGDB</td>
+<td>1483</td>
+<td>1.038e-06</td>
+<td>1397</td>
+<td>1.055e-06</td>
+<td>25</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>WP_HEDGEHOG_SIGNALING_PATHWAY_NETPATH</td>
+<td>MSIGDB</td>
+<td>1617</td>
+<td>9.782e-07</td>
+<td>1325</td>
+<td>1.086e-06</td>
+<td>16</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>REACTOME_VXPX_CARGO_TARGETING_TO_CILIUM</td>
+<td>MSIGDB</td>
+<td>1923</td>
+<td>8.819e-07</td>
+<td>3177</td>
+<td>5.506e-07</td>
+<td>21</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>REACTOME_HEDGEHOG_LIGAND_BIOGENESIS</td>
+<td>MSIGDB</td>
+<td>2949</td>
+<td>5.910e-07</td>
+<td>2522</td>
+<td>6.903e-07</td>
+<td>62</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>REACTOME_TRAFFICKING_OF_MYRISTOYLATED_PROTEINS_TO_THE_CILIUM</td>
+<td>MSIGDB</td>
+<td>5070</td>
+<td>1.685e-07</td>
+<td>5161</td>
+<td>1.564e-07</td>
+<td>5</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>HALLMARK_HEDGEHOG_SIGNALING</td>
+<td>MSIGDB</td>
+<td>5103</td>
+<td>7.054e-08</td>
+<td>4712</td>
+<td>2.576e-07</td>
+<td>35</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><em>19 cilia-related pathways identified across 5,104 scored pathways (KF-CHD universe).</em></p>
+<hr />
 <h3 id="st5-head-to-head-rank-comparison-seed-fisher-vs.-bifo-downloadable-data-files">ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)</h3>
-<p>Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (4,551 rows for KF-CHD; 4,633 rows for KF-NBL).</p>
-<p><strong>ST5a</strong> (<code>supplementary_data_ST5a_kf_chd_fisher_vs_bifo.csv</code>): KF-CHD, 4,551 pathways, sorted by BIFO rank.</p>
-<p><strong>ST5b</strong> (<code>supplementary_data_ST5b_kf_nbl_fisher_vs_bifo.csv</code>): KF-NBL, 4,633 pathways, sorted by BIFO rank.</p>
+<p>Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (4,535 pathways for KF-CHD; 4,617 pathways for KF-NBL after BIFO-universe restriction).</p>
+<p><strong>ST5a</strong> (<code>supplementary_data_ST5a_kf_chd_fisher_vs_bifo.csv</code>): KF-CHD, sorted by BIFO rank.</p>
+<p><strong>ST5b</strong> (<code>supplementary_data_ST5b_kf_nbl_fisher_vs_bifo.csv</code>): KF-NBL, sorted by BIFO rank.</p>
 <p>Columns: pathway_name | source_db | member_count | bifo_rank | bifo_score | fisher_rank | fisher_bh_pvalue | cilia_ref_flag | hub_flag</p>
-<p><em>Source: <code>kf_run_chd/baseline_comparison.csv</code> and <code>kf_run_nbl/baseline_comparison.csv</code></em></p>
+<p><em>Source: <code>results/kf_chd/baseline_comparison.csv</code> and <code>results/kf_nbl/baseline_comparison.csv</code></em></p>
 <hr />
 <h2 id="supplementary-code-and-data-repository">Supplementary: Code and Data Repository</h2>
 <p>All code, configuration, benchmark data, and pre-computed results supporting
@@ -2035,7 +5386,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>pathway_metrics_ncc.json</code></td>
-<td>Pathway-level scoring metrics against the NCC cilia reference set</td>
+<td>Pathway-level scoring metrics against the NCC cilia pathway universe (exploratory; not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>pathway_scores_standard.csv</code></td>
@@ -2043,7 +5394,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>pathway_scores_ncc.csv</code></td>
-<td>Pathway scores restricted to NCC cilia pathway universe</td>
+<td>Pathway scores for exploratory NCC cilia universe (not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.json</code></td>
@@ -2060,6 +5411,14 @@ validation without requiring access to the full graph database.</p>
 <tr class="odd">
 <td><code>resampling_results.csv</code></td>
 <td>Per-draw metrics for all 1,500 bootstrap runs</td>
+</tr>
+<tr class="even">
+<td><code>nodes_clean_noncc.csv.gz</code></td>
+<td>Node file with NCC_CUSTOM pathway entries removed; input to final scoring run</td>
+</tr>
+<tr class="odd">
+<td><code>edges_all_noncc.csv.gz</code></td>
+<td>Merged edge file with NCC_CUSTOM pathway nodes and edges removed; input to final scoring and baseline runs</td>
 </tr>
 </tbody>
 </table>
@@ -2111,7 +5470,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>pathway_metrics_ncc.json</code></td>
-<td>Pathway-level scoring metrics against the NCC cilia reference set</td>
+<td>Pathway-level scoring metrics against the NCC cilia pathway universe (exploratory; not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>pathway_scores_standard.csv</code></td>
@@ -2119,7 +5478,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>pathway_scores_ncc.csv</code></td>
-<td>Pathway scores restricted to NCC cilia pathway universe</td>
+<td>Pathway scores for exploratory NCC cilia universe (not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.json</code></td>
@@ -2136,6 +5495,14 @@ validation without requiring access to the full graph database.</p>
 <tr class="odd">
 <td><code>resampling_results.csv</code></td>
 <td>Per-draw metrics for all 1,500 bootstrap runs</td>
+</tr>
+<tr class="even">
+<td><code>nodes_clean_noncc.csv.gz</code></td>
+<td>Node file with NCC_CUSTOM pathway entries removed; input to final scoring run</td>
+</tr>
+<tr class="odd">
+<td><code>edges_all_noncc.csv.gz</code></td>
+<td>Merged edge file with NCC_CUSTOM pathway nodes and edges removed; input to final scoring and baseline runs</td>
 </tr>
 </tbody>
 </table>
@@ -2235,7 +5602,7 @@ under MIT License; benchmark data under CC BY 4.0.</p>
 <p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference set: 18 pathways. Reference pathways are indicated in the Ref. column. Full 550-pathway scores are available in <code>results/chd_benchmark/pathway_scores_*.csv</code>.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/pathway_scores_*.csv</code>]</em></p>
 <p>Columns: Rank | Pathway name | Score (degree_norm) | Member count | Ref.</p>
-<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark-1">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
+<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
 <p>Extends Table 4 in the main text. All five enrichment methods evaluated on the identical 550-pathway universe. Methods: B0 degree overlap, B1 seed Fisher, B2 neighborhood Fisher, B3 raw PPR GSEA, B3b conditioned PPR GSEA, B4 BIFO full-arm. CHD reference pathway membership indicated in the Ref. column.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/baseline_comparison.csv</code>]</em></p>
 <p>Columns: Pathway name | B0 rank | B1 rank | B2 rank | B3 rank | B3b rank | B4 (BIFO) rank | Ref.</p>
