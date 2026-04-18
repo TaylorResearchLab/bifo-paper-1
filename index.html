@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T16:10:48+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T16:10:48+00:00" />
+  <meta name="dc.modified" content="2026-04-18T16:12:50+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T16:12:50+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5449b96b3dd7a69db581209e93ae61ffd3b05e38/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1400,6 +1400,100 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
      BH correction:
        [@doi:10.1111/j.2517-6161.1995.tb02031.x]  Benjamini & Hochberg 1995
 -->
+<h2 id="supplementary-methods">Supplementary Methods</h2>
+<h3 id="sm1-variant-processing-and-gene-aggregation">SM1 — Variant Processing and Gene Aggregation</h3>
+<p><strong>Kids First harmonized sequencing and alignment.</strong> <em>[YOUR TEXT: KF harmonized GATK-haplotypecaller pipeline, GRCh38/GENCODE v39]</em></p>
+<p><strong>Variant quality filtering.</strong> <em>[YOUR TEXT: GATK PASS, GQ≥20, DP≥10]</em></p>
+<p><strong>Pathogenicity classification.</strong> <em>[YOUR TEXT: AutoGVP P/LP classification integrating ClinVar and modified InterVar/ACMG-AMP]</em></p>
+<p><strong>Population allele frequency filtering.</strong> <em>[YOUR TEXT: gnomAD v3.1 MAF≤0.001 popmax threshold and rationale]</em></p>
+<p><strong>Gene aggregation.</strong> For each cohort, genes harboring at least one qualifying P/LP variant in any proband were aggregated into a per-cohort gene list. Carrier count-filtered subsets requiring ≥2 or ≥3 independent probands carrying qualifying variants in the same gene were generated to assess signal stability under increasingly stringent filters.</p>
+<p><strong>Background burden gene exclusion.</strong> Twenty genes representing common carrier burden from well-characterized recessive Mendelian conditions were excluded from both cohort gene lists prior to pathway analysis. These genes are present at elevated carrier frequency in any unselected pediatric sequencing cohort at MAF ≤0.001 regardless of disease phenotype, and their inclusion would inflate background signal without contributing disease-specific biological information. The complete exclusion list is: ABCA4, BCHE, CD36, COL4A5, FLG, G6PD, GJB2, KRT71, KRT86, MYO15A, MYO1A, MYO3A, MYO7A, OBSCN, PADI3, PAH, TBL1Y, TCHH, TTN, USH2A.</p>
+<p><strong>UMLS CUI resolution.</strong> Gene symbols were mapped to UMLS Concept Unique Identifiers (CUIs) for use as pipeline seed inputs using <code>seed_cui_lookup.py</code>, which queries the DDKG for HGNC-SAB concept nodes matching each gene symbol. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. Genes failing CUI resolution were excluded from graph analysis. Final seed counts used in all reported analyses are 1,276 (KF-CHD) and 1,395 (KF-NBL).</p>
+<p><strong>Output.</strong> Seed gene files for both cohorts at all carrier-count filter levels are provided in the repository at <code>data/cohorts/chd/</code> and <code>data/cohorts/nbl/</code>.</p>
+<hr />
+<h3 id="sm2-neo4j-export-queries">SM2 — Neo4j Export Queries</h3>
+<p>Graph neighborhoods for all benchmarks and cohort analyses were exported from the Data Distillery Knowledge Graph (DDKG) using Neo4j cypher-shell. Each export follows a four-query pattern: (1) a verification query confirming gene symbol-to-CUI resolution; (2) a node export collecting all concept nodes in the 1-hop neighborhood with SAB-priority resolution; (3) an edge export collecting seed↔︎neighbor edges; and (4) a targeted pathway membership edge export collecting gene-to-pathway edges within the neighborhood. Exported CSV files are cleaned using <code>clean_cypher_output.py</code> to remove cypher-shell formatting artifacts before pipeline ingestion.</p>
+<p>All query files are provided in the repository at <code>cypher/</code>. The four-query structure is shared across all exports; cohort-specific files differ only in the seed CUI list and output file names.</p>
+<p><strong>Node SAB priority ordering.</strong> All node export queries resolve each concept to a single source vocabulary (SAB) using a CASE-ordered preference: HGNC (0) &gt; NCBIGENE (1) &gt; MSIGDB (2) &gt; REACTOME (3) &gt; GO (4) &gt; MONDO (5) &gt; OMIM (6) &gt; all others (99). This ordering ensures that gene concepts resolve to their HGNC identifier when available, which is required for entity class assignment in <code>bifo_conditioning.py</code>.</p>
+<p><strong>Edge filtering.</strong> All edge export queries exclude <code>CODE</code>, <code>PREF_TERM</code>, <code>STY</code>, and <code>ISA</code> relationship types, which carry graph infrastructure rather than biological content. These are the same relationship types excluded during BIFO conditioning; excluding them at export reduces file size without affecting downstream results.</p>
+<p><strong>Pathway membership edges.</strong> Pathway membership edges connect two hop-1 nodes (a pathway concept and a gene concept) and are therefore absent from the seed↔︎hop1 edge export. They are collected in a separate targeted query using six membership predicates: <code>pathway_associated_with_gene</code>, <code>inverse_pathway_associated_with_gene</code>, <code>has_signature_gene</code>, <code>inverse_has_signature_gene</code>, <code>process_involves_gene</code>, and <code>gene_plays_role_in_process</code>. These predicates correspond to the Pathway Contribution flow class in BIFO and are the structural bridge edges between the mechanistic gene layer and the pathway annotation layer.</p>
+<p><strong>Post-export merge.</strong> After cleaning, edge files are merged using pandas concat (not shell cat) to preserve CSV headers and avoid duplicate header rows. For KF cohort runs the merge combines the raw edge file, the pathway membership edge file, and any NCC cilia membership edges into a single <code>edges_all.csv</code> input for <code>bifo_conditioning.py</code>. Merge commands are documented in comments at the end of each cypher file.</p>
+<p><strong>Export files by benchmark:</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 45%" />
+<col style="width: 25%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Benchmark / cohort</th>
+<th>Seed CUIs</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>chd_curated_export_queries.cypher</code></td>
+<td>CHD curated benchmark</td>
+<td>15 CUIs (10 seeds + 5 heldout)</td>
+<td>CUIs verified and listed in file header</td>
+</tr>
+<tr class="even">
+<td><code>c4_notch_export_queries.cypher</code></td>
+<td>C4/Notch pathway-split control</td>
+<td>44 CUIs (30 seeds + 14 heldout)</td>
+<td>REACTOME_SIGNALING_BY_NOTCH members</td>
+</tr>
+<tr class="odd">
+<td><code>c4_mapk_export_queries.cypher</code></td>
+<td>C4/MAPK pathway-split control</td>
+<td>91 CUIs (63 seeds + 28 heldout)</td>
+<td>REACTOME_MAPK_FAMILY_SIGNALING_CASCADES members</td>
+</tr>
+<tr class="even">
+<td><code>kf_chd_export_queries.cypher</code></td>
+<td>KF-CHD cohort</td>
+<td>1,276 seed CUIs</td>
+<td>Generated by <code>generate_export_cypher.py</code> from seed list</td>
+</tr>
+<tr class="odd">
+<td><code>kf_nbl_export_queries.cypher</code></td>
+<td>KF-NBL cohort</td>
+<td>1,395 seed CUIs</td>
+<td>Generated by <code>generate_export_cypher.py</code> from seed list</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note on KF cohort query generation.</strong> The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using <code>generate_export_cypher.py</code> rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.</p>
+<hr />
+<h2 id="supplementary-tables">Supplementary Tables</h2>
+<p><em>Tables ST1–ST4 will be populated from pipeline output files. ST5 consists of downloadable CSV files and is not typeset.</em></p>
+<h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark">ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
+<p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference set: 18 pathways. Reference pathways are indicated in the Ref. column. Full 550-pathway scores are available in <code>results/chd_benchmark/pathway_scores_*.csv</code>.</p>
+<p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/pathway_scores_*.csv</code>]</em></p>
+<p>Columns: Rank | Pathway name | Score (degree_norm) | Member count | Ref.</p>
+<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
+<p>Extends Table 4 in the main text. All five enrichment methods evaluated on the identical 550-pathway universe. Methods: B0 degree overlap, B1 seed Fisher, B2 neighborhood Fisher, B3 raw PPR GSEA, B3b conditioned PPR GSEA, B4 BIFO full-arm. CHD reference pathway membership indicated in the Ref. column.</p>
+<p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/baseline_comparison.csv</code>]</em></p>
+<p>Columns: Pathway name | B0 rank | B1 rank | B2 rank | B3 rank | B3b rank | B4 (BIFO) rank | Ref.</p>
+<h3 id="st3-top-20-ranked-pathways-per-method-kf-chd-and-kf-nbl-cohorts">ST3 — Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts</h3>
+<p>Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated in discovery mode. KF-CHD (5,124 pathways scored) and KF-NBL (5,203 pathways scored) shown side by side. Cilia reference pathways indicated in the Cilia ref. column.</p>
+<p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/baseline_comparison.csv</code> and <code>kf_run_nbl/baseline_comparison.csv</code>]</em></p>
+<p>Columns: Method | Rank | Pathway name | Score | Member count | Cilia ref.</p>
+<h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl">ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
+<p>All 22 native cilia, ciliopathy, and hedgehog pathway annotations in the scored universe, ordered by KF-CHD BIFO rank. Hub-flagged pathways (high-degree graph hubs not driven by specific cilia signal) are indicated.</p>
+<p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/pathway_scores_standard.csv</code> and <code>kf_run_nbl/pathway_scores_standard.csv</code>]</em></p>
+<p>Columns: Pathway name | Source DB | KF-CHD BIFO rank | KF-CHD score | KF-NBL BIFO rank | KF-NBL score | Member count | Hub flag</p>
+<h3 id="st5-head-to-head-rank-comparison-seed-fisher-vs.-bifo-downloadable-data-files">ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)</h3>
+<p>Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (4,551 rows for KF-CHD; 4,633 rows for KF-NBL).</p>
+<p><strong>ST5a</strong> (<code>supplementary_data_ST5a_kf_chd_fisher_vs_bifo.csv</code>): KF-CHD, 4,551 pathways, sorted by BIFO rank.</p>
+<p><strong>ST5b</strong> (<code>supplementary_data_ST5b_kf_nbl_fisher_vs_bifo.csv</code>): KF-NBL, 4,633 pathways, sorted by BIFO rank.</p>
+<p>Columns: pathway_name | source_db | member_count | bifo_rank | bifo_score | fisher_rank | fisher_bh_pvalue | cilia_ref_flag | hub_flag</p>
+<p><em>Source: <code>kf_run_chd/baseline_comparison.csv</code> and <code>kf_run_nbl/baseline_comparison.csv</code></em></p>
+<hr />
 <h2 id="supplementary-code-and-data-repository">Supplementary: Code and Data Repository</h2>
 <p>All code, configuration, benchmark data, and pre-computed results supporting
 this manuscript are available at:</p>
@@ -1837,8 +1931,8 @@ README.</p>
 mapping (<code>bifo_ddkg_mapping.yaml</code>) are graph-agnostic and can be applied to any
 property graph whose edges carry DDKG-compatible predicates. Code is released
 under MIT License; benchmark data under CC BY 4.0.</p>
-<h2 id="supplementary-methods">Supplementary Methods</h2>
-<h3 id="sm1-variant-processing-and-gene-aggregation">SM1 — Variant Processing and Gene Aggregation</h3>
+<h2 id="supplementary-methods-1">Supplementary Methods</h2>
+<h3 id="sm1-variant-processing-and-gene-aggregation-1">SM1 — Variant Processing and Gene Aggregation</h3>
 <p><strong>Kids First harmonized sequencing and alignment.</strong> <em>[YOUR TEXT: KF harmonized GATK-haplotypecaller pipeline, GRCh38/GENCODE v39]</em></p>
 <p><strong>Variant quality filtering.</strong> <em>[YOUR TEXT: GATK PASS, GQ≥20, DP≥10]</em></p>
 <p><strong>Pathogenicity classification.</strong> <em>[YOUR TEXT: AutoGVP P/LP classification integrating ClinVar and modified InterVar/ACMG-AMP]</em></p>
@@ -1848,7 +1942,7 @@ under MIT License; benchmark data under CC BY 4.0.</p>
 <p><strong>UMLS CUI resolution.</strong> Gene symbols were mapped to UMLS Concept Unique Identifiers (CUIs) for use as pipeline seed inputs using <code>seed_cui_lookup.py</code>, which queries the DDKG for HGNC-SAB concept nodes matching each gene symbol. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. Genes failing CUI resolution were excluded from graph analysis. Final seed counts used in all reported analyses are 1,276 (KF-CHD) and 1,395 (KF-NBL).</p>
 <p><strong>Output.</strong> Seed gene files for both cohorts at all carrier-count filter levels are provided in the repository at <code>data/cohorts/chd/</code> and <code>data/cohorts/nbl/</code>.</p>
 <hr />
-<h3 id="sm2-neo4j-export-queries">SM2 — Neo4j Export Queries</h3>
+<h3 id="sm2-neo4j-export-queries-1">SM2 — Neo4j Export Queries</h3>
 <p>Graph neighborhoods for all benchmarks and cohort analyses were exported from the Data Distillery Knowledge Graph (DDKG) using Neo4j cypher-shell. Each export follows a four-query pattern: (1) a verification query confirming gene symbol-to-CUI resolution; (2) a node export collecting all concept nodes in the 1-hop neighborhood with SAB-priority resolution; (3) an edge export collecting seed↔︎neighbor edges; and (4) a targeted pathway membership edge export collecting gene-to-pathway edges within the neighborhood. Exported CSV files are cleaned using <code>clean_cypher_output.py</code> to remove cypher-shell formatting artifacts before pipeline ingestion.</p>
 <p>All query files are provided in the repository at <code>cypher/</code>. The four-query structure is shared across all exports; cohort-specific files differ only in the seed CUI list and output file names.</p>
 <p><strong>Node SAB priority ordering.</strong> All node export queries resolve each concept to a single source vocabulary (SAB) using a CASE-ordered preference: HGNC (0) &gt; NCBIGENE (1) &gt; MSIGDB (2) &gt; REACTOME (3) &gt; GO (4) &gt; MONDO (5) &gt; OMIM (6) &gt; all others (99). This ordering ensures that gene concepts resolve to their HGNC identifier when available, which is required for entity class assignment in <code>bifo_conditioning.py</code>.</p>
@@ -1906,25 +2000,25 @@ under MIT License; benchmark data under CC BY 4.0.</p>
 </table>
 <p><strong>Note on KF cohort query generation.</strong> The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using <code>generate_export_cypher.py</code> rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.</p>
 <hr />
-<h2 id="supplementary-tables">Supplementary Tables</h2>
+<h2 id="supplementary-tables-1">Supplementary Tables</h2>
 <p><em>Tables ST1–ST4 will be populated from pipeline output files. ST5 consists of downloadable CSV files and is not typeset.</em></p>
-<h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark">ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
+<h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark-1">ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
 <p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference set: 18 pathways. Reference pathways are indicated in the Ref. column. Full 550-pathway scores are available in <code>results/chd_benchmark/pathway_scores_*.csv</code>.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/pathway_scores_*.csv</code>]</em></p>
 <p>Columns: Rank | Pathway name | Score (degree_norm) | Member count | Ref.</p>
-<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
+<h3 id="st2-full-baseline-enrichment-comparison-curated-chd-benchmark-1">ST2 — Full baseline enrichment comparison, curated CHD benchmark</h3>
 <p>Extends Table 4 in the main text. All five enrichment methods evaluated on the identical 550-pathway universe. Methods: B0 degree overlap, B1 seed Fisher, B2 neighborhood Fisher, B3 raw PPR GSEA, B3b conditioned PPR GSEA, B4 BIFO full-arm. CHD reference pathway membership indicated in the Ref. column.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>BIFO_minimal_test_run_OptionC_V4/baseline_comparison.csv</code>]</em></p>
 <p>Columns: Pathway name | B0 rank | B1 rank | B2 rank | B3 rank | B3b rank | B4 (BIFO) rank | Ref.</p>
-<h3 id="st3-top-20-ranked-pathways-per-method-kf-chd-and-kf-nbl-cohorts">ST3 — Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts</h3>
+<h3 id="st3-top-20-ranked-pathways-per-method-kf-chd-and-kf-nbl-cohorts-1">ST3 — Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts</h3>
 <p>Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated in discovery mode. KF-CHD (5,124 pathways scored) and KF-NBL (5,203 pathways scored) shown side by side. Cilia reference pathways indicated in the Cilia ref. column.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/baseline_comparison.csv</code> and <code>kf_run_nbl/baseline_comparison.csv</code>]</em></p>
 <p>Columns: Method | Rank | Pathway name | Score | Member count | Cilia ref.</p>
-<h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl">ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
+<h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl-1">ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
 <p>All 22 native cilia, ciliopathy, and hedgehog pathway annotations in the scored universe, ordered by KF-CHD BIFO rank. Hub-flagged pathways (high-degree graph hubs not driven by specific cilia signal) are indicated.</p>
 <p><em>[TABLE TO BE INSERTED — source: <code>kf_run_chd/pathway_scores_standard.csv</code> and <code>kf_run_nbl/pathway_scores_standard.csv</code>]</em></p>
 <p>Columns: Pathway name | Source DB | KF-CHD BIFO rank | KF-CHD score | KF-NBL BIFO rank | KF-NBL score | Member count | Hub flag</p>
-<h3 id="st5-head-to-head-rank-comparison-seed-fisher-vs.-bifo-downloadable-data-files">ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)</h3>
+<h3 id="st5-head-to-head-rank-comparison-seed-fisher-vs.-bifo-downloadable-data-files-1">ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)</h3>
 <p>Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (4,551 rows for KF-CHD; 4,633 rows for KF-NBL).</p>
 <p><strong>ST5a</strong> (<code>supplementary_data_ST5a_kf_chd_fisher_vs_bifo.csv</code>): KF-CHD, 4,551 pathways, sorted by BIFO rank.</p>
 <p><strong>ST5b</strong> (<code>supplementary_data_ST5b_kf_nbl_fisher_vs_bifo.csv</code>): KF-NBL, 4,633 pathways, sorted by BIFO rank.</p>
