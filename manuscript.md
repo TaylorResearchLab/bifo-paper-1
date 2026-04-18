@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T09:55:52+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T09:55:52+00:00" />
+  <meta name="dc.modified" content="2026-04-18T10:04:16+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T10:04:16+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/447d7f93578e6d36edb8c6c75b72e37ff16c9c3a/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -107,20 +107,6 @@ Deanne M. Taylor^1,2^✉^^, Taha Mohseni Ahooyi^1^, Benjamin Stear^1^, Yuanchao 
 
 ^✉^Correspondence: <taylordm@chop.edu>
 
-
-
-## Abstract {.page_break_before}
-
-<!-- SLOT: Abstract to be written after Results and Discussion are complete -->
-<!-- Key points to cover:
-  - BIFO: ontology-based framework for admissible biological information flow over heterogeneous knowledge graphs
-  - Applied to DDKG (Data Distillery Knowledge Graph) built on UBKG/Petagraph
-  - Curated CHD benchmark: P@10=0.70, AP=0.403, rank improvement +93 across 3,003 exhaustive seed partitions
-  - KF-CHD application: WP_CILIOPATHIES rank 1 of 5,124 pathways in discovery mode from 1,276 rare variant seeds
-  - Standard Fisher enrichment fails at cohort-scale rare variant inputs (p-value floor collapse)
-  - BIFO recovers cilia pathway cluster coherently where conventional methods cannot discriminate
-  - Cross-cohort CHD+NBL convergence on cilia biology (pending NBL results)
--->
 
 
 ## Introduction
