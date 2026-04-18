@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T09:43:48+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T09:43:48+00:00" />
+  <meta name="dc.modified" content="2026-04-18T09:55:52+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T09:55:52+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d05017e173def2f6d1849e2150aa6df0c8501ab2/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d05017e173def2f6d1849e2150aa6df0c8501ab2/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d05017e173def2f6d1849e2150aa6df0c8501ab2/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ea25d170329df3ac297a281d828a4d926ec2fb66/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -84,6 +84,17 @@ manubot-output-citekeys: output/citations.tsv
 manubot-requests-cache-path: ci/cache/requests-cache
 manubot-clear-requests-cache: false
 ...
+
+## Abstract
+
+Biological knowledge graphs integrate heterogeneous data across molecular, cellular, and phenotypic domains, but do not enable reliable inference on their own. When mechanistic relationships, statistical associations, and annotation edges share a single structure, graph traversal propagates signal along biologically invalid paths. This produces an identifiability problem in which causal and non-causal explanations cannot be distinguished, and standard enrichment approaches fail in both small and large gene set regimes.
+
+Here we introduce the Biological Information Flow Ontology (BIFO), a framework that constrains information flow by defining admissible biological transformations prior to propagation. In a three-arm ablation design, we show that pathway inference depends on a distinct bridge layer: mechanistic-only propagation yields zero pathway scores, while inclusion of gene-to-pathway membership edges enables signal transfer between molecular and pathway representations.
+
+Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO and correctly implemented Fisher enrichment independently identify the same ciliopathy pathway as top-ranked in both diseases, while BIFO remains effective where overlap-based methods lose discriminative power.
+
+These results show that constraining admissible information flow is necessary for meaningful graph-based biological inference.
+
 
 
 Deanne M. Taylor^1,2^✉^^, Taha Mohseni Ahooyi^1^, Benjamin Stear^1^, Yuanchao Zhang^1^, Aditya Lahiri^1^, Alan Simmons^3^, Tiffany J. Callahan^4^, Jonathan C. Silverstein^3^
