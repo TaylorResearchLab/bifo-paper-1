@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T08:48:09+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T08:48:09+00:00" />
+  <meta name="dc.modified" content="2026-04-18T09:35:44+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T09:35:44+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/02fb1f04ea136a73b2d9d6c39a04cdf014ab7580/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/285295e72f03b6c48fdff3e410f34a9e97cfbeb2/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/285295e72f03b6c48fdff3e410f34a9e97cfbeb2/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/285295e72f03b6c48fdff3e410f34a9e97cfbeb2/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -867,43 +867,35 @@ The following figures and tables support the Results sections above.
 
 ## Discussion
 
-<!-- SLOT: Discussion to be written after NBL results and cross-cohort analysis complete.
+The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, ciliopathy-related pathways rank first under BIFO scoring. Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies the same top pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics.
 
-Key points:
-1. BIFO fills the methodological gap for rare variant cohort-scale pathway analysis
-   - Standard enrichment breaks down at both ends of the query size spectrum
-   - Graph propagation concentrates signal before scoring — the key architectural insight
-   - Pathway Contribution bridge edges are the enabling structural element
+The distinction lies in how the signal is detected. Fisher enrichment identifies pathways through direct overlap between genes and pathway membership. BIFO, in contrast, recovers the same signal through propagation across a constrained graph, without requiring strong direct overlap. This allows BIFO to remain effective in regimes where enrichment methods lose reliability, including small gene sets, large heterogeneous cohorts, and graph-derived neighborhoods. In this sense, BIFO does not replace standard enrichment methods; it extends them by enabling pathway-level interpretation when overlap-based approaches are unstable or uninformative.
 
-2. Curated CHD benchmark: performance and robustness
-   - P@10=0.70, AP=0.403 on primary split
-   - Positive rank improvement in 3,003/3,003 exhaustive splits
-   - BIFO vs Fisher: complementary strengths — Fisher competitive when seeds directly
-     annotate pathway members, BIFO's advantage largest in discovery setting
+This difference becomes clear when examining the failure modes of standard enrichment. At small gene set sizes, Fisher enrichment is sensitive to incidental overlap and often prioritizes non-specific pathways. In the curated benchmark, seed-only Fisher achieves P@10 = 0.30, while BIFO reaches P@10 = 0.70, reflecting the instability of direct overlap at this scale. At large gene set sizes, such as those derived from rare variant aggregation, p-values collapse and lose discriminative power even when computed correctly. Graph-based expansion approaches introduce a complementary problem: by inflating the gene set to include most of the graph, they eliminate contrast between pathways. These limitations reflect a common issue: standard methods operate directly on gene membership and do not account for how signal is distributed across biological relationships.
 
-3. KF-CHD application: rare variant enrichment problem solved
-   - WP_CILIOPATHIES rank 1 in both Fisher (with correct universe) and BIFO
-   - Fisher fails when universe is wrong (all graph nodes), BIFO robust to this
-   - The cilia cluster is coherently recovered (22 pathways, all above median)
-   - NCC_CUSTOM pathway connectivity issue — limitation and path to resolution
+BIFO addresses this by separating propagation from scoring. Signal is first propagated through the graph using a constrained set of biologically admissible edges, and pathways are then evaluated based on where that signal accumulates. This allows weak signals that are distributed across many genes to reinforce each other through shared biological context, while incoherent background signal disperses. The scoring step then operates on this structured signal rather than on the original gene list.
 
-4. Cross-cohort convergence (pending NBL)
-   - Oligogenic model for CHD/NBL shared cilia biology
-   - BIFO as individual-level pathway burden scorer (future direction)
-   - U24 Aim 2.1 connection
+A key component of this behavior is the pathway scoring function itself. The results show that propagation alone is not sufficient: while preranked GSEA on PPR scores recovers some pathway signal, its performance remains limited compared to the full BIFO approach (P@10 = 0.10 for both raw and conditioned PPR GSEA versus P@10 = 0.70 for BIFO). The improvement arises from how propagated signal is translated into pathway-level scores.
 
-5. Limitations
-   - Graph scope: 1-hop neighborhood, defined SAB subset
-   - NCC_CUSTOM pathway injection not fully integrated
-   - alpha sensitivity not evaluated
-   - Single scoring variant selected before freeze
+The BIFO scoring function evaluates the direct PPR score at each pathway node and normalizes it by the square root of pathway size. This formulation reflects two design choices. First, it requires signal to reach the pathway node itself. Only signal that successfully propagates from the seed genes into the pathway layer contributes to the score. In contrast, gene-level methods such as GSEA operate on ranked gene lists and do not require this transfer, which can blur distinctions between pathways connected through shared genes or indirect correlations.
 
-6. Future directions
-   - Per-individual pathway burden scoring for oligogenic analysis
-   - Expanded DDKG exports with additional SABs
-   - DisGeNET extension study
-   - Manubot-managed collaborative manuscript development
--->
+Second, the square-root normalization reduces bias toward large pathways without eliminating their contribution. Larger pathways accumulate more propagated signal because more genes contribute PPR mass to the pathway node through Pathway Contribution edges. Fully normalizing by pathway size would overcorrect this effect and suppress biologically meaningful programs. The square-root penalty provides a balance: it down-weights large, non-specific pathways while preserving signal in pathways that are both large and biologically coherent. This scoring variant was selected as the primary function before benchmark freeze; alternative variants were evaluated but not used for primary analysis.
+
+Together, these properties distinguish BIFO from both overlap-based and propagation-based alternatives. Fisher enrichment depends entirely on direct membership overlap, while propagation-only approaches tend to favor highly connected regions of the graph. BIFO combines propagation with pathway-level scoring in a way that requires biologically meaningful signal transfer and controls for pathway size. The result is a scoring scheme that reflects both the structure of the graph and the specificity of the biological program.
+
+The ablation analysis provides a mechanistic explanation for why this works. When propagation is restricted to mechanistic edges alone, pathway scores collapse to zero across the graph. This result reflects how biological knowledge is represented. Mechanistic relationships connect genes within a molecular network, while pathway annotations are stored separately as curated gene sets. These two components form distinct layers of the graph and are connected only through gene-to-pathway membership relationships. Consistent with this structure, removing bridge edges reduces pathway recovery (P@10 decreases from 0.70 to 0.60), while mechanistic-only propagation yields zero pathway scores.
+
+This leads to a simple but important interpretation. The graph is organized as a two-layer system: a mechanistic layer encoding biological processes and an annotation layer encoding curated pathway knowledge. BIFO makes this structure explicit by treating gene-to-pathway relationships as a distinct class of edges that are allowed to carry signal. The ablation results show that these edges are necessary to reach pathway nodes, but they do not generate signal independently. Signal must originate in the mechanistic layer and then transfer across the bridge.
+
+The robustness analysis shows that these results are not dependent on a particular gene set. Across all 3,003 partitions of the CHD gene pool, BIFO consistently improves pathway ranking relative to unconditioned propagation. At the same time, the comparison with Fisher enrichment highlights an important boundary. When seed genes directly overlap with pathway members, Fisher performs well, as expected. BIFO is most useful in the complementary setting, where relevant pathways are connected indirectly through biological relationships. This distinction aligns with the difference between recovery tasks and discovery tasks and explains why BIFO is particularly effective for cohort-scale analyses.
+
+The KF cohort results further clarify the nature of the recovered signal. The ciliopathy signal is not driven by a small number of genes but is distributed across a subset of genes embedded in a larger heterogeneous background. Both BIFO and Fisher fail to recover this signal reliably from small random gene subsets and converge only at cohort scale. This behavior is consistent with a polygenic developmental process rather than a single dominant driver. The biological interpretation of these findings and their implications for cilia-related developmental disease are examined in depth in the companion cross-cohort analysis (Stear et al. 2026).
+
+Several limitations should be noted. The benchmark graph is a controlled 1-hop projection of a larger knowledge graph and includes only a subset of source vocabularies. As a result, some nodes cannot be resolved and are excluded from propagation. The finding that mechanistic edges alone cannot reach pathway nodes depends on this graph configuration and may change with additional data sources. However, the underlying pattern, a separation between mechanistic relationships and curated pathway annotations, is a common feature of ontology-based knowledge graphs.
+
+Gene-level recovery metrics are near ceiling in the curated benchmark due to the small size and strong connectivity of the test set. In this context, pathway-level evaluation and cohort-scale analysis provide a more meaningful assessment of performance.
+
+Overall, BIFO provides a framework for making graph-based biological analysis both effective and interpretable. By constraining which relationships are allowed to carry signal and by explicitly defining how propagated signal is evaluated at the pathway level, it shifts the focus from raw connectivity to biologically meaningful structure. This perspective provides a principled basis for analyzing heterogeneous biological data, particularly in settings where standard methods struggle to extract coherent signal.
 
 
 ## References {.page_break_before}
