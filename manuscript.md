@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T06:56:49+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T06:56:49+00:00" />
+  <meta name="dc.modified" content="2026-04-18T07:03:10+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T07:03:10+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -444,7 +444,7 @@ The bootstrap analysis was designed to address two questions: (1) whether cilia 
 
 *BIFO: Biological Information Flow Ontology --- Benchmark v1.0*
 
-Backbone draft · April 2026 · Data frozen · Kids First cohort TBD
+Backbone draft · April 2026 · Data frozen
 
 ## 1 Graph conditioning and coverage
 
@@ -711,9 +711,7 @@ The planned DisGeNET extension will test whether adding the evidence-layer sourc
 Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3.
 ](images/fig7_schematic.png){#fig:schematic width="100%"}
 
-> *⚑ \[SLOT: Kids First CHD variant-derived seeds\] --- see Section 8 below.*
->
-> *⚑ \[SLOT: Kids First NB variant-derived seeds\] --- see Section 8.3 below.*
+
 
 ## 8 Kids First cohort: discovery-mode pathway analysis
 
@@ -847,7 +845,7 @@ The following figures and tables support the Results sections above.
 
   **Table 3**     Three-arm pathway ablation                           pathway_metrics\_\*.json            Complete
 
-  **Table 4**     Baseline comparison (curated benchmark)              baseline_comparison.json            Complete; B0 row pending
+  **Table 4**     Baseline comparison (curated benchmark)              baseline_comparison.json            Complete
 
   **Table 5**     C4 pathway-split controls                            c4\_\*/pathway_metrics.json         Complete
 

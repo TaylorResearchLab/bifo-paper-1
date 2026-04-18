@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T06:56:49+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T06:56:49+00:00" />
+  <meta name="dc.modified" content="2026-04-18T07:03:10+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T07:03:10+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f780ee41a83cc5b6249bcb83e3e6316c5b1266be/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -461,7 +461,7 @@
 <p>The bootstrap analysis was designed to address two questions: (1) whether cilia pathway recovery requires aggregate cohort-scale variant burden or can emerge from small random gene subsets; and (2) whether BIFO or standard Fisher enrichment is more sensitive for detecting cilia signal at small seed sizes. Results are reported in Section 8.4.</p>
 <p><strong>Results</strong></p>
 <p><em>BIFO: Biological Information Flow Ontology — Benchmark v1.0</em></p>
-<p>Backbone draft · April 2026 · Data frozen · Kids First cohort TBD</p>
+<p>Backbone draft · April 2026 · Data frozen</p>
 <h2 id="graph-conditioning-and-coverage">1 Graph conditioning and coverage</h2>
 <p>The DDKG export comprised 34,523 concept nodes and 174,352 merged edges, combining 94,790 seed-centered mechanistic and association edges (edges_raw) with 79,562 pathway membership edges. Entity resolution using direct SAB column fallback resolved 18,897 of 34,523 concept nodes (54.7%); the remaining 15,626 nodes lacked a mappable source vocabulary assignment and were treated as unresolvable at Level 1.</p>
 <p>BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.7.1; 251 entries). Of 174,352 input edges, 104,342 (59.8%) were retained as biologically admissible; 69,658 were excluded for three mutually exclusive reasons: unmapped predicate (37,448; 21.5%), unresolved endpoint entity (32,214; 18.5%), or explicit non-flow classification (348; 0.2%). Level-2 edge coverage was 59.8%, reflecting incomplete predicate mapping under the current SAB selection.</p>
@@ -975,10 +975,6 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3.</figcaption>
 </figure>
 </div>
-<blockquote>
-<p><em>⚑ [SLOT: Kids First CHD variant-derived seeds] — see Section 8 below.</em></p>
-<p><em>⚑ [SLOT: Kids First NB variant-derived seeds] — see Section 8.3 below.</em></p>
-</blockquote>
 <h2 id="kids-first-cohort-discovery-mode-pathway-analysis">8 Kids First cohort: discovery-mode pathway analysis</h2>
 <h3 id="fisher-enrichment-at-cohort-scale-implementation-matters">8.1 Fisher enrichment at cohort scale: implementation matters</h3>
 <p>Applying seed-only hypergeometric enrichment (B1) to the 1,276-gene KF-CHD variant set requires careful implementation. A naive implementation using standard-precision p-value computation causes float underflow: with 1,276 seeds against a ~22,628-gene universe, scipy.stats.hypergeom.sf returns 0.0 for any pathway with meaningful overlap, collapsing rank discrimination entirely and placing WP_CILIOPATHIES (61/170 members; BH p = 9.68×10⁻³¹) at rank 768 alongside hundreds of non-specific pathways. Once corrected to use log-space hypergeometric computation (hypergeom.logsf) with a pathway-member-only gene universe, Fisher correctly recovers WP_CILIOPATHIES at rank 1 of 4,551 pathways (BH p = 9.68×10⁻³¹, overlap = 61/170 members). WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR ranks 3rd (BH p = 8.29×10⁻¹⁴) and WP_JOUBERT_SYNDROME ranks 4th (BH p = 8.29×10⁻¹⁴), confirming that cilia enrichment signal is present and detectable by both approaches when Fisher is correctly implemented.</p>
@@ -1295,7 +1291,7 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <td style="text-align: left;"><strong>Table 4</strong></td>
 <td style="text-align: left;">Baseline comparison (curated benchmark)</td>
 <td style="text-align: left;">baseline_comparison.json</td>
-<td style="text-align: left;">Complete; B0 row pending</td>
+<td style="text-align: left;">Complete</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Table 5</strong></td>
