@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T07:03:10+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T07:03:10+00:00" />
+  <meta name="dc.modified" content="2026-04-18T08:39:06+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T08:39:06+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/addb577a7d694c0d58491030cf162b6c0383ef9b/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0ec23ba48b3ffce610322bfbc161d4f2b99eaefb/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -551,7 +551,7 @@ The mechanistic-only arm restricted propagation to edges classified as mechanist
 
 Together, the three arms identify a two-layer graph architecture with a structurally necessary bridge. Layer 1 (mechanistic) encodes gene--gene signaling, transcription, and protein interaction. Layer 2 (pathway) encodes curated gene-set annotations. These layers are structurally separated in the present graph; connectivity between them is mediated exclusively by Pathway Contribution edges. BIFO\'s contribution is the principled, ontology-aligned admission of those bridge edges as a coherent flow class, enabling signal transfer from the mechanistic layer to the pathway annotation layer.
 
-> *Scope: these conclusions apply to the present benchmark graph, constructed from a defined SAB subset excluding DisGeNET (DGNAGE/DGNGCM/DGNGV). Future exports may alter mechanistic-layer connectivity. The DisGeNET extension is an independent study, not a limitation correction.*
+> *Scope: these conclusions apply to the present benchmark graph, constructed from a defined SAB subset that isolates ontology-aligned mechanistic and pathway representations from association-derived evidence layers. The present framework does not incorporate association-derived evidence; the architectural findings reported here reflect this graph's topology under the current SAB selection.*
 
 ![
 **BIFO conditioning enables pathway-level signal recovery.**
@@ -688,23 +688,19 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 (**D**) Rank improvement distribution (raw PPR rank − conditioned PPR rank): all 3,003 splits show positive rank improvement (100% positive); primary split +99.2. BIFO beats Seed Fisher on AP in 22.9% of splits.
 ](images/fig6_resampling.png){#fig:resampling width="100%"}
 
-## 7 Limitations and extension path
+## 7 Limitations and scope
 
 ***Graph scope***
 
-The benchmark graph is a 1-hop neighborhood export from a defined DDKG SAB subset. Entity resolution covered 54.7% of concept nodes; DisGeNET vocabularies (DGNAGE, DGNGCM, DGNGV) were intentionally excluded to isolate ontology-aligned mechanistic and pathway representations from association-derived evidence layers.
+The benchmark graph is a 1-hop neighborhood export from a defined DDKG SAB subset that isolates ontology-aligned mechanistic and pathway representations from association-derived evidence layers. Entity resolution covered 54.7% of concept nodes under this SAB selection.
 
 ***Mechanistic arm scope and structural interpretation***
 
-The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies to the present benchmark graph and SAB selection. Rather than a limitation, this reveals an architectural property of ontology-aligned biomedical knowledge graphs: mechanistic edges encode directed biological process flow within the molecular layer (gene–gene signaling, protein interactions, regulatory cascades), while a formally distinct edge class --- Pathway Contribution bridges --- is required to connect that molecular layer to pathway-level annotations. This separation is not an artefact of incomplete edge coverage; it is a consequence of how curated pathway memberships are represented in the DDKG. The result motivates BIFO's explicit admission of bridge edges as a coherent, propagation-eligible flow class: without formally recognising and admitting them, no graph propagation method operating on mechanistic edges alone can reach pathway concept nodes in this knowledge graph architecture. Future exports incorporating DisGeNET may introduce additional edges between gene-level and pathway-level nodes through association-layer paths; whether structural dependence on Pathway Contribution edges persists under expanded SAB selections is the core question of the planned extension study (§7, Extension study: DisGeNET).
+The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies to the present benchmark graph and SAB selection. Rather than a limitation, this reveals an architectural property of ontology-aligned biomedical knowledge graphs: mechanistic edges encode directed biological process flow within the molecular layer (gene--gene signaling, protein interactions, regulatory cascades), while a formally distinct edge class --- Pathway Contribution bridges --- is required to connect that molecular layer to pathway-level annotations. This separation is not an artefact of incomplete edge coverage; it is a consequence of how curated pathway memberships are represented in the DDKG. The result motivates BIFO's explicit admission of bridge edges as a coherent, propagation-eligible flow class: without formally recognising and admitting them, no graph propagation method operating on mechanistic edges alone can reach pathway concept nodes in this knowledge graph architecture. Whether this architectural property persists under expanded SAB selections incorporating additional evidence layers remains an open question outside the scope of the current analysis.
 
 ***Gene-level recovery ceiling***
 
-AUROC is near-ceiling (1.000) on this benchmark due to the small held-out set and strongly connected seed neighborhood. These metrics will be more discriminating at full-cohort scale with variant-derived seeds.
-
-***Extension study: DisGeNET***
-
-The planned DisGeNET extension will test whether adding the evidence-layer sources creates new admissible mechanistic paths to the pathway layer, or whether structural dependence on Pathway Contribution edges persists. This is a structural hypothesis, not a performance optimization.
+AUROC is near-ceiling (1.000) on this benchmark due to the small held-out set and strongly connected seed neighborhood. These metrics will be more discriminating at full-cohort scale with variant-derived seeds. The present framework isolates admissible mechanistic and pathway-level structure; incorporation of additional evidence layers requires separate treatment to preserve interpretability of causal flow.
 
 ![
 **Two-layer graph architecture and the role of Pathway Contribution bridge edges.**
