@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-18" />
   <meta name="citation_publication_date" content="2026-04-18" />
   <meta property="article:published_time" content="2026-04-18" />
-  <meta name="dc.modified" content="2026-04-18T16:12:50+00:00" />
-  <meta property="article:modified_time" content="2026-04-18T16:12:50+00:00" />
+  <meta name="dc.modified" content="2026-04-18T16:51:38+00:00" />
+  <meta property="article:modified_time" content="2026-04-18T16:51:38+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9a756e32b7fb366743885fc2fa12a7815d1400d1/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d1905c20e201f028b99f3e28aa2b5b4e4a880b85/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1848,7 +1848,8 @@ validation without requiring access to the full graph database.</p>
 </tbody>
 </table>
 <h3 id="s6.6-pre-computed-results-results">S6.6 Pre-computed results (<code>results/</code>)</h3>
-<p><strong>CHD benchmark (<code>results/chd_benchmark/</code>)</strong></p>
+<p><strong>Curated CHD benchmark (<code>results/chd_benchmark/</code>)</strong></p>
+<p>Three-arm ablation results. Files are prefixed by arm: <code>full</code> (BIFO-conditioned, all flow classes), <code>ablation</code> (no Pathway Contribution bridge edges), <code>mech</code> (mechanistic-only edges).</p>
 <table>
 <colgroup>
 <col style="width: 31%" />
@@ -1862,12 +1863,132 @@ validation without requiring access to the full graph database.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>chd_resampling_summary.json</code></td>
+<td><code>results_full.json</code></td>
+<td>Gene-level PPR recovery metrics for the full BIFO arm (AUROC, AUPRC, entropy, nonzero fraction)</td>
+</tr>
+<tr class="even">
+<td><code>results_ablation.json</code></td>
+<td>Gene-level PPR recovery metrics for the ablation arm</td>
+</tr>
+<tr class="odd">
+<td><code>results_mech.json</code></td>
+<td>Gene-level PPR recovery metrics for the mechanistic-only arm</td>
+</tr>
+<tr class="even">
+<td><code>results_node_index.json</code></td>
+<td>Node CUI → matrix index mapping shared across all three arms</td>
+</tr>
+<tr class="odd">
+<td><code>results_full_scores_cond.npy</code></td>
+<td>Full arm: conditioned PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_full_scores_raw.npy</code></td>
+<td>Full arm: raw (unconditioned) PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_ablation_scores_cond.npy</code></td>
+<td>Ablation arm: conditioned PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_ablation_scores_raw.npy</code></td>
+<td>Ablation arm: raw PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_mech_scores_cond.npy</code></td>
+<td>Mechanistic-only arm: conditioned PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_mech_scores_raw.npy</code></td>
+<td>Mechanistic-only arm: raw PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_full_kept_edges.csv.zip</code></td>
+<td>Full arm: BIFO-conditioned kept edges with flow class and propagating flag annotations</td>
+</tr>
+<tr class="even">
+<td><code>results_ablation_kept_edges.csv.zip</code></td>
+<td>Ablation arm: kept edges</td>
+</tr>
+<tr class="odd">
+<td><code>results_mech_kept_edges.csv.zip</code></td>
+<td>Mechanistic-only arm: kept edges</td>
+</tr>
+<tr class="even">
+<td><code>pathway_metrics_full.json</code></td>
+<td>Pathway-level scoring metrics for the full arm (P@k, NDCG, AP, mean rank, rank improvement)</td>
+</tr>
+<tr class="odd">
+<td><code>pathway_metrics_ablation.json</code></td>
+<td>Pathway-level scoring metrics for the ablation arm</td>
+</tr>
+<tr class="even">
+<td><code>pathway_metrics_mech.json</code></td>
+<td>Pathway-level scoring metrics for the mechanistic-only arm</td>
+</tr>
+<tr class="odd">
+<td><code>baseline_comparison.json</code></td>
+<td>Baseline enrichment method comparison metrics (B0–B4)</td>
+</tr>
+<tr class="even">
+<td><code>baseline_comparison.csv</code></td>
+<td>Full ranked pathway list under all baseline methods; source for Supplementary Table ST2</td>
+</tr>
+<tr class="odd">
+<td><code>resampling_summary.json</code></td>
 <td>Summary statistics for all 3,003 exhaustive CHD seed-split results: per-metric distributions (mean, SD, min, P25, median, P75, max), robustness counts, and primary split percentile ranks</td>
+</tr>
+<tr class="even">
+<td><code>resampling_results.csv</code></td>
+<td>Per-split metrics for all 3,003 seed partitions; source for Figure 6</td>
 </tr>
 </tbody>
 </table>
-<p><strong>KF-CHD conditioning outputs (<code>results/kf_chd/</code>)</strong></p>
+<p><strong>C4 pathway-split controls (<code>results/chd_benchmark/c4_notch/</code> and <code>results/chd_benchmark/c4_mapk/</code>)</strong></p>
+<p>Each C4 subdirectory contains results for one pathway-split control benchmark. Files use a single-arm naming convention (no arm prefix) as each C4 control uses the full BIFO operator only.</p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>results.json</code></td>
+<td>Gene-level PPR recovery metrics</td>
+</tr>
+<tr class="even">
+<td><code>results_node_index.json</code></td>
+<td>Node CUI → matrix index mapping</td>
+</tr>
+<tr class="odd">
+<td><code>results_scores_cond.npy</code></td>
+<td>Conditioned PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_scores_raw.npy</code></td>
+<td>Raw PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_kept_edges.csv.zip</code></td>
+<td>BIFO-conditioned kept edges</td>
+</tr>
+<tr class="even">
+<td><code>pathway_metrics.json</code></td>
+<td>Pathway-level scoring metrics (P@k, NDCG, AP, source pathway rank)</td>
+</tr>
+<tr class="odd">
+<td><code>baseline_comparison.json</code></td>
+<td>Baseline enrichment method comparison metrics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-CHD cohort (<code>results/kf_chd/</code>)</strong></p>
 <table>
 <colgroup>
 <col style="width: 31%" />
@@ -1907,6 +2028,114 @@ validation without requiring access to the full graph database.</p>
 <tr class="odd">
 <td><code>results_scores_rand.npy</code></td>
 <td>Random sparsification control PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>pathway_metrics_standard.json</code></td>
+<td>Pathway-level scoring metrics against the standard scored universe (5,124 pathways)</td>
+</tr>
+<tr class="odd">
+<td><code>pathway_metrics_ncc.json</code></td>
+<td>Pathway-level scoring metrics against the NCC cilia reference set</td>
+</tr>
+<tr class="even">
+<td><code>pathway_scores_standard.csv</code></td>
+<td>Full ranked pathway list under BIFO full-arm; source for Supplementary Tables ST3 and ST4</td>
+</tr>
+<tr class="odd">
+<td><code>pathway_scores_ncc.csv</code></td>
+<td>Pathway scores restricted to NCC cilia pathway universe</td>
+</tr>
+<tr class="even">
+<td><code>baseline_comparison.json</code></td>
+<td>Baseline enrichment method comparison metrics (B1–B4)</td>
+</tr>
+<tr class="odd">
+<td><code>baseline_comparison.csv</code></td>
+<td>Full ranked pathway list under all baseline methods; source for Supplementary Tables ST3 and ST5a</td>
+</tr>
+<tr class="even">
+<td><code>resampling_summary.json</code></td>
+<td>Bootstrap resampling summary: per-metric distributions at n=10, 20, 30 seed sizes (500 draws each)</td>
+</tr>
+<tr class="odd">
+<td><code>resampling_results.csv</code></td>
+<td>Per-draw metrics for all 1,500 bootstrap runs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KF-NBL cohort (<code>results/kf_nbl/</code>)</strong></p>
+<p>Identical file structure to <code>results/kf_chd/</code>. All files were produced by the same pipeline with KF-NBL seed genes (1,395 CUIs) as input.</p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>results.json</code></td>
+<td>Four-arm PPR gene-level recovery metrics</td>
+</tr>
+<tr class="even">
+<td><code>results_node_index.json</code></td>
+<td>Node CUI → matrix index mapping</td>
+</tr>
+<tr class="odd">
+<td><code>results_kept_edges.csv.zip</code></td>
+<td>BIFO-conditioned kept edges</td>
+</tr>
+<tr class="even">
+<td><code>results_scores_cond.npy</code></td>
+<td>Conditioned (BIFO full-arm) PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_scores_raw.npy</code></td>
+<td>Raw PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>results_scores_meta.npy</code></td>
+<td>Metadata-filtered PPR score vector</td>
+</tr>
+<tr class="odd">
+<td><code>results_scores_rand.npy</code></td>
+<td>Random sparsification control PPR score vector</td>
+</tr>
+<tr class="even">
+<td><code>pathway_metrics_standard.json</code></td>
+<td>Pathway-level scoring metrics against the standard scored universe (5,203 pathways)</td>
+</tr>
+<tr class="odd">
+<td><code>pathway_metrics_ncc.json</code></td>
+<td>Pathway-level scoring metrics against the NCC cilia reference set</td>
+</tr>
+<tr class="even">
+<td><code>pathway_scores_standard.csv</code></td>
+<td>Full ranked pathway list under BIFO full-arm; source for Supplementary Tables ST3 and ST4</td>
+</tr>
+<tr class="odd">
+<td><code>pathway_scores_ncc.csv</code></td>
+<td>Pathway scores restricted to NCC cilia pathway universe</td>
+</tr>
+<tr class="even">
+<td><code>baseline_comparison.json</code></td>
+<td>Baseline enrichment method comparison metrics</td>
+</tr>
+<tr class="odd">
+<td><code>baseline_comparison.csv</code></td>
+<td>Full ranked pathway list under all baseline methods; source for Supplementary Tables ST3 and ST5b</td>
+</tr>
+<tr class="even">
+<td><code>resampling_summary.json</code></td>
+<td>Bootstrap resampling summary</td>
+</tr>
+<tr class="odd">
+<td><code>resampling_results.csv</code></td>
+<td>Per-draw metrics for all 1,500 bootstrap runs</td>
 </tr>
 </tbody>
 </table>
