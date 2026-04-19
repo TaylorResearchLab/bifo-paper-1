@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T05:07:55+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T05:07:55+00:00" />
+  <meta name="dc.modified" content="2026-04-19T05:15:05+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T05:15:05+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bbac654353282e9bd4d5ef68689e54b5759f9199/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bbac654353282e9bd4d5ef68689e54b5759f9199/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bbac654353282e9bd4d5ef68689e54b5759f9199/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -822,7 +822,7 @@ Together, these properties distinguish BIFO from both overlap-based and propagat
 
 The ablation analysis provides a mechanistic explanation for why this works. When propagation is restricted to mechanistic edges alone, pathway scores collapse to zero across the graph. This result reflects how biological knowledge is represented. Mechanistic relationships connect genes within a molecular network, while pathway annotations are stored separately as curated gene sets. These two components form distinct layers of the graph and are connected only through gene-to-pathway membership relationships. Consistent with this structure, removing bridge edges reduces pathway recovery (P@10 decreases from 0.70 to 0.60), while mechanistic-only propagation yields zero pathway scores.
 
-This leads to a simple but important interpretation. The graph is organized as a two-layer system: a mechanistic layer encoding biological processes and an annotation layer encoding curated pathway knowledge. BIFO makes this structure explicit by treating gene-to-pathway relationships as a distinct class of edges that are allowed to carry signal. The ablation results show that these edges are necessary to reach pathway nodes, but they do not generate signal independently. Signal must originate in the mechanistic layer and then transfer across the bridge. Although Pathway Contribution edges dominate numerically — comprising 85% of propagating edges in the conditioned operator — the ablation results confirm they act as necessary conduits for mechanistic signal rather than as independent sources of it.
+This leads to a simple but important interpretation. The graph is organized as a two-layer system: a mechanistic layer encoding biological processes and an annotation layer encoding curated pathway knowledge. BIFO makes this structure explicit by treating gene-to-pathway relationships as a distinct class of edges that are allowed to carry signal. The ablation results show that under the primary degree_norm scoring formulation — which requires propagated mass to arrive at the pathway concept node directly — these bridge edges are necessary for non-zero pathway scores. They do not generate signal independently; signal must originate in the mechanistic layer and transfer across the bridge. Although Pathway Contribution edges dominate numerically — comprising 85.8% of propagating edges in the conditioned operator — the ablation results confirm they act as necessary conduits for mechanistic signal rather than as independent sources of it. This two-layer structure reflects the membership architecture of the exported graph slice, in which explicit gene-to-pathway membership edges are present primarily for MSigDB, WikiPathways, and GO annotations; pathway sources without direct membership edges in this export would not exhibit the same structural separation.
 
 The robustness analysis shows that these results are not dependent on a particular gene set. Across all 3,003 partitions of the CHD gene pool, BIFO consistently improves pathway ranking relative to unconditioned propagation. At the same time, the comparison with Fisher enrichment highlights an important boundary. When seed genes directly overlap with pathway members, Fisher performs well, as expected. BIFO is most useful in the complementary setting, where relevant pathways are connected indirectly through biological relationships. This distinction aligns with the difference between recovery tasks and discovery tasks and explains why BIFO is particularly effective for cohort-scale analyses.
 
