@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T06:17:58+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T06:17:58+00:00" />
+  <meta name="dc.modified" content="2026-04-19T12:23:55+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T12:23:55+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -146,7 +146,7 @@ Three association-derived evidence vocabularies (DGNAGE: age-stratified gene-dis
 
 The Biological Information Flow Ontology (BIFO) defines a vocabulary of biologically admissible flow classes --- categories of biological relationship through which information is considered to propagate in a directed, mechanistically coherent manner. The central design question BIFO addresses is: given a heterogeneous biomedical knowledge graph whose edges span everything from direct phosphorylation to text-mining co-occurrence, which edges should be allowed to carry propagated signal between biological entities? BIFO answers this by classifying each predicate type into a flow class and assigning a classification tier that determines its role in the PPR operator.
 
-The mapping is encoded in bifo_ddkg_mapping.yaml (v0.7.1; 251 predicate-to-flow entries, 96 explicit non-flow designations, 46 observational edge definitions). The five classification tiers are: (1) mechanistic --- direct, causal biochemical or molecular events with clear directionality; (2) weak_mechanistic_or_observational --- relationships that may reflect mechanism but whose evidence is mixed or correlational; (3) observational --- statistical associations without mechanistic grounding; (4) contextual_constraint --- spatial or temporal constraints that modify but do not propagate signal; and (5) nonpropagating_context --- structural relationships excluded from the PPR operator but retained in the conditioning output for downstream use.
+The mapping is encoded in bifo_mapping.yaml (v0.7.1; 251 predicate-to-flow entries, 96 explicit non-flow designations, 46 observational edge definitions). The five classification tiers are: (1) mechanistic --- direct, causal biochemical or molecular events with clear directionality; (2) weak_mechanistic_or_observational --- relationships that may reflect mechanism but whose evidence is mixed or correlational; (3) observational --- statistical associations without mechanistic grounding; (4) contextual_constraint --- spatial or temporal constraints that modify but do not propagate signal; and (5) nonpropagating_context --- structural relationships excluded from the PPR operator but retained in the conditioning output for downstream use.
 
 The classification is deliberately conservative: when a predicate type has mixed evidence quality across its instances, the weaker classification applies. This prevents high-confidence mechanistic relationships from being diluted by the presence of observational instances of the same predicate type in the same graph.
 
@@ -208,7 +208,7 @@ For all operators, adjacency matrices are built as sparse directed binary matric
 
 $$E_C = \{ e \in E : \text{flow\_class}(\text{predicate}(e)) \in F_{\text{admissible}} \land \text{SAB}(\text{source}(e)) \text{ resolved} \land \text{SAB}(\text{target}(e)) \text{ resolved} \}$$ {#eq:operator}
 
-F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (`weak_mechanistic_or_observational`) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
+F_admissible is the set of flow classes designated as propagating in bifo_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (`weak_mechanistic_or_observational`) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
 
 ## 3 Personalized PageRank propagation
 
@@ -400,7 +400,7 @@ At the MAF ≤0.001, n≥1 threshold, 570 of 1,287 CHD seed genes (44.3%) are al
 
 ### 10.3 Graph export and conditioning
 
-Export queries were generated dynamically from each seed list using generate_export_cypher.py. The KF-CHD export produced 815,248 concept nodes and 5,261,300 1-hop edges plus 956,414 pathway membership edges; the KF-NBL export produced 880,476 concept nodes and 5,520,175 edges plus 961,000 pathway membership edges. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. BIFO conditioning used identical parameters to the curated benchmark (alpha=0.5, bifo_ddkg_mapping.yaml v0.7.1), retaining 2,482,752 propagating edges for KF-CHD (43.9% of concept edges) and 2,647,055 for KF-NBL (45.1%).
+Export queries were generated dynamically from each seed list using generate_export_cypher.py. The KF-CHD export produced 815,248 concept nodes and 5,261,300 1-hop edges plus 956,414 pathway membership edges; the KF-NBL export produced 880,476 concept nodes and 5,520,175 edges plus 961,000 pathway membership edges. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. BIFO conditioning used identical parameters to the curated benchmark (alpha=0.5, bifo_mapping.yaml v0.7.1), retaining 2,482,752 propagating edges for KF-CHD (43.9% of concept edges) and 2,647,055 for KF-NBL (45.1%).
 
 ### 10.4 Pathway scoring and discovery evaluation
 
