@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T06:10:19+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T06:10:19+00:00" />
+  <meta name="dc.modified" content="2026-04-19T06:17:58+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T06:17:58+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bb934d1be3af61f46360a3d1f5bc187b6213b8df/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -218,7 +218,7 @@ Given row-normalized adjacency matrix Ã (n × n), seed vector s (uniform mass 1
 
 $$\mathbf{f} = (1 - \alpha) \cdot \tilde{A}^\top \cdot \mathbf{f} + \alpha \cdot \mathbf{s}$$ {#eq:ppr}
 
-where Ã᷊ is the transpose of Ã (propagation follows edge direction). The fixed point is computed by iteration: f\_{t+1} = (1−α)Ã᷊f_t + αs, terminating when ‖f\_{t+1} − f_t‖₁ \< 10⁻¹⁰ or after 500 iterations. Convergence was achieved in all benchmark runs.
+where $\tilde{A}^\top$ is the transpose of $\tilde{A}$ (propagation follows edge direction). The fixed point is computed by iteration: $\mathbf{f}_{t+1} = (1-\alpha)\tilde{A}^\top\mathbf{f}_t + \alpha\mathbf{s}$, terminating when $\|\mathbf{f}_{t+1} - \mathbf{f}_t\|_1 < 10^{-10}$ or after 500 iterations. Convergence was achieved in all benchmark runs.
 
 The restart probability α = 0.5 was set before benchmark freeze and was not optimized on the CHD benchmark or any other dataset. This value was chosen to balance local signal retention (necessary for pathway scoring, where the relevant pathway nodes may be several hops from the seeds) with seed concentration (necessary to avoid diffusing signal uniformly across the graph). Sensitivity to α is a natural direction for future work but is not evaluated in the current benchmark.
 
