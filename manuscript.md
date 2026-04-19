@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:09:53+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:09:53+00:00" />
+  <meta name="dc.modified" content="2026-04-19T02:22:29+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T02:22:29+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/b22c8cc065b64f149727f8c483c14e7092cd3eaf/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b22c8cc065b64f149727f8c483c14e7092cd3eaf/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b22c8cc065b64f149727f8c483c14e7092cd3eaf/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -123,9 +123,9 @@ To address this limitation, we introduce the Biological Information Flow Ontolog
 
 The key idea underlying BIFO is that biological inference can be improved not by adding information to a knowledge graph, but by restricting the space of admissible transformations. By constraining propagation to semantically valid paths, BIFO reduces the reachable state space and increases the identifiability of biologically meaningful signal. This transformation induces a directed, non-symmetric adjacency operator that encodes the source–sink asymmetry inherent in biological processes, enabling propagation methods to operate over a graph that reflects causal structure rather than undifferentiated connectivity.
 
-We evaluate this framework using a controlled benchmark derived from the Data Distillery Knowledge Graph (DDKG), integrating curated congenital heart disease (CHD) gene sets with pathway annotations. Through a three-arm ablation design, we show that mechanistic-only propagation is insufficient to recover pathway-level biological programs, as pathway nodes are structurally unreachable without bridge edges connecting gene-level and pathway-level representations. Introducing BIFO-conditioned propagation enables signal transfer across these layers, revealing a two-layer graph architecture in which pathway inference depends on a formally defined class of admissible bridge edges.
+We evaluate this framework using a controlled benchmark derived from the Data Distillery Knowledge Graph (DDKG) [@doi:10.1101/2025.08.11.666099], integrating curated congenital heart disease (CHD) gene sets with pathway annotations. Through a three-arm ablation design, we show that mechanistic-only propagation is insufficient to recover pathway-level biological programs, as pathway nodes are structurally unreachable without bridge edges connecting gene-level and pathway-level representations. Introducing BIFO-conditioned propagation enables signal transfer across these layers, revealing a two-layer graph architecture in which pathway inference depends on a formally defined class of admissible bridge edges.
 
-We further demonstrate the applicability of BIFO in a discovery setting using rare variant cohorts from the Kids First program. In this regime, gene sets derived from variant aggregation are large and heterogeneous, and standard enrichment approaches fail to recover biologically coherent pathways. BIFO-conditioned propagation concentrates distributed signal across the graph and recovers biologically relevant pathways without prior specification, illustrating its utility for cohort-scale inference where traditional methods break down.
+We further demonstrate the applicability of BIFO in a discovery setting using rare variant cohorts from the Kids First program [@url:https://kidsfirstdrc.org]. In this regime, gene sets derived from variant aggregation are large and heterogeneous, and standard enrichment approaches fail to recover biologically coherent pathways. BIFO-conditioned propagation concentrates distributed signal across the graph and recovers biologically relevant pathways without prior specification, illustrating its utility for cohort-scale inference where traditional methods break down.
 
 Together, these results establish BIFO as a general framework for defining admissible biological information flow over heterogeneous knowledge graphs. By transforming graphs from passive integration structures into constrained propagation substrates, BIFO enables principled, mechanistically grounded inference across multiple biological scales.
 
@@ -134,9 +134,9 @@ Together, these results establish BIFO as a general framework for defining admis
 
 ## 1 Knowledge graph source
 
-All analyses used the Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and Petagraph infrastructure. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a source authority base (SAB) identifier; each edge carries a predicate drawn from the source ontology\'s relation vocabulary. This structure makes edge provenance fully traceable, which is essential for the BIFO conditioning step: the predicate determines which flow class an edge belongs to, and the SAB determines which entity resolution rule applies.
+All analyses used the Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and Petagraph infrastructure [@doi:10.1101/2025.08.11.666099; @doi:10.1038/s41597-024-04070-w]. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a source authority base (SAB) identifier; each edge carries a predicate drawn from the source ontology\'s relation vocabulary. This structure makes edge provenance fully traceable, which is essential for the BIFO conditioning step: the predicate determines which flow class an edge belongs to, and the SAB determines which entity resolution rule applies.
 
-For the present benchmark, the graph was queried as a 1-hop neighborhood centered on 15 CHD-associated seed and held-out genes. This produced two edge files: (1) edges_raw.csv containing 94,790 seed-to-neighbor mechanistic and association edges, and (2) pathway_membership_edges.csv containing 79,562 gene-to-pathway membership edges derived from MSigDB, WikiPathways, and Gene Ontology annotations. These were merged into edges_merged.csv (174,352 edges). Node metadata was exported in nodes.csv (34,523 concept nodes). The 1-hop design was chosen to produce a graph of tractable size with known provenance; it does not represent the full DDKG connectivity.
+For the present benchmark, the graph was queried as a 1-hop neighborhood centered on 15 CHD-associated seed and held-out genes. This produced two edge files: (1) edges_raw.csv containing 94,790 seed-to-neighbor mechanistic and association edges, and (2) pathway_membership_edges.csv containing 79,562 gene-to-pathway membership edges derived from MSigDB [@doi:10.1073/pnas.0506580102; @doi:10.1016/j.cels.2015.12.004], WikiPathways [@doi:10.1093/nar/gkaa1024], and Gene Ontology annotations. These were merged into edges_merged.csv (174,352 edges). Node metadata was exported in nodes.csv (34,523 concept nodes). The 1-hop design was chosen to produce a graph of tractable size with known provenance; it does not represent the full DDKG connectivity.
 
 Three association-derived evidence vocabularies (DGNAGE: age-stratified gene-disease associations; DGNGCM: clinical mutation associations; DGNGV: genomic variant associations) were intentionally excluded. The rationale is scientific, not technical: excluding these sources isolates ontology-aligned mechanistic and pathway representations from association-derived evidence layers, enabling clean attribution of information flow to specific edge classes.
 
@@ -212,7 +212,7 @@ F_admissible is the set of flow classes designated as propagating in bifo_ddkg_m
 
 ## 3 Personalized PageRank propagation
 
-Signal propagation uses personalized PageRank (PPR), also known as random walk with restart. PPR models the probability that a random walk starting from the seed set visits each node in the graph, with a restart probability α that returns the walk to the seeds at each step. High α keeps signal concentrated near the seeds; low α allows signal to diffuse further into the graph. The balance between local concentration and global diffusion is the mechanism by which BIFO\'s structural constraints shape the output: by conditioning which edges are in the operator, BIFO determines which paths the random walk can follow.
+Signal propagation uses personalized PageRank (PPR) [@doi:10.1145/1148170.1148225], also known as random walk with restart. PPR models the probability that a random walk starting from the seed set visits each node in the graph, with a restart probability α that returns the walk to the seeds at each step. High α keeps signal concentrated near the seeds; low α allows signal to diffuse further into the graph. The balance between local concentration and global diffusion is the mechanism by which BIFO\'s structural constraints shape the output: by conditioning which edges are in the operator, BIFO determines which paths the random walk can follow.
 
 Given row-normalized adjacency matrix Ã (n × n), seed vector s (uniform mass 1/\|S\| over seed nodes, zero elsewhere), and restart probability α, the PPR score vector f satisfies:
 
@@ -290,7 +290,7 @@ where degree\_conditioned(g) is the out-degree of gene g in the BIFO-conditioned
 
 ***B1: Seed-only hypergeometric enrichment***
 
-For each pathway p, a one-tailed hypergeometric test is applied with N = gene universe size (\~13,000 C-prefixed nodes appearing as edge endpoints in edges_merged), K = \|members(p) ∩ universe\|, n = \|seeds ∩ universe\|, and k = \|members(p) ∩ seeds\|. This tests whether the seed genes are over-represented among pathway members relative to the background rate. Pathways are ranked by ascending p-value; Benjamini--Hochberg FDR correction is applied across all 550 pathways jointly. This baseline represents what a bioinformatician would do with just the seed gene list and no graph information.
+For each pathway p, a one-tailed hypergeometric test is applied with N = gene universe size (\~13,000 C-prefixed nodes appearing as edge endpoints in edges_merged), K = \|members(p) ∩ universe\|, n = \|seeds ∩ universe\|, and k = \|members(p) ∩ seeds\|. This tests whether the seed genes are over-represented among pathway members relative to the background rate. Pathways are ranked by ascending p-value; Benjamini–Hochberg FDR correction [@doi:10.1111/j.2517-6161.1995.tb02031.x] is applied across all 550 pathways jointly. This baseline represents what a bioinformatician would do with just the seed gene list and no graph information.
 
 **Gene universe design and the `--small-universe` flag.** The curated benchmark uses the large universe (all \~13,000 C-prefixed nodes) with standard-precision `hypergeom.sf`, which produces the honest Fisher result: non-specific hits (cancer gene sets, transcription factor targets) dominate because a ten-gene query cannot discriminate against a large background. For KF cohort analyses (1,276--1,395 seeds against \~22,600-gene universe), this implementation causes p-value floor collapse --- `hypergeom.sf` returns 0.0 for every pathway with meaningful overlap, eliminating rank discrimination entirely. The `--small-universe` flag switches to the pathway-member-only universe (\~4K--22K genes depending on the graph), K = \|members(p)\| (all members, not universe-intersected), and log-space computation (`hypergeom.logsf`) to recover correct relative ordering. The two modes test different statistical hypotheses and produce numerically incomparable results; the curated benchmark always uses the default large universe to reproduce the frozen manuscript numbers.
 
@@ -300,7 +300,7 @@ The query gene set is expanded to include all C-prefixed nodes that are direct n
 
 ***B3 / B3b: Preranked GSEA on PPR scores***
 
-Genes in the universe are ranked by their PPR scores (raw arm for B3; conditioned arm for B3b) in descending order. For each pathway, a weighted running-sum enrichment score is computed following the preranked GSEA algorithm, using \|PPR score\| as the hit weight. Pathways are ranked by descending enrichment score. B3 tests whether graph propagation alone (without BIFO conditioning) recovers pathway-relevant signal. B3b tests whether BIFO-conditioned gene scores, when used as a ranked list input to GSEA, improve over raw propagation. The difference between B3b and BIFO full-arm isolates the contribution of the degree_norm pathway-level scoring function beyond what the gene-level score ordering provides.
+Genes in the universe are ranked by their PPR scores (raw arm for B3; conditioned arm for B3b) in descending order. For each pathway, a weighted running-sum enrichment score is computed following the preranked GSEA algorithm [@doi:10.1073/pnas.0506580102], using \|PPR score\| as the hit weight. Pathways are ranked by descending enrichment score. B3 tests whether graph propagation alone (without BIFO conditioning) recovers pathway-relevant signal. B3b tests whether BIFO-conditioned gene scores, when used as a ranked list input to GSEA, improve over raw propagation. The difference between B3b and BIFO full-arm isolates the contribution of the degree_norm pathway-level scoring function beyond what the gene-level score ordering provides.
 
 ## 7 Evaluation metrics
 
@@ -386,7 +386,7 @@ The JSON summary file (chd_resampling_summary.json) contains: distribution stati
 
 ### 10.1 The rare variant enrichment problem
 
-Standard pathway enrichment methods were designed for gene sets produced by differential expression (tens to hundreds of genes, biologically coherent signal) or GWAS association (small focused gene lists near association peaks). Rare variant cohort analysis occupies a different regime: AutoGVP P/LP variant aggregation across a disease cohort typically produces gene lists of hundreds to thousands of genes spanning diverse disease processes, with the biologically relevant signal distributed across a minority of genes embedded in a larger heterogeneous background.
+Standard pathway enrichment methods were designed for gene sets produced by differential expression (tens to hundreds of genes, biologically coherent signal) or GWAS association (small focused gene lists near association peaks). Rare variant cohort analysis occupies a different regime: AutoGVP [@doi:10.1093/bioinformatics/btae114] P/LP variant aggregation across a disease cohort typically produces gene lists of hundreds to thousands of genes spanning diverse disease processes, with the biologically relevant signal distributed across a minority of genes embedded in a larger heterogeneous background.
 
 This creates a fundamental tension for enrichment testing. When carrier frequency filters are strict (e.g., ≥3 carriers, MAF ≤0.0001), the gene list shrinks to tens of genes but becomes dominated by severe recessive disease genes incidentally present in the cohort (lysosomal storage, deafness, retinal dystrophy), losing the distributed developmental signal of interest. When carrier frequency filters are relaxed to match the full AutoGVP P/LP burden (MAF ≤0.001, no carrier count filter), the gene list expands to \~1,000--1,500 genes --- large enough that hypergeometric p-values collapse to zero for virtually every pathway with any overlap, eliminating rank discrimination entirely. In the KF-CHD cohort at MAF ≤0.001 (1,276 seed genes, 22,628-gene pathway member universe), all pathways with any overlap at this scale receive floor-level p-values that cannot be ranked. BIFO\'s graph propagation is robust to this regime: by propagating signal from all 1,276 seeds simultaneously through the DDKG, it amplifies the coherent biological signal from the distributed cilia gene subset while the incoherent background diffuses away.
 
@@ -394,7 +394,7 @@ This creates a fundamental tension for enrichment testing. When carrier frequenc
 
 Germline variant data were obtained from two Kids First pediatric cohorts: KF-CHD (Pediatric Cardiac Genomics Consortium, phs001138, n=697 probands with congenital heart defects) and KF-NBL (Discovering the Genetic Basis of Human Neuroblastoma, phs001436, n=460 probands with neuroblastoma). Whole-genome sequencing was performed using Kids First harmonization pipelines aligned to GRCh38/GENCODE v39.
 
-Variants were filtered retaining GATK PASS calls with genotype quality ≥20 and read depth ≥10. AutoGVP P/LP classification was applied integrating ClinVar and modified InterVar for hierarchical ACMG-AMP criteria assessment. Population allele frequency filtering used gnomAD v3.1 MAF ≤0.001, matching the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026). Genes harboring ≥1 qualifying variant in any proband were aggregated per cohort. Twenty high-frequency background disease genes were excluded — specifically, genes among the most prevalent recessive disease carrier loci in population-scale sequencing (carrier frequency >1% in gnomAD), representing incidental findings unrelated to the disease of interest. The excluded genes encode proteins associated with hereditary hearing loss (GJB2, MYO15A, MYO1A, MYO3A, MYO7A, USH2A), retinal dystrophy (ABCA4), skin barrier dysfunction (FLG, KRT71, KRT86, TCHH, PADI3), metabolic disease (G6PD, PAH, BCHE), and structural/connective tissue disorders (TTN, OBSCN, COL4A5, TBL1Y, CD36). This yielded 1,287 seed genes for KF-CHD and 1,406 seed genes for KF-NBL.
+Variants were filtered retaining GATK PASS calls with genotype quality ≥20 and read depth ≥10. AutoGVP P/LP classification was applied integrating ClinVar and modified InterVar for hierarchical ACMG-AMP criteria assessment. Population allele frequency filtering used gnomAD v3.1 [@doi:10.1038/s41586-020-2308-7] MAF ≤0.001, matching the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026). Genes harboring ≥1 qualifying variant in any proband were aggregated per cohort. Twenty high-frequency background disease genes were excluded — specifically, genes among the most prevalent recessive disease carrier loci in population-scale sequencing (carrier frequency >1% in gnomAD), representing incidental findings unrelated to the disease of interest. The excluded genes encode proteins associated with hereditary hearing loss (GJB2, MYO15A, MYO1A, MYO3A, MYO7A, USH2A), retinal dystrophy (ABCA4), skin barrier dysfunction (FLG, KRT71, KRT86, TCHH, PADI3), metabolic disease (G6PD, PAH, BCHE), and structural/connective tissue disorders (TTN, OBSCN, COL4A5, TBL1Y, CD36). This yielded 1,287 seed genes for KF-CHD and 1,406 seed genes for KF-NBL.
 
 At the MAF ≤0.001, n≥1 threshold, 570 of 1,287 CHD seed genes (44.3%) are also present in the NBL seed set. This inter-cohort overlap reflects the shared background of Mendelian disease gene carriers present in any pediatric sequencing cohort at this allele frequency threshold and is not specific to either disease. Carrier count-filtered seed sets (n≥2: 387 CHD / 401 NBL genes, 30% overlap; n≥3: 146 CHD / 147 NBL genes, 27% overlap) show reduced but persistent overlap, consistent with shared rare variant burden being a property of the population rather than the disease.
 
@@ -416,7 +416,7 @@ Five baseline methods were evaluated against the identical pathway universe rest
 
 **B2: 1-hop neighborhood hypergeometric enrichment.** The query set was expanded to the union of seed genes and all 1-hop gene-concept neighbors in the conditioned graph (\~58,846--59,033 genes). This method failed to discriminate pathways because the 1-hop neighborhood covers essentially the full pathway gene universe, giving near-identical p-values to all pathways with any membership overlap.
 
-**B3 / B3b: Preranked GSEA on PPR scores.** Genes were ranked by raw PPR scores (B3) or conditioned PPR scores (B3b) and a weighted running-sum enrichment score was computed following Subramanian et al. 2005.
+**B3 / B3b: Preranked GSEA on PPR scores.** Genes were ranked by raw PPR scores (B3) or conditioned PPR scores (B3b) and a weighted running-sum enrichment score was computed following Subramanian et al. [@doi:10.1073/pnas.0506580102].
 
 **B4: BIFO full-arm (degree_norm).** The conditioned PPR score vector was used to score all pathways via score(p) = f_direct(p) / √\|members(p)\|. This is the primary BIFO scoring method.
 
@@ -837,42 +837,52 @@ Overall, BIFO provides a framework for making graph-based biological analysis bo
 
 ## References {.page_break_before}
 
-<!-- Manubot handles references automatically via cite keys.
-     Use inline citations in the text like [@doi:10.1038/...] or [@arxiv:...] or [@url:...]
-     
-     Key references to add as you write:
-     
-     DDKG/UBKG/Petagraph:
-       [@doi:TBD]
-     
-     PageRank:
-       [@doi:10.1016/S0169-7552(98)00110-X]  Brin & Page 1998
-     
-     Personalized PageRank for biology:
-       [@doi:10.1145/1148170.1148225]  Tong et al. 2006
-     
-     MSigDB:
-       [@doi:10.1073/pnas.0506580102]  Subramanian et al. 2005
-       [@doi:10.1016/j.cels.2015.12.004]  Liberzon et al. 2015
-     
-     WikiPathways:
-       [@doi:10.1093/nar/gkaa1024]  Martens et al. 2021
-     
-     gnomAD:
-       [@doi:10.1038/s41586-020-2308-7]  Karczewski et al. 2020
-     
-     AutoGVP:
-       [@doi:TBD]
-     
-     Kids First:
-       [@doi:TBD]
-     
-     GSEA:
-       [@doi:10.1073/pnas.0506580102]  Subramanian et al. 2005
-     
-     BH correction:
-       [@doi:10.1111/j.2517-6161.1995.tb02031.x]  Benjamini & Hochberg 1995
+<!-- 
+Bioinformatics journal style: Vancouver/numbered references, auto-formatted by Manubot.
+Manubot resolves each [@doi:...] cite key into a formatted reference automatically.
+Add inline citations in the text as [@doi:10.xxxx/...] — Manubot handles numbering and formatting.
+
+All cite keys below are verified. Use them directly as inline citations throughout the manuscript.
 -->
+
+<!-- 1. DDKG — Mohseni Ahooyi, Stear et al. 2025 -->
+[@doi:10.1101/2025.08.11.666099]
+
+<!-- 2. Petagraph — Stear et al. Scientific Data 2024 -->
+[@doi:10.1038/s41597-024-04070-w]
+
+<!-- 3. Personalized PageRank — Tong, Faloutsos & Pan 2006 -->
+[@doi:10.1145/1148170.1148225]
+
+<!-- 4. PageRank — Brin & Page 1998 -->
+[@doi:10.1016/S0169-7552(98)00110-X]
+
+<!-- 5. GSEA / MSigDB — Subramanian et al. PNAS 2005 -->
+[@doi:10.1073/pnas.0506580102]
+
+<!-- 6. MSigDB v5 — Liberzon et al. Cell Systems 2015 -->
+[@doi:10.1016/j.cels.2015.12.004]
+
+<!-- 7. WikiPathways — Martens et al. NAR 2021 -->
+[@doi:10.1093/nar/gkaa1024]
+
+<!-- 8. gnomAD v3 — Karczewski et al. Nature 2020 -->
+[@doi:10.1038/s41586-020-2308-7]
+
+<!-- 9. AutoGVP — Kim, Naqvi, Corbett et al. Bioinformatics 2024 -->
+[@doi:10.1093/bioinformatics/btae114]
+
+<!-- 10. VEP — McLaren et al. Genome Biology 2016 -->
+[@doi:10.1186/s13059-016-0974-4]
+
+<!-- 11. Benjamini & Hochberg FDR — JRSS-B 1995 -->
+[@doi:10.1111/j.2517-6161.1995.tb02031.x]
+
+<!-- 12. Kids First Data Resource Center -->
+[@url:https://kidsfirstdrc.org]
+
+<!-- 13. Stear et al. 2026 companion cross-cohort analysis — add DOI when available -->
+<!-- [@doi:TBD] -->
 
 
 ## Supplementary Methods
@@ -884,11 +894,11 @@ Overall, BIFO provides a framework for making graph-based biological analysis bo
 **Variant quality filtering.** 
 Multi-allelic sites were split into biallelic records to ensure consistent downstream filtering and annotation. Variant-level and genotype-level quality control was performed using bcftools (v1.30) to ensure consistency across all cohorts. Only variants annotated with FILTER=PASS, as determined by the GATK variant quality score recalibration (VQSR) or hard-filtering framework, were retained. At the genotype level, we required a minimum genotype quality (GQ) of 20, corresponding to an estimated posterior genotype accuracy of ≥99%, and a minimum read depth (DP) of 10 reads to ensure adequate sequencing support at each locus. An initial broad population frequency filter of MAF ≤1% in gnomAD was applied at this stage to remove common variants unlikely to be disease-relevant, consistent with standard rare disease variant processing pipelines. Genotype-level filtering was applied prior to aggregation across individuals to ensure that only high-confidence variant calls contributed to downstream analyses.
 
-**Pathogenicity classification.** To enrich for variants with predicted functional impact, we implemented a complementary pathogenicity prioritization strategy integrating both consequence-based and model-based annotations. First, variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP), incorporating transcript consequence, gene assignment, and predicted functional impact categories. Variants annotated by Ensembl VEP as having HIGH impact (including predicted loss-of-function consequences such as stop-gain, frameshift, and canonical splice-site variants) were retained. 
-Second, variants were evaluated using AutoGVP [CITE], a supervised pathogenicity prediction framework that integrates functional, evolutionary, and annotation-based features. Variants classified as “Pathogenic” or “Likely_Pathogenic” by AutoGVP were retained. Variants meeting either criterion (VEP HIGH impact or AutoGVP “Pathogenic/Likely pathogenic” classification) were included in the final analysis set. This approach enabled capture of canonical loss-of-function alleles as well as predicted deleterious missense or regulatory variants with strong pathogenic support. Both annotation steps were performed against the GRCh38 reference and corresponding Ensembl gene models. The final analytical dataset comprised high-confidence germline variants that passed GATK variant-level filters, met stringent genotype-level depth and quality thresholds, and were predicted to be deleterious by VEP and/or AutoGVP. This harmonized filtering framework ensured consistent variant quality across both cohorts and enriched the dataset for variants with a high prior probability of functional relevance. All downstream gene-level aggregation, cross-cohort comparisons, and enrichment analyses were performed using this curated set of high-confidence pathogenic variants. 
+**Pathogenicity classification.** To enrich for variants with predicted functional impact, we implemented a complementary pathogenicity prioritization strategy integrating both consequence-based and model-based annotations. First, variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP) [@doi:10.1186/s13059-016-0974-4], incorporating transcript consequence, gene assignment, and predicted functional impact categories. Variants annotated by Ensembl VEP as having HIGH impact (including predicted loss-of-function consequences such as stop-gain, frameshift, and canonical splice-site variants) were retained. 
+Second, variants were evaluated using AutoGVP [@doi:10.1093/bioinformatics/btae114], a supervised pathogenicity prediction framework that integrates functional, evolutionary, and annotation-based features. Variants classified as “Pathogenic” or “Likely_Pathogenic” by AutoGVP were retained. Variants meeting either criterion (VEP HIGH impact or AutoGVP “Pathogenic/Likely pathogenic” classification) were included in the final analysis set. This approach enabled capture of canonical loss-of-function alleles as well as predicted deleterious missense or regulatory variants with strong pathogenic support. Both annotation steps were performed against the GRCh38 reference and corresponding Ensembl gene models. The final analytical dataset comprised high-confidence germline variants that passed GATK variant-level filters, met stringent genotype-level depth and quality thresholds, and were predicted to be deleterious by VEP and/or AutoGVP. This harmonized filtering framework ensured consistent variant quality across both cohorts and enriched the dataset for variants with a high prior probability of functional relevance. All downstream gene-level aggregation, cross-cohort comparisons, and enrichment analyses were performed using this curated set of high-confidence pathogenic variants. 
 
 
-**Population allele frequency filtering.** Variants were filtered against population allele frequency estimates from the Genome Aggregation Database (gnomAD) v3.1, which provides allele frequencies across diverse global populations aligned to GRCh38. For this study, we applied a more stringent analytical threshold of MAF ≤0.001 (0.1%) using the gnomAD v3.1 non-cancer popmax allele frequency — the maximum allele frequency observed across any gnomAD ancestry group, excluding cancer cohorts. This represents a tenfold reduction relative to the initial processing filter and was applied to the already quality-filtered variant set to restrict analyses to ultra-rare variants. This threshold was selected to enrich for rare variants consistent with a Mendelian or strong-effect rare disease genetic architecture, and to match the filtering parameters used in the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026), enabling direct comparability of gene lists across studies. Variants exceeding this frequency threshold in any gnomAD ancestry group were excluded regardless of their pathogenicity classification.
+**Population allele frequency filtering.** Variants were filtered against population allele frequency estimates from the Genome Aggregation Database (gnomAD) v3.1 [@doi:10.1038/s41586-020-2308-7], which provides allele frequencies across diverse global populations aligned to GRCh38. For this study, we applied a more stringent analytical threshold of MAF ≤0.001 (0.1%) using the gnomAD v3.1 non-cancer popmax allele frequency — the maximum allele frequency observed across any gnomAD ancestry group, excluding cancer cohorts. This represents a tenfold reduction relative to the initial processing filter and was applied to the already quality-filtered variant set to restrict analyses to ultra-rare variants. This threshold was selected to enrich for rare variants consistent with a Mendelian or strong-effect rare disease genetic architecture, and to match the filtering parameters used in the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026), enabling direct comparability of gene lists across studies. Variants exceeding this frequency threshold in any gnomAD ancestry group were excluded regardless of their pathogenicity classification.
 
 **Gene aggregation.** For each cohort, genes harboring at least one qualifying P/LP variant in any proband were aggregated into a per-cohort gene list. Carrier count-filtered subsets requiring ≥2 or ≥3 independent probands carrying qualifying variants in the same gene were generated to assess signal stability under increasingly stringent filters.
 
