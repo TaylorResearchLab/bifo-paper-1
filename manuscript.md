@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:40:41+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:40:41+00:00" />
+  <meta name="dc.modified" content="2026-04-19T01:45:13+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T01:45:13+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -738,11 +738,11 @@ Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (deg
 
 BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 19 cilia, ciliopathy, and hedgehog pathway annotations in the 5,104-pathway universe, all 19 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
 
-Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.
+\[⚑ Supplementary Table ST3: Full top-20 ranked pathways per method for KF-CHD and KF-NBL. To be typeset from kf_chd_results/baseline_comparison.csv.\]
 
-Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL is provided in Supplementary Table ST4.
+\[⚑ Supplementary Table ST4: Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL. All 19 cilia, ciliopathy, and hedgehog pathways with BIFO rank, degree_norm score, member gene count, and hub flag.\]
 
-Head-to-head rank comparison between seed Fisher and BIFO for all scored pathways is provided as downloadable data in Supplementary Table ST5.
+\[⚑ Supplementary Table ST5: Head-to-head rank comparison --- seed_fisher rank vs. BIFO rank for all 4,535 pathways, sorted by BIFO rank.\]
 
 ### 8.3 Cross-cohort convergence: KF-NBL independent replication
 
@@ -808,58 +808,6 @@ The core finding is that the cilia signal in these cohorts is distributed across
 (**D**) Bootstrap resampling against a 19-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.
 ](images/fig8_crosscohort.png){#fig:crosscohort width="100%"}
 
-
-**Figure and table inventory**
-
-The following figures and tables support the Results sections above.
-
-  --------------- ---------------------------------------------------- ----------------------------------- -------------------------
-  **Item**        **Title**                                            **Data source**                     **Status**
-
-  **Fig 1**       BIFO conditioning coverage                           results.json, coverage block        Final (fig1 v2)
-
-  **Fig 2**       Four-arm gene-level recovery                         results\*.json                      Final
-
-  **Fig 3**       Three-arm pathway ablation + KF-CHD method panel     pathway_metrics\_\*.json            Final
-
-  **Fig 4**       Baseline comparison heatmap (KF-CHD + KF-NBL)        baseline_comparison.csv             Final (fig4 v3)
-
-  **Fig 5**       C4 pathway-split controls                            c4\_\*/pathway_metrics.json         Final (fig5 v2)
-
-  **Fig 6**       CHD resampling distribution (3,003 splits)           resampling_summary.json             Final (violin)
-
-  **Fig 7**       Two-layer architecture schematic                     Conceptual (Python/matplotlib)      Final (fig7_schematic.png)
-
-  **Fig 8**       Cross-cohort convergence (KF-CHD vs. KF-NBL)         pathway_scores\_\*.csv, resampling  Final (fig8 v4)
-
-  **Table 1**     Graph conditioning statistics                        results.json                        Complete
-
-  **Table 2**     Four-arm gene-level recovery                         results\*.json                      Complete
-
-  **Table 3**     Three-arm pathway ablation                           pathway_metrics\_\*.json            Complete
-
-  **Table 4**     Baseline comparison (curated benchmark)              baseline_comparison.json            Complete
-
-  **Table 5**     C4 pathway-split controls                            c4\_\*/pathway_metrics.json         Complete
-
-  **Table 6**     Resampling distribution (3,003 splits)               resampling_summary.json             Complete
-
-  **Table 8.1**   KF-CHD method comparison — WP_CILIOPATHIES rank      kf_chd_results/baseline_comparison  Complete (inline §8.1)
-
-  **Table 8.3**   Cross-cohort comparison — WP_CILIOPATHIES recovery   kf\_\*/pathway_scores_standard      Complete (inline §8.3)
-
-  **Table 8.4**   Bootstrap resampling — BIFO vs. Fisher               kf\_\*/resampling_results.csv       Complete (inline §8.4)
-
-  **Supp ST1**     YAML predicate classification                        bifo_ddkg_mapping.yaml              Needs formatting
-
-  **Supp ST2**     Top-10 pathway lists per arm                         pathway_scores\_\*.csv              Data ready; table TBD
-
-  **Supp ST3**     Full top-20 ranked pathways per method, KF-CHD       kf_chd_results/baseline_comparison  Data ready; table TBD
-
-  **Supp ST4**     Full cilia pathway cluster ranking under BIFO        kf_chd_results/pathway_scores       Data ready; table TBD
-
-  **Supp ST5**     Head-to-head rank comparison (Fisher vs BIFO)        kf_chd_results/baseline_comparison  Data ready; table TBD
-  --------------- ---------------------------------------------------- ----------------------------------- -------------------------
 
 
 ## Discussion

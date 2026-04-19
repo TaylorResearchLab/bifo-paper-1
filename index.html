@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:40:41+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:40:41+00:00" />
+  <meta name="dc.modified" content="2026-04-19T01:45:13+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T01:45:13+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6331a56c49aa0c6b6e35911fa5e2a66c07f045ea/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1022,9 +1022,9 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 <h3 id="bifo-recovers-ciliopathy-signal-in-discovery-mode">8.2 BIFO recovers ciliopathy signal in discovery mode</h3>
 <p>Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (degree_norm = 6.26×10⁻⁶; not hub-flagged). This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the ~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.</p>
 <p>BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 19 cilia, ciliopathy, and hedgehog pathway annotations in the 5,104-pathway universe, all 19 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.</p>
-<p>Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.</p>
-<p>Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL is provided in Supplementary Table ST4.</p>
-<p>Head-to-head rank comparison between seed Fisher and BIFO for all scored pathways is provided as downloadable data in Supplementary Table ST5.</p>
+<p>[⚑ Supplementary Table ST3: Full top-20 ranked pathways per method for KF-CHD and KF-NBL. To be typeset from kf_chd_results/baseline_comparison.csv.]</p>
+<p>[⚑ Supplementary Table ST4: Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL. All 19 cilia, ciliopathy, and hedgehog pathways with BIFO rank, degree_norm score, member gene count, and hub flag.]</p>
+<p>[⚑ Supplementary Table ST5: Head-to-head rank comparison — seed_fisher rank vs. BIFO rank for all 4,535 pathways, sorted by BIFO rank.]</p>
 <h3 id="cross-cohort-convergence-kf-nbl-independent-replication">8.3 Cross-cohort convergence: KF-NBL independent replication</h3>
 <p>Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,183 scored pathways), WP_CILIOPATHIES ranked first of 5,183 pathways — an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,617 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th.</p>
 <p>The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecting shared rare Mendelian disease gene carrier burden at MAF ≤0.001 rather than disease-specific biology. At a stricter n≥2 carrier count filter, the overlap decreases to 117 of 387 CHD genes (30%) while both cohorts still yield WP_CILIOPATHIES at rank 1 — the cilia signal is present in both the shared and cohort-specific variant components. The convergence on the same top pathway across two biologically distinct pediatric diseases is consistent with the known developmental role of cilia in both cardiac septation and neural crest migration, and with the companion U24 cross-cohort analysis (Stear et al. 2026) which independently identified cilia enrichment in KF cohorts using permutation-based GSEA.</p>
@@ -1197,156 +1197,6 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 (<strong>D</strong>) Bootstrap resampling against a 19-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.</figcaption>
 </figure>
 </div>
-<p><strong>Figure and table inventory</strong></p>
-<p>The following figures and tables support the Results sections above.</p>
-<table style="width:98%;">
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 39%" />
-<col style="width: 27%" />
-<col style="width: 19%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Item</strong></td>
-<td style="text-align: left;"><strong>Title</strong></td>
-<td style="text-align: left;"><strong>Data source</strong></td>
-<td style="text-align: left;"><strong>Status</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 1</strong></td>
-<td style="text-align: left;">BIFO conditioning coverage</td>
-<td style="text-align: left;">results.json, coverage block</td>
-<td style="text-align: left;">Final (fig1 v2)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 2</strong></td>
-<td style="text-align: left;">Four-arm gene-level recovery</td>
-<td style="text-align: left;">results*.json</td>
-<td style="text-align: left;">Final</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 3</strong></td>
-<td style="text-align: left;">Three-arm pathway ablation + KF-CHD method panel</td>
-<td style="text-align: left;">pathway_metrics_*.json</td>
-<td style="text-align: left;">Final</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 4</strong></td>
-<td style="text-align: left;">Baseline comparison heatmap (KF-CHD + KF-NBL)</td>
-<td style="text-align: left;">baseline_comparison.csv</td>
-<td style="text-align: left;">Final (fig4 v3)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 5</strong></td>
-<td style="text-align: left;">C4 pathway-split controls</td>
-<td style="text-align: left;">c4_*/pathway_metrics.json</td>
-<td style="text-align: left;">Final (fig5 v2)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 6</strong></td>
-<td style="text-align: left;">CHD resampling distribution (3,003 splits)</td>
-<td style="text-align: left;">resampling_summary.json</td>
-<td style="text-align: left;">Final (violin)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Fig 7</strong></td>
-<td style="text-align: left;">Two-layer architecture schematic</td>
-<td style="text-align: left;">Conceptual (Python/matplotlib)</td>
-<td style="text-align: left;">Final (fig7_schematic.png)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Fig 8</strong></td>
-<td style="text-align: left;">Cross-cohort convergence (KF-CHD vs. KF-NBL)</td>
-<td style="text-align: left;">pathway_scores_*.csv, resampling</td>
-<td style="text-align: left;">Final (fig8 v4)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Table 1</strong></td>
-<td style="text-align: left;">Graph conditioning statistics</td>
-<td style="text-align: left;">results.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Table 2</strong></td>
-<td style="text-align: left;">Four-arm gene-level recovery</td>
-<td style="text-align: left;">results*.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Table 3</strong></td>
-<td style="text-align: left;">Three-arm pathway ablation</td>
-<td style="text-align: left;">pathway_metrics_*.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Table 4</strong></td>
-<td style="text-align: left;">Baseline comparison (curated benchmark)</td>
-<td style="text-align: left;">baseline_comparison.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Table 5</strong></td>
-<td style="text-align: left;">C4 pathway-split controls</td>
-<td style="text-align: left;">c4_*/pathway_metrics.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Table 6</strong></td>
-<td style="text-align: left;">Resampling distribution (3,003 splits)</td>
-<td style="text-align: left;">resampling_summary.json</td>
-<td style="text-align: left;">Complete</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Table 8.1</strong></td>
-<td style="text-align: left;">KF-CHD method comparison — WP_CILIOPATHIES rank</td>
-<td style="text-align: left;">kf_chd_results/baseline_comparison</td>
-<td style="text-align: left;">Complete (inline §8.1)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Table 8.3</strong></td>
-<td style="text-align: left;">Cross-cohort comparison — WP_CILIOPATHIES recovery</td>
-<td style="text-align: left;">kf_*/pathway_scores_standard</td>
-<td style="text-align: left;">Complete (inline §8.3)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Table 8.4</strong></td>
-<td style="text-align: left;">Bootstrap resampling — BIFO vs. Fisher</td>
-<td style="text-align: left;">kf_*/resampling_results.csv</td>
-<td style="text-align: left;">Complete (inline §8.4)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Supp ST1</strong></td>
-<td style="text-align: left;">YAML predicate classification</td>
-<td style="text-align: left;">bifo_ddkg_mapping.yaml</td>
-<td style="text-align: left;">Needs formatting</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Supp ST2</strong></td>
-<td style="text-align: left;">Top-10 pathway lists per arm</td>
-<td style="text-align: left;">pathway_scores_*.csv</td>
-<td style="text-align: left;">Data ready; table TBD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Supp ST3</strong></td>
-<td style="text-align: left;">Full top-20 ranked pathways per method, KF-CHD</td>
-<td style="text-align: left;">kf_chd_results/baseline_comparison</td>
-<td style="text-align: left;">Data ready; table TBD</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Supp ST4</strong></td>
-<td style="text-align: left;">Full cilia pathway cluster ranking under BIFO</td>
-<td style="text-align: left;">kf_chd_results/pathway_scores</td>
-<td style="text-align: left;">Data ready; table TBD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Supp ST5</strong></td>
-<td style="text-align: left;">Head-to-head rank comparison (Fisher vs BIFO)</td>
-<td style="text-align: left;">kf_chd_results/baseline_comparison</td>
-<td style="text-align: left;">Data ready; table TBD</td>
-</tr>
-</tbody>
-</table>
 <h2 id="discussion">Discussion</h2>
 <p>The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, ciliopathy-related pathways rank first under BIFO scoring. Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies the same top pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics.</p>
 <p>The distinction lies in how the signal is detected. Fisher enrichment identifies pathways through direct overlap between genes and pathway membership. BIFO, in contrast, recovers the same signal through propagation across a constrained graph, without requiring strong direct overlap. This allows BIFO to remain effective in regimes where enrichment methods lose reliability, including small gene sets, large heterogeneous cohorts, and graph-derived neighborhoods. In this sense, BIFO does not replace standard enrichment methods; it extends them by enabling pathway-level interpretation when overlap-based approaches are unstable or uninformative.</p>
