@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T12:23:55+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T12:23:55+00:00" />
+  <meta name="dc.modified" content="2026-04-19T12:25:29+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T12:25:29+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/09c2d63bce3fa3903b01c18a0b22cc84315b1224/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1423,7 +1423,7 @@ this manuscript are available at:
 
 The repository is organized according to FAIR data principles: all benchmark
 inputs are versioned and shipped with the repository; all analysis parameters
-are documented in `config/bifo_ddkg_mapping.yaml` (v0.7.1); all pipeline
+are documented in `config/bifo_mapping.yaml` (v0.7.1); all pipeline
 scripts are self-contained with documented inputs and outputs; and a
 self-contained end-to-end test (`examples/minimal_test/`) is provided for
 validation without requiring access to the full graph database.
@@ -1464,7 +1464,7 @@ validation without requiring access to the full graph database.
 
 | File | Description |
 |------|-------------|
-| `config/bifo_ddkg_mapping.yaml` | BIFO flow class definitions, v0.7.1. Contains 251 predicate-to-flow entries, 96 explicit non-flow designations, and 46 observational edge definitions across 5 classification tiers. This file is the primary scientific artifact of the BIFO framework; all conditioning results are determined by its contents |
+| `config/bifo_mapping.yaml` | BIFO flow class definitions, v0.7.1. Contains 251 predicate-to-flow entries, 96 explicit non-flow designations, and 46 observational edge definitions across 5 classification tiers. This file is the primary scientific artifact of the BIFO framework; all conditioning results are determined by its contents |
 
 ### S6.4 Neo4j export queries (`cypher/`)
 
@@ -1629,7 +1629,7 @@ YAML. All file formats are documented in this supplement and in the repository
 README.
 
 **Reusable:** The BIFO conditioning operator (`bifo_conditioning.py`) and YAML
-mapping (`bifo_ddkg_mapping.yaml`) are graph-agnostic and can be applied to any
+mapping (`bifo_mapping.yaml`) are graph-agnostic and can be applied to any
 property graph whose edges carry DDKG-compatible predicates. Code is released
 under MIT License; benchmark data under CC BY 4.0.
 
