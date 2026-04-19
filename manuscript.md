@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T12:25:29+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T12:25:29+00:00" />
+  <meta name="dc.modified" content="2026-04-19T22:37:07+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T22:37:07+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/335f41d1faf62252a7d2f6aaa4c13ccebf7c1408/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -357,6 +357,17 @@ No parameter was modified after the first successful full run. The C4 random see
 ### 8.3 Scope of benchmark graph
 
 The benchmark graph is a controlled projection of the full DDKG, not a comprehensive export. Results reported here are specific to this graph slice and SAB vocabulary selection. The mechanistic-layer finding (pathway structural inaccessibility under mechanistic-only propagation) is a property of this graph\'s topology under the current SAB selection and should not be generalised to DDKG as a whole without validation on expanded exports incorporating different source vocabularies. Importantly, this result is informative rather than merely cautionary: it reveals that curated pathway membership relationships (Pathway Contribution edges) occupy a structurally distinct layer from mechanistic gene-gene relationships in this knowledge graph architecture, and that formal admission of bridge edges as a propagation-eligible class is what enables signal transfer across layers. This architectural insight holds regardless of whether future expanded exports alter the specific inaccessibility result.
+
+
+### 8.4 Empirical significance assessment via membership rewiring null
+
+BIFO pathway scores are made actionable by comparison to an empirical null that tests whether a pathway's observed score is higher than expected given the propagated signal landscape. The null model uses degree-preserving bipartite edge rewiring of the Pathway Contribution (bridge) layer, keeping the real seed set and propagation operator fixed while randomising which genes are assigned as members of each pathway. For each permutation, the bridge edges are rewired via random endpoint swaps that preserve each pathway's member count and each gene's pathway membership count exactly. PPR is rerun on the rewired graph with the same seeds, and degree_norm scores are recomputed for all pathways. This process is repeated N = 1000 times to build a per-pathway null distribution.
+
+Statistical significance is assessed using the finite-sample-corrected empirical p-value (Phipson and Smyth 2010): p = (1 + count(null ≥ observed)) / (1 + N). BH correction is applied across all scored pathways to obtain q-values. The rewiring null is implemented in `score_pathways.py` via the `--n-permutations` and `--null-type membership-rewiring` flags.
+
+**Validated regime.** The membership rewiring null is validated for the sparse-seed benchmark setting, where the observed score for top cardiac pathways substantially exceeds the null distribution (BRUNEAU_SEPTATION_VENTRICULAR q = 0.017, null_z = 23.4; 48 of 550 pathways significant at q < 0.05). In this regime the null correctly separates biologically coherent pathway hits from background.
+
+**Cohort-scale limitation.** At cohort scale (KF-CHD, n = 1,276 seeds), the rewiring null is miscalibrated because degree-preserving rewiring preserves pathway size but does not control the graph connectivity profile of the assigned member genes. When seeds are numerous and propagate broadly, rewired pathways with many high-connectivity member genes receive null scores comparable to or higher than the observed score, inflating the null mean. This reflects a fundamental limitation of size-preserving nulls applied to well-connected pathway nodes under dense seed sets, not a failure of the BIFO scoring framework itself. At cohort scale, pathway prioritisation validity is supported by cross-cohort convergence, concordance with independently implemented Fisher enrichment, and bootstrap rank stability rather than a BIFO-native null p-value. Development of a connectivity-aware null model — for example, degree-aware bipartite rewiring that matches member genes on their propagation propensity in the conditioned graph — is a priority for future work.
 
 ## 9 CHD exhaustive resampling analysis
 
@@ -831,6 +842,8 @@ The KF cohort results further clarify the nature of the recovered signal. The pr
 Several limitations should be noted. The benchmark graph is a controlled 1-hop projection of a larger knowledge graph and includes only a subset of source vocabularies. As a result, some nodes cannot be resolved and are excluded from propagation. The finding that mechanistic edges alone cannot reach pathway nodes depends on this graph configuration and may change with additional data sources. However, the underlying pattern, a separation between mechanistic relationships and curated pathway annotations, is a common feature of ontology-based knowledge graphs. The conditioning framework itself is graph-agnostic: the specific structural result depends on representation choices in the source graph, but the need to distinguish admissible flow from associative and contextual relationships does not. An alternative approach of weighting edges within a single operator would conflate causal and associative relationships, whereas BIFO preserves this distinction at the representation level — enabling attribution of pathway score changes to specific edge classes rather than to the aggregate topology.
 
 Gene-level recovery metrics are near ceiling in the curated benchmark due to the small size and strong connectivity of the test set. In this context, pathway-level evaluation and cohort-scale analysis provide a more meaningful assessment of performance. BIFO as implemented here is best understood as a biologically constrained propagation schema with a reference DDKG implementation, rather than a formal ontology in the description-logic sense; the flow class vocabulary and admissibility rules constitute an operational specification that can be extended or reconfigured for other graph representations. Additionally, the 15-gene CHD benchmark pool is itself curated from prior knowledge, which bounds generalization claims beyond the illustrative benchmark setting; the exhaustive 3,003-split resampling addresses seed-composition sensitivity within this pool but does not substitute for an independent benchmark.
+
+BIFO-native empirical significance assessment via the membership rewiring null is validated for sparse seed sets, where it correctly separates biologically coherent hits from background (benchmark: 48/550 pathways significant at q < 0.05; top cardiac pathways null_z > 9). In large cohort-scale analyses, size-preserving null models are miscalibrated because they do not control the graph connectivity profile of pathway member genes — a property that determines null score distributions independent of seed identity. At cohort scale, pathway prioritisation support is therefore taken from cross-cohort convergence and concordance with independently computed enrichment statistics rather than from a BIFO-native null p-value. Development of a connectivity-aware null — such as degree-aware bipartite rewiring that matches member genes on their propagation propensity in the conditioned graph — is the appropriate direction for a unified significance framework valid across both sparse and dense seed regimes.
 
 Overall, BIFO provides a framework for making graph-based biological analysis both effective and interpretable. By constraining which relationships are allowed to carry signal and by explicitly defining how propagated signal is evaluated at the pathway level, it shifts the focus from raw connectivity to biologically meaningful structure. This perspective provides a principled basis for analyzing heterogeneous biological data, particularly in settings where standard methods struggle to extract coherent signal.
 
