@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:41:30+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:41:30+00:00" />
+  <meta name="dc.modified" content="2026-04-19T02:45:32+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T02:45:32+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -836,53 +836,6 @@ Overall, BIFO provides a framework for making graph-based biological analysis bo
 
 
 ## References {.page_break_before}
-
-<!-- 
-Bioinformatics journal style: Vancouver/numbered references, auto-formatted by Manubot.
-Manubot resolves each [@doi:...] cite key into a formatted reference automatically.
-Add inline citations in the text as [@doi:10.xxxx/...] — Manubot handles numbering and formatting.
-
-All cite keys below are verified. Use them directly as inline citations throughout the manuscript.
--->
-
-<!-- 1. DDKG — Mohseni Ahooyi, Stear et al. 2025 -->
-[@doi:10.1101/2025.08.11.666099]
-
-<!-- 2. Petagraph — Stear et al. Scientific Data 2024 -->
-[@doi:10.1038/s41597-024-04070-w]
-
-<!-- 3. Personalized PageRank — Tong, Faloutsos & Pan 2006 -->
-[@doi:10.1145/1148170.1148225]
-
-<!-- 4. PageRank — Brin & Page 1998 -->
-[@doi:10.1016/S0169-7552(98)00110-X]
-
-<!-- 5. GSEA / MSigDB — Subramanian et al. PNAS 2005 -->
-[@doi:10.1073/pnas.0506580102]
-
-<!-- 6. MSigDB v5 — Liberzon et al. Cell Systems 2015 -->
-[@doi:10.1016/j.cels.2015.12.004]
-
-<!-- 7. WikiPathways — Martens et al. NAR 2021 -->
-[@doi:10.1093/nar/gkaa1024]
-
-<!-- 8. gnomAD v3 — Karczewski et al. Nature 2020 -->
-[@doi:10.1038/s41586-020-2308-7]
-
-<!-- 9. AutoGVP — Kim, Naqvi, Corbett et al. Bioinformatics 2024 -->
-[@doi:10.1093/bioinformatics/btae114]
-
-<!-- 10. VEP — McLaren et al. Genome Biology 2016 -->
-[@doi:10.1186/s13059-016-0974-4]
-
-<!-- 11. Benjamini & Hochberg FDR — JRSS-B 1995 -->
-[@doi:10.1111/j.2517-6161.1995.tb02031.x]
-
-<!-- 12. Kids First Data Resource Center -->
-[@url:https://kidsfirstdrc.org]
-
-<!-- 13. Stear et al. 2026 companion cross-cohort analysis — add DOI when available -->
-<!-- [@doi:TBD] -->
 
 
 ## Supplementary Methods
