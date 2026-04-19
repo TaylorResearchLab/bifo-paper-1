@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:55:31+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:55:31+00:00" />
+  <meta name="dc.modified" content="2026-04-19T02:09:53+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T02:09:53+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13d378316993caaf4affe097d031804dbdc87009/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -879,13 +879,16 @@ Overall, BIFO provides a framework for making graph-based biological analysis bo
 
 ### SM1 — Variant Processing and Gene Aggregation
 
-**Kids First harmonized sequencing and alignment.** *[YOUR TEXT: KF harmonized GATK-haplotypecaller pipeline, GRCh38/GENCODE v39]*
+**Kids First harmonized sequencing and alignment.** Whole-genome sequencing (WGS) data were obtained from two independent germline cohorts: NIH dbGAP phs001138 (congenital heart defects, n=1121 probands) and NIH dbGAP phs001436 (neuroblastoma, n=554 probands). All samples were sequenced on Illumina platforms using paired-end protocols. Raw sequencing reads were processed by the Kids First Data Resource Center pipelines, aligned to the human reference genome build GRCh38 using BWA (Burrows–Wheeler alignment) algorithms, and variant discovery was performed with the Genome Analysis Toolkit (GATK) Best Practices workflow. Cohorts were harmonized to ensure consistent reference build, alignment parameters, and variant-calling procedures. For cohorts originally processed using joint genotyping in family-based designs (e.g., trios or duos), multi-sample VCFs were decomposed into proband-sample VCFs for downstream per-individual filtering and aggregation. Cohorts sequenced as proband-only were retained as individual-level VCFs. All variants analyzed represent germline calls.
 
-**Variant quality filtering.** *[YOUR TEXT: GATK PASS, GQ≥20, DP≥10]*
+**Variant quality filtering.** 
+Multi-allelic sites were split into biallelic records to ensure consistent downstream filtering and annotation. Variant-level and genotype-level quality control was performed using bcftools (v1.30) to ensure consistency across all cohorts. Only variants annotated with FILTER=PASS, as determined by the GATK variant quality score recalibration (VQSR) or hard-filtering framework, were retained. At the genotype level, we required a minimum genotype quality (GQ) of 20, corresponding to an estimated posterior genotype accuracy of ≥99%, and a minimum read depth (DP) of 10 reads to ensure adequate sequencing support at each locus. An initial broad population frequency filter of MAF ≤1% in gnomAD was applied at this stage to remove common variants unlikely to be disease-relevant, consistent with standard rare disease variant processing pipelines. Genotype-level filtering was applied prior to aggregation across individuals to ensure that only high-confidence variant calls contributed to downstream analyses.
 
-**Pathogenicity classification.** *[YOUR TEXT: AutoGVP P/LP classification integrating ClinVar and modified InterVar/ACMG-AMP]*
+**Pathogenicity classification.** To enrich for variants with predicted functional impact, we implemented a complementary pathogenicity prioritization strategy integrating both consequence-based and model-based annotations. First, variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP), incorporating transcript consequence, gene assignment, and predicted functional impact categories. Variants annotated by Ensembl VEP as having HIGH impact (including predicted loss-of-function consequences such as stop-gain, frameshift, and canonical splice-site variants) were retained. 
+Second, variants were evaluated using AutoGVP [CITE], a supervised pathogenicity prediction framework that integrates functional, evolutionary, and annotation-based features. Variants classified as “Pathogenic” or “Likely_Pathogenic” by AutoGVP were retained. Variants meeting either criterion (VEP HIGH impact or AutoGVP “Pathogenic/Likely pathogenic” classification) were included in the final analysis set. This approach enabled capture of canonical loss-of-function alleles as well as predicted deleterious missense or regulatory variants with strong pathogenic support. Both annotation steps were performed against the GRCh38 reference and corresponding Ensembl gene models. The final analytical dataset comprised high-confidence germline variants that passed GATK variant-level filters, met stringent genotype-level depth and quality thresholds, and were predicted to be deleterious by VEP and/or AutoGVP. This harmonized filtering framework ensured consistent variant quality across both cohorts and enriched the dataset for variants with a high prior probability of functional relevance. All downstream gene-level aggregation, cross-cohort comparisons, and enrichment analyses were performed using this curated set of high-confidence pathogenic variants. 
 
-**Population allele frequency filtering.** *[YOUR TEXT: gnomAD v3.1 MAF≤0.001 popmax threshold and rationale]*
+
+**Population allele frequency filtering.** Variants were filtered against population allele frequency estimates from the Genome Aggregation Database (gnomAD) v3.1, which provides allele frequencies across diverse global populations aligned to GRCh38. For this study, we applied a more stringent analytical threshold of MAF ≤0.001 (0.1%) using the gnomAD v3.1 non-cancer popmax allele frequency — the maximum allele frequency observed across any gnomAD ancestry group, excluding cancer cohorts. This represents a tenfold reduction relative to the initial processing filter and was applied to the already quality-filtered variant set to restrict analyses to ultra-rare variants. This threshold was selected to enrich for rare variants consistent with a Mendelian or strong-effect rare disease genetic architecture, and to match the filtering parameters used in the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026), enabling direct comparability of gene lists across studies. Variants exceeding this frequency threshold in any gnomAD ancestry group were excluded regardless of their pathogenicity classification.
 
 **Gene aggregation.** For each cohort, genes harboring at least one qualifying P/LP variant in any proband were aggregated into a per-cohort gene list. Carrier count-filtered subsets requiring ≥2 or ≥3 independent probands carrying qualifying variants in the same gene were generated to assess signal stability under increasingly stringent filters.
 
