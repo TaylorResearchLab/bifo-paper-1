@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:27:45+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:27:45+00:00" />
+  <meta name="dc.modified" content="2026-04-19T02:41:30+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T02:41:30+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/89ab069d7143f6fd3f2ad655707fd959c720a1b4/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/89ab069d7143f6fd3f2ad655707fd959c720a1b4/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/89ab069d7143f6fd3f2ad655707fd959c720a1b4/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/974dc9ea258caac14882abd9577b353491157827/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -106,7 +106,7 @@ Here we introduce the Biological Information Flow Ontology (BIFO), a framework t
 
 Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO and correctly implemented Fisher enrichment independently identify the same ciliopathy pathway as top-ranked in both diseases, while BIFO remains effective where overlap-based methods lose discriminative power.
 
-These results show that constraining admissible information flow is necessary for meaningful graph-based biological inference.
+These results show that constraining admissible information flow is sufficient to enable meaningful graph-based biological inference in settings where standard approaches fail.
 
 
 ## Introduction
@@ -730,11 +730,11 @@ Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (deg
 
 BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 19 cilia, ciliopathy, and hedgehog pathway annotations in the 5,104-pathway universe, all 19 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
 
-\[⚑ Supplementary Table ST3: Full top-20 ranked pathways per method for KF-CHD and KF-NBL. To be typeset from kf_chd_results/baseline_comparison.csv.\]
+Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.
 
-\[⚑ Supplementary Table ST4: Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL. All 19 cilia, ciliopathy, and hedgehog pathways with BIFO rank, degree_norm score, member gene count, and hub flag.\]
+Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL is provided in Supplementary Table ST4.
 
-\[⚑ Supplementary Table ST5: Head-to-head rank comparison --- seed_fisher rank vs. BIFO rank for all 4,535 pathways, sorted by BIFO rank.\]
+Head-to-head rank comparison between seed Fisher and BIFO for all scored pathways is provided as downloadable data in Supplementary Table ST5.
 
 ### 8.3 Cross-cohort convergence: KF-NBL independent replication
 
