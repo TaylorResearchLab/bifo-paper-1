@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T04:57:53+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T04:57:53+00:00" />
+  <meta name="dc.modified" content="2026-04-19T05:07:55+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T05:07:55+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fd497a55f944f89bb9039b6dcd710c6e8b0f6984/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fd497a55f944f89bb9039b6dcd710c6e8b0f6984/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fd497a55f944f89bb9039b6dcd710c6e8b0f6984/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c8f7cc72483714e1999ba39e08f24a818c3a0d34/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -208,7 +208,7 @@ For all operators, adjacency matrices are built as sparse directed binary matric
 
 > E_C = { e ∈ E : flow_class(predicate(e)) ∈ F_admissible ∧ SAB(source(e)) resolved ∧ SAB(target(e)) resolved }
 
-F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
+F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (`weak_mechanistic_or_observational`) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
 
 ## 3 Personalized PageRank propagation
 
