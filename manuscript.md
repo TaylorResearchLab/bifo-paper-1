@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:59:22+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:59:22+00:00" />
+  <meta name="dc.modified" content="2026-04-19T03:37:00+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T03:37:00+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -346,11 +346,11 @@ Rank improvement is the primary metric for comparing conditioning effect. It is 
 
 ### 8.1 Software
 
-All analyses were implemented in Python 3.8+ using: NumPy and SciPy for numerical operations and sparse linear algebra; scipy.sparse for PPR adjacency matrices; scipy.stats.hypergeom for Fisher/hypergeometric baselines; pandas for tabular data manipulation; and PyYAML for YAML configuration parsing. The pipeline is implemented in three scripts: bifo_conditioning.py (entity resolution, edge conditioning, PPR propagation), score_pathways.py (pathway membership mapping, score computation, metric calculation), and baseline_enrichment.py (baseline enrichment methods and Analysis 6 metrics). A self-contained run script (minimal_test_run_run_test.sh) generates all main-benchmark outputs from raw graph files without manual intervention.
+All analyses were implemented in Python 3.8+ using: NumPy and SciPy for numerical operations and sparse linear algebra; scipy.sparse for PPR adjacency matrices; scipy.stats.hypergeom for Fisher/hypergeometric baselines; pandas for tabular data manipulation; and PyYAML for YAML configuration parsing. The pipeline is implemented in three scripts: bifo_conditioning.py (entity resolution, edge conditioning, PPR propagation), score_pathways.py (pathway membership mapping, score computation, metric calculation), and baseline_enrichment.py (baseline enrichment methods and Analysis 6 metrics). A self-contained run script (`examples/minimal_test/run_test.sh`) generates all main-benchmark outputs from raw graph files without manual intervention.
 
 ### 8.2 Benchmark freeze
 
-All benchmark parameters were locked before analysis began. The frozen package (benchmark_freeze/) comprises 17 files including the three pipeline scripts, the YAML mapping (v0.7.1), the run script, and nine seed/heldout/reference files for the three benchmark cohorts. The run script is self-contained: given nodes.csv, edges_raw.csv, and pathway_membership_edges.csv, it produces every main-benchmark output including all baseline comparisons and C4 controls without manual steps.
+All benchmark parameters were locked before analysis began. Frozen benchmark parameters are documented in `BENCHMARK_MANIFEST.md` at the repository root. Pipeline scripts are in `pipeline/`, the YAML mapping (v0.7.1) is in `config/`, and seed, heldout, and reference files for all three benchmark cohorts are in `data/benchmark/`. The run script is self-contained: given nodes.csv, edges_raw.csv, and pathway_membership_edges.csv, it produces every main-benchmark output including all baseline comparisons and C4 controls without manual steps.
 
 No parameter was modified after the first successful full run. The C4 random seed (42), pathway universe filters (min=8, max=300 members, name patterns), score variant (degree_norm), and α (0.5) were all fixed before the first benchmark run and documented in BENCHMARK_MANIFEST.md alongside expected output metrics. The manifest serves as a reproducibility contract: if any output metric differs from the manifest values, the run is considered non-reproducible.
 
@@ -380,7 +380,7 @@ The seed-overlap Fisher computed in the resampling uses the split seed genes dir
 
 The JSON summary file (chd_resampling_summary.json) contains: distribution statistics (mean, SD, min, P25, median, P75, max) for all per-split metrics; robustness counts (fraction of splits with P@10 ≥ threshold, fraction with positive rank improvement, fraction where BIFO AP exceeds Fisher AP); and the primary benchmark split identified as an anchor point within the full distribution with its percentile rank on each metric. The per-split CSV contains one row per split and is the source file for Figure 6 (the resampling distribution figure).
 
-> *Implementation: chd_resampling_exhaustive.py (benchmark_freeze/). Requires Python 3.8+ (compatibility shims for math.comb and str.removesuffix are included). Runtime scales linearly with \--n-cores; 3,003 splits complete in approximately 5 min on 1 core.*
+> *Implementation: chd_resampling_exhaustive.py (pipeline/). Requires Python 3.8+ (compatibility shims for math.comb and str.removesuffix are included). Runtime scales linearly with \--n-cores; 3,003 splits complete in approximately 5 min on 1 core.*
 
 ## 10 Kids First cohort analysis
 

@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:59:22+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:59:22+00:00" />
+  <meta name="dc.modified" content="2026-04-19T03:37:00+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T03:37:00+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6ebfbc98750691ed064869af91ad2654fc1ccddb/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd266f9b7a72c03751fc46103c2ec3a5ff6e41a7/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -425,9 +425,9 @@
 <p>Rank improvement is the primary metric for comparing conditioning effect. It is reported for all arms except mechanistic-only, where all pathway scores are exactly zero and rank improvement is uninterpretable (reflects arbitrary tie-ordering). In recovery benchmarks (C4 controls), negative rank improvement is expected because the raw PPR arm already has direct proximity to the target pathway through the seed-member overlap; in these cases, AP and source-pathway rank are the appropriate primary metrics.</p>
 <h2 id="implementation-and-reproducibility">8 Implementation and reproducibility</h2>
 <h3 id="software">8.1 Software</h3>
-<p>All analyses were implemented in Python 3.8+ using: NumPy and SciPy for numerical operations and sparse linear algebra; scipy.sparse for PPR adjacency matrices; scipy.stats.hypergeom for Fisher/hypergeometric baselines; pandas for tabular data manipulation; and PyYAML for YAML configuration parsing. The pipeline is implemented in three scripts: bifo_conditioning.py (entity resolution, edge conditioning, PPR propagation), score_pathways.py (pathway membership mapping, score computation, metric calculation), and baseline_enrichment.py (baseline enrichment methods and Analysis 6 metrics). A self-contained run script (minimal_test_run_run_test.sh) generates all main-benchmark outputs from raw graph files without manual intervention.</p>
+<p>All analyses were implemented in Python 3.8+ using: NumPy and SciPy for numerical operations and sparse linear algebra; scipy.sparse for PPR adjacency matrices; scipy.stats.hypergeom for Fisher/hypergeometric baselines; pandas for tabular data manipulation; and PyYAML for YAML configuration parsing. The pipeline is implemented in three scripts: bifo_conditioning.py (entity resolution, edge conditioning, PPR propagation), score_pathways.py (pathway membership mapping, score computation, metric calculation), and baseline_enrichment.py (baseline enrichment methods and Analysis 6 metrics). A self-contained run script (<code>examples/minimal_test/run_test.sh</code>) generates all main-benchmark outputs from raw graph files without manual intervention.</p>
 <h3 id="benchmark-freeze">8.2 Benchmark freeze</h3>
-<p>All benchmark parameters were locked before analysis began. The frozen package (benchmark_freeze/) comprises 17 files including the three pipeline scripts, the YAML mapping (v0.7.1), the run script, and nine seed/heldout/reference files for the three benchmark cohorts. The run script is self-contained: given nodes.csv, edges_raw.csv, and pathway_membership_edges.csv, it produces every main-benchmark output including all baseline comparisons and C4 controls without manual steps.</p>
+<p>All benchmark parameters were locked before analysis began. Frozen benchmark parameters are documented in <code>BENCHMARK_MANIFEST.md</code> at the repository root. Pipeline scripts are in <code>pipeline/</code>, the YAML mapping (v0.7.1) is in <code>config/</code>, and seed, heldout, and reference files for all three benchmark cohorts are in <code>data/benchmark/</code>. The run script is self-contained: given nodes.csv, edges_raw.csv, and pathway_membership_edges.csv, it produces every main-benchmark output including all baseline comparisons and C4 controls without manual steps.</p>
 <p>No parameter was modified after the first successful full run. The C4 random seed (42), pathway universe filters (min=8, max=300 members, name patterns), score variant (degree_norm), and α (0.5) were all fixed before the first benchmark run and documented in BENCHMARK_MANIFEST.md alongside expected output metrics. The manifest serves as a reproducibility contract: if any output metric differs from the manifest values, the run is considered non-reproducible.</p>
 <h3 id="scope-of-benchmark-graph">8.3 Scope of benchmark graph</h3>
 <p>The benchmark graph is a controlled projection of the full DDKG, not a comprehensive export. Results reported here are specific to this graph slice and SAB vocabulary selection. The mechanistic-layer finding (pathway structural inaccessibility under mechanistic-only propagation) is a property of this graph's topology under the current SAB selection and should not be generalised to DDKG as a whole without validation on expanded exports incorporating different source vocabularies. Importantly, this result is informative rather than merely cautionary: it reveals that curated pathway membership relationships (Pathway Contribution edges) occupy a structurally distinct layer from mechanistic gene-gene relationships in this knowledge graph architecture, and that formal admission of bridge edges as a propagation-eligible class is what enables signal transfer across layers. This architectural insight holds regardless of whether future expanded exports alter the specific inaccessibility result.</p>
@@ -443,7 +443,7 @@
 <h3 id="summary-output">9.4 Summary output</h3>
 <p>The JSON summary file (chd_resampling_summary.json) contains: distribution statistics (mean, SD, min, P25, median, P75, max) for all per-split metrics; robustness counts (fraction of splits with P@10 ≥ threshold, fraction with positive rank improvement, fraction where BIFO AP exceeds Fisher AP); and the primary benchmark split identified as an anchor point within the full distribution with its percentile rank on each metric. The per-split CSV contains one row per split and is the source file for Figure 6 (the resampling distribution figure).</p>
 <blockquote>
-<p><em>Implementation: chd_resampling_exhaustive.py (benchmark_freeze/). Requires Python 3.8+ (compatibility shims for math.comb and str.removesuffix are included). Runtime scales linearly with --n-cores; 3,003 splits complete in approximately 5 min on 1 core.</em></p>
+<p><em>Implementation: chd_resampling_exhaustive.py (pipeline/). Requires Python 3.8+ (compatibility shims for math.comb and str.removesuffix are included). Runtime scales linearly with --n-cores; 3,003 splits complete in approximately 5 min on 1 core.</em></p>
 </blockquote>
 <h2 id="kids-first-cohort-analysis">10 Kids First cohort analysis</h2>
 <h3 id="the-rare-variant-enrichment-problem">10.1 The rare variant enrichment problem</h3>
