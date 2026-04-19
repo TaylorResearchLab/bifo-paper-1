@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:52:36+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:52:36+00:00" />
+  <meta name="dc.modified" content="2026-04-19T01:55:31+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T01:55:31+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a2898bba1e3ebad96d5957365989978dd5e6ae70/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -238,7 +238,7 @@ The degree_norm scoring variant is defined as:
 
 > **score(p) = f_direct(p) / √(\|members(p)\|)**
 
-where f_direct(p) is the PPR score on the pathway concept node itself --- the score mass arriving at the pathway node via Pathway Contribution edges --- and \|members(p)\| is the SAB-constrained member gene count. The √ penalty down-weights large generic pathways (which accumulate high PPR scores simply by having many members) without fully normalizing by size (which would over-penalize legitimate large biological programs). Pathways with zero member genes receive score zero. This variant was selected as the primary scoring function before benchmark freeze; three alternative variants (member_mean, member_max, local_bg) were computed but not used for primary analysis.
+where f_direct(p) is the PPR score on the pathway concept node itself --- the score mass arriving at the pathway node via Pathway Contribution edges --- and \|members(p)\| is the SAB-constrained member gene count. The √ penalty down-weights large generic pathways (which accumulate high PPR scores simply by having many members) without fully normalizing by size (which would over-penalize legitimate large biological programs). Pathways with zero member genes receive score zero. This variant was selected as the primary scoring function before benchmark freeze; three alternative variants (member_mean, member_max, local_bg) were computed but not used for primary analysis. The scoring function was specified prior to benchmark evaluation and was not modified after the first successful full run.
 
 ### 4.3 Rank improvement
 
@@ -804,7 +804,7 @@ The core finding is that the cilia signal in these cohorts is distributed across
 
 ## Discussion
 
-The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, ciliopathy-related pathways rank first under BIFO scoring. Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies the same top pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics.
+The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, ciliopathy-related pathways rank first under BIFO scoring. Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies the same top pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics. This agreement establishes that BIFO does not introduce spurious signal but recovers the same biological structure through a different inference mechanism.
 
 The distinction lies in how the signal is detected. Fisher enrichment identifies pathways through direct overlap between genes and pathway membership. BIFO, in contrast, recovers the same signal through propagation across a constrained graph, without requiring strong direct overlap. This allows BIFO to remain effective in regimes where enrichment methods lose reliability, including small gene sets, large heterogeneous cohorts, and graph-derived neighborhoods. In this sense, BIFO does not replace standard enrichment methods; it extends them by enabling pathway-level interpretation when overlap-based approaches are unstable or uninformative.
 
