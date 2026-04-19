@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T05:51:44+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T05:51:44+00:00" />
+  <meta name="dc.modified" content="2026-04-19T06:10:19+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T06:10:19+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,15 +93,22 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
   <link rel="mask-icon" href="https://manubot.org/safari-pinned-tab.svg" color="#ad1457" />
   <meta name="theme-color" content="#ad1457" />
   <!-- end Manubot generated metadata -->
+  
+  <!-- pandoc-eqnos: equation style -->
+  <style>
+    .eqnos { display: inline-block; position: relative; width: 100%; }
+    .eqnos br { display: none; }
+    .eqnos-number { position: absolute; right: 0em; top: 50%; line-height: 0; }
+  </style>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -250,16 +257,12 @@
 <p>The mechanistic-only operator applies an additional filter to the full kept-edge set, retaining only edges whose classification tier is mechanistic (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes including direct molecular interaction subsets of Perturbational Effect). This operator excludes Pathway Contribution, Observational Association, and all weak-mechanistic edges from the PPR adjacency matrix. Its composition and the pathway-scoring outcome under this operator are reported in Results Section 3.</p>
 <p>For all operators, adjacency matrices are built as sparse directed binary matrices (edge weight = 1, no differential weighting by flow class). Self-loops are excluded. Row normalization is applied before transpose to produce the column-stochastic matrix used in the PPR recurrence. Edge weights are uniform across all analyses reported here; the pipeline supports evidence-tier weighting when confidence or evidence-type annotations are present in the edge file, but DDKG exports do not carry these fields and all benchmark and cohort runs use unit weights.</p>
 <p><strong>Formal definition of the BIFO conditioning operator.</strong> Let G = (V, E) be the input property graph with node set V and edge set E, where each edge e = (u, v, p) carries predicate p and endpoint SABs s_u, s_v. BIFO conditioning defines a constraint operator C that produces the conditioned propagation graph G_C = (V, E_C), where:</p>
-<blockquote>
-<p>E_C = { e ∈ E : flow_class(predicate(e)) ∈ F_admissible ∧ SAB(source(e)) resolved ∧ SAB(target(e)) resolved }</p>
-</blockquote>
+<p><span id="eq:operator" class="eqnos"><span class="math display">\[E_C = \{ e \in E : \text{flow\_class}(\text{predicate}(e)) \in F_{\text{admissible}} \land \text{SAB}(\text{source}(e)) \text{ resolved} \land \text{SAB}(\text{target}(e)) \text{ resolved} \}\]</span><span class="eqnos-number">(1)</span></span> </p>
 <p>F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (<code>weak_mechanistic_or_observational</code>) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).</p>
 <h2 id="personalized-pagerank-propagation">3 Personalized PageRank propagation</h2>
 <p>Signal propagation uses personalized PageRank (PPR) <span class="citation" data-cites="1Ab5kRJRG">[<a href="#ref-1Ab5kRJRG" role="doc-biblioref">7</a>]</span>, also known as random walk with restart. PPR models the probability that a random walk starting from the seed set visits each node in the graph, with a restart probability α that returns the walk to the seeds at each step. High α keeps signal concentrated near the seeds; low α allows signal to diffuse further into the graph. The balance between local concentration and global diffusion is the mechanism by which BIFO's structural constraints shape the output: by conditioning which edges are in the operator, BIFO determines which paths the random walk can follow.</p>
 <p>Given row-normalized adjacency matrix Ã (n × n), seed vector s (uniform mass 1/|S| over seed nodes, zero elsewhere), and restart probability α, the PPR score vector f satisfies:</p>
-<blockquote>
-<p><strong>f = (1 − α) · Ã᷊ · f + α · s</strong></p>
-</blockquote>
+<p><span id="eq:ppr" class="eqnos"><span class="math display">\[\mathbf{f} = (1 - \alpha) \cdot \tilde{A}^\top \cdot \mathbf{f} + \alpha \cdot \mathbf{s}\]</span><span class="eqnos-number">(2)</span></span> </p>
 <p>where Ã᷊ is the transpose of Ã (propagation follows edge direction). The fixed point is computed by iteration: f_{t+1} = (1−α)Ã᷊f_t + αs, terminating when ‖f_{t+1} − f_t‖₁ &lt; 10⁻¹⁰ or after 500 iterations. Convergence was achieved in all benchmark runs.</p>
 <p>The restart probability α = 0.5 was set before benchmark freeze and was not optimized on the CHD benchmark or any other dataset. This value was chosen to balance local signal retention (necessary for pathway scoring, where the relevant pathway nodes may be several hops from the seeds) with seed concentration (necessary to avoid diffusing signal uniformly across the graph). Sensitivity to α is a natural direction for future work but is not evaluated in the current benchmark.</p>
 <p>Four score vectors are computed per benchmark run on the full-graph operator: (1) raw — propagation on the full merged adjacency without conditioning; (2) metadata-filtered — removal of non-flow structural and metadata edges (non_flow_edges in the YAML) without flow-class filtering, retaining all remaining edges as propagating; (3) conditioned (BIFO) — full BIFO conditioning; and (4) random sparsification — random edge selection retaining the same edge count as the conditioned arm. The random control establishes that entropy reduction in the conditioned arm is not simply a consequence of edge count reduction, but reflects the structural properties of the admissible edges specifically.</p>
@@ -269,9 +272,7 @@
 <p>After size filtering (minimum 8, maximum 300 members) and name-pattern exclusion (patterns: _Q2, _Q3, _Q4, _Q5, _Q6, MIR), 550 pathways constitute the evaluation universe. The minimum-member filter excludes pathways too small for enrichment analysis to be meaningful; the maximum-member filter excludes pathways so large that membership is uninformative. The name-pattern filter excludes gene expression quantile sets and microRNA sets that represent statistical partitions rather than curated biological programs. This universe is held constant across all arms and all baseline methods.</p>
 <h3 id="pathway-score-computation-degree_norm">4.2 Pathway score computation (degree_norm)</h3>
 <p>The degree_norm scoring variant is defined as:</p>
-<blockquote>
-<p><strong>score(p) = f_direct(p) / √(|members(p)|)</strong></p>
-</blockquote>
+<p><span id="eq:degreenorm" class="eqnos"><span class="math display">\[\text{score}(p) = \frac{f_{\text{direct}}(p)}{\sqrt{|\text{members}(p)|}}\]</span><span class="eqnos-number">(3)</span></span> </p>
 <p>where f_direct(p) is the PPR score on the pathway concept node itself — the score mass arriving at the pathway node via Pathway Contribution edges — and |members(p)| is the SAB-constrained member gene count. The √ penalty down-weights large generic pathways (which accumulate high PPR scores simply by having many members) without fully normalizing by size (which would over-penalize legitimate large biological programs). Pathways with zero member genes receive score zero. This variant was selected as the primary scoring function before benchmark freeze; three alternative variants (member_mean, member_max, local_bg) were computed but not used for primary analysis. The scoring function was specified prior to benchmark evaluation and was not modified after the first successful full run.</p>
 <h3 id="rank-improvement">4.3 Rank improvement</h3>
 <p>Rank improvement is defined as mean_rank(raw) − mean_rank(conditioned), where both rankings use the same 550-pathway universe and the same reference set. This metric captures how much the BIFO conditioning step improves the relative position of reference pathways compared to propagating signal over the unconditioned graph. A positive value means conditioning moves reference pathways to lower (better) rank positions; a negative value means the raw score already had those pathways ranked higher.</p>
@@ -334,9 +335,7 @@
 <p>Three conventional enrichment baselines and one graph-structure baseline are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data — not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set. The <code>baseline_enrichment.py</code> script accepts two flags that control baseline behaviour: <code>--kept-edges</code> enables B0 (requires the conditioning output); <code>--small-universe</code> switches Fisher baselines to the pathway-member universe and log-space p-values, required for KF cohort runs (see B1 below).</p>
 <p><strong><em>B0: Degree-weighted seed overlap (graph membership baseline)</em></strong></p>
 <p>For each pathway p, the score is the sum of conditioned-graph node degrees of seed genes that are direct members of p, normalised by pathway size:</p>
-<blockquote>
-<p>score(p) = Σ_{g ∈ seeds ∩ members(p)} degree_conditioned(g) / √(|members(p)|)</p>
-</blockquote>
+<p><span id="eq:b0" class="eqnos"><span class="math display">\[\text{score}(p) = \sum_{g \in \text{seeds} \cap \text{members}(p)} \text{degree}_{\text{cond}}(g) \;/\; \sqrt{|\text{members}(p)|}\]</span><span class="eqnos-number">(4)</span></span> </p>
 <p>where degree_conditioned(g) is the out-degree of gene g in the BIFO-conditioned propagation graph G_C. Pathways are ranked by descending score. This baseline uses graph structure (node connectivity) but not graph propagation: it scores pathways based on how well-connected the directly overlapping seed genes are within the conditioned graph, without running PPR. It provides a lower bound on graph-guided methods and isolates the contribution of propagation beyond local connectivity. B0 is closely related to degree_norm (which uses PPR scores rather than degrees) and is computed from the conditioning output via the <code>--kept-edges</code> flag in baseline_enrichment.py.</p>
 <p><strong><em>B1: Seed-only hypergeometric enrichment</em></strong></p>
 <p>For each pathway p, a one-tailed hypergeometric test is applied with N = gene universe size (~13,000 C-prefixed nodes appearing as edge endpoints in edges_merged), K = |members(p) ∩ universe|, n = |seeds ∩ universe|, and k = |members(p) ∩ seeds|. This tests whether the seed genes are over-represented among pathway members relative to the background rate. Pathways are ranked by ascending p-value; Benjamini–Hochberg FDR correction <span class="citation" data-cites="UeFCwwR7">[<a href="#ref-UeFCwwR7" role="doc-biblioref">8</a>]</span> is applied across all 550 pathways jointly. This baseline represents what a bioinformatician would do with just the seed gene list and no graph information.</p>

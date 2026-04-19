@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T05:51:44+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T05:51:44+00:00" />
+  <meta name="dc.modified" content="2026-04-19T06:10:19+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T06:10:19+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ad0b679c0187611fca18e6c4c781d091f5f2c2da/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ae86b79820dfc7468a39b99f06ad22b2507d35dd/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -206,7 +206,7 @@ For all operators, adjacency matrices are built as sparse directed binary matric
 
 **Formal definition of the BIFO conditioning operator.** Let G = (V, E) be the input property graph with node set V and edge set E, where each edge e = (u, v, p) carries predicate p and endpoint SABs s_u, s_v. BIFO conditioning defines a constraint operator C that produces the conditioned propagation graph G_C = (V, E_C), where:
 
-> E_C = { e ∈ E : flow_class(predicate(e)) ∈ F_admissible ∧ SAB(source(e)) resolved ∧ SAB(target(e)) resolved }
+$$E_C = \{ e \in E : \text{flow\_class}(\text{predicate}(e)) \in F_{\text{admissible}} \land \text{SAB}(\text{source}(e)) \text{ resolved} \land \text{SAB}(\text{target}(e)) \text{ resolved} \}$$ {#eq:operator}
 
 F_admissible is the set of flow classes designated as propagating in bifo_ddkg_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (`weak_mechanistic_or_observational`) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
 
@@ -216,7 +216,7 @@ Signal propagation uses personalized PageRank (PPR) [@doi:10.1145/1148170.114822
 
 Given row-normalized adjacency matrix Ã (n × n), seed vector s (uniform mass 1/\|S\| over seed nodes, zero elsewhere), and restart probability α, the PPR score vector f satisfies:
 
-> **f = (1 − α) · Ã᷊ · f + α · s**
+$$\mathbf{f} = (1 - \alpha) \cdot \tilde{A}^\top \cdot \mathbf{f} + \alpha \cdot \mathbf{s}$$ {#eq:ppr}
 
 where Ã᷊ is the transpose of Ã (propagation follows edge direction). The fixed point is computed by iteration: f\_{t+1} = (1−α)Ã᷊f_t + αs, terminating when ‖f\_{t+1} − f_t‖₁ \< 10⁻¹⁰ or after 500 iterations. Convergence was achieved in all benchmark runs.
 
@@ -236,7 +236,7 @@ After size filtering (minimum 8, maximum 300 members) and name-pattern exclusion
 
 The degree_norm scoring variant is defined as:
 
-> **score(p) = f_direct(p) / √(\|members(p)\|)**
+$$\text{score}(p) = \frac{f_{\text{direct}}(p)}{\sqrt{|\text{members}(p)|}}$$ {#eq:degreenorm}
 
 where f_direct(p) is the PPR score on the pathway concept node itself --- the score mass arriving at the pathway node via Pathway Contribution edges --- and \|members(p)\| is the SAB-constrained member gene count. The √ penalty down-weights large generic pathways (which accumulate high PPR scores simply by having many members) without fully normalizing by size (which would over-penalize legitimate large biological programs). Pathways with zero member genes receive score zero. This variant was selected as the primary scoring function before benchmark freeze; three alternative variants (member_mean, member_max, local_bg) were computed but not used for primary analysis. The scoring function was specified prior to benchmark evaluation and was not modified after the first successful full run.
 
@@ -284,7 +284,7 @@ Three conventional enrichment baselines and one graph-structure baseline are imp
 
 For each pathway p, the score is the sum of conditioned-graph node degrees of seed genes that are direct members of p, normalised by pathway size:
 
-> score(p) = Σ\_{g ∈ seeds ∩ members(p)} degree\_conditioned(g) / √(\|members(p)\|)
+$$\text{score}(p) = \sum_{g \in \text{seeds} \cap \text{members}(p)} \text{degree}_{\text{cond}}(g) \;/\; \sqrt{|\text{members}(p)|}$$ {#eq:b0}
 
 where degree\_conditioned(g) is the out-degree of gene g in the BIFO-conditioned propagation graph G_C. Pathways are ranked by descending score. This baseline uses graph structure (node connectivity) but not graph propagation: it scores pathways based on how well-connected the directly overlapping seed genes are within the conditioned graph, without running PPR. It provides a lower bound on graph-guided methods and isolates the contribution of propagation beyond local connectivity. B0 is closely related to degree_norm (which uses PPR scores rather than degrees) and is computed from the conditioning output via the `--kept-edges` flag in baseline_enrichment.py.
 
