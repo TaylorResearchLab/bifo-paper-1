@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T05:19:20+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T05:19:20+00:00" />
+  <meta name="dc.modified" content="2026-04-19T05:25:47+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T05:25:47+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/239443741dab1157b02bdbe0ef389236b00243df/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/239443741dab1157b02bdbe0ef389236b00243df/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/239443741dab1157b02bdbe0ef389236b00243df/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f4317036e52febb0f44c9810a889fe26b21836e2/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f4317036e52febb0f44c9810a889fe26b21836e2/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f4317036e52febb0f44c9810a889fe26b21836e2/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -562,7 +562,7 @@ To evaluate BIFO against conventional enrichment approaches applied to the same 
 
   **Seed-only Fisher**              0.300       0.200       0.215         0.156            120
 
-  **1-hop neighborhood Fisher**     0.000       0.000       0.000         0.037            243
+  **1-hop neighborhood Fisher**     0.000       0.000       0.000         0.036            243
 
   Raw PPR preranked GSEA            0.100       0.050       0.220         0.117            162
 
@@ -577,7 +577,7 @@ Seed-only Fisher (B1) achieved P@10 = 0.30 but produced non-specific top hits (b
 
 The degree-weighted seed overlap baseline (B0) scored pathways by the sum of conditioned-graph out-degrees of overlapping seed genes normalised by pathway size, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.342). BIFO outperforms B0 on both P@10 (0.70 vs. 0.40) and AP (0.403 vs. 0.342), isolating the contribution of PPR propagation beyond local graph connectivity.
 
-Neighborhood Fisher (B2) failed entirely (P@10 = 0.000, AP = 0.037). The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes --- 86% of the gene universe --- so virtually every pathway had non-trivial neighborhood overlap, eliminating all discriminating power. This demonstrates the neighborhood-inflation problem: graph-derived gene sets are too broad for conventional enrichment without prior signal concentration.
+Neighborhood Fisher (B2) failed entirely (P@10 = 0.000, AP = 0.036). The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes --- 86% of the gene universe --- so virtually every pathway had non-trivial neighborhood overlap, eliminating all discriminating power. This demonstrates the neighborhood-inflation problem: graph-derived gene sets are too broad for conventional enrichment without prior signal concentration.
 
 Raw PPR preranked GSEA (B3) recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P@10 = 0.10, NDCG@10 = 0.220), confirming that graph propagation encodes pathway-relevant signal even before BIFO conditioning. BIFO full-arm (B4) outperformed all baselines across every metric: P@10 = 0.70 (2.3× seed Fisher), NDCG@10 = 0.757 (3.4× raw GSEA), AP = 0.403 (2.6× seed Fisher). The improvement over conditioned PPR GSEA (B3b; AP = 0.114) isolates the contribution of the degree_norm scoring function beyond propagation alone.
 
