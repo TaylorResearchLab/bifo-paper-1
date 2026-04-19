@@ -41,8 +41,8 @@
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:45:13+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:45:13+00:00" />
+  <meta name="dc.modified" content="2026-04-19T01:52:36+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T01:52:36+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -74,9 +74,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -113,8 +113,6 @@
 <p>We further demonstrate the applicability of BIFO in a discovery setting using rare variant cohorts from the Kids First program. In this regime, gene sets derived from variant aggregation are large and heterogeneous, and standard enrichment approaches fail to recover biologically coherent pathways. BIFO-conditioned propagation concentrates distributed signal across the graph and recovers biologically relevant pathways without prior specification, illustrating its utility for cohort-scale inference where traditional methods break down.</p>
 <p>Together, these results establish BIFO as a general framework for defining admissible biological information flow over heterogeneous knowledge graphs. By transforming graphs from passive integration structures into constrained propagation substrates, BIFO enables principled, mechanistically grounded inference across multiple biological scales.</p>
 <p><strong>Methods</strong></p>
-<p><em>BIFO: Biological Information Flow Ontology — Benchmark v1.0</em></p>
-<p>Companion to Results Backbone · April 2026 · All parameters frozen</p>
 <h2 id="knowledge-graph-source">1 Knowledge graph source</h2>
 <p>All analyses used the Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and Petagraph infrastructure. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a source authority base (SAB) identifier; each edge carries a predicate drawn from the source ontology's relation vocabulary. This structure makes edge provenance fully traceable, which is essential for the BIFO conditioning step: the predicate determines which flow class an edge belongs to, and the SAB determines which entity resolution rule applies.</p>
 <p>For the present benchmark, the graph was queried as a 1-hop neighborhood centered on 15 CHD-associated seed and held-out genes. This produced two edge files: (1) edges_raw.csv containing 94,790 seed-to-neighbor mechanistic and association edges, and (2) pathway_membership_edges.csv containing 79,562 gene-to-pathway membership edges derived from MSigDB, WikiPathways, and Gene Ontology annotations. These were merged into edges_merged.csv (174,352 edges). Node metadata was exported in nodes.csv (34,523 concept nodes). The 1-hop design was chosen to produce a graph of tractable size with known provenance; it does not represent the full DDKG connectivity.</p>
@@ -454,8 +452,6 @@
 <p>Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 19-pathway cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.</p>
 <p>The bootstrap analysis was designed to address two questions: (1) whether cilia pathway recovery requires aggregate cohort-scale variant burden or can emerge from small random gene subsets; and (2) whether BIFO or standard Fisher enrichment is more sensitive for detecting cilia signal at small seed sizes. Results are reported in Section 8.4.</p>
 <p><strong>Results</strong></p>
-<p><em>BIFO: Biological Information Flow Ontology — Benchmark v1.0</em></p>
-<p>Backbone draft · April 2026 · Data frozen</p>
 <h2 id="graph-conditioning-and-coverage">1 Graph conditioning and coverage</h2>
 <p>The DDKG export comprised 34,523 concept nodes and 174,352 merged edges, combining 94,790 seed-centered mechanistic and association edges (edges_raw) with 79,562 pathway membership edges. Entity resolution using direct SAB column fallback resolved 18,897 of 34,523 concept nodes (54.7%); the remaining 15,626 nodes lacked a mappable source vocabulary assignment and were treated as unresolvable at Level 1.</p>
 <p>BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.7.1; 251 entries). Of 174,352 input edges, 104,342 (59.8%) were retained as biologically admissible; 69,658 were excluded for three mutually exclusive reasons: unmapped predicate (37,448; 21.5%), unresolved endpoint entity (32,214; 18.5%), or explicit non-flow classification (348; 0.2%). Level-2 edge coverage was 59.8%, reflecting incomplete predicate mapping under the current SAB selection.</p>

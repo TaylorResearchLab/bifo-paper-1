@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T01:45:13+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T01:45:13+00:00" />
+  <meta name="dc.modified" content="2026-04-19T01:52:36+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T01:52:36+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/77d789783a50ed415b3b4507deb3bf364c835d38/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6a1e012e6a2b749dfa27ff34f3f65fa4068a0c8c/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -131,10 +131,6 @@ Together, these results establish BIFO as a general framework for defining admis
 
 
 **Methods**
-
-*BIFO: Biological Information Flow Ontology --- Benchmark v1.0*
-
-Companion to Results Backbone · April 2026 · All parameters frozen
 
 ## 1 Knowledge graph source
 
@@ -438,10 +434,6 @@ The bootstrap analysis was designed to address two questions: (1) whether cilia 
 
 
 **Results**
-
-*BIFO: Biological Information Flow Ontology --- Benchmark v1.0*
-
-Backbone draft · April 2026 · Data frozen
 
 ## 1 Graph conditioning and coverage
 
