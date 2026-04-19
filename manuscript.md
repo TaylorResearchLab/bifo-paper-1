@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T02:45:32+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T02:45:32+00:00" />
+  <meta name="dc.modified" content="2026-04-19T02:54:45+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T02:54:45+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/bd34c7c46d058008e6c2cb6f258ed86cf316317e/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/22f250caedb86a117332dc3a530ac5d45d734fa8/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/22f250caedb86a117332dc3a530ac5d45d734fa8/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/22f250caedb86a117332dc3a530ac5d45d734fa8/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -833,9 +833,6 @@ Several limitations should be noted. The benchmark graph is a controlled 1-hop p
 Gene-level recovery metrics are near ceiling in the curated benchmark due to the small size and strong connectivity of the test set. In this context, pathway-level evaluation and cohort-scale analysis provide a more meaningful assessment of performance.
 
 Overall, BIFO provides a framework for making graph-based biological analysis both effective and interpretable. By constraining which relationships are allowed to carry signal and by explicitly defining how propagated signal is evaluated at the pathway level, it shifts the focus from raw connectivity to biologically meaningful structure. This perspective provides a principled basis for analyzing heterogeneous biological data, particularly in settings where standard methods struggle to extract coherent signal.
-
-
-## References {.page_break_before}
 
 
 ## Supplementary Methods
@@ -1635,4 +1632,7 @@ README.
 mapping (`bifo_ddkg_mapping.yaml`) are graph-agnostic and can be applied to any
 property graph whose edges carry DDKG-compatible predicates. Code is released
 under MIT License; benchmark data under CC BY 4.0.
+
+
+## References
 
