@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-19" />
   <meta name="citation_publication_date" content="2026-04-19" />
   <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T22:37:07+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T22:37:07+00:00" />
+  <meta name="dc.modified" content="2026-04-19T22:42:13+00:00" />
+  <meta property="article:modified_time" content="2026-04-19T22:42:13+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/b8686ecf5bcfcc2ef96c01b88dbc1d9398cdd88a/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -548,6 +548,8 @@ The ablation arm removed Pathway Contribution edges from propagation (16,026 pro
 ***Mechanistic-only arm***
 
 The mechanistic-only arm restricted propagation to edges classified as mechanistic in the YAML mapping (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor classes including mechanistically classified subsets of perturbational and termination predicates). All 550 pathway scores were exactly zero, yielding P@10 = 0.00. This is a structural result, not a performance result. In the present benchmark graph, pathway nodes are not reachable from seed genes through mechanistic edges alone; gene-to-pathway connectivity is mediated exclusively by Pathway Contribution edges. The rank improvement value of +34.7 is uninterpretable: it reflects arbitrary tie-ordering of zero-score pathways.
+
+**Empirical significance via membership rewiring null.** To assess whether top-ranked pathways exceed what is expected by chance, we applied a degree-preserving membership rewiring null (N = 1000 permutations; Methods §8.4). Of 550 scored pathways, 49 (8.9%) were significant at q < 0.05 after BH correction. The top cardiac pathways showed strong separation from the null: BRUNEAU_SEPTATION_VENTRICULAR (q = 0.017, null_z = 23.4), WP_HEART_DEVELOPMENT (q = 0.017, null_z = 20.4), and WP_CARDIAC_PROGENITOR_DIFFERENTIATION (q = 0.017, null_z = 18.3). All nine pathways in the top-10 carrying a CHD reference annotation were significant at q < 0.05. This confirms that the top-ranked pathways receive substantially more propagated signal than pathway-sized random gene sets drawn from the same conditioned graph, providing empirical support for the biological specificity of BIFO pathway prioritisation in the sparse-seed regime.
 
 Together, the three arms identify a two-layer graph architecture with a structurally necessary bridge. Layer 1 (mechanistic) encodes gene--gene signaling, transcription, and protein interaction. Layer 2 (pathway) encodes curated gene-set annotations. These layers are structurally separated in the present graph; connectivity between them is mediated exclusively by Pathway Contribution edges. BIFO\'s contribution is the principled, ontology-aligned admission of those bridge edges as a coherent flow class, enabling signal transfer from the mechanistic layer to the pathway annotation layer.
 
