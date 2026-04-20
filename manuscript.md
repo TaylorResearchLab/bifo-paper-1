@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-19'
+date-meta: '2026-04-20'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-19" />
-  <meta name="citation_publication_date" content="2026-04-19" />
-  <meta property="article:published_time" content="2026-04-19" />
-  <meta name="dc.modified" content="2026-04-19T22:42:13+00:00" />
-  <meta property="article:modified_time" content="2026-04-19T22:42:13+00:00" />
+  <meta name="dc.date" content="2026-04-20" />
+  <meta name="citation_publication_date" content="2026-04-20" />
+  <meta property="article:published_time" content="2026-04-20" />
+  <meta name="dc.modified" content="2026-04-20T00:48:18+00:00" />
+  <meta property="article:modified_time" content="2026-04-20T00:48:18+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d832dbcf9dcb7aa0c12b14e3402591ce7c18f788/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/839f5efbc347bf1655469c646ca9d07f017c022d/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/839f5efbc347bf1655469c646ca9d07f017c022d/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/839f5efbc347bf1655469c646ca9d07f017c022d/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -368,6 +368,8 @@ Statistical significance is assessed using the finite-sample-corrected empirical
 **Validated regime.** The membership rewiring null is validated for the sparse-seed benchmark setting, where the observed score for top cardiac pathways substantially exceeds the null distribution (BRUNEAU_SEPTATION_VENTRICULAR q = 0.017, null_z = 23.4; 48 of 550 pathways significant at q < 0.05). In this regime the null correctly separates biologically coherent pathway hits from background.
 
 **Cohort-scale limitation.** At cohort scale (KF-CHD, n = 1,276 seeds), the rewiring null is miscalibrated because degree-preserving rewiring preserves pathway size but does not control the graph connectivity profile of the assigned member genes. When seeds are numerous and propagate broadly, rewired pathways with many high-connectivity member genes receive null scores comparable to or higher than the observed score, inflating the null mean. This reflects a fundamental limitation of size-preserving nulls applied to well-connected pathway nodes under dense seed sets, not a failure of the BIFO scoring framework itself. At cohort scale, pathway prioritisation validity is supported by cross-cohort convergence, concordance with independently implemented Fisher enrichment, and bootstrap rank stability rather than a BIFO-native null p-value. Development of a connectivity-aware null model — for example, degree-aware bipartite rewiring that matches member genes on their propagation propensity in the conditioned graph — is a priority for future work.
+
+**Member-level empirical null.** A complementary null tests whether a pathway's constituent genes carry disproportionate propagated signal, without requiring PPR reruns and valid at all seed sizes. For each pathway, the observed mean PPR score across its member genes (member_mean) is compared against N = 1000 matched random gene sets of the same size drawn from the eligible pathway-connected gene universe. Null genes are matched to true pathway members on structural features only: conditioned graph out-degree and pathway membership count (both log-binned into 10 quantile bins). Observed propagated score is intentionally excluded from matching to avoid conditioning the null on the quantity being tested. Sampling is without replacement within each null set. This null is parallelised over permutations: each worker computes one full permutation across all pathways, giving balanced load for large pathway universes. Empirical p-values use the finite-sample correction p = (1 + count(null ≥ observed)) / (1 + N); BH correction is applied across all tested pathways. Output columns member_mean_p, member_mean_q, member_mean_null_mean, member_mean_null_sd, and member_mean_null_z are written alongside degree_norm null columns. This member-level null is a structurally matched but score-naive empirical test; it does not directly validate the degree_norm pathway-node score but provides a complementary line of evidence that a highly ranked pathway is supported by concentrated signal among its constituent genes.
 
 ## 9 CHD exhaustive resampling analysis
 
@@ -845,7 +847,7 @@ Several limitations should be noted. The benchmark graph is a controlled 1-hop p
 
 Gene-level recovery metrics are near ceiling in the curated benchmark due to the small size and strong connectivity of the test set. In this context, pathway-level evaluation and cohort-scale analysis provide a more meaningful assessment of performance. BIFO as implemented here is best understood as a biologically constrained propagation schema with a reference DDKG implementation, rather than a formal ontology in the description-logic sense; the flow class vocabulary and admissibility rules constitute an operational specification that can be extended or reconfigured for other graph representations. Additionally, the 15-gene CHD benchmark pool is itself curated from prior knowledge, which bounds generalization claims beyond the illustrative benchmark setting; the exhaustive 3,003-split resampling addresses seed-composition sensitivity within this pool but does not substitute for an independent benchmark.
 
-BIFO-native empirical significance assessment via the membership rewiring null is validated for sparse seed sets, where it correctly separates biologically coherent hits from background (benchmark: 48/550 pathways significant at q < 0.05; top cardiac pathways null_z > 9). In large cohort-scale analyses, size-preserving null models are miscalibrated because they do not control the graph connectivity profile of pathway member genes — a property that determines null score distributions independent of seed identity. At cohort scale, pathway prioritisation support is therefore taken from cross-cohort convergence and concordance with independently computed enrichment statistics rather than from a BIFO-native null p-value. Development of a connectivity-aware null — such as degree-aware bipartite rewiring that matches member genes on their propagation propensity in the conditioned graph — is the appropriate direction for a unified significance framework valid across both sparse and dense seed regimes.
+BIFO-native empirical significance operates at two levels. The pathway-node membership rewiring null is validated for sparse seed sets, where it correctly separates biologically coherent hits from background (benchmark: 49/550 pathways significant at q < 0.05; top cardiac pathways null_z > 9). In large cohort-scale analyses, pathway-node size-preserving nulls are miscalibrated because they do not control the graph connectivity profile of pathway member genes. A complementary stratified member-level null — which tests whether a pathway's constituent genes carry disproportionate propagated signal relative to structurally matched gene sets, without requiring PPR reruns — is valid at all seed sizes. In the KF-CHD cohort, this member-level null shows that ciliopathy member genes carry greater propagated signal than matched gene sets (WP_CILIOPATHIES null_z = 3.45, empirical p = 0.000999), providing a member-level complement to the pathway-node ranking result. These results suggest that cohort-scale significance in BIFO may be better assessed at the member-gene level than at the pathway-node level, even when pathway-node nulls remain difficult to calibrate in large, densely connected graphs. The member-level null as implemented uses structural matching only (degree and pathway membership count) and does not directly validate the degree_norm pathway-node score; it provides converging evidence rather than a primary significance test for that score variant. Development of a connectivity-aware pathway-node null — such as degree-aware bipartite rewiring that matches member genes on their propagation propensity — remains the appropriate direction for a fully unified significance framework.
 
 Overall, BIFO provides a framework for making graph-based biological analysis both effective and interpretable. By constraining which relationships are allowed to carry signal and by explicitly defining how propagated signal is evaluated at the pathway level, it shifts the focus from raw connectivity to biologically meaningful structure. This perspective provides a principled basis for analyzing heterogeneous biological data, particularly in settings where standard methods struggle to extract coherent signal.
 
