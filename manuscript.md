@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-20" />
   <meta name="citation_publication_date" content="2026-04-20" />
   <meta property="article:published_time" content="2026-04-20" />
-  <meta name="dc.modified" content="2026-04-20T00:52:17+00:00" />
-  <meta property="article:modified_time" content="2026-04-20T00:52:17+00:00" />
+  <meta name="dc.modified" content="2026-04-20T08:11:48+00:00" />
+  <meta property="article:modified_time" content="2026-04-20T08:11:48+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/254813010b4ea9f2c1fe20dd88659acd62e94d57/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/254813010b4ea9f2c1fe20dd88659acd62e94d57/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/254813010b4ea9f2c1fe20dd88659acd62e94d57/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/131cbedef154ef8366f9aac2413f78e582874892/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/131cbedef154ef8366f9aac2413f78e582874892/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/131cbedef154ef8366f9aac2413f78e582874892/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -737,6 +737,9 @@ Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighb
   cond_ppr_gsea (B3b)           4,414 / 4,535              No                          Conditioned scores insufficient
 
   BIFO full-arm (B4)            1 / 5,104                  Yes (rank 1)                degree_norm=6.26×10⁻⁶; not hub-flagged
+
+  BIFO member-level null        rank 1 (null_z=3.45)       Yes                         empirical p=0.000999 (floor, 1000 perms);
+                                                                                        structural matching only (degree + membership count)
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
 
 Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMARY_CILIUM_CRISPR (3), WP_JOUBERT_SYNDROME (4), REACTOME_DISORDERS_TRANSMEMBRANE (5). BIFO top-5: WP_CILIOPATHIES (1), YOSHIMURA_MAPK8 (2; hub-flagged), NABA_MATRISOME (3; hub-flagged), Ionophore activity (4), REACTOME_DISEASES_OF_METABOLISM (5; hub-flagged).
@@ -757,7 +760,7 @@ Head-to-head rank comparison between seed Fisher and BIFO for all scored pathway
 
 ### 8.3 Cross-cohort convergence: KF-NBL independent replication
 
-Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,183 scored pathways), WP_CILIOPATHIES ranked first of 5,183 pathways --- an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,617 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th.
+Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,183 scored pathways), WP_CILIOPATHIES ranked first of 5,183 pathways --- an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,617 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th. The stratified member-level null showed a positive but weaker signal for WP_CILIOPATHIES in KF-NBL (null_z = 2.41, empirical p = 0.004) compared to KF-CHD (null_z = 3.45, p = 0.000999), consistent with cilia biology being more central to cardiac septation than to neuroblastoma. Cross-cohort convergence on rank-1 WP_CILIOPATHIES under both BIFO and Fisher, combined with directionally consistent member-level null support in both cohorts, provides strong converging evidence for a genuine biological signal.
 
 The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecting shared rare Mendelian disease gene carrier burden at MAF ≤0.001 rather than disease-specific biology. At a stricter n≥2 carrier count filter, the overlap decreases to 117 of 387 CHD genes (30%) while both cohorts still yield WP_CILIOPATHIES at rank 1 --- the cilia signal is present in both the shared and cohort-specific variant components. The convergence on the same top pathway across two biologically distinct pediatric diseases is consistent with the known developmental role of cilia in both cardiac septation and neural crest migration, and with the companion U24 cross-cohort analysis (Stear et al. 2026) which independently identified cilia enrichment in KF cohorts using permutation-based GSEA.
 
