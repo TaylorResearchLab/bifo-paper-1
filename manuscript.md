@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-20" />
   <meta name="citation_publication_date" content="2026-04-20" />
   <meta property="article:published_time" content="2026-04-20" />
-  <meta name="dc.modified" content="2026-04-20T08:46:56+00:00" />
-  <meta property="article:modified_time" content="2026-04-20T08:46:56+00:00" />
+  <meta name="dc.modified" content="2026-04-20T08:54:17+00:00" />
+  <meta property="article:modified_time" content="2026-04-20T08:54:17+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ce21022a9c61499d97b65f2895547be0ab854c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ce21022a9c61499d97b65f2895547be0ab854c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ce21022a9c61499d97b65f2895547be0ab854c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82f36356c060b82253b1e3db195733aca176f55/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82f36356c060b82253b1e3db195733aca176f55/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82f36356c060b82253b1e3db195733aca176f55/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -759,7 +759,7 @@ Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMA
 
 Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (degree_norm = 6.26×10⁻⁶; not hub-flagged). This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the \~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.
 
-The pathway-node rewiring null is miscalibrated for KF-CHD because 93.9% of propagating edges in this graph are bridge edges (Methods §8.4). When bridge edges dominate routing, degree-preserving rewiring effectively randomizes the dominant routing structure of the propagation operator, inflating the null mean above the observed score (WP_CILIOPATHIES rewiring null_z = −1.9). This is a graph composition property, not a seed size property: the same null is well-calibrated for KF-NBL where bridge edges comprise 46.3% of propagating edges.
+The pathway-node rewiring null is miscalibrated for KF-CHD because 93.9% of propagating edges in this graph are bridge edges (Methods §8.4). When bridge edges dominate routing, degree-preserving rewiring effectively randomizes the dominant routing structure of the propagation operator, inflating the null mean above the observed score (WP_CILIOPATHIES rewiring null_z = −1.9). This demonstrates that null calibration is determined by graph composition rather than seed set size, and reflects a class of graph compositions in which bridge edges dominate routing: the same null is well-calibrated for KF-NBL where bridge edges comprise 46.3% of propagating edges.
 
 A stratified member-level null applied to member_mean, which is not affected by bridge edge fraction because it does not rerun PPR, showed that ciliopathy member genes carried greater propagated signal than structurally matched random gene sets (WP_CILIOPATHIES null_z = 3.45, empirical p = 0.000999). The empirical p-value reached the permutation floor (0.000999; N=1000), while multiple-testing correction across the full pathway universe remains conservative in this setting. This member-level null tests whether propagated signal concentrates within the genes defining a pathway, rather than whether signal reaches the pathway node itself. This member-level empirical support, combined with Fisher enrichment and cross-cohort recurrence in KF-NBL where WP_CILIOPATHIES also ranked first, provides converging evidence that the ciliopathy signal reflects concentration of propagated signal within biologically coherent gene sets rather than a byproduct of graph topology.
 
