@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-20" />
   <meta name="citation_publication_date" content="2026-04-20" />
   <meta property="article:published_time" content="2026-04-20" />
-  <meta name="dc.modified" content="2026-04-20T17:32:42+00:00" />
-  <meta property="article:modified_time" content="2026-04-20T17:32:42+00:00" />
+  <meta name="dc.modified" content="2026-04-20T17:51:46+00:00" />
+  <meta property="article:modified_time" content="2026-04-20T17:51:46+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/84b75baa1113de4daeaf050750cb946061546364/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/84b75baa1113de4daeaf050750cb946061546364/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/84b75baa1113de4daeaf050750cb946061546364/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0bbdf58783374bee15ce378a8d59b3730c914744/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0bbdf58783374bee15ce378a8d59b3730c914744/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0bbdf58783374bee15ce378a8d59b3730c914744/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -526,7 +526,7 @@ Each panel compares four PPR propagation arms (Raw, Metadata-filtered, BIFO-cond
 (**A**) AUROC is near-ceiling across all arms and configurations and is not informative for this benchmark; entropy and nonzero fraction reflect the meaningful differences between arms.
 (**B**) AUPRC discriminates between arms; BIFO-conditioned on the Mechanistic graph shows the expected drop (0.149) relative to Full (0.192), and Random sparsification of the Mechanistic graph collapses to 0.049.
 (**C**) Localization (mean held-out rank normalised by graph size; lower = more concentrated near seeds). BIFO-conditioned is lowest across Full and Ablation graphs.
-(**D**) PPR score entropy in bits (lower = more concentrated signal). BIFO-conditioned achieves the lowest entropy in all three graph configurations, showing that conditioning concentrates signal beyond what edge-count reduction alone achieves.
+(**D**) PPR score entropy in nats (lower = more concentrated signal; computed as Shannon entropy using natural logarithm). BIFO-conditioned achieves the lowest entropy in all three graph configurations, showing that conditioning concentrates signal beyond what edge-count reduction alone achieves.
 ](images/fig2_gene_recovery.png){#fig:gene_recovery width="100%"}
 
 ## 3 Pathway prioritization: three-arm ablation
