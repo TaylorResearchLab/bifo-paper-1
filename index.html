@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T16:34:14+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T16:34:14+00:00" />
+  <meta name="dc.modified" content="2026-04-21T16:48:25+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T16:48:25+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/4785e76678c082661c2f88f77be01f79fa8d39ad/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4785e76678c082661c2f88f77be01f79fa8d39ad/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4785e76678c082661c2f88f77be01f79fa8d39ad/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1057,7 +1057,7 @@ structural matching only (degree + membership count)</td>
 <h3 id="bifo-recovers-ciliopathy-signal-in-discovery-mode">8.2 BIFO recovers ciliopathy signal in discovery mode</h3>
 <p>Under BIFO full-arm scoring, WP_CILIOPATHIES ranked 43rd of 2,130 canonical pathways (degree_norm = 8.51×10⁻⁶; not hub-flagged), placing it in the top 2% of the scored universe. WP_JOUBERT_SYNDROME, a closely related ciliopathy pathway sharing many structural members, ranked 34th. This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the ~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.</p>
 <p>The pathway-node rewiring null shows that WP_CILIOPATHIES carries the strongest statistical enrichment signal in the dataset: null_z = 48.71 (empirical q = 0.006), meaning the observed degree_norm score is 48.7 standard deviations above the mean of 1,000 degree-preserving membership rewiring permutations. This directly tests whether the specific gene membership of WP_CILIOPATHIES — rather than graph topology alone — drives the signal. The member-level stratified null (member_mean null_z = 1.39, p = 0.057) indicates that signal is concentrated at the pathway node level rather than distributed uniformly across all 170 member genes, consistent with a subset of cilia-associated CHD variant genes driving propagated mass to the ciliopathy pathway cluster through the mechanistic network. This member-level null tests whether propagated signal concentrates within the genes defining a pathway, rather than whether signal reaches the pathway node itself. This member-level empirical support, combined with Fisher enrichment and cross-cohort recurrence in KF-NBL where WP_CILIOPATHIES also ranked first, provides converging evidence that the ciliopathy signal reflects concentration of propagated signal within biologically coherent gene sets rather than a byproduct of graph topology.</p>
-<p>BIFO recovers a coherent ciliopathy pathway cluster. Of 17 cilia, ciliopathy, and hedgehog pathway annotations in the 2,130-pathway universe, 11 (65%) rank above the median. The core ciliopathy pathways show the strongest enrichment: WP_JOUBERT_SYNDROME (rank 34, null_z = 54.7), WP_CILIOPATHIES (rank 43, null_z = 48.7), REACTOME_CILIUM_ASSEMBLY (rank 163, null_z = 22.2), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 171, null_z = 19.9), and REACTOME_HEDGEHOG_OFF_STATE (rank 216, null_z = 18.3) are all significant (q = 0.006). Notably, generic Hedgehog signaling pathways not specific to cilia (HALLMARK_HEDGEHOG_SIGNALING, PID_HEDGEHOG_GLI_PATHWAY, REACTOME_HEDGEHOG_ON_STATE) show negative null_z values, indicating depletion rather than enrichment — a biologically interpretable distinction between cilia-specific and generic Hedgehog signal. The top-ranked pathways by degree_norm (Protein phosphorylation, REACTOME_CROSS_PRESENTATION, WP_NAD_METABOLISM, etc.) reflect broad high-degree graph structure rather than specific cilia signal; they are distinguishable from the ciliopathy cluster by their low null_z values and absence of cilia-related annotations.</p>
+<p>BIFO recovers a coherent ciliopathy cluster. Of 16 matched cilia, ciliopathy, and hedgehog pathway annotations in the 2,130-pathway universe, 8 (50%) rank in the top half. The core ciliopathy pathways show the strongest enrichment: WP_JOUBERT_SYNDROME (rank 34, null_z = 54.7), WP_CILIOPATHIES (rank 43, null_z = 48.7), REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE (rank 95, null_z = 38.1), REACTOME_CILIUM_ASSEMBLY (rank 163, null_z = 22.2), and WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR (rank 171, null_z = 19.9). Notably, generic Hedgehog signaling pathways not specific to cilia (WP_HEDGEHOG_SIGNALING_PATHWAY, WP_HEDGEHOG_SIGNALING_PATHWAY_NETPATH, REACTOME_CARGO_TRAFFICKING_TO_THE_PERICILIARY_MEMBRANE) show negative null_z values in KF-CHD, indicating depletion rather than enrichment — a biologically interpretable distinction between cilia-specific and generic Hedgehog signal. The top-ranked pathways by degree_norm (Protein phosphorylation, REACTOME_CROSS_PRESENTATION, WP_NAD_METABOLISM, etc.) reflect broad high-degree graph structure rather than specific cilia signal; they are distinguishable from the ciliopathy cluster by their low null_z values and absence of cilia-related annotations.</p>
 <p>Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.</p>
 <p>Full cilia pathway cluster ranking under BIFO for KF-CHD and KF-NBL is provided in Supplementary Table ST4.</p>
 <p>Head-to-head rank comparison between seed Fisher and BIFO for all scored pathways is provided as downloadable data in Supplementary Table ST5.</p>
@@ -4489,19 +4489,17 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 </table>
 <hr />
 <h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl">ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
-<p>All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (17 in KF-CHD, 18 in KF-NBL), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null) and empirical_q. Hub-flagged pathways (degree_flag = True) reflect high-degree graph connectivity rather than specific cilia biology.</p>
-<table style="width:100%;">
+<p>All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 17-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (YAUCH_HEDGEHOG_SIGNALING_PARACRINE_UP) was not present in the scored universe after canonical-collection filtering and is excluded from this table.</p>
+<table>
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -4513,8 +4511,6 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <th>KF-NBL rank</th>
 <th>KF-NBL score</th>
 <th>KF-NBL null_z</th>
-<th>Members</th>
-<th>Hub</th>
 </tr>
 </thead>
 <tbody>
@@ -4527,8 +4523,6 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>17</td>
 <td>2.536e-06</td>
 <td>10.54</td>
-<td>76</td>
-<td>—</td>
 </tr>
 <tr class="even">
 <td>WP_CILIOPATHIES</td>
@@ -4539,10 +4533,18 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>3</td>
 <td>4.241e-06</td>
 <td>18.95</td>
-<td>170</td>
-<td>—</td>
 </tr>
 <tr class="odd">
+<td>REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE</td>
+<td>MSIGDB</td>
+<td>95</td>
+<td>6.049e-06</td>
+<td>38.09</td>
+<td>71</td>
+<td>1.752e-06</td>
+<td>5.65</td>
+</tr>
+<tr class="even">
 <td>REACTOME_CILIUM_ASSEMBLY</td>
 <td>MSIGDB</td>
 <td>163</td>
@@ -4551,10 +4553,8 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>32</td>
 <td>2.154e-06</td>
 <td>6.12</td>
-<td>194</td>
-<td>—</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR</td>
 <td>MSIGDB</td>
 <td>171</td>
@@ -4563,10 +4563,8 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>31</td>
 <td>2.154e-06</td>
 <td>8.94</td>
-<td>94</td>
-<td>—</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>REACTOME_HEDGEHOG_OFF_STATE</td>
 <td>MSIGDB</td>
 <td>216</td>
@@ -4575,10 +4573,8 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>347</td>
 <td>9.544e-07</td>
 <td>0.13</td>
-<td>110</td>
-<td>—</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>REACTOME_SIGNALING_BY_HEDGEHOG</td>
 <td>MSIGDB</td>
 <td>239</td>
@@ -4587,10 +4583,8 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>228</td>
 <td>1.134e-06</td>
 <td>0.52</td>
-<td>147</td>
-<td>—</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>WP_CILIARY_LANDSCAPE</td>
 <td>MSIGDB</td>
 <td>358</td>
@@ -4599,180 +4593,90 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>233</td>
 <td>1.125e-06</td>
 <td>-1.01</td>
-<td>211</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td>REACTOME_CARGO_TRAFFICKING_TO_THE_PERICILIARY_MEMBRANE</td>
-<td>MSIGDB</td>
-<td>378</td>
-<td>1.949e-06</td>
-<td>1296</td>
-<td>1.098e-06</td>
-<td>51</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE</td>
-<td>MSIGDB</td>
-<td>395</td>
-<td>1.916e-06</td>
-<td>202</td>
-<td>2.306e-06</td>
-<td>94</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>REACTOME_SIGNALING_BY_HEDGEHOG</td>
-<td>MSIGDB</td>
-<td>458</td>
-<td>1.816e-06</td>
-<td>493</td>
-<td>1.699e-06</td>
-<td>147</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>WP_CILIARY_LANDSCAPE</td>
-<td>MSIGDB</td>
-<td>521</td>
-<td>1.713e-06</td>
-<td>483</td>
-<td>1.706e-06</td>
-<td>211</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>REACTOME_BBSOME_MEDIATED_CARGO_TARGETING_TO_CILIUM</td>
-<td>MSIGDB</td>
-<td>679</td>
-<td>1.530e-06</td>
-<td>2070</td>
-<td>8.222e-07</td>
-<td>23</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>REACTOME_INTRAFLAGELLAR_TRANSPORT</td>
-<td>MSIGDB</td>
-<td>906</td>
-<td>1.362e-06</td>
-<td>636</td>
-<td>1.551e-06</td>
-<td>50</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>YAUCH_HEDGEHOG_SIGNALING_PARACRINE_UP</td>
-<td>MSIGDB</td>
-<td>914</td>
-<td>1.354e-06</td>
-<td>1214</td>
-<td>1.136e-06</td>
-<td>140</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>WP_HEDGEHOG_SIGNALING_PATHWAY</td>
-<td>MSIGDB</td>
-<td>959</td>
-<td>1.324e-06</td>
-<td>797</td>
-<td>1.405e-06</td>
-<td>43</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>WP_INTRAFLAGELLAR_TRANSPORT_PROTEINS_BINDING_TO_DYNEIN</td>
-<td>MSIGDB</td>
-<td>1483</td>
-<td>1.038e-06</td>
-<td>1397</td>
-<td>1.055e-06</td>
-<td>25</td>
-<td>—</td>
-<td></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>WP_HEDGEHOG_SIGNALING_PATHWAY_NETPATH</td>
 <td>MSIGDB</td>
-<td>1617</td>
-<td>9.782e-07</td>
-<td>1325</td>
-<td>1.086e-06</td>
-<td>16</td>
-<td>—</td>
-<td></td>
-<td></td>
+<td>921</td>
+<td>1.895e-08</td>
+<td>-3.18</td>
+<td>516</td>
+<td>7.433e-07</td>
+<td>2.74</td>
 </tr>
 <tr class="even">
-<td>REACTOME_VXPX_CARGO_TARGETING_TO_CILIUM</td>
+<td>WP_HEDGEHOG_SIGNALING_PATHWAY</td>
 <td>MSIGDB</td>
-<td>1923</td>
-<td>8.819e-07</td>
-<td>3177</td>
-<td>5.506e-07</td>
-<td>21</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>REACTOME_HEDGEHOG_LIGAND_BIOGENESIS</td>
-<td>MSIGDB</td>
-<td>2949</td>
-<td>5.910e-07</td>
-<td>2522</td>
-<td>6.903e-07</td>
-<td>62</td>
-<td>—</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>REACTOME_TRAFFICKING_OF_MYRISTOYLATED_PROTEINS_TO_THE_CILIUM</td>
-<td>MSIGDB</td>
-<td>5070</td>
-<td>1.685e-07</td>
-<td>5161</td>
-<td>1.564e-07</td>
-<td>5</td>
-<td>—</td>
-<td></td>
-<td></td>
+<td>926</td>
+<td>1.874e-08</td>
+<td>-4.86</td>
+<td>359</td>
+<td>9.307e-07</td>
+<td>2.76</td>
 </tr>
 <tr class="odd">
 <td>HALLMARK_HEDGEHOG_SIGNALING</td>
 <td>MSIGDB</td>
-<td>5103</td>
-<td>7.054e-08</td>
-<td>4712</td>
-<td>2.576e-07</td>
-<td>35</td>
-<td>—</td>
-<td></td>
-<td></td>
+<td>1110</td>
+<td>1.471e-08</td>
+<td>-0.38</td>
+<td>722</td>
+<td>6.062e-07</td>
+<td>15.90</td>
+</tr>
+<tr class="even">
+<td>REACTOME_CARGO_TRAFFICKING_TO_THE_PERICILIARY_MEMBRANE</td>
+<td>MSIGDB</td>
+<td>1457</td>
+<td>9.213e-09</td>
+<td>-5.34</td>
+<td>499</td>
+<td>7.561e-07</td>
+<td>0.98</td>
+</tr>
+<tr class="odd">
+<td>REACTOME_BBSOME_MEDIATED_CARGO_TARGETING_TO_CILIUM</td>
+<td>MSIGDB</td>
+<td>1463</td>
+<td>9.174e-09</td>
+<td>-3.60</td>
+<td>867</td>
+<td>5.303e-07</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td>REACTOME_INTRAFLAGELLAR_TRANSPORT</td>
+<td>MSIGDB</td>
+<td>1592</td>
+<td>7.794e-09</td>
+<td>-5.35</td>
+<td>245</td>
+<td>1.100e-06</td>
+<td>3.45</td>
+</tr>
+<tr class="odd">
+<td>WP_INTRAFLAGELLAR_TRANSPORT_PROTEINS_BINDING_TO_DYNEIN</td>
+<td>MSIGDB</td>
+<td>1634</td>
+<td>7.254e-09</td>
+<td>-3.78</td>
+<td>532</td>
+<td>7.313e-07</td>
+<td>1.61</td>
+</tr>
+<tr class="even">
+<td>REACTOME_VXPX_CARGO_TARGETING_TO_CILIUM</td>
+<td>MSIGDB</td>
+<td>1924</td>
+<td>3.677e-09</td>
+<td>-3.26</td>
+<td>1437</td>
+<td>3.202e-07</td>
+<td>-0.58</td>
 </tr>
 </tbody>
 </table>
-<p><em>17 cilia-related pathways identified across 2,130 scored pathways (KF-CHD universe). Top 5 core ciliopathy pathways shown; full table available in supplementary data.</em></p>
+<p><em>16 of 17 reference pathways matched in the scored universe (YAUCH_HEDGEHOG_SIGNALING_PARACRINE_UP not present after canonical-collection filtering). Null_z values from pathway-node membership rewiring null (N=1000 permutations). Negative null_z indicates depletion relative to null expectation.</em></p>
 <hr />
 <h3 id="st5-head-to-head-rank-comparison-seed-fisher-vs.-bifo-downloadable-data-files">ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)</h3>
 <p>Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (2,130 pathways for KF-CHD; 2,196 pathways for KF-NBL).</p>
