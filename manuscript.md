@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T19:14:21+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T19:14:21+00:00" />
+  <meta name="dc.modified" content="2026-04-21T19:21:08+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T19:21:08+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/47e404c6c562be86c54be7e14035c91995660cf1/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/47e404c6c562be86c54be7e14035c91995660cf1/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/47e404c6c562be86c54be7e14035c91995660cf1/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -206,7 +206,7 @@ For all operators, adjacency matrices are built as sparse directed binary matric
 
 **Formal definition of the BIFO conditioning operator.** Let G = (V, E) be the input property graph with node set V and edge set E, where each edge e = (u, v, p) carries predicate p and endpoint SABs s_u, s_v. BIFO conditioning defines a constraint operator C that produces the conditioned propagation graph G_C = (V, E_C), where:
 
-$$E_C = \{ e \in E : \text{flow\_class}(\text{predicate}(e)) \in F_{\text{admissible}} \land \text{SAB}(\text{source}(e)) \text{ resolved} \land \text{SAB}(\text{target}(e)) \text{ resolved} \}$$ {#eq:operator}
+$$E_C = \{ e \in E : \operatorname{flow\_class}(\text{predicate}(e)) \in F_{\text{admissible}} \land \text{SAB}(\text{source}(e)) \text{ resolved} \land \text{SAB}(\text{target}(e)) \text{ resolved} \}$$ {#eq:operator}
 
 F_admissible is the set of flow classes designated as propagating in bifo_mapping.yaml (mechanistic and weak-mechanistic tiers, plus Pathway Contribution bridge edges; excluding Observational Association, contextual_constraint, and nonpropagating_context tiers). In the implementation, weak-mechanistic relationships are encoded as a single hybrid classification tier (`weak_mechanistic_or_observational`) that is treated as admissible in the conditioned operator but excluded from the mechanistic-only arm. The operator is graph-agnostic in principle: its admissibility decisions depend only on the predicate-to-flow mapping and entity resolution rules, not on graph topology. Implementation requires SAB-specific resolution rules and vocabulary mappings that are currently configured for DDKG-compatible graphs; the same conditioning logic can be applied to any property graph whose edges carry compatible predicate vocabularies, including the full KF-CHD and KF-NBL exports (Section 10).
 
