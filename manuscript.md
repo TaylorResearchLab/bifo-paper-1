@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T21:00:09+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T21:00:09+00:00" />
+  <meta name="dc.modified" content="2026-04-21T21:17:30+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T21:17:30+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/019e627b348578e4f7ace24ce9ae73efeadb2ac6/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/019e627b348578e4f7ace24ce9ae73efeadb2ac6/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/019e627b348578e4f7ace24ce9ae73efeadb2ac6/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -486,7 +486,7 @@ BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.
 
 Of the 57,005 propagating edges in the conditioned arm, 43,698 (76.7%) were classified as Pathway Contribution in the gene→pathway direction, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. An additional 37,352 Pathway Contribution edges in the pathway→gene direction are retained in the kept-edges output but excluded from propagation as nonpropagating_context per BIFO spec v0.02. Signal Transduction accounted for 5,786 (10.1%) of propagating edges and Perturbational Effect for 5,392 (9.5%), with Transcription, Signal Termination, and minor classes comprising the remainder.
 
-While Pathway Contribution edges dominate numerically, the ablation experiment (Section 3) establishes that they do not generate signal independently: removing bridge edges while preserving all other admissible mechanistic classes reduces P@10 from 0.70 to 0.60, and mechanistic-only propagation --- which contains no Pathway Contribution edges --- yields exactly zero pathway scores across all 550 pathways. Pathway Contribution edges (referred to hereafter as bridge edges) are necessary conduits for transferring mechanistic signal from gene-level propagation to the pathway annotation layer; without upstream mechanistic signal to relay, they have no effect on their own.
+While Pathway Contribution edges dominate numerically, the ablation experiment (Section 3) establishes that they are the primary driver of pathway-level signal transfer: removing bridge edges from propagation while preserving all other admissible mechanistic classes reduces P@10 from 0.70 to 0.60, and mechanistic-only propagation — which contains no Pathway Contribution edges — yields exactly zero pathway scores across all 550 pathways. The ablation arm achieves modest positive rank improvement (+13.5) because mechanistic edges concentrate signal within cardiac-relevant gene neighbourhoods prior to scoring, but without bridge edges this pre-transfer organisation cannot be converted into direct pathway-node signal. The sign change relative to the pre-unidirectional pipeline result (previously reported as −11.2) reflects removal of spurious bidirectional Pathway Contribution edges that had inflated the raw arm's pathway scores; the corrected result is interpretable. Pathway Contribution bridge edges remain the necessary conduit for transferring mechanistic gene-level signal to the pathway annotation layer.
 
 ![
 **BIFO conditioning coverage — curated CHD benchmark graph.**
@@ -551,7 +551,7 @@ Under full BIFO conditioning (57,005 propagating edges), the top-10 pathways con
 
 ***Ablation arm***
 
-The ablation arm removed Pathway Contribution edges from propagation ((14,413 propagating edges from 26,080 kept edges of edges_raw) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was +13.5: the ablation arm improves modestly over the raw arm because mechanistic edges alone can still route some signal toward cardiac pathway neighborhoods. However, the improvement is substantially smaller than the full arm (+125.4 vs +13.5), confirming that Pathway Contribution bridge edges are the primary driver of pathway-level signal transfer.
+The ablation arm removed Pathway Contribution edges from propagation ((14,413 propagating edges from 26,080 kept edges of edges_raw) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was +13.5: the ablation arm improves modestly over the raw arm because mechanistic edges concentrate signal within cardiac-relevant gene neighborhoods prior to scoring. However, without Pathway Contribution edges in the propagation operator, signal cannot be transferred directly to pathway concept nodes; the observed improvement therefore reflects improved pre-transfer signal organisation rather than direct pathway-level recovery. This interpretation is confirmed by the much larger improvement in the full arm (+125.4 vs +13.5): the conditioning gain from bridge edges dominates the modest pre-transfer improvement from mechanistic edges alone.
 
 ***Mechanistic-only arm***
 
@@ -716,7 +716,7 @@ AUROC is near-ceiling (1.000) on this benchmark due to the small held-out set an
 
 ![
 **Two-layer graph architecture and the role of Pathway Contribution bridge edges.**
-Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; connectivity is mediated exclusively by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates down through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed and the pathway layer is unreachable from seed genes — the structural finding of Section 3. Pathway nodes receive propagated mass only via bridge edges; mechanistic edges connect only within the molecular layer in this graph construction.
+Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges (signal transduction, protein interaction, transcription). The pathway layer (bottom) contains curated pathway concept nodes from WikiPathways, Reactome, and related sources. The two layers are structurally separated in the mechanistic subgraph; direct connectivity between them is mediated by Pathway Contribution bridge edges (orange, dashed). Variant-gene seeds (filled nodes) inject PPR probability mass into the gene layer, which propagates through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed from the propagation operator; pathway nodes cannot receive propagated mass directly, and the modest rank improvement observed (+13.5) reflects pre-transfer signal organisation in the mechanistic layer rather than direct pathway-level signal recovery. Mechanistic-only propagation yields exactly zero pathway scores (P@10=0.00), confirming that direct bridge transfer is required for pathway-level recovery in this graph construction.
 ](images/fig7_schematic.png){#fig:schematic width="100%"}
 
 
