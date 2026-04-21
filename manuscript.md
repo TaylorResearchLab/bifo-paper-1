@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T17:02:45+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T17:02:45+00:00" />
+  <meta name="dc.modified" content="2026-04-21T18:27:03+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T18:27:03+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d9d40a40fb9061c5000b9534d54e10576746b4c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d9d40a40fb9061c5000b9534d54e10576746b4c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d9d40a40fb9061c5000b9534d54e10576746b4c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/2079531bde40fb2c7f6bf9c55c0ce3e00ae0de0e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2079531bde40fb2c7f6bf9c55c0ce3e00ae0de0e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2079531bde40fb2c7f6bf9c55c0ce3e00ae0de0e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -928,7 +928,7 @@ All query files are provided in the repository at `cypher/`. The four-query stru
 
 ### ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark
 
-Three-arm comparison: Full BIFO (93,487 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count).
+Three-arm comparison: Full BIFO (93,487 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count). Note: the curated benchmark universe includes all MSigDB collections (HALLMARK_, REACTOME_, WP_, KEGG_, PID_, BIOCARTA_, and CGP author-named sets); the CGP exclusion filter applies only to KF cohort analyses (ST3–ST4).
 
 **Full BIFO**
 
@@ -971,7 +971,7 @@ Three-arm comparison: Full BIFO (93,487 propagating edges), Ablation (16,026 pro
 
 ### ST2 — Baseline enrichment method comparison, curated CHD benchmark
 
-Top-20 ranked pathways under each enrichment method, evaluated on the identical 550-pathway universe. CHD reference pathways marked with ✓. Score/stat column: degree_norm for B0 and B4; hypergeometric stat for B1/B2; enrichment score for B3/B3b.
+Top-20 ranked pathways under each enrichment method, evaluated on the identical 550-pathway universe (all MSigDB collections including CGP; CGP exclusion applies to KF analyses only). CHD reference pathways marked with ✓. Score/stat column: degree_norm for B0 and B4; hypergeometric stat for B1/B2; enrichment score for B3/B3b.
 
 **B0 — Degree-weighted seed overlap**
 
