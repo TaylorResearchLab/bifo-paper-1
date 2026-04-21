@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T16:18:40+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T16:18:40+00:00" />
+  <meta name="dc.modified" content="2026-04-21T16:34:14+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T16:34:14+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/13a839db771c063073d63576fdb1cc2571f04dd2/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -423,7 +423,7 @@ Export queries were generated dynamically from each seed list using generate_exp
 
 ### 10.4 Pathway scoring and discovery evaluation
 
-Pathway scoring used the degree_norm scoring variant against a universe of 2,130 pathways for KF-CHD and 2,196 pathways for KF-NBL, each passing minimum-member (≥8), maximum-member (≤300), name-pattern, and canonical-collection filters (Hallmarks, Reactome, WikiPathways, KEGG, BioCarta, PID; C2.CGP author-named gene expression signature sets excluded). No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 17-pathway cilia reference set (KF-CHD) and 18-pathway cilia reference set (KF-NBL) of MSigDB canonical cilia, ciliopathy, and hedgehog pathway CUIs pre-specified before scoring (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 18 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
+Pathway scoring used the degree_norm scoring variant against a universe of 2,130 pathways for KF-CHD and 2,196 pathways for KF-NBL, each passing minimum-member (≥8), maximum-member (≤300), name-pattern, and canonical-collection filters (Hallmarks, Reactome, WikiPathways, KEGG, BioCarta, PID; C2.CGP author-named gene expression signature sets excluded). No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 17-pathway cilia reference set (KF-CHD and KF-NBL) of MSigDB canonical cilia, ciliopathy, and hedgehog pathway CUIs pre-specified before scoring (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 16 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
 
 ### 10.5 Baseline enrichment methods for KF cohort analysis
 
@@ -447,7 +447,7 @@ All five methods were evaluated on identical pathway universes to enable direct 
 
 To assess the stability of cilia pathway recovery and the relationship between seed set size and signal, a bootstrap resampling analysis was performed for both cohorts. For each of three seed sizes (n=10, 20, 30), 500 bootstrap draws were made by sampling uniformly without replacement from the full seed CUI pool. For each draw, BIFO scoring and seed-only Fisher enrichment were run using the identical pathway universe and cilia reference set as the primary analysis. The primary cohort run (full 1,276/1,395-gene seed set) was also evaluated as a reference point (boot_id = −1).
 
-Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 17-pathway (KF-CHD) / 18-pathway (KF-NBL) cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
+Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 17-pathway cilia reference (identical for KF-CHD and KF-NBL), and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
 
 The bootstrap analysis was designed to address two questions: (1) whether cilia pathway recovery requires aggregate cohort-scale variant burden or can emerge from small random gene subsets; and (2) whether BIFO or standard Fisher enrichment is more sensitive for detecting cilia signal at small seed sizes. Results are reported in Section 8.4.
 
@@ -467,9 +467,9 @@ BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.
 
   **Kept after conditioning**           104,342         59.8%                   Biologically admissible (includes non-propagating retained)
 
-  --- Propagating (conditioned arm)     93,507          ---                     Used in PPR operator; see Section 3
+  --- Propagating (conditioned arm)     93,487          ---                     Used in PPR operator; see Section 3
 
-  --- Non-propagating retained          10,033          ---                     Observational Association 9,909; contextual 124
+  --- Non-propagating retained          10,855          ---                     Observational Association 9,909; GRM 84; Spatial constraint 862
 
   Dropped: non-flow                     348             0.2%                    Structural/taxonomic predicates
 
@@ -482,15 +482,15 @@ BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.
   Propagating edges (mechanistic arm)   9,710           ---                     classification=mechanistic only (see §3)
   ------------------------------------- --------------- ----------------------- -------------------------------------------------------------
 
-**Table 1.** *Graph conditioning statistics. All values from benchmark run V5. Of the 104,342 kept edges, 93,507 enter the PPR operator as propagating edges; 10,033 are retained in the conditioning output (kept_edges.csv) but excluded from propagation --- comprising Observational Association edges (9,909) that pass flow classification but are excluded by operator construction, and a small set of contextual edges (124). The ablation arm conditions edges_raw.csv independently, producing 26,059 kept edges of which 16,026 are propagating (the remainder are the same non-propagating classes).*
+**Table 1.** *Graph conditioning statistics. All values from benchmark run V5. Of the 104,342 kept edges, 93,487 enter the PPR operator as propagating edges; 10,855 are retained in the conditioning output (kept_edges.csv) but excluded from propagation --- comprising Observational Association edges (9,909) that pass flow classification but are excluded by operator construction, 84 weak-mechanistic Genetic Regulatory Modulation edges, and 862 nonpropagating Spatial constraint edges. The ablation arm conditions edges_raw.csv independently, producing 26,059 kept edges of which 16,026 are propagating (the remainder are the same non-propagating classes).*
 
-Of the 93,507 propagating edges in the conditioned arm, 80,200 (85.8%) were classified as Pathway Contribution, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. Signal Transduction accounted for 5,786 (6.1%) and Perturbational Effect for 5,392 (5.7%), with Transcription, Signal Termination, and minor classes comprising the remainder.
+Of the 93,487 propagating edges in the conditioned arm, 80,200 (85.8%) were classified as Pathway Contribution, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. Signal Transduction accounted for 5,786 (6.1%) and Perturbational Effect for 5,392 (5.7%), with Transcription, Signal Termination, and minor classes comprising the remainder.
 
 While Pathway Contribution edges dominate numerically, the ablation experiment (Section 3) establishes that they do not generate signal independently: removing bridge edges while preserving all other admissible mechanistic classes reduces P@10 from 0.70 to 0.60, and mechanistic-only propagation --- which contains no Pathway Contribution edges --- yields exactly zero pathway scores across all 550 pathways. Pathway Contribution edges (referred to hereafter as bridge edges) are necessary conduits for transferring mechanistic signal from gene-level propagation to the pathway annotation layer; without upstream mechanistic signal to relay, they have no effect on their own.
 
 ![
 **BIFO conditioning coverage — curated CHD benchmark graph.**
-(**A**) Edge funnel from 174,352 merged input edges through entity resolution and flow-class conditioning to 93,507 propagating edges (54.0% retention) used by the PPR operator.
+(**A**) Edge funnel from 174,352 merged input edges through entity resolution and flow-class conditioning to 93,487 propagating edges (54.0% retention) used by the PPR operator.
 (**B**) Dropped edges stratified by cause: unmapped predicates (37,448; 21.5%) and unresolved entities (32,214; 18.5%) account for nearly all losses; non-flow classifications contribute <1%.
 (**C**) Flow-class distribution of propagating edges. Pathway Contribution bridge edges (dark blue; 80,200 edges; 85.8% of propagating edges) are the architectural element enabling gene→pathway signal transfer; mechanistic classes (Signal Transduction, Perturbational Effect, Transcription, etc.) comprise the remaining 14.2%.
 (**D**) Concept-node entity resolution: 18,897 of 34,523 nodes (54.7%) resolve to a source vocabulary; the remainder are Level-1 unresolvable under the current SAB selection.
@@ -536,7 +536,7 @@ The primary benchmark evaluated pathway prioritization using three propagation a
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
   **Arm**                          **Prop. edges**   **P@10**   **Enrich. \@10**   **Mean rank**   **Rank imp.**
 
-  **Full (BIFO conditioned)**      **93,507**        **0.70**   **21.4×**          **113**         **+125.4**
+  **Full (BIFO conditioned)**      **93,487**        **0.70**   **21.4×**          **86.6**        **+125.4**
 
   **Ablation (no bridge edges)**   16,026            0.60       18.3×              111             −11.2
 
@@ -547,11 +547,11 @@ The primary benchmark evaluated pathway prioritization using three propagation a
 
 ***Full arm***
 
-Under full BIFO conditioning (93,507 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score from the same propagation, yielding rank improvement +125.4.
+Under full BIFO conditioning (93,487 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score from the same propagation, yielding rank improvement +125.4.
 
 ***Ablation arm***
 
-The ablation arm removed Pathway Contribution edges from propagation (16,026 propagating edges from 26,059 kept edges of edges_raw, with 10,033 non-propagating retained classes excluded as in the full arm) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was −11.2: without Pathway Contribution bridge edges in the propagating graph, the conditioned operator cannot route signal through the pathway-layer bridge, so the raw arm\'s direct scoring advantage persists. This shows that the core cardiac signal originates in the mechanistic neighborhood but that the full arm\'s conditioning gain requires the bridge edges to be present.
+The ablation arm removed Pathway Contribution edges from propagation (16,026 propagating edges from 26,059 kept edges of edges_raw, with 10,855 non-propagating retained classes excluded as in the full arm) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was −11.2: without Pathway Contribution bridge edges in the propagating graph, the conditioned operator cannot route signal through the pathway-layer bridge, so the raw arm\'s direct scoring advantage persists. This shows that the core cardiac signal originates in the mechanistic neighborhood but that the full arm\'s conditioning gain requires the bridge edges to be present.
 
 ***Mechanistic-only arm***
 
@@ -748,7 +748,7 @@ Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighb
                                                                                         structural matching only (degree + membership count)
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
 
-Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMARY_CILIUM_CRISPR (3), WP_JOUBERT_SYNDROME (4), REACTOME_DISORDERS_TRANSMEMBRANE (5). BIFO top-5: WP_CILIOPATHIES (1), YOSHIMURA_MAPK8 (2; hub-flagged), NABA_MATRISOME (3; hub-flagged), Ionophore activity (4), REACTOME_DISEASES_OF_METABOLISM (5; hub-flagged).
+Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMARY_CILIUM_CRISPR (3), WP_JOUBERT_SYNDROME (4), REACTOME_DISORDERS_TRANSMEMBRANE (5). BIFO top-5 by degree_norm: Protein phosphorylation (1), REACTOME_CROSS_PRESENTATION_OF_PARTICULATE_EXOGENOUS_ANTIGENS_PHAGOSOMES (2), WP_NAD_METABOLISM_SIRTUINS_AND_AGING (3), REACTOME_FREE_FATTY_ACIDS_REGULATE_INSULIN_SECRETION (4), WP_ARYL_HYDROCARBON_RECEPTOR_NETPATH (5); WP_CILIOPATHIES ranks 43rd with null_z=48.71, the strongest enrichment signal in the dataset.
 
 ### 8.2 BIFO recovers ciliopathy signal in discovery mode
 
@@ -756,7 +756,7 @@ Under BIFO full-arm scoring, WP_CILIOPATHIES ranked 43rd of 2,130 canonical path
 
 The pathway-node rewiring null shows that WP_CILIOPATHIES carries the strongest statistical enrichment signal in the dataset: null_z = 48.71 (empirical q = 0.006), meaning the observed degree_norm score is 48.7 standard deviations above the mean of 1,000 degree-preserving membership rewiring permutations. This directly tests whether the specific gene membership of WP_CILIOPATHIES — rather than graph topology alone — drives the signal. The member-level stratified null (member_mean null_z = 1.39, p = 0.057) indicates that signal is concentrated at the pathway node level rather than distributed uniformly across all 170 member genes, consistent with a subset of cilia-associated CHD variant genes driving propagated mass to the ciliopathy pathway cluster through the mechanistic network. This member-level null tests whether propagated signal concentrates within the genes defining a pathway, rather than whether signal reaches the pathway node itself. This member-level empirical support, combined with Fisher enrichment and cross-cohort recurrence in KF-NBL where WP_CILIOPATHIES also ranked first, provides converging evidence that the ciliopathy signal reflects concentration of propagated signal within biologically coherent gene sets rather than a byproduct of graph topology.
 
-BIFO recovers a coherent ciliopathy pathway cluster. Of 17 cilia, ciliopathy, and hedgehog pathway annotations in the 2,130-pathway universe, 11 (65%) rank above the median. The core ciliopathy pathways show the strongest enrichment: WP_JOUBERT_SYNDROME (rank 34, null_z = 54.7), WP_CILIOPATHIES (rank 43, null_z = 48.7), REACTOME_CILIUM_ASSEMBLY (rank 163, null_z = 22.2), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 171, null_z = 19.9), and REACTOME_HEDGEHOG_OFF_STATE (rank 216, null_z = 18.3) are all significant (q = 0.006). Notably, generic Hedgehog signaling pathways not specific to cilia (HALLMARK_HEDGEHOG_SIGNALING, PID_HEDGEHOG_GLI_PATHWAY, REACTOME_HEDGEHOG_ON_STATE) show negative null_z values, indicating depletion rather than enrichment — a biologically interpretable distinction between cilia-specific and generic Hedgehog signal. Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
+BIFO recovers a coherent ciliopathy pathway cluster. Of 17 cilia, ciliopathy, and hedgehog pathway annotations in the 2,130-pathway universe, 11 (65%) rank above the median. The core ciliopathy pathways show the strongest enrichment: WP_JOUBERT_SYNDROME (rank 34, null_z = 54.7), WP_CILIOPATHIES (rank 43, null_z = 48.7), REACTOME_CILIUM_ASSEMBLY (rank 163, null_z = 22.2), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 171, null_z = 19.9), and REACTOME_HEDGEHOG_OFF_STATE (rank 216, null_z = 18.3) are all significant (q = 0.006). Notably, generic Hedgehog signaling pathways not specific to cilia (HALLMARK_HEDGEHOG_SIGNALING, PID_HEDGEHOG_GLI_PATHWAY, REACTOME_HEDGEHOG_ON_STATE) show negative null_z values, indicating depletion rather than enrichment — a biologically interpretable distinction between cilia-specific and generic Hedgehog signal. The top-ranked pathways by degree_norm (Protein phosphorylation, REACTOME_CROSS_PRESENTATION, WP_NAD_METABOLISM, etc.) reflect broad high-degree graph structure rather than specific cilia signal; they are distinguishable from the ciliopathy cluster by their low null_z values and absence of cilia-related annotations.
 
 Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.
 
@@ -796,7 +796,7 @@ The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecti
 
 To assess whether cilia pathway recovery is robust to seed set size, 500 bootstrap draws at each of three seed sizes (n=10, 20, 30) were drawn from each cohort\'s full seed pool. Results reveal a consistent pattern across both cohorts: neither BIFO nor Fisher reliably recovers cilia pathways from small random gene subsets, but both converge at full cohort scale.
 
-At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.00 against the 16-pathway cilia reference with mean cilia reference rank of 889 and AP = 0.012. Fisher achieves P@10 = 0.20 (WP_CILIOPATHIES rank 1) and AP = 0.130. The BIFO P@10 of 0.00 reflects that no cilia reference pathway ranks in the top 10 by degree_norm, though WP_CILIOPATHIES ranks 43rd with null_z = 48.71 — the strongest enrichment signal in the dataset. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO's null_z signal (CHD: 48.7; NBL: 19.0) confirms that graph conditioning recovers a statistically robust ciliopathy signal that is absent at small seed sizes, while Fisher's higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
+At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.00 against the 17-pathway cilia reference with mean cilia reference rank of 889 and AP = 0.012. Fisher achieves P@10 = 0.20 (WP_CILIOPATHIES rank 1) and AP = 0.130. The BIFO P@10 of 0.00 reflects that no cilia reference pathway ranks in the top 10 by degree_norm, though WP_CILIOPATHIES ranks 43rd with null_z = 48.71 — the strongest enrichment signal in the dataset. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO's null_z signal (CHD: 48.7; NBL: 19.0) confirms that graph conditioning recovers a statistically robust ciliopathy signal that is absent at small seed sizes, while Fisher's higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
 
 The core finding is that the cilia signal in these cohorts is distributed across many genes and requires aggregate cohort-scale variant burden to emerge. Neither method recovers it reliably from n=10--30 randomly drawn genes, and both converge at cohort scale. This is consistent with a polygenic developmental signal embedded in heterogeneous rare variant background --- BIFO\'s graph propagation concentrates this distributed signal through shared pathway neighborhoods, while Fisher requires sufficient overlap count to produce significant statistics.
 
