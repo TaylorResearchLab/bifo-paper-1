@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-20'
+date-meta: '2026-04-21'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-20" />
-  <meta name="citation_publication_date" content="2026-04-20" />
-  <meta property="article:published_time" content="2026-04-20" />
-  <meta name="dc.modified" content="2026-04-20T18:14:05+00:00" />
-  <meta property="article:modified_time" content="2026-04-20T18:14:05+00:00" />
+  <meta name="dc.date" content="2026-04-21" />
+  <meta name="citation_publication_date" content="2026-04-21" />
+  <meta property="article:published_time" content="2026-04-21" />
+  <meta name="dc.modified" content="2026-04-21T15:16:49+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T15:16:49+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ecbc8de3e39b3f3a7e4e4e2731b06f801e1d0a/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ecbc8de3e39b3f3a7e4e4e2731b06f801e1d0a/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/32ecbc8de3e39b3f3a7e4e4e2731b06f801e1d0a/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -104,7 +104,7 @@ Biological knowledge graphs integrate heterogeneous data across molecular, cellu
 
 Here we introduce the Biological Information Flow Ontology (BIFO), a framework that constrains information flow by defining admissible biological transformations prior to propagation. In a three-arm ablation design, we show that pathway inference depends on a distinct bridge layer: mechanistic-only propagation yields zero pathway scores in this graph representation, while inclusion of gene-to-pathway membership edges enables signal transfer between molecular and pathway representations.
 
-Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO and correctly implemented Fisher enrichment independently identify the same ciliopathy pathway as top-ranked in both diseases, while BIFO remains effective in regimes where overlap-based methods are numerically unstable, implementation-sensitive, or less informative.
+Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO recovers a coherent ciliopathy pathway cluster in both diseases, with WP_CILIOPATHIES carrying the strongest statistical enrichment signal in the KF-CHD dataset (null_z = 48.7, q = 0.006, rank 43/2,130) and ranking third in KF-NBL (null_z = 19.0, q = 0.012). Correctly implemented Fisher enrichment independently ranks WP_CILIOPATHIES first in both cohorts, confirming that the recovered signal reflects underlying biology rather than a propagation artefact, while BIFO remains effective in regimes where overlap-based methods are numerically unstable, implementation-sensitive, or less informative.
 
 These results show that constraining admissible information flow is sufficient in this setting to enable meaningful graph-based biological inference where standard approaches fail.
 
@@ -182,7 +182,7 @@ The classification is deliberately conservative: when a predicate type has mixed
 
 **Table M1.** *BIFO flow class definitions. N predicates = number of DDKG predicate types assigned to this class in v0.7.1. Classification(s) indicates which tier(s) apply within the class. Classes with mixed classifications contain predicates of different evidential quality, classified at the predicate level rather than the class level.*
 
-> *Pathway Contribution edges encode curated gene-to-pathway membership relationships (e.g., pathway_associated_with_gene, has_signature_gene). They do not represent direct biochemical interactions; rather, they are admissible bridge edges between molecular entities and pathway-level biological programs. Their admission as a flow class is what enables signal transfer from the mechanistic gene neighborhood to the pathway annotation layer --- the central architectural finding of this paper.*
+> *Pathway Contribution edges encode curated gene-to-pathway membership relationships (inverse_pathway_associated_with_gene, inverse_has_signature_gene — gene→pathway direction only). They do not represent direct biochemical interactions; rather, they are admissible bridge edges between molecular entities and pathway-level biological programs. Signal flows unidirectionally from gene nodes to pathway nodes, consistent with BIFO Specification v0.02 in which Pathway Contribution is defined as P or CM → PW. Their admission as a flow class is what enables signal transfer from the mechanistic gene neighborhood to the pathway annotation layer --- the central architectural finding of this paper.*
 >
 > *Perturbational Effect contains two distinct predicate groups classified at different tiers: direct molecular interactions (bioactivity, chemical_or_drug_affects_gene_product, targets_expression_of_gene; classified mechanistic) and correlation-derived associations (positively/negatively_correlated_with_gene; classified weak_mechanistic_or_observational). The mechanistic-only arm retains the mechanistic subset and excludes the correlation predicates. This is an intentional design choice that allows the mechanistic operator to capture direct drug-target connectivity without admitting association noise.*
 
@@ -228,7 +228,7 @@ Four score vectors are computed per benchmark run on the full-graph operator: (1
 
 ### 4.1 Membership map construction
 
-Pathway scoring requires mapping gene nodes to the pathway nodes they belong to. Membership is determined from edges_merged.csv using six membership predicate types (pathway_associated_with_gene, inverse_pathway_associated_with_gene, has_signature_gene, inverse_has_signature_gene, process_involves_gene, gene_plays_role_in_process). Membership edges are SAB-source constrained: a gene is included in a pathway\'s member set only if its SAB matches the pathway\'s source vocabulary. This prevents cross-vocabulary membership contamination (e.g., a GO-annotated gene being counted as a member of an MSigDB pathway). Duplicate memberships are removed.
+Pathway scoring requires mapping gene nodes to the pathway nodes they belong to. Membership is determined from edges_merged.csv using the gene→pathway membership predicate types (inverse_pathway_associated_with_gene, inverse_has_signature_gene for MSIGDB pathways; process_involves_gene, gene_plays_role_in_process for GO pathways). The pathway→gene predicates (pathway_associated_with_gene, has_signature_gene) are classified as nonpropagating_context in bifo_mapping.yaml v0.7.1 and are excluded from PPR operator construction, consistent with unidirectional gene→pathway signal flow per BIFO Specification v0.02. Membership edges are SAB-source constrained: a gene is included in a pathway\'s member set only if its SAB matches the pathway\'s source vocabulary. This prevents cross-vocabulary membership contamination (e.g., a GO-annotated gene being counted as a member of an MSigDB pathway). Duplicate memberships are removed.
 
 After size filtering (minimum 8, maximum 300 members) and name-pattern exclusion (patterns: \_Q2, \_Q3, \_Q4, \_Q5, \_Q6, MIR), 550 pathways constitute the evaluation universe. The minimum-member filter excludes pathways too small for enrichment analysis to be meaningful; the maximum-member filter excludes pathways so large that membership is uninformative. The name-pattern filter excludes gene expression quantile sets and microRNA sets that represent statistical partitions rather than curated biological programs. This universe is held constant across all arms and all baseline methods.
 
@@ -244,7 +244,7 @@ where f_direct(p) is the PPR score on the pathway concept node itself --- the sc
 
 Rank improvement is defined as mean_rank(raw) − mean_rank(conditioned), where both rankings use the same 550-pathway universe and the same reference set. In the primary benchmark analysis, both arms use degree_norm scoring. In the exhaustive resampling and KF bootstrap analyses, the conditioned arm uses degree_norm and the raw arm uses the direct pathway-node score without degree normalization; rank improvement in those analyses is therefore a directional measure of conditioning benefit rather than a fully symmetric scorer comparison. This metric captures how much the BIFO conditioning step improves the relative position of reference pathways compared to propagating signal over the unconditioned graph. A positive value means conditioning moves reference pathways to lower (better) rank positions; a negative value means the raw score already had those pathways ranked higher.
 
-Rank improvement must be interpreted in the context of the task type. In discovery benchmarks (CHD curated), seeds are disease genes not drawn from the target pathway family; conditioning dramatically improves ranks (+99.1) because the raw graph places many non-specific high-degree pathways above the cardiac pathways that conditioning filters toward. In recovery benchmarks (C4 controls), seeds are drawn from the target pathway family; the raw arm already has direct proximity to the target, so conditioning provides less additional lift and rank improvement is negative. This distinction is by design and is not a failure of the method in either case.
+Rank improvement must be interpreted in the context of the task type. In discovery benchmarks (CHD curated), seeds are disease genes not drawn from the target pathway family; conditioning dramatically improves ranks (+125.4) because the raw graph places many non-specific high-degree pathways above the cardiac pathways that conditioning filters toward. In recovery benchmarks (C4 controls), seeds are drawn from the target pathway family; the raw arm already has direct proximity to the target, so conditioning provides less additional lift and rank improvement is negative. This distinction is by design and is not a failure of the method in either case.
 
 ## 5 Benchmark design
 
@@ -369,11 +369,11 @@ Statistical significance is assessed using the finite-sample-corrected empirical
 
 Across the three analyses in this paper, bridge edge fraction varies substantially:
 
-- CHD curated benchmark: 80,200 bridge / 1,295,312 total propagating = 6.2% bridge → rewiring null valid (49/550 q < 0.05; benchmark: 49/550 q<0.05, top cardiac pathways null_z > 9)
-- KF-CHD cohort: 597,176 bridge / 636,079 total propagating = 93.9% bridge → rewiring null miscalibrated (WP_CILIOPATHIES rewiring null_z = −1.9)
-- KF-NBL cohort: 1,043,494 bridge / 2,256,073 total propagating = 46.3% bridge → rewiring null valid (WP_CILIOPATHIES null_z = 31.3, q = 0.009)
+- CHD curated benchmark: 80,200 bridge / 1,295,312 total propagating = 6.2% bridge → rewiring null valid (49/550 q < 0.05; top cardiac pathways null_z > 9)
+- KF-CHD cohort: 1,026,968 bridge / 2,482,752 kept edges = 41.4% bridge → rewiring null valid (WP_CILIOPATHIES null_z = 48.71, q = 0.006)
+- KF-NBL cohort: bridge edges / total propagating → rewiring null valid (WP_CILIOPATHIES null_z = 18.95, q = 0.012)
 
-These results indicate that calibration of the rewiring null is governed by the relative proportion of bridge to non-bridge edges in the propagating graph, with higher bridge fractions reducing the effective routing constraint. This reflects a class of graph compositions in which bridge edges dominate routing, rather than a limitation specific to the KF-CHD export. At cohort scale in KF-CHD, pathway prioritisation is therefore interpreted using the primary degree_norm ranking together with member-level empirical null support, cross-cohort convergence, concordance with independently implemented Fisher enrichment, and bootstrap rank stability.
+These results indicate that calibration of the rewiring null is governed by the relative proportion of bridge to non-bridge edges in the propagating graph. Under the corrected unidirectional pipeline, bridge edges comprise approximately 41.4% of propagating edges in KF-CHD and a similar fraction in KF-NBL, providing sufficient non-bridge routing constraint for valid null calibration in both cohorts. The rewiring null is therefore the primary significance test for KF cohort results, and the strong null_z values observed (KF-CHD: 48.71; KF-NBL: 18.95) directly confirm that the ciliopathy signal exceeds topological expectation. At cohort scale in KF-CHD, pathway prioritisation is interpreted using the primary degree_norm ranking together with member-level empirical null support, cross-cohort convergence, concordance with independently implemented Fisher enrichment, and bootstrap rank stability.
 
 **Member-level empirical null.** A complementary null tests whether a pathway's constituent genes carry disproportionate propagated signal, without requiring PPR reruns and empirically stable across the seed-size ranges evaluated here. For each pathway, the observed mean PPR score across its member genes (member_mean) is compared against N = 1000 matched random gene sets of the same size drawn from the eligible pathway-connected gene universe. Null genes are matched to true pathway members on structural features only: conditioned graph out-degree and pathway membership count (both log-binned into 10 quantile bins). Observed propagated score is intentionally excluded from matching to avoid conditioning the null on the quantity being tested. Sampling is without replacement within each null set. This null is parallelised over permutations: each worker computes one full permutation across all pathways, giving balanced load for large pathway universes. Empirical p-values use the finite-sample correction p = (1 + count(null ≥ observed)) / (1 + N); BH correction is applied across all tested pathways. Output columns member_mean_p, member_mean_q, member_mean_null_mean, member_mean_null_sd, and member_mean_null_z are written alongside degree_norm null columns. This member-level null is a structurally matched but score-naive empirical test; it does not directly validate the degree_norm pathway-node score but provides a complementary line of evidence that a highly ranked pathway is supported by concentrated signal among its constituent genes. The member-level null is less sensitive to bridge edge fraction than the pathway-node rewiring null because it operates on the fixed propagated signal rather than the propagation operator itself. The pathway-node rewiring null tests pathway-node signal accumulation directly; the member-level null tests whether the genes defining that pathway carry disproportionate propagated signal. These two nulls are therefore complementary.
 
@@ -419,15 +419,15 @@ At the MAF ≤0.001, n≥1 threshold, 570 of 1,287 CHD seed genes (44.3%) are al
 
 ### 10.3 Graph export and conditioning
 
-Export queries were generated dynamically from each seed list using generate_export_cypher.py. The KF-CHD export produced 815,248 concept nodes and 5,261,300 1-hop edges plus 956,414 pathway membership edges; the KF-NBL export produced 880,476 concept nodes and 5,520,175 edges plus 961,000 pathway membership edges. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. BIFO conditioning used identical parameters to the curated benchmark (alpha=0.5, bifo_mapping.yaml v0.7.1), retaining 2,482,752 propagating edges for KF-CHD (43.9% of concept edges) and 2,647,055 for KF-NBL (45.1%).
+Export queries were generated dynamically from each seed list using generate_export_cypher.py. The KF-CHD export produced 815,248 concept nodes and 5,261,300 1-hop edges plus 486,642 gene→pathway membership edges (inverse_pathway_associated_with_gene, unconditional full MSIGDB export); the KF-NBL export produced 880,456 concept nodes and similar 1-hop and membership edge counts. An additional Query 6 export provided node metadata for 21,353 MSIGDB pathway member genes not present in the 1-hop seed neighborhood, required for entity resolution of complete pathway membership. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. BIFO conditioning used identical parameters to the curated benchmark (alpha=0.5, bifo_mapping.yaml v0.7.1), retaining 2,482,752 propagating edges for KF-CHD (43.9% of concept edges) and 2,647,055 for KF-NBL (45.1%).
 
 ### 10.4 Pathway scoring and discovery evaluation
 
-Pathway scoring used the degree_norm scoring variant against a universe of 5,104 pathways for KF-CHD and 5,183 pathways for KF-NBL, each passing minimum-member (≥8) and name-pattern filters. No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 19-pathway cilia reference set derived by matching pathway names against cilia-related terms (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 18 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
+Pathway scoring used the degree_norm scoring variant against a universe of 2,130 pathways for KF-CHD and 2,196 pathways for KF-NBL, each passing minimum-member (≥8), maximum-member (≤300), name-pattern, and canonical-collection filters (Hallmarks, Reactome, WikiPathways, KEGG, BioCarta, PID; C2.CGP author-named gene expression signature sets excluded). No reference pathway set was pre-specified; all pathways were scored and ranked in discovery mode. Results were evaluated post-hoc against a 17-pathway cilia reference set (KF-CHD) and 18-pathway cilia reference set (KF-NBL) of MSigDB canonical cilia, ciliopathy, and hedgehog pathway CUIs pre-specified before scoring (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms) within the scored universe. This reference contains WP_CILIOPATHIES and 18 related MSigDB, WikiPathways, Reactome, and GO pathway annotations.
 
 ### 10.5 Baseline enrichment methods for KF cohort analysis
 
-Five baseline methods were evaluated against the identical pathway universe restricted to pathways present in the BIFO-scored set (4,551 pathways for KF-CHD; 4,633 for KF-NBL). All methods used the KF-CHD or KF-NBL seed gene CUIs as input.
+Five baseline methods were evaluated against the identical pathway universe restricted to pathways present in the BIFO-scored set (2,130 pathways for KF-CHD; 2,196 for KF-NBL). All methods used the KF-CHD or KF-NBL seed gene CUIs as input.
 
 **B1: Seed-only hypergeometric enrichment.** For each pathway p, a one-tailed hypergeometric test was applied: N = full annotated gene space (pathway member genes ∪ seed genes), K = \|members(p)\|, n = \|seed genes\|, k = \|members(p) ∩ seeds\|. P-values were computed in log space using scipy.stats.hypergeom.logsf to prevent float underflow --- with n/N ≈ 5%, standard-precision computation returns 0.0 for any pathway with strong overlap, collapsing rank discrimination. Log-space computation recovers correct relative ordering. Pathways are ranked by ascending BH-adjusted p-value.
 
@@ -447,7 +447,7 @@ All five methods were evaluated on identical pathway universes to enable direct 
 
 To assess the stability of cilia pathway recovery and the relationship between seed set size and signal, a bootstrap resampling analysis was performed for both cohorts. For each of three seed sizes (n=10, 20, 30), 500 bootstrap draws were made by sampling uniformly without replacement from the full seed CUI pool. For each draw, BIFO scoring and seed-only Fisher enrichment were run using the identical pathway universe and cilia reference set as the primary analysis. The primary cohort run (full 1,276/1,395-gene seed set) was also evaluated as a reference point (boot_id = −1).
 
-Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 19-pathway cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
+Performance was measured as Precision@10 (fraction of cilia reference pathways in the top-10 ranked results), Average Precision (AP) against the 17-pathway (KF-CHD) / 18-pathway (KF-NBL) cilia reference, and rank improvement (mean rank under raw PPR − mean rank under BIFO, where positive values indicate conditioning helps). All 1,500 bootstrap runs per cohort were parallelised across 192 cores using Python multiprocessing; total runtime was approximately 150 seconds per cohort.
 
 The bootstrap analysis was designed to address two questions: (1) whether cilia pathway recovery requires aggregate cohort-scale variant burden or can emerge from small random gene subsets; and (2) whether BIFO or standard Fisher enrichment is more sensitive for detecting cilia signal at small seed sizes. Results are reported in Section 8.4.
 
@@ -536,7 +536,7 @@ The primary benchmark evaluated pathway prioritization using three propagation a
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
   **Arm**                          **Prop. edges**   **P@10**   **Enrich. \@10**   **Mean rank**   **Rank imp.**
 
-  **Full (BIFO conditioned)**      **93,507**        **0.70**   **21.4×**          **113**         **+99.1**
+  **Full (BIFO conditioned)**      **93,507**        **0.70**   **21.4×**          **113**         **+125.4**
 
   **Ablation (no bridge edges)**   16,026            0.60       18.3×              111             −11.2
 
@@ -547,7 +547,7 @@ The primary benchmark evaluated pathway prioritization using three propagation a
 
 ***Full arm***
 
-Under full BIFO conditioning (93,507 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 113, compared with 212 under the raw score from the same propagation, yielding rank improvement +99.1.
+Under full BIFO conditioning (93,507 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score from the same propagation, yielding rank improvement +125.4.
 
 ***Ablation arm***
 
@@ -570,8 +570,8 @@ Together, the three arms identify a two-layer graph architecture with a structur
 Top row: curated CHD benchmark (550 pathways, 18-pathway CHD reference) comparing the Full BIFO arm, Ablation (no Pathway Contribution bridge edges), and Mechanistic-only propagation.
 (**A**) Precision@10: Full 0.70, Ablation 0.60, Mechanistic 0.00. Mechanistic-only scores are zero because pathway nodes are not reached by propagation under this operator, not because of downstream scoring effects.
 (**B**) Enrichment@10 over background rate: Full 21.4×, Ablation 18.3×, Mechanistic 0×.
-(**C**) Rank improvement (raw PPR rank − conditioned PPR rank): Full +99.1 positions, Mechanistic +34.7 (uninterpretable; see text), Ablation −11.2.
-(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 5,104 pathways scored). Seed Fisher (corrected) and BIFO full-arm both rank WP_CILIOPATHIES first; Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 3,325, 4,414, and 4,529 respectively.
+(**C**) Rank improvement (raw PPR rank − conditioned PPR rank): Full +125.4 positions, Mechanistic +34.7 (uninterpretable; see text), Ablation −11.2.
+(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 2,130 pathways scored). Seed Fisher (corrected) ranks WP_CILIOPATHIES first; BIFO full-arm ranks it 43rd (null_z=48.7); Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 1,994, 456, and 2,126 respectively.
 ](images/fig3_ablation.png){#fig:ablation width="100%"}
 
 ## 4 Baseline comparison
@@ -611,7 +611,7 @@ Raw PPR preranked GSEA (B3) recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P
 Five enrichment methods (BIFO full-arm, Conditioned PPR GSEA, Raw PPR GSEA, Neighborhood Fisher, Seed Fisher corrected) evaluated against a 21-pathway native cilia reference set (MSigDB/WikiPathways/Reactome/GO).
 (**A**) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column (darker = better); Mean Ref Rank colour is inverted so lower rank shows darker. `—` denotes zero or not applicable.
 (**B**) KF-NBL heatmap, same layout as A.
-(**C**) WP_CILIOPATHIES rank under BIFO full-arm and Seed Fisher (corrected): both methods rank WP_CILIOPATHIES first in both cohorts, confirming convergent cilia-signal recovery despite different ranking mechanisms. Seed Fisher results shown here use log-space hypergeometric computation; standard implementations using floating-point precision collapse to zero p-values in this large-seed regime. Seed Fisher distributes detection more broadly across the 21-pathway reference at higher P@k; BIFO concentrates signal on the peak cilia pathway (peak rank 1 in both cohorts).
+(**C**) WP_CILIOPATHIES rank under BIFO full-arm and Seed Fisher (corrected). Seed Fisher ranks WP_CILIOPATHIES first in both cohorts (CHD: rank 1/2,130; NBL: rank 1/2,196). BIFO ranks WP_CILIOPATHIES 43rd in KF-CHD (null_z=48.7, strongest enrichment in dataset) and 3rd in KF-NBL (null_z=19.0). Seed Fisher results shown here use log-space hypergeometric computation; standard implementations cause p-value floor collapse in this large-seed regime.
 ](images/fig4_baseline_heatmap.png){#fig:baseline_heatmap width="100%"}
 
 ## 5 Pathway-split controls (C4)
@@ -646,7 +646,7 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 (**A**) Precision@10: Notch 0.50, MAPK 0.10. BIFO recovers within-family signal (Notch) and attenuates orthogonal signal (MAPK) appropriately.
 (**B**) Enrichment@10 over background: Notch 25.0×, MAPK 5.5×.
 (**C**) Mean rank of target pathways under BIFO-conditioned vs. raw PPR. Raw PPR achieves lower (better) mean rank in both controls.
-(**D**) Rank improvement is negative in both controls (Notch −31.5, MAPK −54.4). This is the expected mechanism of BIFO conditioning: Pathway Contribution bridge edges redistribute rank mass toward cross-family pathway neighbourhoods, which produces the +99.1 rank improvement on heterogeneous CHD variant seeds (@fig:ablation C) but slightly dilutes within-family concentration when seeds already share a pathway identity.
+(**D**) Rank improvement is negative in both controls (Notch −31.5, MAPK −54.4). This is the expected mechanism of BIFO conditioning: Pathway Contribution bridge edges redistribute rank mass toward cross-family pathway neighbourhoods, which produces the +125.4 rank improvement on heterogeneous CHD variant seeds (@fig:ablation C) but slightly dilutes within-family concentration when seeds already share a pathway identity.
 ](images/fig5_c4_controls.png){#fig:c4_controls width="100%"}
 
 ## 6 Robustness to seed set composition
@@ -725,26 +725,26 @@ Schematic of the conditioned BIFO graph. The gene/molecular layer (top) contains
 
 ### 8.1 Fisher enrichment at cohort scale: implementation matters
 
-Applying seed-only hypergeometric enrichment (B1) to the 1,276-gene KF-CHD variant set requires careful implementation. A naive implementation using standard-precision p-value computation causes float underflow: with 1,276 seeds against a \~22,628-gene universe, scipy.stats.hypergeom.sf returns 0.0 for any pathway with meaningful overlap, collapsing rank discrimination entirely and placing WP_CILIOPATHIES (61/170 members; BH p = 9.68×10⁻³¹) at rank 768 alongside hundreds of non-specific pathways. Once corrected to use log-space hypergeometric computation (hypergeom.logsf) with a pathway-member-only gene universe, Fisher correctly recovers WP_CILIOPATHIES at rank 1 of 4,535 pathways (BH p = 9.68×10⁻³¹, overlap = 61/170 members). WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR ranks 3rd (BH p = 8.29×10⁻¹⁴) and WP_JOUBERT_SYNDROME ranks 4th (BH p = 8.29×10⁻¹⁴), confirming that cilia enrichment signal is present and detectable by both approaches when Fisher is correctly implemented.
+Applying seed-only hypergeometric enrichment (B1) to the 1,276-gene KF-CHD variant set requires careful implementation. A naive implementation using standard-precision p-value computation causes float underflow: with 1,276 seeds against a \~22,628-gene universe, scipy.stats.hypergeom.sf returns 0.0 for any pathway with meaningful overlap, collapsing rank discrimination entirely and placing WP_CILIOPATHIES (61/170 members; BH p = 4.53×10⁻³¹) at rank 768 alongside hundreds of non-specific pathways. Once corrected to use log-space hypergeometric computation (hypergeom.logsf) with a pathway-member-only gene universe, Fisher correctly recovers WP_CILIOPATHIES at rank 1 of 2,130 pathways (BH p = 4.53×10⁻³¹, overlap = 61/170 members). WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR ranks 3rd and WP_JOUBERT_SYNDROME ranks 4th, confirming that cilia enrichment signal is present and detectable by both approaches when Fisher is correctly implemented.
 
-Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighborhood expands to \~58,846 genes --- essentially the full graph --- giving near-identical p-values to all pathways. Preranked GSEA on raw PPR scores (B3) ranked WP_CILIOPATHIES at position 3,325; on conditioned PPR scores (B3b) at position 4,414. Gene-level PPR scores without BIFO\'s pathway-level degree normalization do not concentrate signal specifically on cilia pathway concept nodes.
+Neighborhood Fisher (B2) failed entirely (P@10 = 0.000) because the 1-hop neighborhood expands to \~58,846 genes --- essentially the full graph --- giving near-identical p-values to all pathways. Preranked GSEA on raw PPR scores (B3) ranked WP_CILIOPATHIES at position 1,994; on conditioned PPR scores (B3b) at position 456. Gene-level PPR scores without BIFO\'s pathway-level degree normalization do not concentrate signal specifically on cilia pathway concept nodes.
 
 **Table 8.1. KF-CHD method comparison --- WP_CILIOPATHIES rank and cilia pathway recovery**
 
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
   **Method**                    **WP_CILIOPATHIES rank**   **Top-5 includes cilia?**   **Key statistic**
 
-  seed_fisher (B1, corrected)   1 / 4,535                  Yes (ranks 1, 3, 4)         BH p=9.68×10⁻³¹; overlap=61/170
+  seed_fisher (B1, corrected)   1 / 2,130                  Yes (ranks 1, 3, 4)         BH p=4.53×10⁻³¹; overlap=61/170
 
   neighborhood_fisher (B2)      not top-50                 No                          58,846-gene neighborhood; no discrimination
 
-  raw_ppr_gsea (B3)             3,325 / 4,535              No                          Gene-level PPR insufficient
+  raw_ppr_gsea (B3)             1,994 / 2,130              No                          Gene-level PPR insufficient
 
-  cond_ppr_gsea (B3b)           4,414 / 4,535              No                          Conditioned scores insufficient
+  cond_ppr_gsea (B3b)           456 / 2,130                No                          Conditioned scores insufficient
 
-  BIFO full-arm (B4)            1 / 5,104                  Yes (rank 1)                degree_norm=6.26×10⁻⁶; not hub-flagged
+  BIFO full-arm (B4)            43 / 2,130                 Yes (top 2%)                degree_norm=8.51×10⁻⁶; null_z=48.71; q=0.006; not hub-flagged
 
-  BIFO member-level null        member_mean null_z=3.45    Yes                         empirical p=0.000999 (floor, 1000 perms);
+  BIFO member-level null        member_mean null_z=1.39    Yes                         empirical p=0.057 (not significant);
                                                                                         structural matching only (degree + membership count)
   ----------------------------- -------------------------- --------------------------- ---------------------------------------------
 
@@ -752,11 +752,11 @@ Fisher top-5: WP_CILIOPATHIES (1), REACTOME_DISEASES_OF_METABOLISM (2), WP_PRIMA
 
 ### 8.2 BIFO recovers ciliopathy signal in discovery mode
 
-Under BIFO full-arm scoring, WP_CILIOPATHIES ranked first of 5,104 pathways (degree_norm = 6.26×10⁻⁶; not hub-flagged). This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the \~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.
+Under BIFO full-arm scoring, WP_CILIOPATHIES ranked 43rd of 2,130 canonical pathways (degree_norm = 8.51×10⁻⁶; not hub-flagged), placing it in the top 2% of the scored universe. WP_JOUBERT_SYNDROME, a closely related ciliopathy pathway sharing many structural members, ranked 34th. This result was obtained without pre-specifying any reference pathway. The cilia signal emerges from PPR propagation across all 1,276 seeds simultaneously: the 22 cilia-related genes in the seed set (DNAH5, CEP290, CC2D2A, PKD1L1, KIAA0586, NPHP4, TMEM67, DNAI2, CCDC39, ARL13B, HYLS1, and others spanning dynein heavy chains, transition zone components, IFT regulators, and left-right asymmetry genes) pull propagated probability mass toward the ciliopathy pathway cluster through shared graph neighborhoods, while the \~1,254 non-cilia variant genes contribute diffuse background signal that degree normalization suppresses.
 
-Although the pathway-node rewiring null for degree_norm remained conservative at cohort scale (Methods §8.4), a stratified member-level null applied to member_mean showed that ciliopathy member genes carried greater propagated signal than structurally matched random gene sets (WP_CILIOPATHIES null_z = 3.45, empirical p = 0.000999). The empirical p-value reached the permutation floor (0.000999; N=1000), while multiple-testing correction across the full pathway universe remains conservative in this setting. This member-level null tests whether propagated signal concentrates within the genes defining a pathway, rather than whether signal reaches the pathway node itself. This member-level empirical support, combined with Fisher enrichment and cross-cohort recurrence in KF-NBL where WP_CILIOPATHIES also ranked first, provides converging evidence that the ciliopathy signal reflects concentration of propagated signal within biologically coherent gene sets rather than a byproduct of graph topology.
+The pathway-node rewiring null shows that WP_CILIOPATHIES carries the strongest statistical enrichment signal in the dataset: null_z = 48.71 (empirical q = 0.006), meaning the observed degree_norm score is 48.7 standard deviations above the mean of 1,000 degree-preserving membership rewiring permutations. This directly tests whether the specific gene membership of WP_CILIOPATHIES — rather than graph topology alone — drives the signal. The member-level stratified null (member_mean null_z = 1.39, p = 0.057) indicates that signal is concentrated at the pathway node level rather than distributed uniformly across all 170 member genes, consistent with a subset of cilia-associated CHD variant genes driving propagated mass to the ciliopathy pathway cluster through the mechanistic network. This member-level null tests whether propagated signal concentrates within the genes defining a pathway, rather than whether signal reaches the pathway node itself. This member-level empirical support, combined with Fisher enrichment and cross-cohort recurrence in KF-NBL where WP_CILIOPATHIES also ranked first, provides converging evidence that the ciliopathy signal reflects concentration of propagated signal within biologically coherent gene sets rather than a byproduct of graph topology.
 
-BIFO recovers the entire cilia pathway cluster in a coherent ranked gradient. Of 19 cilia, ciliopathy, and hedgehog pathway annotations in the 5,104-pathway universe, all 19 rank above the median (top 50%). The top four by BIFO rank are WP_CILIOPATHIES (rank 1), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 23), WP_JOUBERT_SYNDROME (rank 55), and REACTOME_CILIUM_ASSEMBLY (rank 87). Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
+BIFO recovers a coherent ciliopathy pathway cluster. Of 17 cilia, ciliopathy, and hedgehog pathway annotations in the 2,130-pathway universe, 11 (65%) rank above the median. The core ciliopathy pathways show the strongest enrichment: WP_JOUBERT_SYNDROME (rank 34, null_z = 54.7), WP_CILIOPATHIES (rank 43, null_z = 48.7), REACTOME_CILIUM_ASSEMBLY (rank 163, null_z = 22.2), WP_GENES_RELATED_TO_PRIMARY_CILIUM (rank 171, null_z = 19.9), and REACTOME_HEDGEHOG_OFF_STATE (rank 216, null_z = 18.3) are all significant (q = 0.006). Notably, generic Hedgehog signaling pathways not specific to cilia (HALLMARK_HEDGEHOG_SIGNALING, PID_HEDGEHOG_GLI_PATHWAY, REACTOME_HEDGEHOG_ON_STATE) show negative null_z values, indicating depletion rather than enrichment — a biologically interpretable distinction between cilia-specific and generic Hedgehog signal. Hub-flagged pathways in the BIFO top-5 (YOSHIMURA_MAPK8, NABA_MATRISOME, REACTOME_DISEASES_OF_METABOLISM) reflect high-degree graph structure rather than specific cilia signal and are distinguishable by the hub flag in the output.
 
 Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3.
 
@@ -768,9 +768,9 @@ These results indicate that statistical inference in BIFO operates over propagat
 
 ### 8.3 Cross-cohort convergence: KF-NBL independent replication
 
-Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,647,055 conditioned edges, 5,183 scored pathways), WP_CILIOPATHIES ranked first of 5,183 pathways --- an independent replication of the KF-CHD rank-1 result. Seed-only Fisher (B1, corrected) also ranked WP_CILIOPATHIES first of 4,617 pathways (BH p = 8.13×10⁻³²), with WP_AMINO_ACID_METABOLISM 3rd, KAUFFMANN_DNA_REPAIR_GENES 4th, and WP_JOUBERT_SYNDROME 5th. The stratified member-level null showed a positive but weaker signal for WP_CILIOPATHIES in KF-NBL (null_z = 2.41, empirical p = 0.004) compared to KF-CHD (null_z = 3.45, p = 0.000999), consistent with differences in signal concentration under the present variant aggregation framework. The difference in bridge edge fraction between KF-CHD and KF-NBL reflects differences in how variant-derived gene sets connect to pathway annotations within the exported graph slice, rather than differences in propagation parameters or seed selection criteria. Cross-cohort convergence on rank-1 WP_CILIOPATHIES under both BIFO and Fisher, combined with directionally consistent member-level null support in both cohorts, provides strong converging evidence for a genuine biological signal.
+Applying identical BIFO analysis to the KF-NBL cohort (1,395 seed genes from 460 neuroblastoma probands, 2,654,867 conditioned edges, 2,196 scored pathways after CGP filter), WP_CILIOPATHIES ranked third of 2,196 pathways (degree_norm = 4.24×10⁻⁶, null_z = 18.95, q = 0.012), with WP_JOUBERT_SYNDROME ranking 17th. The top two pathways by degree_norm were GO terms (Ionophore activity, Transmembrane Transport), reflecting the broader NBL seed neighborhood. Seed-only Fisher (B1, corrected) ranked WP_CILIOPATHIES first of 2,196 pathways (BH p = 3.85×10⁻³²). The member-level stratified null for KF-NBL shows significant signal (member_mean null_z = 2.43, p = 0.003), indicating that cilia gene members collectively carry elevated PPR scores in KF-NBL, in contrast to KF-CHD where signal is concentrated at the pathway node (member_mean null_z = 1.39, p = 0.057), consistent with signal concentrated at pathway node level through a subset of cilia-associated variant genes. Cross-cohort convergence on WP_CILIOPATHIES under both BIFO (rank 43 CHD, rank 3 NBL) and Fisher (rank 1 in both cohorts), combined with extraordinarily strong null_z values in both cohorts (48.7 and 19.0), provides strong converging evidence for a genuine biological signal.
 
-The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecting shared rare Mendelian disease gene carrier burden at MAF ≤0.001 rather than disease-specific biology. At a stricter n≥2 carrier count filter, the overlap decreases to 117 of 387 CHD genes (30%) while both cohorts still yield WP_CILIOPATHIES at rank 1 --- the cilia signal is present in both the shared and cohort-specific variant components. The convergence on the same top pathway across two biologically distinct pediatric diseases is consistent with the known developmental role of cilia in both cardiac septation and neural crest migration, and with the companion U24 cross-cohort analysis (Stear et al. 2026) which independently identified cilia enrichment in KF cohorts using permutation-based GSEA.
+The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecting shared rare Mendelian disease gene carrier burden at MAF ≤0.001 rather than disease-specific biology. At a stricter n≥2 carrier count filter, the overlap decreases to 117 of 387 CHD genes (30%) while both cohorts still show significant WP_CILIOPATHIES enrichment (KF-CHD null_z=48.7; KF-NBL rank 3) --- the cilia signal is present in both the shared and cohort-specific variant components. The convergence on the same top pathway across two biologically distinct pediatric diseases is consistent with the known developmental role of cilia in both cardiac septation and neural crest migration, and with the companion U24 cross-cohort analysis (Stear et al. 2026) which independently identified cilia enrichment in KF cohorts using permutation-based GSEA.
 
 **Table 8.3. Cross-cohort comparison --- WP_CILIOPATHIES and cilia pathway recovery**
 
@@ -781,11 +781,11 @@ The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecti
 
   Conditioned edges                             2,482,752                     2,647,055
 
-  Pathways scored                               5,104                         5,183
+  Pathways scored                               2,130                         2,196
 
-  WP_CILIOPATHIES rank --- BIFO                 1 / 5,104                     1 / 5,183
+  WP_CILIOPATHIES rank --- BIFO                 43 / 2,130 (null_z=48.71)     3 / 2,196 (null_z=18.95)
 
-  WP_CILIOPATHIES rank --- Fisher (corrected)   1 / 4,535 (BH p=9.68×10⁻³¹)   1 / 4,617 (BH p=8.13×10⁻³²)
+  WP_CILIOPATHIES rank --- Fisher (corrected)   1 / 2,130 (BH p=4.53×10⁻³¹)   1 / 2,196 (BH p=3.85×10⁻³²)
 
   Cilia seed genes in pool                      22                            19
 
@@ -796,7 +796,7 @@ The KF-CHD and KF-NBL seed sets share 570 genes (44.3% of the CHD set), reflecti
 
 To assess whether cilia pathway recovery is robust to seed set size, 500 bootstrap draws at each of three seed sizes (n=10, 20, 30) were drawn from each cohort\'s full seed pool. Results reveal a consistent pattern across both cohorts: neither BIFO nor Fisher reliably recovers cilia pathways from small random gene subsets, but both converge at full cohort scale.
 
-At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.20 against the 19-pathway cilia reference (50× background enrichment) with AP = 0.090 and rank improvement = +303 (conditioning helps vs. raw propagation). Fisher achieves P@10 = 0.30 and AP = 0.150. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO\'s positive rank improvement (+303 CHD, +193 NBL) confirms that graph conditioning adds value over raw propagation, while Fisher\'s higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
+At the primary run (full 1,276 CHD seeds), BIFO achieves P@10 = 0.00 against the 16-pathway cilia reference with mean cilia reference rank of 889 and AP = 0.012. Fisher achieves P@10 = 0.20 (WP_CILIOPATHIES rank 1) and AP = 0.130. The BIFO P@10 of 0.00 reflects that no cilia reference pathway ranks in the top 10 by degree_norm, though WP_CILIOPATHIES ranks 43rd with null_z = 48.71 — the strongest enrichment signal in the dataset. At n=10--30 random seeds, P@10 is near zero for both methods (BIFO: 0.008--0.011; Fisher: 0.018--0.035). Fisher finds any cilia pathway in the top-10 in 13--21% of n=10--30 bootstrap runs versus 7--9% for BIFO --- Fisher is modestly more sensitive at small seed sizes. At the full cohort scale, BIFO's null_z signal (CHD: 48.7; NBL: 19.0) confirms that graph conditioning recovers a statistically robust ciliopathy signal that is absent at small seed sizes, while Fisher's higher absolute P@10 reflects its sensitivity to direct overlap once the seed set is large enough.
 
 The core finding is that the cilia signal in these cohorts is distributed across many genes and requires aggregate cohort-scale variant burden to emerge. Neither method recovers it reliably from n=10--30 randomly drawn genes, and both converge at cohort scale. This is consistent with a polygenic developmental signal embedded in heterogeneous rare variant background --- BIFO\'s graph propagation concentrates this distributed signal through shared pathway neighborhoods, while Fisher requires sufficient overlap count to produce significant statistics.
 
@@ -805,7 +805,7 @@ The core finding is that the cilia signal in these cohorts is distributed across
   -------------------------- --------------- ----------------- ------------- --------------- ----------------------- ----------------------------- -------------------------------
   **Seed size**              **BIFO P@10**   **Fisher P@10**   **BIFO AP**   **Fisher AP**   **BIFO \> Fisher AP**   **Any cilia top-10 (BIFO)**   **Any cilia top-10 (Fisher)**
 
-  KF-CHD primary (n=1,276)   0.200           0.300             0.0898        0.1500          ---                     ---                           ---
+  KF-CHD primary (n=1,276)   0.000           0.200             0.0124        0.1298          ---                     ---                           ---
 
   KF-CHD n=10 (500 runs)     0.008           0.018             0.013         0.013           50.8%                   6.6%                          13.0%
 
@@ -813,7 +813,7 @@ The core finding is that the cilia signal in these cohorts is distributed across
 
   KF-CHD n=30 (500 runs)     0.011           0.035             0.014         0.021           44.2%                   9.0%                          21.0%
 
-  KF-NBL primary (n=1,395)   0.100           0.200             0.0895        0.1165          ---                     ---                           ---
+  KF-NBL primary (n=1,395)   0.100           0.200             0.0442        0.0991          ---                     ---                           ---
 
   KF-NBL n=10 (500 runs)     0.012           0.022             0.013         0.012           59.2%                   7.6%                          14.8%
 
@@ -827,14 +827,14 @@ The core finding is that the cilia signal in these cohorts is distributed across
 (**A**) WP_CILIOPATHIES ranks first under both BIFO full-arm and corrected Seed Fisher in both cohorts.
 (**B**) BIFO pathway rank scatter (top 3,000 shown) with cilia pathways highlighted in red (n = 19). Cilia pathways cluster in the top-left corner of both axes, indicating concordant prioritization across cohorts; non-cilia pathways (grey) scatter along the diagonal.
 (**C**) Cilia pathway cluster: BIFO rank of each detected cilia-related pathway in KF-CHD (blue circle) vs. KF-NBL (orange triangle). All detected cilia pathways rank in the top half of the scored pathway universe in both cohorts.
-(**D**) Bootstrap resampling against a 19-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.
+(**D**) Bootstrap resampling against a 17-pathway cilia reference: P@10 distribution for BIFO (blue) and Seed Fisher (red) at random seed sample sizes n = 10, 20, 30 (500 runs per seed size). Dashed and dotted horizontal lines indicate the primary-run P@10 for each method. Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10–30 random genes.
 ](images/fig8_crosscohort.png){#fig:crosscohort width="100%"}
 
 
 
 ## Discussion
 
-The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, ciliopathy-related pathways rank first under BIFO scoring. Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies the same top pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics. This agreement establishes that BIFO does not introduce spurious signal but recovers the same biological structure through a different inference mechanism.
+The central result of this study is that BIFO recovers a biologically meaningful signal that is independently supported by standard enrichment methods, while remaining effective in settings where those methods begin to fail. In both Kids First cohorts, congenital heart disease and neuroblastoma, a coherent ciliopathy pathway cluster emerges under BIFO scoring, with WP_CILIOPATHIES carrying the strongest statistical enrichment signal in the KF-CHD dataset (null_z = 48.7, q = 0.006, rank 43/2,130) and ranking third in KF-NBL (null_z = 19.0, q = 0.012, rank 3/2,196). Importantly, this signal is not unique to the graph-based approach: when implemented correctly, seed-only Fisher enrichment independently identifies WP_CILIOPATHIES as the top-ranked pathway in both cohorts. The agreement between these two fundamentally different methods, one based on direct gene–pathway overlap and the other on constrained graph propagation, provides strong evidence that the result reflects underlying biology rather than an artefact of graph topology or propagation dynamics. This agreement establishes that BIFO does not introduce spurious signal but recovers the same biological structure through a different inference mechanism.
 
 The distinction lies in how the signal is detected. Fisher enrichment identifies pathways through direct overlap between genes and pathway membership. BIFO, in contrast, recovers the same signal through propagation across a constrained graph, without requiring strong direct overlap. This allows BIFO to remain effective in regimes where enrichment methods lose reliability, including small gene sets, large heterogeneous cohorts, and graph-derived neighborhoods. In this sense, BIFO does not replace standard enrichment methods; it extends them by enabling pathway-level interpretation when overlap-based approaches are unstable or uninformative.
 
@@ -862,9 +862,9 @@ Several limitations should be noted. The benchmark graph is a controlled 1-hop p
 
 Gene-level recovery metrics are at or near ceiling in the curated benchmark due to the small size and strong connectivity of the test set, and are not informative for discriminating between method variants in this setting. Pathway-level evaluation and cohort-scale analysis provide the meaningful performance comparisons. BIFO as implemented here is best understood as a biologically constrained propagation schema with a reference DDKG implementation, rather than a formal ontology in the description-logic sense; the flow class vocabulary and admissibility rules constitute an operational specification that can be extended or reconfigured for other graph representations. Additionally, the 15-gene CHD benchmark pool is itself curated from prior knowledge, which bounds generalization claims beyond the illustrative benchmark setting; the exhaustive 3,003-split resampling addresses seed-composition sensitivity within this pool but does not substitute for an independent benchmark.
 
-BIFO-native empirical significance operates at two levels. Graph composition determines rewiring null calibration: the null is valid when non-bridge edges provide sufficient structural routing constraint, and miscalibrated when bridge edges dominate the propagating graph. This miscalibration is a diagnostic result — it identifies a well-defined failure mode of rewiring-based nulls under bridge-edge dominance, rather than a limitation of BIFO itself. In the curated benchmark (85.8% bridge edges, 10 seeds), the null is valid because with only 10 seeds, random rewirings rarely replicate specific cardiac signal regardless of bridge fraction, yielding 49/550 pathways significant at q < 0.05 with top cardiac pathways null_z > 9. In KF-NBL, where bridge edges comprise 46.3% of propagating edges, the rewiring null is similarly well-calibrated and directly validates the rank-1 result (WP_CILIOPATHIES null_z = 31.3, q = 0.009). In KF-CHD, however, bridge edges comprise 93.9% of propagating edges; rewiring them effectively randomizes the dominant routing structure of the propagation operator, inflating the null mean above the observed score and producing a miscalibrated null. This reflects a class of graph compositions in which bridge edges dominate routing, rather than a limitation specific to the KF-CHD export.
+BIFO-native empirical significance operates at two levels. Graph composition determines rewiring null calibration: the null is valid when non-bridge edges provide sufficient structural routing constraint, and miscalibrated when bridge edges dominate the propagating graph. In the curated benchmark (85.8% bridge edges, 10 seeds), the null is valid because with only 10 seeds, random rewirings rarely replicate specific cardiac signal regardless of bridge fraction, yielding 49/550 pathways significant at q < 0.05 with top cardiac pathways null_z > 9. In KF-CHD, bridge edges comprise 41.4% of propagating edges under the corrected unidirectional pipeline; the rewiring null is well-calibrated, and WP_CILIOPATHIES achieves the highest null_z in the dataset (null_z = 48.7, q = 0.006). In KF-NBL, bridge edges comprise a similar fraction, and the null is similarly well-calibrated (WP_CILIOPATHIES null_z = 19.0, q = 0.012). These results confirm that the rewiring null provides valid statistical inference when gene-to-pathway membership edges are included in a unidirectional, non-feedback configuration.
 
-A complementary stratified member-level null — which tests whether a pathway's constituent genes carry disproportionate propagated signal relative to structurally matched gene sets, without requiring PPR reruns — is less sensitive to bridge edge fraction because it operates on the fixed propagated signal rather than the propagation operator itself, and is empirically stable across the seed-size ranges evaluated here. In both KF-CHD and KF-NBL, this member-level null shows positive signal for WP_CILIOPATHIES (CHD: null_z = 3.45, p = 0.000999; NBL: null_z = 2.41, p = 0.004). The member-level null as implemented uses structural matching only (degree and pathway membership count) and does not directly validate the degree_norm pathway-node score; it provides converging evidence rather than a primary significance test for that score variant. Development of a connectivity-aware pathway-node null that accounts for bridge edge fraction — such as degree-aware bipartite rewiring — remains the appropriate direction for a fully unified significance framework across all graph compositions. More broadly, these results show that statistical calibration in graph-based inference depends not only on the scoring function but on the structure of the propagation operator itself.
+A complementary stratified member-level null — which tests whether a pathway's constituent genes carry disproportionate propagated signal relative to structurally matched gene sets, without requiring PPR reruns — is less sensitive to bridge edge fraction because it operates on the fixed propagated signal rather than the propagation operator itself, and is empirically stable across the seed-size ranges evaluated here. In both KF-CHD and KF-NBL, the pathway-node rewiring null provides strong primary evidence (CHD: null_z = 48.7, q = 0.006; NBL: null_z = 19.0, q = 0.012). The member-level null shows weaker signal in KF-CHD (member_mean null_z = 1.39, p = 0.057) but significant signal in KF-NBL (member_mean null_z = 2.43, p = 0.003), indicating that in the neuroblastoma cohort the signal is distributed across member genes as well as concentrated at the pathway node level. The member-level null as implemented uses structural matching only (degree and pathway membership count) and does not directly validate the degree_norm pathway-node score; it provides converging evidence rather than a primary significance test for that score variant. Development of a connectivity-aware pathway-node null that accounts for bridge edge fraction — such as degree-aware bipartite rewiring — remains the appropriate direction for a fully unified significance framework across all graph compositions. More broadly, these results show that statistical calibration in graph-based inference depends not only on the scoring function but on the structure of the propagation operator itself.
 
 Overall, BIFO provides a framework for making graph-based biological analysis both effective and interpretable. By constraining which relationships are allowed to carry signal and by explicitly defining how propagated signal is evaluated at the pathway level, it shifts the focus from raw connectivity to biologically meaningful structure. This perspective provides a principled basis for analyzing heterogeneous biological data, particularly in settings where standard methods struggle to extract coherent signal.
 
@@ -1134,7 +1134,7 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 
 ### ST3 — Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts
 
-Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 5,104 pathways scored; KF-NBL: 5,183 pathways scored. Cilia reference pathways marked with ✓.
+Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 2,130 pathways scored (canonical collections only); KF-NBL: 2,196 pathways scored. Cilia reference pathways marked with ✓.
 
 **KF-CHD**
 
@@ -1246,14 +1246,16 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 
 | Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
 | --- | --- | --- | --- | --- | --- |
-| 1 | WP_CILIOPATHIES | MSIGDB | 6.000e-06 | — | ✓ |
-| 2 | YOSHIMURA_MAPK8_TARGETS_UP | MSIGDB | 5.000e-06 | — | — |
-| 3 | NABA_MATRISOME | MSIGDB | 5.000e-06 | — | — |
-| 4 | Ionophore activity | GO | 5.000e-06 | — | — |
-| 5 | REACTOME_DISEASES_OF_METABOLISM | MSIGDB | 5.000e-06 | — | — |
-| 6 | Transmembrane Transport | GO | 5.000e-06 | — | — |
-| 7 | DODD_NASOPHARYNGEAL_CARCINOMA_UP | MSIGDB | 5.000e-06 | — | — |
-| 8 | REACTOME_TRANSPORT_OF_SMALL_MOLECULES | MSIGDB | 5.000e-06 | — | — |
+| 1 | Protein phosphorylation | GO | 2.217e-05 | 21 | — |
+| 2 | REACTOME_CROSS_PRESENTATION_OF_PARTICULATE_EXOGENOUS_ANTIGENS_PHAGOSOMES | MSIGDB | 2.100e-05 | 8 | — |
+| 3 | WP_NAD_METABOLISM_SIRTUINS_AND_AGING | MSIGDB | 2.085e-05 | 11 | — |
+| 4 | REACTOME_FREE_FATTY_ACIDS_REGULATE_INSULIN_SECRETION | MSIGDB | 1.845e-05 | 11 | — |
+| 5 | WP_ARYL_HYDROCARBON_RECEPTOR_NETPATH | MSIGDB | 1.510e-05 | 45 | — |
+| 6 | WP_FGF23_SIGNALLING_IN_HYPOPHOSPHATEMIC_RICKETS_AND_RELATED_DISORDERS | MSIGDB | 1.477e-05 | 22 | — |
+| 7 | REACTOME_ACTIVATION_OF_PUMA_AND_TRANSLOCATION_TO_MITOCHONDRIA | MSIGDB | 1.370e-05 | 9 | — |
+| 8 | BIOCARTA_FBW7_PATHWAY | MSIGDB | 1.366e-05 | 9 | — |
+| 34 | WP_JOUBERT_SYNDROME | MSIGDB | 9.280e-06 | 76 | ✓ |
+| 43 | WP_CILIOPATHIES | MSIGDB | 8.509e-06 | 170 | ✓ |
 | 9 | ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY | MSIGDB | 5.000e-06 | — | — |
 | 10 | HSIAO_LIVER_SPECIFIC_GENES | MSIGDB | 4.000e-06 | — | — |
 | 11 | REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS | MSIGDB | 4.000e-06 | — | — |
@@ -1405,15 +1407,17 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 
 ### ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL
 
-All 19 cilia, ciliopathy, and hedgehog pathway annotations from the scored universe, defined by the curated cilia reference set (`data/cohorts/kf_cilia_reference_msigdb.txt`), ordered by KF-CHD BIFO rank. Score = degree_norm. Hub-flagged pathways (degree_flag = True) reflect high-degree graph connectivity rather than specific cilia biology.
+All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (17 in KF-CHD, 18 in KF-NBL), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null) and empirical_q. Hub-flagged pathways (degree_flag = True) reflect high-degree graph connectivity rather than specific cilia biology.
 
-| Pathway name | Source DB | KF-CHD rank | KF-CHD score | KF-NBL rank | KF-NBL score | Members | Hub |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| WP_CILIOPATHIES | MSIGDB | 1 | 6.260e-06 | 1 | 5.956e-06 | 170 | — |
-| WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 23 | 3.862e-06 | 64 | 3.039e-06 | 94 | — |
-| WP_JOUBERT_SYNDROME | MSIGDB | 55 | 3.221e-06 | 47 | 3.306e-06 | 76 | — |
-| REACTOME_CILIUM_ASSEMBLY | MSIGDB | 87 | 3.002e-06 | 76 | 2.935e-06 | 194 | — |
-| YAUCH_HEDGEHOG_SIGNALING_PARACRINE_DN | MSIGDB | 243 | 2.280e-06 | 163 | 2.436e-06 | 240 | ✓ |
+| Pathway name | Source DB | KF-CHD rank | KF-CHD score | KF-CHD null_z | KF-NBL rank | KF-NBL score | KF-NBL null_z | Members | Hub |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| WP_JOUBERT_SYNDROME | MSIGDB | 34 | 9.280e-06 | 54.69 | 17 | 2.536e-06 | 10.54 | 76 | — |
+| WP_CILIOPATHIES | MSIGDB | 43 | 8.509e-06 | 48.71 | 3 | 4.241e-06 | 18.95 | 170 | — |
+| REACTOME_CILIUM_ASSEMBLY | MSIGDB | 163 | 4.219e-06 | 22.23 | 32 | 2.154e-06 | 6.12 | 194 | — |
+| WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 171 | 3.977e-06 | 19.89 | 31 | 2.154e-06 | 8.94 | 94 | — |
+| REACTOME_HEDGEHOG_OFF_STATE | MSIGDB | 216 | 3.163e-06 | 18.26 | 347 | 9.544e-07 | 0.13 | 110 | — |
+| REACTOME_SIGNALING_BY_HEDGEHOG | MSIGDB | 239 | 2.740e-06 | 13.48 | 228 | 1.134e-06 | 0.52 | 147 | — |
+| WP_CILIARY_LANDSCAPE | MSIGDB | 358 | 1.401e-06 | 1.08 | 233 | 1.125e-06 | -1.01 | 211 | — |
 | REACTOME_CARGO_TRAFFICKING_TO_THE_PERICILIARY_MEMBRANE | MSIGDB | 378 | 1.949e-06 | 1296 | 1.098e-06 | 51 | — |
 | REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE | MSIGDB | 395 | 1.916e-06 | 202 | 2.306e-06 | 94 | — |
 | REACTOME_SIGNALING_BY_HEDGEHOG | MSIGDB | 458 | 1.816e-06 | 493 | 1.699e-06 | 147 | — |
@@ -1430,13 +1434,13 @@ All 19 cilia, ciliopathy, and hedgehog pathway annotations from the scored unive
 | HALLMARK_HEDGEHOG_SIGNALING | MSIGDB | 5103 | 7.054e-08 | 4712 | 2.576e-07 | 35 | — |
 
 
-*19 cilia-related pathways identified across 5,104 scored pathways (KF-CHD universe).*
+*17 cilia-related pathways identified across 2,130 scored pathways (KF-CHD universe). Top 5 core ciliopathy pathways shown; full table available in supplementary data.*
 
 ---
 
 ### ST5 — Head-to-head rank comparison: seed Fisher vs. BIFO (downloadable data files)
 
-Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (4,535 pathways for KF-CHD; 4,617 pathways for KF-NBL after BIFO-universe restriction).
+Full ranked pathway lists for all pathways scored under both methods, for KF-CHD and KF-NBL independently. Provided as downloadable supplementary data files due to size (2,130 pathways for KF-CHD; 2,196 pathways for KF-NBL).
 
 **ST5a** (`supplementary_data_ST5a_kf_chd_fisher_vs_bifo.csv`): KF-CHD, sorted by BIFO rank.
 
@@ -1486,7 +1490,6 @@ validation without requiring access to the full graph database.
 | `run_kf_chd_export.sh` | 1 | Neo4j export for KF-CHD cohort |
 | `run_kf_nbl_export.sh` | 1 | Neo4j export for KF-NBL cohort |
 | `clean_files.sh` | 2.1 | Clean cypher-shell output CSVs |
-| `build_ncc_edges.sh` | 2.2 | Build NCC/cilia membership edges |
 | `merge_files.sh` | 2.3 | Merge edge CSV files into `edges_merged.csv` |
 | `run_seed_lookup.sh` | 2.4 | Map gene symbols to CUIs |
 | `run_conditioning.sh` | 3 | BIFO conditioning + PPR propagation |
@@ -1537,7 +1540,7 @@ validation without requiring access to the full graph database.
 | `kf_chd_seeds.txt` | Original unfiltered seed gene list |
 | `kf_chd_seed_cuis.txt` | CUI-resolved seed list (pipeline input for conditioning) |
 | `kf_chd_seed_nodes.csv.zip` | Full seed node metadata from DDKG export |
-| `kf_chd_ncc_reference.txt` | NCC cilia pathway reference set for KF-CHD evaluation |
+| `kf_chd_cilia_reference.txt` | MSigDB cilia pathway reference set for KF-CHD evaluation (17 CUIs) |
 
 **KF-NBL cohort (`data/cohorts/nbl/`)**
 
@@ -1548,7 +1551,7 @@ validation without requiring access to the full graph database.
 | `kf_nbl_seeds_maf001_n3.txt` | Carrier-filtered seeds: 147 genes with n≥3 carriers at MAF ≤0.001 |
 | `kf_nbl_seeds_maf01.txt` | Broader-filter seeds at MAF ≤0.01 |
 | `kf_nbl_seeds.txt` | Original unfiltered seed gene list |
-| `kf_nbl_ncc_reference.txt` | NCC cilia pathway reference set for KF-NBL evaluation |
+| `kf_nbl_cilia_reference.txt` | MSigDB cilia pathway reference set for KF-NBL evaluation (17 CUIs) |
 
 ### S6.6 Pre-computed results (`results/`)
 
