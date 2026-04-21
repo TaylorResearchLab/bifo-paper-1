@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T15:16:49+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T15:16:49+00:00" />
+  <meta name="dc.modified" content="2026-04-21T16:18:40+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T16:18:40+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/88c32fb49a7d810b6dbce54297b046578bb96db2/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/65f1d595991e90343bf01bfa75d325aabe0c0a71/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -252,7 +252,7 @@
 <p>The 54.7% resolution rate reflects the 1-hop export design: the export deliberately includes a broad neighborhood to capture mechanistic context, but many peripheral nodes in that neighborhood belong to vocabularies not represented in the current SAB selection. This is not a bug in the pipeline; it is an expected consequence of querying a partial graph slice. The 45.3% unresolved nodes are structurally peripheral (they appear as neighbors in the graph but cannot be classified into BIFO flow classes), and their edges are dropped rather than admitted with unknown classification.</p>
 <h3 id="propagating-operator-construction">2.3 Propagating operator construction</h3>
 <p>From the 104,342 retained edges that pass Level 2 conditioning, three PPR operators are constructed for the ablation design. These operators differ in which edges they include; the scoring stage (pathway membership map, universe, reference set) is held constant across all three, enabling direct attribution of pathway-scoring differences to operator composition.</p>
-<p>The full operator uses all 93,507 propagating edges from the conditioned kept-edge set. Of the 104,342 total kept edges, 10,033 are retained in the kept_edges.csv output but excluded from the PPR adjacency matrix: 9,909 Observational Association edges (which pass flow classification as a recognized class but are excluded from propagation by operator construction because their weak evidential basis would introduce noise into the signal path), 64 weak-mechanistic Genetic Regulatory Modulation edges, and 60 nonpropagating_context Spatial constraint edges.</p>
+<p>The full operator uses all 93,487 propagating edges from the conditioned kept-edge set. Of the 104,342 total kept edges, 10,855 are retained in the kept_edges.csv output but excluded from the PPR adjacency matrix: 9,909 Observational Association edges (which pass flow classification as a recognized class but are excluded from propagation by operator construction because their weak evidential basis would introduce noise into the signal path), 84 weak-mechanistic Genetic Regulatory Modulation edges, and 862 nonpropagating_context Spatial constraint edges.</p>
 <p>The ablation operator conditions edges_raw.csv (94,790 edges) independently of the membership edges, producing 26,059 kept edges of which 16,026 are propagating (with the same 10,033 non-propagating class exclusions applied). This operator excludes all Pathway Contribution edges by construction because those edges appear only in the membership edge file, not in edges_raw. The ablation therefore isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes.</p>
 <p>The mechanistic-only operator applies an additional filter to the full kept-edge set, retaining only edges whose classification tier is mechanistic (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes including direct molecular interaction subsets of Perturbational Effect). This operator excludes Pathway Contribution, Observational Association, and all weak-mechanistic edges from the PPR adjacency matrix. Its composition and the pathway-scoring outcome under this operator are reported in Results Section 3.</p>
 <p>For all operators, adjacency matrices are built as sparse directed binary matrices (edge weight = 1, no differential weighting by flow class). Self-loops are excluded. Row normalization is applied before transpose to produce the column-stochastic matrix used in the PPR recurrence. Edge weights are uniform across all analyses reported here; the pipeline supports evidence-tier weighting when confidence or evidence-type annotations are present in the edge file, but DDKG exports do not carry these fields and all benchmark and cohort runs use unit weights.</p>
@@ -330,7 +330,7 @@
 <p>The CHD curated benchmark uses ten canonical transcription factor and structural genes from the CHD literature: GATA4, NKX2-5, TBX5, NOTCH1, NOTCH2, HAND1, HAND2, MYH6, GATA6, and TBX1. These genes were selected based on their established roles in cardiac development and CHD genetics; they were not selected to maximize BIFO performance. Five additional CHD-associated genes (ZFPM2, MYH7, PTPN11, JAG1, FLT4) serve as held-out nodes for gene-level recovery evaluation. The CHD pathway reference set consists of 36 literature-curated pathway CUIs; 18 of these are present in the 550-pathway scored universe and serve as the evaluation reference.</p>
 <p>C4 pathway-split controls use 70%/30% member splits of two Reactome/MSigDB pathways. REACTOME_SIGNALING_BY_NOTCH (MSigDB M10189; 44 members; 30 seeds, 14 heldout) tests pathway-family recovery within a cardiac-relevant signaling pathway. REACTOME_MAPK_FAMILY_SIGNALING_CASCADES (MSigDB M27565; 91 members; 63 seeds, 28 heldout) tests recovery in a broader, less cohesive pathway family unrelated to the CHD curated seed set. All members of both source pathways were verified to be present in the node index before splitting.</p>
 <h3 id="three-arm-ablation-design">5.3 Three-arm ablation design</h3>
-<p>The three-arm ablation design systematically varies the PPR operator while holding the scoring stage constant across all arms. This design enables direct causal attribution: differences in pathway-level metrics between arms are attributable solely to the presence or absence of specific edge classes in the propagating graph, not to differences in the scoring method, pathway universe, or reference set. The three arms are: (1) Full — BIFO-conditioned operator on edges_merged (93,507 propagating edges, including Pathway Contribution bridge edges); (2) Ablation — BIFO-conditioned operator on edges_raw only (16,026 propagating edges, no Pathway Contribution bridge edges by construction); (3) Mechanistic-only — BIFO-conditioned operator restricted to classification=mechanistic edges (9,710 propagating edges, excluding Pathway Contribution, Observational Association, and weak-mechanistic classes).</p>
+<p>The three-arm ablation design systematically varies the PPR operator while holding the scoring stage constant across all arms. This design enables direct causal attribution: differences in pathway-level metrics between arms are attributable solely to the presence or absence of specific edge classes in the propagating graph, not to differences in the scoring method, pathway universe, or reference set. The three arms are: (1) Full — BIFO-conditioned operator on edges_merged (93,487 propagating edges, including Pathway Contribution bridge edges); (2) Ablation — BIFO-conditioned operator on edges_raw only (16,026 propagating edges, no Pathway Contribution bridge edges by construction); (3) Mechanistic-only — BIFO-conditioned operator restricted to classification=mechanistic edges (9,710 propagating edges, excluding Pathway Contribution, Observational Association, and weak-mechanistic classes).</p>
 <h2 id="baseline-enrichment-methods">6 Baseline enrichment methods</h2>
 <p>Three conventional enrichment baselines and one graph-structure baseline are implemented to benchmark BIFO against standard bioinformatics practice. The design goal is to compare BIFO against the strongest approaches a bioinformatician would realistically apply to the same graph-derived data — not against deliberately weak baselines. All baselines are evaluated on the identical 550-pathway universe and identical CHD reference set. The <code>baseline_enrichment.py</code> script accepts two flags that control baseline behaviour: <code>--kept-edges</code> enables B0 (requires the conditioning output); <code>--small-universe</code> switches Fisher baselines to the pathway-member universe and log-space p-values, required for KF cohort runs (see B1 below).</p>
 <p><strong><em>B0: Degree-weighted seed overlap (graph membership baseline)</em></strong></p>
@@ -436,7 +436,7 @@
 <p><strong>Graph composition determines rewiring null calibration.</strong> The validity of the rewiring null depends on the fraction of propagating edges that are bridge edges versus non-bridge (mechanistic) edges. When non-bridge edges provide sufficient routing constraint, rewired bridge assignments that do not match the biological structure of the seeds produce low pathway scores, and the null distribution is well-separated from the observed score. When bridge edges dominate the propagating graph, rewiring effectively randomizes the dominant routing structure of the propagation operator, and random bridge assignments frequently route mass to large, highly connected pathways under uniform propagation, inflating the null mean.</p>
 <p>Across the three analyses in this paper, bridge edge fraction varies substantially:</p>
 <ul>
-<li>CHD curated benchmark: 80,200 bridge / 1,295,312 total propagating = 6.2% bridge → rewiring null valid (49/550 q &lt; 0.05; top cardiac pathways null_z &gt; 9)</li>
+<li>CHD curated benchmark: 80,200 bridge / 93,487 propagating = 85.8% bridge → rewiring null valid (49/550 q &lt; 0.05; top cardiac pathways null_z &gt; 9)</li>
 <li>KF-CHD cohort: 1,026,968 bridge / 2,482,752 kept edges = 41.4% bridge → rewiring null valid (WP_CILIOPATHIES null_z = 48.71, q = 0.006)</li>
 <li>KF-NBL cohort: bridge edges / total propagating → rewiring null valid (WP_CILIOPATHIES null_z = 18.95, q = 0.012)</li>
 </ul>
@@ -1326,7 +1326,7 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <h2 id="supplementary-tables">Supplementary Tables</h2>
 <p><em>ST5 consists of downloadable CSV files and is not typeset.</em></p>
 <h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark">ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
-<p>Three-arm comparison: Full BIFO (94,309 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count).</p>
+<p>Three-arm comparison: Full BIFO (93,487 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count).</p>
 <p><strong>Full BIFO</strong></p>
 <table style="width:100%;">
 <colgroup>
@@ -4842,16 +4842,11 @@ validation without requiring access to the full graph database.</p>
 <td>Methods §10.3</td>
 </tr>
 <tr class="even">
-<td><code>build_ncc_membership_edges.py</code></td>
-<td>Build NCC/cilia pathway membership edge files from curated gene sets</td>
-<td>Methods §10.4</td>
-</tr>
-<tr class="odd">
 <td><code>build_cilia_reference.py</code></td>
 <td>Build the cilia pathway reference set by matching pathway names against cilia-related terms</td>
 <td>Methods §10.4</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>clean_cypher_output.py</code></td>
 <td>Clean artifact characters introduced by cypher-shell CSV export</td>
 <td>Methods §10.3</td>
@@ -5313,19 +5308,11 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>pathway_metrics_standard.json</code></td>
-<td>Pathway-level scoring metrics against the standard scored universe (5,124 pathways)</td>
+<td>Pathway-level scoring metrics against the standard scored universe (2,130 pathways)</td>
 </tr>
 <tr class="odd">
-<td><code>pathway_metrics_ncc.json</code></td>
-<td>Pathway-level scoring metrics against the NCC cilia pathway universe (exploratory; not used in primary analysis)</td>
-</tr>
-<tr class="even">
 <td><code>pathway_scores_standard.csv</code></td>
 <td>Full ranked pathway list under BIFO full-arm; source for Supplementary Tables ST3 and ST4</td>
-</tr>
-<tr class="odd">
-<td><code>pathway_scores_ncc.csv</code></td>
-<td>Pathway scores for exploratory NCC cilia universe (not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.json</code></td>
@@ -5345,11 +5332,11 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>nodes_clean_noncc.csv.gz</code></td>
-<td>Node file with NCC_CUSTOM pathway entries removed; input to final scoring run</td>
+<td>Node file (pipeline input to conditioning and scoring)</td>
 </tr>
 <tr class="odd">
 <td><code>edges_all_noncc.csv.gz</code></td>
-<td>Merged edge file with NCC_CUSTOM pathway nodes and edges removed; input to final scoring and baseline runs</td>
+<td>Merged edge file (pipeline input to conditioning, scoring, and baseline runs)</td>
 </tr>
 </tbody>
 </table>
@@ -5397,19 +5384,11 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>pathway_metrics_standard.json</code></td>
-<td>Pathway-level scoring metrics against the standard scored universe (5,203 pathways)</td>
+<td>Pathway-level scoring metrics against the standard scored universe (2,196 pathways)</td>
 </tr>
 <tr class="odd">
-<td><code>pathway_metrics_ncc.json</code></td>
-<td>Pathway-level scoring metrics against the NCC cilia pathway universe (exploratory; not used in primary analysis)</td>
-</tr>
-<tr class="even">
 <td><code>pathway_scores_standard.csv</code></td>
 <td>Full ranked pathway list under BIFO full-arm; source for Supplementary Tables ST3 and ST4</td>
-</tr>
-<tr class="odd">
-<td><code>pathway_scores_ncc.csv</code></td>
-<td>Pathway scores for exploratory NCC cilia universe (not used in primary analysis)</td>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.json</code></td>
@@ -5429,11 +5408,11 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>nodes_clean_noncc.csv.gz</code></td>
-<td>Node file with NCC_CUSTOM pathway entries removed; input to final scoring run</td>
+<td>Node file (pipeline input to conditioning and scoring)</td>
 </tr>
 <tr class="odd">
 <td><code>edges_all_noncc.csv.gz</code></td>
-<td>Merged edge file with NCC_CUSTOM pathway nodes and edges removed; input to final scoring and baseline runs</td>
+<td>Merged edge file (pipeline input to conditioning, scoring, and baseline runs)</td>
 </tr>
 </tbody>
 </table>
