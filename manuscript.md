@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-21" />
   <meta name="citation_publication_date" content="2026-04-21" />
   <meta property="article:published_time" content="2026-04-21" />
-  <meta name="dc.modified" content="2026-04-21T19:21:08+00:00" />
-  <meta property="article:modified_time" content="2026-04-21T19:21:08+00:00" />
+  <meta name="dc.modified" content="2026-04-21T21:00:09+00:00" />
+  <meta property="article:modified_time" content="2026-04-21T21:00:09+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/3d7ecaf5348cab9ad07464ab56b13c4e71c05169/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/10d276f7d0c7eb02410508e0e4b68cc79bd73fac/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -194,11 +194,11 @@ The 54.7% resolution rate reflects the 1-hop export design: the export deliberat
 
 ### 2.3 Propagating operator construction
 
-From the 104,342 retained edges that pass Level 2 conditioning, three PPR operators are constructed for the ablation design. These operators differ in which edges they include; the scoring stage (pathway membership map, universe, reference set) is held constant across all three, enabling direct attribution of pathway-scoring differences to operator composition.
+From the 105,192 retained edges that pass Level 2 conditioning, three PPR operators are constructed for the ablation design. These operators differ in which edges they include; the scoring stage (pathway membership map, universe, reference set) is held constant across all three, enabling direct attribution of pathway-scoring differences to operator composition.
 
-The full operator uses all 93,487 propagating edges from the conditioned kept-edge set. Of the 104,342 total kept edges, 10,855 are retained in the kept_edges.csv output but excluded from the PPR adjacency matrix: 9,909 Observational Association edges (which pass flow classification as a recognized class but are excluded from propagation by operator construction because their weak evidential basis would introduce noise into the signal path), 84 weak-mechanistic Genetic Regulatory Modulation edges, and 862 nonpropagating_context Spatial constraint edges.
+The full operator uses all 57,005 propagating edges from the conditioned kept-edge set. Of the 105,192 total kept edges, 48,187 are retained in the kept_edges.csv output but excluded from the PPR adjacency matrix: 37,352 Pathway Contribution edges in the pathway→gene direction (classified as nonpropagating_context under the unidirectional YAML — these are gene-to-pathway membership edges traversed in the reverse direction, excluded per BIFO spec v0.02), 9,909 Observational Association edges (which pass flow classification as a recognized class but are excluded from propagation by operator construction because their weak evidential basis would introduce noise into the signal path), 64 weak-mechanistic Genetic Regulatory Modulation edges, and 862 nonpropagating_context Spatial constraint edges.
 
-The ablation operator conditions edges_raw.csv (94,790 edges) independently of the membership edges, producing 26,059 kept edges of which 16,026 are propagating (with the same 10,033 non-propagating class exclusions applied — note this is less than the full arm's 10,855 because Spatial constraint and weak-mechanistic GRM edges appear only in the membership edge file, not in edges_raw). This operator excludes all Pathway Contribution edges by construction because those edges appear only in the membership edge file, not in edges_raw. The ablation therefore isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes.
+The ablation operator conditions edges_raw.csv (94,790 edges) independently of the membership edges, producing 26,080 kept edges of which 14,413 are propagating (with 11,667 non-propagating class exclusions applied — fewer than the full arm's 48,187 because the pathway→gene direction Pathway Contribution edges and most Spatial constraint and GRM edges appear only in the membership edge file, not in edges_raw). This operator excludes all Pathway Contribution edges by construction because those edges appear only in the membership edge file, not in edges_raw. The ablation therefore isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes.
 
 The mechanistic-only operator applies an additional filter to the full kept-edge set, retaining only edges whose classification tier is mechanistic (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes including direct molecular interaction subsets of Perturbational Effect). This operator excludes Pathway Contribution, Observational Association, and all weak-mechanistic edges from the PPR adjacency matrix. Its composition and the pathway-scoring outcome under this operator are reported in Results Section 3.
 
@@ -274,7 +274,7 @@ C4 pathway-split controls use 70%/30% member splits of two Reactome/MSigDB pathw
 
 ### 5.3 Three-arm ablation design
 
-The three-arm ablation design systematically varies the PPR operator while holding the scoring stage constant across all arms. This design enables direct causal attribution: differences in pathway-level metrics between arms are attributable solely to the presence or absence of specific edge classes in the propagating graph, not to differences in the scoring method, pathway universe, or reference set. The three arms are: (1) Full --- BIFO-conditioned operator on edges_merged (93,487 propagating edges, including Pathway Contribution bridge edges); (2) Ablation --- BIFO-conditioned operator on edges_raw only (16,026 propagating edges, no Pathway Contribution bridge edges by construction); (3) Mechanistic-only --- BIFO-conditioned operator restricted to classification=mechanistic edges (9,710 propagating edges, excluding Pathway Contribution, Observational Association, and weak-mechanistic classes).
+The three-arm ablation design systematically varies the PPR operator while holding the scoring stage constant across all arms. This design enables direct causal attribution: differences in pathway-level metrics between arms are attributable solely to the presence or absence of specific edge classes in the propagating graph, not to differences in the scoring method, pathway universe, or reference set. The three arms are: (1) Full --- BIFO-conditioned operator on edges_merged (57,005 propagating edges, including Pathway Contribution bridge edges in the gene→pathway direction); (2) Ablation --- BIFO-conditioned operator on edges_raw only (14,413 propagating edges, no Pathway Contribution bridge edges by construction); (3) Mechanistic-only --- BIFO-conditioned operator restricted to classification=mechanistic edges (9,710 propagating edges, excluding Pathway Contribution, Observational Association, and weak-mechanistic classes).
 
 ## 6 Baseline enrichment methods
 
@@ -369,7 +369,7 @@ Statistical significance is assessed using the finite-sample-corrected empirical
 
 Across the three analyses in this paper, bridge edge fraction varies substantially:
 
-- CHD curated benchmark: 80,200 bridge / 93,487 propagating = 85.8% bridge → rewiring null valid (49/550 q < 0.05; top cardiac pathways null_z > 9)
+- CHD curated benchmark: 43,698 bridge / 57,005 propagating = 76.7% bridge → rewiring null valid (49/550 q < 0.05; top cardiac pathways null_z > 9)
 - KF-CHD cohort: 1,026,968 bridge / 2,482,752 kept edges = 41.4% bridge → rewiring null valid (WP_CILIOPATHIES null_z = 48.71, q = 0.006)
 - KF-NBL cohort: bridge edges / total propagating → rewiring null valid (WP_CILIOPATHIES null_z = 18.95, q = 0.012)
 
@@ -458,41 +458,41 @@ The bootstrap analysis was designed to address two questions: (1) whether cilia 
 
 The DDKG export comprised 34,523 concept nodes and 174,352 merged edges, combining 94,790 seed-centered mechanistic and association edges (edges_raw) with 79,562 pathway membership edges. Entity resolution using direct SAB column fallback resolved 18,897 of 34,523 concept nodes (54.7%); the remaining 15,626 nodes lacked a mappable source vocabulary assignment and were treated as unresolvable at Level 1.
 
-BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.7.1; 251 entries). Of 174,352 input edges, 104,342 (59.8%) were retained as biologically admissible; 69,658 were excluded for three mutually exclusive reasons: unmapped predicate (37,448; 21.5%), unresolved endpoint entity (32,214; 18.5%), or explicit non-flow classification (348; 0.2%). Level-2 edge coverage was 59.8%, reflecting incomplete predicate mapping under the current SAB selection.
+BIFO conditioning evaluated each edge against the predicate-to-flow mapping (v0.7.1; 251 entries). Of 174,352 input edges, 105,192 (60.3%) were retained as biologically admissible; 69,160 were excluded for three mutually exclusive reasons: unmapped predicate (36,598; 21.0%), unresolved endpoint entity (32,214; 18.5%), or explicit non-flow classification (348; 0.2%). Level-2 edge coverage was 60.3%, reflecting incomplete predicate mapping under the current SAB selection.
 
   ------------------------------------- --------------- ----------------------- -------------------------------------------------------------
   **Edge category**                     **Count**       **Fraction of input**   **Notes**
 
   **Raw input edges (merged)**          174,352         100%                    94,790 seed↔hop1 + 79,562 membership
 
-  **Kept after conditioning**           104,342         59.8%                   Biologically admissible (includes non-propagating retained)
+  **Kept after conditioning**           105,192         60.3%                   Biologically admissible (includes non-propagating retained)
 
-  --- Propagating (conditioned arm)     93,487          ---                     Used in PPR operator; see Section 3
+  --- Propagating (conditioned arm)     57,005          ---                     Used in PPR operator; see Section 3
 
-  --- Non-propagating retained          10,855          ---                     Observational Association 9,909; GRM 84; Spatial constraint 862
+  --- Non-propagating retained          48,187          ---                     PC pathway→gene 37,352; Obs. Assoc. 9,909; Spatial 862; GRM 64
 
   Dropped: non-flow                     348             0.2%                    Structural/taxonomic predicates
 
-  Dropped: unmapped predicate           37,448          21.5%                   No BIFO flow class assigned
+  Dropped: unmapped predicate           36,598          21.0%                   No BIFO flow class assigned
 
   Dropped: unresolved entity            32,214          18.5%                   No SAB match at entity resolution
 
-  Propagating edges (ablation arm)      16,026          ---                     edges_raw conditioned: 26,059 kept → 16,026 propagating
+  Propagating edges (ablation arm)      14,413          ---                     edges_raw conditioned: 26,080 kept → 14,413 propagating
 
   Propagating edges (mechanistic arm)   9,710           ---                     classification=mechanistic only (see §3)
   ------------------------------------- --------------- ----------------------- -------------------------------------------------------------
 
-**Table 1.** *Graph conditioning statistics. All values from benchmark run V5. Of the 104,342 kept edges, 93,487 enter the PPR operator as propagating edges; 10,855 are retained in the conditioning output (kept_edges.csv) but excluded from propagation --- comprising Observational Association edges (9,909) that pass flow classification but are excluded by operator construction, 84 weak-mechanistic Genetic Regulatory Modulation edges, and 862 nonpropagating Spatial constraint edges. The ablation arm conditions edges_raw.csv independently, producing 26,059 kept edges of which 16,026 are propagating (the remainder are the same non-propagating classes).*
+**Table 1.** *Graph conditioning statistics. All values from benchmark run V6 (unidirectional pipeline, BIFO spec v0.02). Of the 105,192 kept edges, 57,005 enter the PPR operator as propagating edges; 48,187 are retained in the conditioning output (kept_edges.csv) but excluded from propagation --- comprising 37,352 Pathway Contribution edges in the pathway→gene direction (nonpropagating_context per the unidirectional YAML), 9,909 Observational Association edges excluded by operator construction, 64 weak-mechanistic GRM edges, and 862 Spatial constraint edges. The ablation arm conditions edges_raw.csv independently, producing 26,080 kept edges of which 14,413 are propagating.*
 
-Of the 93,487 propagating edges in the conditioned arm, 80,200 (85.8%) were classified as Pathway Contribution, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. Signal Transduction accounted for 5,786 (6.1%) and Perturbational Effect for 5,392 (5.7%), with Transcription, Signal Termination, and minor classes comprising the remainder.
+Of the 57,005 propagating edges in the conditioned arm, 43,698 (76.7%) were classified as Pathway Contribution in the gene→pathway direction, the edge class encoding curated gene-to-pathway membership relationships that serve as admissible bridges between the mechanistic gene neighborhood and the pathway annotation layer. An additional 37,352 Pathway Contribution edges in the pathway→gene direction are retained in the kept-edges output but excluded from propagation as nonpropagating_context per BIFO spec v0.02. Signal Transduction accounted for 5,786 (10.1%) of propagating edges and Perturbational Effect for 5,392 (9.5%), with Transcription, Signal Termination, and minor classes comprising the remainder.
 
 While Pathway Contribution edges dominate numerically, the ablation experiment (Section 3) establishes that they do not generate signal independently: removing bridge edges while preserving all other admissible mechanistic classes reduces P@10 from 0.70 to 0.60, and mechanistic-only propagation --- which contains no Pathway Contribution edges --- yields exactly zero pathway scores across all 550 pathways. Pathway Contribution edges (referred to hereafter as bridge edges) are necessary conduits for transferring mechanistic signal from gene-level propagation to the pathway annotation layer; without upstream mechanistic signal to relay, they have no effect on their own.
 
 ![
 **BIFO conditioning coverage — curated CHD benchmark graph.**
-(**A**) Edge funnel from 174,352 merged input edges through entity resolution and flow-class conditioning to 93,487 propagating edges (54.0% retention) used by the PPR operator.
-(**B**) Dropped edges stratified by cause: unmapped predicates (37,448; 21.5%) and unresolved entities (32,214; 18.5%) account for nearly all losses; non-flow classifications contribute <1%.
-(**C**) Flow-class distribution of propagating edges. Pathway Contribution bridge edges (dark blue; 80,200 edges; 85.8% of propagating edges) are the architectural element enabling gene→pathway signal transfer; mechanistic classes (Signal Transduction, Perturbational Effect, Transcription, etc.) comprise the remaining 14.2%.
+(**A**) Edge funnel from 174,352 merged input edges through entity resolution and flow-class conditioning to 57,005 propagating edges (32.7% of input) used by the PPR operator; 48,187 additional edges are retained as non-propagating (including 37,352 pathway→gene direction Pathway Contribution edges excluded per BIFO spec v0.02).
+(**B**) Dropped edges stratified by cause: unmapped predicates (36,598; 21.0%) and unresolved entities (32,214; 18.5%) account for nearly all losses; non-flow classifications contribute <1%.
+(**C**) Flow-class distribution of propagating edges. Pathway Contribution bridge edges (dark blue; 43,698 edges; 76.7% of propagating edges) are the architectural element enabling gene→pathway signal transfer; mechanistic classes (Signal Transduction, Perturbational Effect, Transcription, etc.) comprise the remaining 23.3%.
 (**D**) Concept-node entity resolution: 18,897 of 34,523 nodes (54.7%) resolve to a source vocabulary; the remainder are Level-1 unresolvable under the current SAB selection.
 ](images/fig1_conditioning.png){#fig:conditioning width="100%"}
 
@@ -505,16 +505,16 @@ To evaluate propagation signal at the gene level, we performed PPR on each arm o
 
   **Raw (full graph)**         1.000        0.2215       5.728         100.0%
 
-  **Conditioned (BIFO)**       1.000        0.1902       5.217         31.6%
+  **Conditioned (BIFO)**       1.000        0.1947       4.934         N/A
 
-  Ablation (no bridge edges)   1.000        0.2215       4.939         19.5%
+  Ablation (no bridge edges)   1.000        0.2215       4.919         N/A
 
   Random sparsification        1.000        0.2173       5.590         64.6%
   ---------------------------- ------------ ------------ ------------- -----------------------
 
 **Table 2.** *Four-arm gene-level recovery for the CHD curated benchmark. Entropy is the Shannon entropy of the propagation score distribution (lower = more concentrated). Nonzero node fraction indicates the proportion of nodes with non-negligible score mass. AUROC is near-ceiling across all arms on this small benchmark; entropy and nonzero fraction are the informative discriminants at this scale.*
 
-AUROC was 1.000 across all arms, reflecting ceiling performance on this small benchmark (five held-out nodes from a strongly connected seed neighborhood). AUPRC was 0.2215 for the raw arm and declined to 0.1902 under full BIFO conditioning, reflecting concentration of score mass into a smaller node subset. The ablation arm (propagation without Pathway Contribution edges) produced AUPRC equal to the raw arm (0.2215) with substantially lower entropy (4.939 vs. 5.728), demonstrating that the core mechanistic signal is preserved without bridge edges. The random sparsification control (same edge count as conditioned, random selection) produced intermediate entropy (5.590) and AUPRC (0.2173), establishing that BIFO\'s entropy reduction is not simply a consequence of edge count reduction.
+AUROC was 1.000 across all arms, reflecting ceiling performance on this small benchmark (five held-out nodes from a strongly connected seed neighborhood). AUPRC was 0.2215 for the raw arm and 0.1947 under full BIFO conditioning, reflecting concentration of score mass into a smaller node subset. The ablation arm (propagation without Pathway Contribution edges) produced AUPRC equal to the raw arm (0.2215) with lower entropy (4.919 vs. 5.728), demonstrating that the core mechanistic signal is preserved without bridge edges. The random sparsification control (same edge count as conditioned, random selection) produced intermediate entropy (5.590) and AUPRC (0.2173), establishing that BIFO\'s entropy reduction is not simply a consequence of edge count reduction.
 
 The AUPRC decline from raw to conditioned reflects the structure-dependent nature of BIFO filtering: conditioning concentrates signal on biologically coherent neighborhoods but does not optimize for held-out gene recovery per se. The mechanistic-only arm (9,710 edges, classification=mechanistic, including mechanistically classified subsets of perturbational and termination predicates) produced AUPRC 0.1486 and entropy 4.770, the lowest across all arms, consistent with a sparse subgraph reaching fewer nodes than the random control.
 
@@ -536,9 +536,9 @@ The primary benchmark evaluated pathway prioritization using three propagation a
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
   **Arm**                          **Prop. edges**   **P@10**   **Enrich. \@10**   **Mean rank**   **Rank imp.**
 
-  **Full (BIFO conditioned)**      **93,487**        **0.70**   **21.4×**          **86.6**        **+125.4**
+  **Full (BIFO conditioned)**      **57,005**        **0.70**   **21.4×**          **86.6**        **+125.4**
 
-  **Ablation (no bridge edges)**   16,026            0.60       18.3×              111             −11.2
+  **Ablation (no bridge edges)**   14,413            0.60       18.3×              86.3            +13.5
 
   Mechanistic-only                 9,710             0.00       0.0×               177             uninterpretable \*
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
@@ -547,11 +547,11 @@ The primary benchmark evaluated pathway prioritization using three propagation a
 
 ***Full arm***
 
-Under full BIFO conditioning (93,487 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score from the same propagation, yielding rank improvement +125.4.
+Under full BIFO conditioning (57,005 propagating edges), the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score from the same propagation, yielding rank improvement +125.4.
 
 ***Ablation arm***
 
-The ablation arm removed Pathway Contribution edges from propagation (16,026 propagating edges from 26,059 kept edges of edges_raw, with 10,855 non-propagating retained classes excluded as in the full arm) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was −11.2: without Pathway Contribution bridge edges in the propagating graph, the conditioned operator cannot route signal through the pathway-layer bridge, so the raw arm\'s direct scoring advantage persists. This shows that the core cardiac signal originates in the mechanistic neighborhood but that the full arm\'s conditioning gain requires the bridge edges to be present.
+The ablation arm removed Pathway Contribution edges from propagation ((14,413 propagating edges from 26,080 kept edges of edges_raw) while retaining the identical membership map for scoring. P@10 = 0.60 (enrichment = 18.3×); the top-6 CHD pathways were identical to those in the full arm. Rank improvement was +13.5: the ablation arm improves modestly over the raw arm because mechanistic edges alone can still route some signal toward cardiac pathway neighborhoods. However, the improvement is substantially smaller than the full arm (+125.4 vs +13.5), confirming that Pathway Contribution bridge edges are the primary driver of pathway-level signal transfer.
 
 ***Mechanistic-only arm***
 
@@ -570,7 +570,7 @@ Together, the three arms identify a two-layer graph architecture with a structur
 Top row: curated CHD benchmark (550 pathways, 18-pathway CHD reference) comparing the Full BIFO arm, Ablation (no Pathway Contribution bridge edges), and Mechanistic-only propagation.
 (**A**) Precision@10: Full 0.70, Ablation 0.60, Mechanistic 0.00. Mechanistic-only scores are zero because pathway nodes are not reached by propagation under this operator, not because of downstream scoring effects.
 (**B**) Enrichment@10 over background rate: Full 21.4×, Ablation 18.3×, Mechanistic 0×.
-(**C**) Rank improvement (raw PPR rank − conditioned PPR rank): Full +125.4 positions, Mechanistic +34.7 (uninterpretable; see text), Ablation −11.2.
+(**C**) Rank improvement (raw PPR rank − conditioned PPR rank): Full +125.4 positions, Mechanistic +34.7 (uninterpretable; see text), Ablation +13.5.
 (**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 2,130 pathways scored). Seed Fisher (corrected) ranks WP_CILIOPATHIES first; BIFO full-arm ranks it 43rd (null_z=48.7); Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 1,994, 456, and 2,126 respectively.
 ](images/fig3_ablation.png){#fig:ablation width="100%"}
 
@@ -679,11 +679,11 @@ Rank improvement was positive in all 3,003 splits (range +28.4 to +139.1; mean �
 
 ***Pathway precision is stable across nearly all seed configurations***
 
-Top-10 precision ranged from 0.10 to 0.70 (median 0.50, IQR \[0.40, 0.50\]). In 95.1% of splits (2,857/3,003), P@10 ≥ 0.30; in 51.8% (1,555/3,003), P@10 ≥ 0.50. Average precision ranged from 0.136 to 0.448 (median 0.311). Even in the least favorable splits, BIFO retains detectable pathway signal.
+Top-10 precision ranged from 0.10 to 0.70 (median 0.40, IQR \[0.30, 0.50\]). In 94.4% of splits (2,835/3,003), P@10 ≥ 0.30; in 43.8% (1,314/3,003), P@10 ≥ 0.50. Average precision ranged from 0.136 to 0.448 (median 0.312). Even in the least favorable splits, BIFO retains detectable pathway signal.
 
 ***Position of the primary benchmark split***
 
-The primary split achieved P@10 = 0.70, AP = 0.408, and rank improvement +99.2. P@10 = 0.70 is the maximum observed across the full evaluated split space; AP = 0.408 falls at the 91st percentile of the distribution; rank improvement +99.2 is near the center of the distribution (median +93.5). The primary split therefore represents a favorable configuration within the CHD gene pool, with P@10 at the maximum observed and rank improvement near the distribution center.
+The primary split achieved P@10 = 0.70, AP = 0.409, and rank improvement +128.9. P@10 = 0.70 is the maximum observed across the full evaluated split space; AP = 0.409 falls at the 98th percentile of the distribution; rank improvement +128.9 falls at the 74th percentile (median +118.4). The primary split therefore represents a favorable but not exceptional configuration within the CHD gene pool.
 
 ***Relationship to seed-overlap Fisher enrichment***
 
@@ -694,10 +694,10 @@ BIFO achieved higher average precision than the seed-overlap Fisher baseline in 
 ![
 **BIFO pathway recovery is stable across 3,003 seed partitions — curated CHD benchmark.**
 Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Primary split (red dashed line in each panel) is the manuscript benchmark split. Box = IQR; whiskers = min/max.
-(**A**) Precision@10 distribution across all 3,003 splits. 95.1% of splits achieve P@10 ≥ 0.30; 51.8% achieve P@10 ≥ 0.50; primary split P@10 = 0.70.
+(**A**) Precision@10 distribution across all 3,003 splits. 94.4% of splits achieve P@10 ≥ 0.30; 43.8% achieve P@10 ≥ 0.50; primary split P@10 = 0.70.
 (**B**) BIFO Average Precision distribution (primary = 0.408).
 (**C**) Seed Fisher Average Precision distribution (primary = 0.431).
-(**D**) Rank improvement distribution (raw PPR rank − conditioned PPR rank): all 3,003 splits show positive rank improvement (100% positive); primary split +99.2. BIFO beats Seed Fisher on AP in 22.9% of splits. All splits use identical conditioning operators and pathway universe; only the seed vector varies.
+(**D**) Rank improvement distribution (raw PPR rank − conditioned PPR rank): all 3,003 splits show positive rank improvement (100% positive); primary split +128.9. BIFO beats Seed Fisher on AP in 24.0% of splits. All splits use identical conditioning operators and pathway universe; only the seed vector varies.
 ](images/fig6_resampling.png){#fig:resampling width="100%"}
 
 ## 7 Limitations and scope
@@ -854,7 +854,7 @@ Together, these properties distinguish BIFO from both overlap-based and propagat
 
 The ablation analysis provides a mechanistic explanation for why this works. When propagation is restricted to mechanistic edges alone, pathway scores collapse to zero across the graph — an observation that holds in this benchmark graph and under the direct pathway-node scoring formulation used here. This result reflects how biological knowledge is represented in this graph slice. Mechanistic relationships connect genes within a molecular network, while pathway annotations are stored separately as curated gene sets. These two components form distinct layers of the graph and are connected only through gene-to-pathway membership relationships. Consistent with this structure, removing bridge edges reduces pathway recovery (P@10 decreases from 0.70 to 0.60), while mechanistic-only propagation yields zero pathway scores.
 
-This leads to a simple but important interpretation within this graph construction and scoring formulation. The graph is organized, in this benchmark slice, as a two-layer system: a mechanistic layer encoding biological processes and an annotation layer encoding curated pathway knowledge. BIFO makes this structure explicit by treating gene-to-pathway relationships as a distinct class of edges that are allowed to carry signal. The ablation results show that under the primary degree_norm scoring formulation — which requires propagated mass to arrive at the pathway concept node directly — these bridge edges are necessary for non-zero pathway scores. Under the current operator and scoring formulation, they do not generate signal independently; signal must originate in the mechanistic layer and transfer across the bridge. Although Pathway Contribution edges dominate numerically — comprising 85.8% of propagating edges in the conditioned operator — the ablation results confirm they act as transfer operators rather than signal sources under the unweighted PPR operator used here: they map propagated gene-level probability mass onto pathway nodes without introducing additional signal. This two-layer structure reflects the membership architecture of the exported graph slice, in which explicit gene-to-pathway membership edges are present primarily for MSigDB, WikiPathways, and GO annotations; pathway sources without direct membership edges in this export would not exhibit the same structural separation. Alternative scoring variants based on member-gene aggregation (member_mean, member_max) were evaluated but do not isolate pathway-node signal transfer and therefore do not directly test the structural accessibility of pathway nodes under different propagation operators; they are not used for the primary analysis.
+This leads to a simple but important interpretation within this graph construction and scoring formulation. The graph is organized, in this benchmark slice, as a two-layer system: a mechanistic layer encoding biological processes and an annotation layer encoding curated pathway knowledge. BIFO makes this structure explicit by treating gene-to-pathway relationships as a distinct class of edges that are allowed to carry signal. The ablation results show that under the primary degree_norm scoring formulation — which requires propagated mass to arrive at the pathway concept node directly — these bridge edges are necessary for non-zero pathway scores. Under the current operator and scoring formulation, they do not generate signal independently; signal must originate in the mechanistic layer and transfer across the bridge. Although Pathway Contribution edges dominate numerically — comprising 76.7% of propagating edges in the conditioned operator — the ablation results confirm they act as transfer operators rather than signal sources under the unweighted PPR operator used here: they map propagated gene-level probability mass onto pathway nodes without introducing additional signal. This two-layer structure reflects the membership architecture of the exported graph slice, in which explicit gene-to-pathway membership edges are present primarily for MSigDB, WikiPathways, and GO annotations; pathway sources without direct membership edges in this export would not exhibit the same structural separation. Alternative scoring variants based on member-gene aggregation (member_mean, member_max) were evaluated but do not isolate pathway-node signal transfer and therefore do not directly test the structural accessibility of pathway nodes under different propagation operators; they are not used for the primary analysis.
 
 The robustness analysis shows that these results are not dependent on a particular gene set. Across all 3,003 partitions of the CHD gene pool, BIFO consistently improves pathway ranking relative to unconditioned propagation. At the same time, the comparison with Fisher enrichment highlights an important boundary. When seed genes directly overlap with pathway members, Fisher performs well, as expected. BIFO is most useful in the complementary setting, where relevant pathways are connected indirectly through biological relationships. This distinction aligns with the difference between recovery tasks and discovery tasks and explains why BIFO is particularly effective for cohort-scale analyses.
 
@@ -864,7 +864,7 @@ Several limitations should be noted. The benchmark graph is a controlled 1-hop p
 
 Gene-level recovery metrics are at or near ceiling in the curated benchmark due to the small size and strong connectivity of the test set, and are not informative for discriminating between method variants in this setting. Pathway-level evaluation and cohort-scale analysis provide the meaningful performance comparisons. BIFO as implemented here is best understood as a biologically constrained propagation schema with a reference DDKG implementation, rather than a formal ontology in the description-logic sense; the flow class vocabulary and admissibility rules constitute an operational specification that can be extended or reconfigured for other graph representations. Additionally, the 15-gene CHD benchmark pool is itself curated from prior knowledge, which bounds generalization claims beyond the illustrative benchmark setting; the exhaustive 3,003-split resampling addresses seed-composition sensitivity within this pool but does not substitute for an independent benchmark.
 
-BIFO-native empirical significance operates at two levels. Graph composition determines rewiring null calibration: the null is valid when non-bridge edges provide sufficient structural routing constraint, and miscalibrated when bridge edges dominate the propagating graph. In the curated benchmark (85.8% bridge edges, 10 seeds), the null is valid because with only 10 seeds, random rewirings rarely replicate specific cardiac signal regardless of bridge fraction, yielding 49/550 pathways significant at q < 0.05 with top cardiac pathways null_z > 9. In KF-CHD, bridge edges comprise 41.4% of propagating edges under the corrected unidirectional pipeline; the rewiring null is well-calibrated, and WP_CILIOPATHIES achieves the highest null_z in the dataset (null_z = 48.7, q = 0.006). In KF-NBL, bridge edges comprise a similar fraction, and the null is similarly well-calibrated (WP_CILIOPATHIES null_z = 19.0, q = 0.012). These results confirm that the rewiring null provides valid statistical inference when gene-to-pathway membership edges are included in a unidirectional, non-feedback configuration.
+BIFO-native empirical significance operates at two levels. Graph composition determines rewiring null calibration: the null is valid when non-bridge edges provide sufficient structural routing constraint, and miscalibrated when bridge edges dominate the propagating graph. In the curated benchmark (76.7% bridge edges, 10 seeds), the null is valid because with only 10 seeds, random rewirings rarely replicate specific cardiac signal regardless of bridge fraction, yielding 49/550 pathways significant at q < 0.05 with top cardiac pathways null_z > 9. In KF-CHD, bridge edges comprise 41.4% of propagating edges under the corrected unidirectional pipeline; the rewiring null is well-calibrated, and WP_CILIOPATHIES achieves the highest null_z in the dataset (null_z = 48.7, q = 0.006). In KF-NBL, bridge edges comprise a similar fraction, and the null is similarly well-calibrated (WP_CILIOPATHIES null_z = 19.0, q = 0.012). These results confirm that the rewiring null provides valid statistical inference when gene-to-pathway membership edges are included in a unidirectional, non-feedback configuration.
 
 A complementary stratified member-level null — which tests whether a pathway's constituent genes carry disproportionate propagated signal relative to structurally matched gene sets, without requiring PPR reruns — is less sensitive to bridge edge fraction because it operates on the fixed propagated signal rather than the propagation operator itself, and is empirically stable across the seed-size ranges evaluated here. In both KF-CHD and KF-NBL, the pathway-node rewiring null provides strong primary evidence (CHD: null_z = 48.7, q = 0.006; NBL: null_z = 19.0, q = 0.012). The member-level null shows weaker signal in KF-CHD (member_mean null_z = 1.39, p = 0.057) but significant signal in KF-NBL (member_mean null_z = 2.43, p = 0.003), indicating that in the neuroblastoma cohort the signal is distributed across member genes as well as concentrated at the pathway node level. The member-level null as implemented uses structural matching only (degree and pathway membership count) and does not directly validate the degree_norm pathway-node score; it provides converging evidence rather than a primary significance test for that score variant. Development of a connectivity-aware pathway-node null that accounts for bridge edge fraction — such as degree-aware bipartite rewiring — remains the appropriate direction for a fully unified significance framework across all graph compositions. More broadly, these results show that statistical calibration in graph-based inference depends not only on the scoring function but on the structure of the propagation operator itself.
 
@@ -930,7 +930,7 @@ All query files are provided in the repository at `cypher/`. The four-query stru
 
 ### ST1 — Top-10 ranked pathways per propagation arm, curated CHD benchmark
 
-Three-arm comparison: Full BIFO (93,487 propagating edges), Ablation (16,026 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count). Note: the curated benchmark universe includes all MSigDB collections (HALLMARK_, REACTOME_, WP_, KEGG_, PID_, BIOCARTA_, and CGP author-named sets); the CGP exclusion filter applies only to KF cohort analyses (ST3–ST4).
+Three-arm comparison: Full BIFO (57,005 propagating edges), Ablation (14,413 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count). Note: the curated benchmark universe includes all MSigDB collections (HALLMARK_, REACTOME_, WP_, KEGG_, PID_, BIOCARTA_, and CGP author-named sets); the CGP exclusion filter applies only to KF cohort analyses (ST3–ST4).
 
 **Full BIFO**
 
