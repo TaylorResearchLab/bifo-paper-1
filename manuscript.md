@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-22" />
   <meta name="citation_publication_date" content="2026-04-22" />
   <meta property="article:published_time" content="2026-04-22" />
-  <meta name="dc.modified" content="2026-04-22T11:17:26+00:00" />
-  <meta property="article:modified_time" content="2026-04-22T11:17:26+00:00" />
+  <meta name="dc.modified" content="2026-04-22T11:44:25+00:00" />
+  <meta property="article:modified_time" content="2026-04-22T11:44:25+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/ef572364ea49bc2061f6585e3ab25ec654dbd6fa/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ef572364ea49bc2061f6585e3ab25ec654dbd6fa/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/ef572364ea49bc2061f6585e3ab25ec654dbd6fa/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -459,7 +459,7 @@ The pipeline produces two output files per run via `summarize_results.py`.
 
 `pathway_results_summary.tsv` contains one row per scored pathway, sorted by degree_norm rank, with the following columns: rank (integer, 1 = highest score); pathway_name (human-readable label); pathway_id (source database identifier); source (MSigDB, WikiPathways, Reactome, or GO); n_members (pathway size after membership filtering); degree_norm (primary BIFO score); null_calibrated (boolean, TRUE if the rewiring null distribution is valid for this pathway); null_z (z-score relative to 1,000 degree-preserving membership rewiring permutations; NaN if null is degenerate); empirical_q (BH-corrected empirical p-value; NaN if not tested); member_mean_null_z and member_mean_q (complementary member-level null statistics); and in_reference (TRUE if the pathway is in a pre-specified reference set). All scored pathways are included regardless of null calibration status; the null_calibrated column allows downstream filtering.
 
-`pathway_results_llm.md` is a structured markdown document intended for input to a large language model. It contains a role instruction directing the model to focus on biological interpretation rather than methodological critique, a plain-language description of the analysis, a column-by-column interpretation guide, the top 50 pathways by degree_norm score (well-calibrated only), a list of seed genes used as input, the reference pathway set if provided, key findings (significant pathways and top pathways by null_z), and suggested questions a biologist can ask to begin interpreting the results. The file is self-contained: a user with no prior knowledge of BIFO can paste it into any LLM and immediately receive biologically grounded interpretation of their results.
+`pathway_results_llm.md` is a structured markdown document intended for input to a large language model. It contains a role instruction directing the model to focus on biological interpretation rather than methodological critique, a plain-language description of the analysis, a column-by-column interpretation guide, the top 50 pathways by degree_norm score (well-calibrated only), a list of seed genes used as input, the reference pathway set if provided, key findings (significant pathways and top pathways by null_z), and suggested questions a biologist can ask to begin interpreting the results. The file is self-contained: a user with no prior knowledge of BIFO can paste it into any LLM and immediately receive biologically grounded interpretation of their results. LLM outputs are intended for exploratory biological interpretation only and are not part of any quantitative evaluation; the LLM output is not used for scoring, ranking, or statistical inference.
 
 
 **Results**
@@ -718,7 +718,7 @@ The benchmark graph is a 1-hop neighborhood export from a defined DDKG SAB subse
 
 ***Mechanistic arm scope and structural interpretation***
 
-The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies to the present benchmark graph and SAB selection. Rather than a limitation, this is consistent with an architectural property of ontology-aligned biomedical knowledge graphs: mechanistic edges encode directed biological process flow within the molecular layer (gene--gene signaling, protein interactions, regulatory cascades), while a formally distinct edge class --- Pathway Contribution bridges --- is required to connect that molecular layer to pathway-level annotations. This separation is not an artefact of incomplete edge coverage; it is a consequence of how curated pathway memberships are represented in the DDKG. The result motivates BIFO's explicit admission of bridge edges as a coherent, propagation-eligible flow class: without formally recognising and admitting them, no graph propagation method operating on mechanistic edges alone can reach pathway concept nodes in this knowledge graph architecture. Whether this architectural property persists under expanded SAB selections incorporating additional evidence layers remains an open question outside the scope of the current analysis.
+The finding that pathway nodes are structurally inaccessible under mechanistic-only propagation applies to the present benchmark graph and SAB selection. Rather than a limitation, this is consistent with an architectural property of ontology-aligned biomedical knowledge graphs: mechanistic edges encode directed biological process flow within the molecular layer (gene--gene signaling, protein interactions, regulatory cascades), while a formally distinct edge class --- Pathway Contribution bridges --- is required to connect that molecular layer to pathway-level annotations. This separation is not an artefact of incomplete edge coverage; it is a consequence of how curated pathway memberships are represented in the DDKG. The result motivates BIFO's explicit admission of bridge edges as a coherent, propagation-eligible flow class: without formally recognising and admitting them, no graph propagation method operating on mechanistic edges alone can reach pathway concept nodes under this graph construction and scoring formulation. Whether this architectural property persists under expanded SAB selections incorporating additional evidence layers remains an open question outside the scope of the current analysis.
 
 ***Gene-level recovery ceiling***
 
