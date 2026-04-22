@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-22" />
   <meta name="citation_publication_date" content="2026-04-22" />
   <meta property="article:published_time" content="2026-04-22" />
-  <meta name="dc.modified" content="2026-04-22T06:01:08+00:00" />
-  <meta property="article:modified_time" content="2026-04-22T06:01:08+00:00" />
+  <meta name="dc.modified" content="2026-04-22T06:08:32+00:00" />
+  <meta property="article:modified_time" content="2026-04-22T06:08:32+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a50a0111edf601c55e9730f726db5fdd341d9397/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a50a0111edf601c55e9730f726db5fdd341d9397/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a50a0111edf601c55e9730f726db5fdd341d9397/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0f52f8a5d33308d8702d447d30e5a8537de2ecb/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0f52f8a5d33308d8702d447d30e5a8537de2ecb/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a0f52f8a5d33308d8702d447d30e5a8537de2ecb/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -364,6 +364,8 @@ The benchmark graph is a controlled projection of the full DDKG, not a comprehen
 BIFO pathway scores are made actionable by comparison to an empirical null that tests whether a pathway's observed score is higher than expected given the propagated signal landscape. The null model uses degree-preserving bipartite edge rewiring of the Pathway Contribution (bridge) layer, keeping the real seed set and propagation operator fixed while randomising which genes are assigned as members of each pathway. For each permutation, the bridge edges are rewired via random endpoint swaps that preserve each pathway's member count and each gene's pathway membership count exactly. PPR is rerun on the rewired graph with the same seeds, and degree_norm scores are recomputed for all pathways. This process is repeated N = 1000 times to build a per-pathway null distribution.
 
 Statistical significance is assessed using the finite-sample-corrected empirical p-value (Phipson and Smyth 2010): p = (1 + count(null ≥ observed)) / (1 + N). BH correction is applied across all scored pathways to obtain q-values. The rewiring null is implemented in `score_pathways.py` via the `--n-permutations` and `--null-type membership-rewiring` flags.
+
+**Null calibration filter.** Pathways for which the rewiring null distribution is near-degenerate — defined as those where the null mean is less than 10% of the observed degree_norm score (signal_to_null_mean > 10) — are excluded from BH correction and reported with null_z = NaN and empirical_q = NaN. When null_mean is near zero, all 1,000 permutations produce scores far below the observed value, the null standard deviation collapses, and null_z inflates mechanically rather than reflecting biological enrichment. A threshold of 10 was selected empirically as a conservative cutoff separating pathways with stable null distributions from those with near-degenerate null means; results are qualitatively unchanged across reasonable threshold ranges (5–20). In KF-CHD, 115 of 2,130 pathways (5.4%) fail this filter; in KF-NBL, 0 of 2,196 fail. The two new output columns `null_calibrated` (boolean) and `signal_to_null_mean` (float) are written to the scored CSV for inspection.
 
 **Graph composition determines rewiring null calibration.** The validity of the rewiring null depends on the fraction of propagating edges that are bridge edges versus non-bridge (mechanistic) edges. When non-bridge edges provide sufficient routing constraint, rewired bridge assignments that do not match the biological structure of the seeds produce low pathway scores, and the null distribution is well-separated from the observed score. When bridge edges dominate the propagating graph, rewiring effectively randomizes the dominant routing structure of the propagation operator, and random bridge assignments frequently route mass to large, highly connected pathways under uniform propagation, inflating the null mean.
 
@@ -1409,16 +1411,16 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 
 ### ST4 — Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL
 
-All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table.
+All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean > 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §8.4).
 
 | Pathway name | Source DB | KF-CHD rank | KF-CHD score | KF-CHD null_z | KF-NBL rank | KF-NBL score | KF-NBL null_z |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| WP_JOUBERT_SYNDROME | MSIGDB | 34 | 9.280e-06 | 54.69 | 17 | 2.536e-06 | 10.54 |
+| WP_JOUBERT_SYNDROME | MSIGDB | 34 | 9.280e-06 | NaN† | 17 | 2.536e-06 | 10.54 |
 | WP_CILIOPATHIES | MSIGDB | 43 | 8.509e-06 | 41.19 | 3 | 4.241e-06 | 18.37 |
-| REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE | MSIGDB | 95 | 6.049e-06 | 38.09 | 71 | 1.752e-06 | 5.65 |
-| REACTOME_CILIUM_ASSEMBLY | MSIGDB | 163 | 4.219e-06 | 22.23 | 32 | 2.154e-06 | 6.12 |
-| WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 171 | 3.977e-06 | 19.89 | 31 | 2.154e-06 | 8.94 |
-| REACTOME_HEDGEHOG_OFF_STATE | MSIGDB | 216 | 3.163e-06 | 18.26 | 347 | 9.544e-07 | 0.13 |
+| REACTOME_ANCHORING_OF_THE_BASAL_BODY_TO_THE_PLASMA_MEMBRANE | MSIGDB | 95 | 6.049e-06 | 29.97 | 71 | 1.752e-06 | 5.65 |
+| REACTOME_CILIUM_ASSEMBLY | MSIGDB | 163 | 4.219e-06 | 18.52 | 32 | 2.154e-06 | 6.12 |
+| WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 171 | 3.977e-06 | 17.86 | 31 | 2.154e-06 | 8.94 |
+| REACTOME_HEDGEHOG_OFF_STATE | MSIGDB | 216 | 3.163e-06 | 14.39 | 347 | 9.544e-07 | 0.13 |
 | REACTOME_SIGNALING_BY_HEDGEHOG | MSIGDB | 239 | 2.740e-06 | 13.48 | 228 | 1.134e-06 | 0.52 |
 | WP_CILIARY_LANDSCAPE | MSIGDB | 358 | 1.401e-06 | 1.08 | 233 | 1.125e-06 | -1.01 |
 | WP_HEDGEHOG_SIGNALING_PATHWAY_NETPATH | MSIGDB | 921 | 1.895e-08 | -3.18 | 516 | 7.433e-07 | 2.74 |
