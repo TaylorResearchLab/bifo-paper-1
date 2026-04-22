@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-22" />
   <meta name="citation_publication_date" content="2026-04-22" />
   <meta property="article:published_time" content="2026-04-22" />
-  <meta name="dc.modified" content="2026-04-22T11:44:25+00:00" />
-  <meta property="article:modified_time" content="2026-04-22T11:44:25+00:00" />
+  <meta name="dc.modified" content="2026-04-22T12:56:55+00:00" />
+  <meta property="article:modified_time" content="2026-04-22T12:56:55+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d01b44cb3c55f569c9d012df235a111267b5f036/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0b944561fa565ec0eb580c31450a6eae6b3f6fd8/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0b944561fa565ec0eb580c31450a6eae6b3f6fd8/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0b944561fa565ec0eb580c31450a6eae6b3f6fd8/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -104,9 +104,9 @@ Biological knowledge graphs integrate heterogeneous data across molecular, cellu
 
 Here we introduce the Biological Information Flow Ontology (BIFO), a framework that constrains information flow by defining admissible biological transformations prior to propagation. In a three-arm ablation design, we show that pathway inference depends on a distinct bridge layer: mechanistic-only propagation yields zero pathway scores in this graph representation, while inclusion of gene-to-pathway membership edges enables signal transfer between molecular and pathway representations.
 
-Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO recovers a coherent ciliopathy pathway cluster in both diseases, with WP_CILIOPATHIES carrying the strongest statistical enrichment signal in the KF-CHD dataset (null_z = 41.2, q = 0.008, rank 43/2,130) and ranking third in KF-NBL (null_z = 18.4, q = 0.014). Correctly implemented Fisher enrichment independently ranks WP_CILIOPATHIES first in both cohorts, confirming that the recovered signal reflects underlying biology rather than a propagation artefact, while BIFO remains effective in regimes where overlap-based methods are numerically unstable, implementation-sensitive, or less informative.
+Across a curated congenital heart disease benchmark, BIFO improves pathway prioritization (P@10 = 0.70) relative to seed-only enrichment (P@10 = 0.30) and propagation-based baselines (P@10 = 0.10). In two independent rare variant cohorts, BIFO recovers a coherent ciliopathy pathway cluster in both diseases, with WP_CILIOPATHIES carrying the strongest statistical enrichment signal among well-calibrated pathways in the KF-CHD dataset (null_z = 41.2, q = 0.008, rank 43/2,130) and ranking third in KF-NBL (null_z = 18.4, q = 0.014). Correctly implemented Fisher enrichment independently ranks WP_CILIOPATHIES first in both cohorts, supporting that the recovered signal reflects underlying biology rather than a propagation artefact, while BIFO remains effective in regimes where overlap-based methods are numerically unstable, implementation-sensitive, or less informative.
 
-These results show that constraining admissible information flow is sufficient in this setting to enable meaningful graph-based biological inference where standard approaches fail.
+Constraining admissible information flow is sufficient in this setting to enable meaningful graph-based biological inference where standard approaches fail.
 
 
 ## Introduction
@@ -874,7 +874,7 @@ Within this benchmark slice, the graph is organized as a two-layer system: a mec
 
 The robustness analysis shows that these results are not dependent on a particular gene set. Across all 3,003 partitions of the CHD gene pool, BIFO consistently improves pathway ranking relative to unconditioned propagation. At the same time, the comparison with Fisher enrichment highlights an important boundary. When seed genes directly overlap with pathway members, Fisher performs well, as expected. BIFO is most useful in the complementary setting, where relevant pathways are connected indirectly through biological relationships. This distinction aligns with the difference between recovery tasks and discovery tasks and explains why BIFO is particularly effective for cohort-scale analyses.
 
-The KF cohort results further clarify the nature of the recovered signal. The primary contribution of this analysis is that BIFO remains effective in the large-cohort regime where standard enrichment methods lose discriminative power due to p-value floor collapse. The convergence with correctly implemented Fisher enrichment supports that the recovered signal reflects underlying biology rather than a propagation artefact, while the requirement for cohort-scale seed sets reflects the distributed nature of the underlying developmental process rather than a limitation of either method. The ciliopathy signal is not driven by a small number of genes but is distributed across a subset of genes embedded in a larger heterogeneous background, consistent with a polygenic developmental process rather than a single dominant driver. The biological interpretation of these findings and their implications for cilia-related developmental disease are examined in depth in the companion cross-cohort analysis (Stear et al. 2026).
+The KF cohort results further clarify the nature of the recovered signal. The primary contribution of this analysis is that BIFO remains effective in the large-cohort regime where standard enrichment methods lose discriminative power due to p-value floor collapse. The convergence with correctly implemented Fisher enrichment supports that the recovered signal reflects underlying biology rather than a propagation artefact, while the requirement for cohort-scale seed sets reflects the distributed nature of the underlying developmental process rather than a limitation of either method. The ciliopathy signal is not driven by a small number of genes but is distributed across a subset of genes embedded in a larger heterogeneous background, consistent with a polygenic developmental process rather than a single dominant driver. The pipeline output includes a structured markdown file (`pathway_results_llm.md`) that enables biological interpretation without prior knowledge of BIFO; downstream analysis of the KF-CHD and KF-NBL outputs using a general-purpose LLM independently recovered the ciliopathy module as the primary signal in both cohorts and identified a DNA repair axis specific to the neuroblastoma cohort, demonstrating the utility of the output format for exploratory biological interpretation (Supplementary Section SS1). The biological interpretation of these findings and their implications for cilia-related developmental disease are examined in depth in the companion cross-cohort analysis (Stear et al. 2026).
 
 Several limitations should be noted. The benchmark graph is a controlled 1-hop projection of a larger knowledge graph and includes only a subset of source vocabularies. As a result, some nodes cannot be resolved and are excluded from propagation. The finding that mechanistic edges alone cannot reach pathway nodes depends on this graph configuration and may change with additional data sources. This result reflects representation choices in the exported graph rather than a general limitation of mechanistic relationships. However, the underlying pattern, a separation between mechanistic relationships and curated pathway annotations, is a common feature of ontology-based knowledge graphs. The conditioning framework itself is graph-agnostic: the specific structural result depends on representation choices in the source graph, but the need to distinguish admissible flow from associative and contextual relationships does not. An alternative approach of weighting edges within a single operator would conflate causal and associative relationships, whereas BIFO preserves this distinction at the representation level, enabling partial attribution of pathway score changes to specific edge classes rather than to the aggregate topology. Application to other knowledge graphs will depend on the availability and representation of mechanistic and membership edge types. Pathway-level inference additionally depends on curated gene–pathway relationships; absence or inconsistency of these edges will affect performance. BIFO does not infer causal direction or validate biological mechanism; it constrains and interprets signal propagation within the structure of the input graph.
 
@@ -1677,6 +1677,112 @@ README.
 mapping (`bifo_mapping.yaml`) are graph-agnostic and can be applied to any
 property graph whose edges carry DDKG-compatible predicates. Code is released
 under MIT License; benchmark data under CC BY 4.0.
+
+
+## Supplementary Section SS1: LLM-assisted biological interpretation of KF-CHD and KF-NBL pathway results
+
+### Overview
+
+The following interpretations were generated by providing the `pathway_results_llm.md` output file from each cohort to a general-purpose large language model (GPT-4) in a fresh session with no prior context. The model was given the scored pathway table, seed gene list, and reference set as structured input and asked to interpret the biological meaning of the results. No method-specific guidance was provided beyond the role instruction embedded in the output file. These outputs are illustrative of the exploratory biological interpretation use case for `pathway_results_llm.md` and are not part of the quantitative evaluation.
+
+---
+
+### SS1.1 KF-CHD: congenital heart disease cohort (697 probands, 1,287 seed genes)
+
+#### Summary interpretation
+
+The CHD result set does not point to a single pathway. It points to a recurring developmental program with several strong axes: cilia and cilium-dependent morphogenesis; membrane transport and ion handling; cell shape, adhesion, and tissue architecture; muscle and cardiac functional programs; inflammatory and innate immune signaling; and metabolism and growth-state programs. This pattern is biologically plausible for congenital heart defects because heart development depends on left-right patterning, morphogen signaling, epithelial and mesenchymal remodeling, calcium and ion flux, and myocardial differentiation and contraction.
+
+#### Primary signal: cilia module
+
+The clearest signal is the cilia module. WP_CILIOPATHIES is the strongest reference-supported hit (rank 43, null_z = 41.2, q = 0.008), with the same theme recurring in REACTOME_CILIUM_ASSEMBLY and primary cilium development pathways. In CHD, primary cilia sit upstream of left-right axis formation and developmental signaling systems including Hedgehog and Notch, making this a coherent developmental mechanism rather than an incidental enrichment. The seed list supports this interpretation directly, containing recognizable cilia and centrosome genes including AHI1, ALMS1, ARL13B, B9D1, BBS4, BBS9, CC2D2A, CEP104, CEP152, CEP250, and CEP290.
+
+#### Secondary signal: transport and ion handling
+
+Disorders of transmembrane transporters, SLC-mediated transport, and broader transmembrane transport all score highly. This signal reflects how cells move ions, metabolites, and molecules across membranes, which is relevant to morphogen handling, cellular energetics, osmotic balance, calcium regulation, and cardiac electrophysiology. The seed list contains many transporter and channel genes including ABCA family members, ABCB11, ABCC genes, ATP7B, and several CACNA genes, providing direct input support for this theme.
+
+#### Tertiary signals: morphogenesis, muscle, immune
+
+Regulation of cell shape, receptor-mediated endocytosis, basal body anchoring, cell adhesion, and Notch signaling point toward developmental patterning and structural remodeling relevant to outflow tract formation, septation, valve development, and chamber morphogenesis. Myogenesis, striated muscle contraction, arrhythmogenic right ventricular cardiomyopathy, and calcium regulation in the cardiac cell represent either downstream consequences of developmental programs or a second axis involving sarcomeric and excitation-contraction biology. Inflammatory and innate immune pathways (IL4/IL13, IL18, complement, Toll-like receptor) are present but rank behind the developmental themes.
+
+#### Biological modules (from TSV analysis)
+
+| Module | Representative pathways | Pathway count | Interpretation |
+|--------|------------------------|---------------|----------------|
+| Cilia / developmental polarity | WP_CILIOPATHIES, REACTOME_CILIUM_ASSEMBLY, primary cilium development, basal body anchoring | ~10 | Core developmental mechanism; left-right axis, morphogen gradients, cardiac looping |
+| Membrane transport / ion flux | Transmembrane transport, SLC transport, ion channels | ~76 | Cellular signaling competence, calcium dynamics, morphogen handling |
+| Cell shape / morphogenesis | Regulation of cell shape, endocytosis, receptor trafficking, Notch | small | Tissue architecture; valve, septation, outflow tract remodeling |
+| Muscle / cardiac function | Myogenesis, striated muscle contraction, calcium regulation | present | Downstream developmental consequence or independent cardiomyopathy axis |
+| Immune / inflammatory | IL4/IL13, IL18, complement, TLR cascades | sparse | Modifier layer; shared hubs or syndromic gene pleiotropy |
+| Metabolic state | Lipid, fatty acid, carbohydrate metabolism | present | Cell-state programs; proliferation vs differentiation |
+
+#### Cohort interpretation
+
+This is not a single-pathway CHD cohort. It reflects a mixed but structured cohort with at least two major etiologic classes: Class A developmental patterning defects (cilia, morphogenesis, signaling pathways) and Class B cellular physiology defects (ion channels, transporters, metabolism), with a possible Class C cardiac function gene component (contraction, calcium handling). This is consistent with the heterogeneous genetic architecture of congenital heart disease.
+
+**One-sentence biological summary:** This looks most like a CHD cohort enriched for defects in cilia-linked developmental signaling and tissue morphogenesis, layered with transporter and ion-handling biology, plus a secondary contribution from myocardial and inflammatory programs.
+
+---
+
+### SS1.2 KF-NBL: neuroblastoma cohort (460 probands, 1,406 seed genes)
+
+#### Summary interpretation
+
+The NBL results reflect a mixed germline predisposition landscape with four major modules: cilium and cell architecture; genome maintenance and DNA repair; membrane transport and ionic homeostasis; and broader developmental-metabolic programs. Notably, the NBL cohort shows a distinct DNA repair signal not prominent in the CHD cohort, consistent with the known role of genome stability genes in neuroblastoma predisposition.
+
+#### Primary signal: cilia and developmental architecture
+
+WP_CILIOPATHIES ranks 3rd (null_z = 18.4, q = 0.014) and is reinforced by primary cilium development, cilium assembly, regulation of cell shape, and several sensory or photoreceptor pathways that travel with ciliary biology. In a neuroblastoma setting, this is interpreted as altered neurodevelopmental architecture, polarity, trafficking, and morphogen-related cell biology rather than as an eye-specific signal. The seed list supports this with canonical ciliary genes including AHI1, ALMS1, ARL13B, B9D1, BBS4, BBS9, and BBS10.
+
+#### Distinctive signal: DNA repair and genome maintenance
+
+DNA Repair ranks 5th, with additional support from recombinational repair and Reactome DNA repair pathways (~64 significant pathways). This is a clean, specific module not dominant in the CHD cohort. The seed list contains ATM, ATR, ATRX, BARD1, BLM, BRCA2, BRIP1, and APTX, pointing toward chromatin and DNA damage response biology. This is interpreted as neuroblastoma predisposition through impaired genome integrity maintenance, consistent with known neuroblastoma susceptibility gene biology.
+
+#### Transport and membrane biology
+
+Ionophore activity (rank 1) and Transmembrane Transport (rank 2) are the top-ranked pathways by degree_norm, with ~721 pathways mapping to this theme across the scored universe. This is not noise — it is a large, distributed signal across many related pathways reflecting ion gradients, vesicular transport, and membrane trafficking. In neuroblastoma, this aligns with neuronal lineage physiology, intracellular trafficking, and metabolic adaptation. The seed list includes multiple ATPases, calcium-channel genes, ABC transporters, and transporter-disorder pathway overlap supporting this theme.
+
+#### Developmental programs
+
+Skeletal development, organogenesis, histogenic processes, myogenesis, synaptic transmission, and extracellular matrix organization reflect reused morphogenetic programs and differentiation-state control rather than literal tissue identities. These are consistent with a tumor of disrupted developmental origin and reinforce the cilium signal through a shared developmental architecture axis.
+
+#### Biological modules (from TSV analysis)
+
+| Module | Representative pathways | Pathway count | Interpretation |
+|--------|------------------------|---------------|----------------|
+| Cilia / cell structure | WP_CILIOPATHIES (rank 3), cilium assembly, organelle biogenesis, cell shape | ~33 | Neurodevelopmental architecture; neural crest polarity and trafficking |
+| DNA repair / genome stability | DNA Repair (rank 5), recombinational repair, Reactome DNA repair | ~64 | Predisposition via impaired genome integrity; ATM, ATRX, BARD1 axis |
+| Transport / membrane biology | Ionophore activity (rank 1), transmembrane transport (rank 2), SLC transporters | ~721 | Neuronal lineage physiology; ion handling, vesicular transport |
+| Metabolism | Amino acid, carbohydrate, xenobiotic metabolism; mitochondrial tRNA | ~123 | Systemic metabolic vulnerability; biosynthetic stress susceptibility |
+| Developmental programs | Skeletal development, organogenesis, myogenesis, synaptic transmission | ~23 | Reused morphogenetic programs; differentiation-state control |
+| Immune / ECM / vascular | Complement, coagulation, ECM organization, heparin binding | ~8 | Contextual biology; tumor-microenvironment interface |
+
+#### Cohort interpretation
+
+The germline neuroblastoma cohort reflects inherited variation converging on neurodevelopmental cell architecture, ciliary and trafficking functions, genome maintenance, and membrane-metabolic homeostasis. The DNA repair module distinguishes this cohort from the CHD cohort and is the most interpretable mechanistic signal for neuroblastoma predisposition specifically.
+
+**One-sentence biological summary:** The germline neuroblastoma cohort is enriched for inherited variation converging on neurodevelopmental cell architecture, ciliary and trafficking functions, genome maintenance, and membrane-metabolic homeostasis, with additional extracellular and inflammatory interface signals.
+
+---
+
+### SS1.3 Cross-cohort comparison
+
+| Feature | KF-CHD | KF-NBL |
+|---------|--------|--------|
+| Top BIFO rank by degree_norm | Protein phosphorylation (hub) | Ionophore activity (hub) |
+| Top cilia pathway rank | WP_CILIOPATHIES rank 43 | WP_CILIOPATHIES rank 3 |
+| Cilia null_z | 41.2 (highest well-calibrated) | 18.4 (highest overall) |
+| DNA repair signal | Absent as dominant module | Present (~64 pathways, rank 5) |
+| Transport signal | Present (rank ~2–4 range) | Dominant (ranks 1–2) |
+| Morphogenesis signal | Strong (Notch, cell shape, adhesion) | Present (developmental programs) |
+| Distinctive biology | Cardiac morphogenesis, left-right axis | Genome stability, neural crest |
+| Significant pathways (q < 0.05) | 265 | 296 |
+
+Both cohorts independently recover WP_CILIOPATHIES as a top enriched pathway under both BIFO and correctly implemented Fisher enrichment, supporting a shared developmental cilia signal across pediatric disease contexts. The NBL-specific DNA repair module and the CHD-specific cardiac morphogenesis signal reflect disease-appropriate biology distinct from the shared background.
+
+---
+
+*These interpretations were generated using pathway_results_llm.md output files from summarize_results.py and are provided as illustrative examples of the LLM-assisted biological interpretation use case. They are not part of the quantitative evaluation of BIFO.*
 
 
 ## References {.page_break_before}
