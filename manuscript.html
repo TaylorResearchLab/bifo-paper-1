@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T21:02:06+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T21:02:06+00:00" />
+  <meta name="dc.modified" content="2026-04-23T22:10:40+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T22:10:40+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -802,26 +802,26 @@ Schematic of the conditioned BIFO graph. The molecular layer (top) contains gene
 <td style="text-align: left;">Conditioned PPR GSEA (B3b)</td>
 <td style="text-align: left;">0.100</td>
 <td style="text-align: left;">0.050</td>
-<td style="text-align: left;">0.085</td>
-<td style="text-align: left;">0.114</td>
-<td style="text-align: left;">110</td>
+<td style="text-align: left;">0.220</td>
+<td style="text-align: left;">0.088</td>
+<td style="text-align: left;">260</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">**BIFO-PPR full-arm (degree_norm)*</td>
 <td style="text-align: left;">* **0.700*</td>
 <td style="text-align: left;">* **0.350*</td>
-<td style="text-align: left;">* <strong>0.757</strong></td>
-<td style="text-align: left;"><strong>0.403</strong></td>
-<td style="text-align: left;"><strong>113</strong></td>
+<td style="text-align: left;">* <strong>0.753</strong></td>
+<td style="text-align: left;"><strong>0.408</strong></td>
+<td style="text-align: left;"><strong>87</strong></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Table 4.</strong> <em>Baseline comparison for the curated CHD benchmark. All methods evaluated on identical 550-pathway universe (background rate 3.3%). P@10 = fraction of the top-10 ranked pathways that belong to the CHD reference set. NDCG@10 = normalized discounted cumulative gain at rank 10, which rewards recovering reference pathways at higher ranks more than lower ranks. Avg. Prec. = average precision, the area under the precision-recall curve across all ranks; a single-number summary of how well reference pathways are recovered throughout the full ranked list, not just in the top 10.</em></p>
-<p>BIFO-PPR full-arm outperformed all baselines across every metric: P@10 = 0.70, meaning 7 of the top 10 ranked pathways were disease-relevant; NDCG@10 = 0.757, reflecting that those hits were concentrated at the very top of the list rather than scattered through the top 10; and AP = 0.403, indicating that CHD reference pathways were recovered consistently throughout the full ranked list. These compare to the next best method (B0) at P@10 = 0.40, NDCG@10 = 0.492, and AP = 0.342.</p>
+<p>BIFO-PPR full-arm outperformed all baselines across every metric: P@10 = 0.70, meaning 7 of the top 10 ranked pathways were disease-relevant; NDCG@10 = 0.757, reflecting that those hits were concentrated at the very top of the list rather than scattered through the top 10; and AP = 0.408, indicating that CHD reference pathways were recovered consistently throughout the full ranked list. These compare to the next best method (B0) at P@10 = 0.40, NDCG@10 = 0.492, and AP = 0.342.</p>
 <p><strong>Seed-only Fisher (B1)</strong> achieved P@10 = 0.30, meaning 3 of the top 10 were CHD-relevant, but the top hits included non-specific entries such as bladder cancer gene sets, TP63 targets, and TNF response pathways. With only ten seed genes, any pathway with even minimal overlap receives a low p-value, so cancer-associated gene sets that happen to share a gene or two with the seed set rank above biologically specific cardiac pathways. AP = 0.156 reflects that this non-specificity persists throughout the ranked list, not just at the top.</p>
-<p><strong>Degree-weighted seed overlap (B0)</strong> performed better than Fisher despite using no statistical test, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.342). This result is informative: it shows that the top cardiac pathways are directly accessible from the seed genes through the membership map, and that graph connectivity alone (out-degree of overlapping seed genes) is enough to surface them. BIFO’s advantage over B0 on both P@10 (0.70 vs. 0.40) and AP (0.403 vs. 0.342) reflects recovery of additional reference pathways that are connected to the seeds through the graph but do not directly overlap them, which requires propagation rather than local overlap scoring.</p>
+<p><strong>Degree-weighted seed overlap (B0)</strong> performed better than Fisher despite using no statistical test, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.342). This result is informative: it shows that the top cardiac pathways are directly accessible from the seed genes through the membership map, and that graph connectivity alone (out-degree of overlapping seed genes) is enough to surface them. BIFO’s advantage over B0 on both P@10 (0.70 vs. 0.40) and AP (0.408 vs. 0.342) reflects recovery of additional reference pathways that are connected to the seeds through the graph but do not directly overlap them, which requires propagation rather than local overlap scoring.</p>
 <p><strong>Neighborhood Fisher (B2)</strong> failed entirely, producing P@10 = 0.000 and AP = 0.036. The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes, which is 86% of the full gene universe. At that coverage, virtually every pathway has substantial neighborhood overlap, and p-values are near-identical across pathways, eliminating all rank discrimination. This illustrates a fundamental problem with graph-derived gene sets: expanding to a neighborhood before enrichment testing inflates the query to the point where the test loses all power.</p>
-<p><strong>Raw PPR GSEA (B3)</strong> recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P@10 = 0.10, AP = 0.117), confirming that graph propagation carries pathway-relevant signal even before BIFO conditioning. However, gene-level PPR scores used as input to GSEA are not specific enough to rank more than one or two reference pathways highly; the method does not distinguish between pathways that accumulate signal because their member genes are biologically relevant and pathways that accumulate signal simply because their member genes are well-connected hubs. Conditioning PPR GSEA (B3b, AP = 0.114) shows that applying BIFO conditioning to the gene-level scores before GSEA does not substantially improve this, because the bottleneck is the gene-to-pathway scoring step rather than the propagation itself. The improvement from B3b (AP = 0.114) to BIFO-PPR full-arm (AP = 0.403) therefore isolates the specific contribution of scoring pathway nodes directly via the bridge layer rather than aggregating gene-level scores.</p>
+<p><strong>Raw PPR GSEA (B3)</strong> recovered BRUNEAU_SEPTATION_VENTRICULAR at rank 1 (P@10 = 0.10, AP = 0.117), confirming that graph propagation carries pathway-relevant signal even before BIFO conditioning. However, gene-level PPR scores used as input to GSEA are not specific enough to rank more than one or two reference pathways highly; the method does not distinguish between pathways that accumulate signal because their member genes are biologically relevant and pathways that accumulate signal simply because their member genes are well-connected hubs. Conditioning PPR GSEA (B3b, AP = 0.088) shows that applying BIFO conditioning to the gene-level scores before GSEA does not substantially improve this, because the bottleneck is the gene-to-pathway scoring step rather than the propagation itself. The improvement from B3b (AP = 0.088) to BIFO-PPR full-arm (AP = 0.408) therefore isolates the specific contribution of scoring pathway nodes directly via the bridge layer rather than aggregating gene-level scores.</p>
 <p>Taken together, standard enrichment methods fail at both ends of the gene set size spectrum for this benchmark: seed Fisher is unstable with ten genes, and neighborhood Fisher loses all discriminating power with 11,000. BIFO avoids both failure modes by concentrating signal through conditioned propagation before scoring, and by scoring pathway nodes directly rather than through gene-level intermediates.</p>
 <div id="fig:baseline_heatmap" class="fignos">
 <figure>
@@ -864,7 +864,7 @@ Five enrichment methods evaluated against a 21-pathway native cilia reference se
 <td style="text-align: left;">18</td>
 <td style="text-align: left;">0.70</td>
 <td>21.4×</td>
-<td>0.403</td>
+<td>0.408</td>
 <td style="text-align: left;">1</td>
 </tr>
 <tr class="odd">
@@ -935,62 +935,62 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 </tr>
 <tr class="even">
 <td style="text-align: left;">BIFO-PPR P@10</td>
-<td style="text-align: left;">0.445</td>
-<td style="text-align: left;">0.123</td>
-<td style="text-align: left;">0.100</td>
+<td style="text-align: left;">0.430</td>
+<td style="text-align: left;">0.121</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.300</td>
 <td style="text-align: left;">0.400</td>
-<td style="text-align: left;">0.500</td>
 <td style="text-align: left;">0.500</td>
 <td style="text-align: left;">0.700</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BIFO-PPR Enrichment@10</td>
-<td style="text-align: left;">13.60×</td>
-<td style="text-align: left;">3.75</td>
-<td style="text-align: left;">3.1×</td>
-<td style="text-align: left;">12.2×</td>
-<td style="text-align: left;">15.3×</td>
-<td style="text-align: left;">15.3×</td>
-<td style="text-align: left;">21.4×</td>
+<td style="text-align: left;">13.46×</td>
+<td style="text-align: left;">3.77</td>
+<td style="text-align: left;">0.0×</td>
+<td style="text-align: left;">9.4×</td>
+<td style="text-align: left;">12.5×</td>
+<td style="text-align: left;">15.6×</td>
+<td style="text-align: left;">21.9×</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BIFO-PPR NDCG@10</td>
-<td style="text-align: left;">0.523</td>
-<td style="text-align: left;">0.142</td>
-<td style="text-align: left;">0.064</td>
+<td style="text-align: left;">0.518</td>
+<td style="text-align: left;">0.131</td>
+<td style="text-align: left;">0.000</td>
 <td style="text-align: left;">0.447</td>
-<td style="text-align: left;">0.554</td>
-<td style="text-align: left;">0.617</td>
-<td style="text-align: left;">0.760</td>
+<td style="text-align: left;">0.542</td>
+<td style="text-align: left;">0.605</td>
+<td style="text-align: left;">0.757</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BIFO-PPR Avg. Precision</td>
-<td style="text-align: left;">0.305</td>
-<td style="text-align: left;">0.066</td>
-<td style="text-align: left;">0.136</td>
-<td style="text-align: left;">0.265</td>
-<td style="text-align: left;">0.311</td>
-<td style="text-align: left;">0.354</td>
-<td style="text-align: left;">0.448</td>
+<td style="text-align: left;">0.308</td>
+<td style="text-align: left;">0.061</td>
+<td style="text-align: left;">0.142</td>
+<td style="text-align: left;">0.270</td>
+<td style="text-align: left;">0.312</td>
+<td style="text-align: left;">0.353</td>
+<td style="text-align: left;">0.438</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Rank improvement</td>
-<td style="text-align: left;">+93.0</td>
+<td style="text-align: left;">+118.3</td>
 <td style="text-align: left;">16.8</td>
-<td style="text-align: left;">+28.4</td>
-<td style="text-align: left;">+82.8</td>
-<td style="text-align: left;">+93.5</td>
-<td style="text-align: left;">+103.9</td>
-<td style="text-align: left;">+139.1</td>
+<td style="text-align: left;">+57.7</td>
+<td style="text-align: left;">+107.4</td>
+<td style="text-align: left;">+118.4</td>
+<td style="text-align: left;">+129.8</td>
+<td style="text-align: left;">+166.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Gene AUPRC</td>
-<td style="text-align: left;">0.877</td>
+<td style="text-align: left;">0.868</td>
 <td style="text-align: left;">0.121</td>
-<td style="text-align: left;">0.357</td>
-<td style="text-align: left;">0.829</td>
-<td style="text-align: left;">0.891</td>
-<td style="text-align: left;">1.000</td>
+<td style="text-align: left;">0.354</td>
+<td style="text-align: left;">0.822</td>
+<td style="text-align: left;">0.877</td>
+<td style="text-align: left;">0.967</td>
 <td style="text-align: left;">1.000</td>
 </tr>
 <tr class="even">
@@ -1007,11 +1007,11 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 </table>
 <p><strong>Table 6.</strong> <em>Distribution of BIFO-PPR pathway metrics across all 3,003 exhaustive seed partitions of the 15-gene CHD pool. All splits use identical conditioning (alpha=0.5), 550-pathway universe, and 18-pathway CHD reference. Rank improvement = mean_rank(raw) minus mean_rank(conditioned); positive values indicate conditioning improves pathway rank. Seed Fisher AP is an internal comparator within the split space and is not numerically comparable to the Table 4 Fisher baseline, which uses a different query construction.</em></p>
 <h3 id="rank-improvement-is-positive-across-every-split">6.1 Rank improvement is positive across every split</h3>
-<p>Rank improvement was positive in all 3,003 splits, ranging from +28.4 to +139.1 with a mean of +93.0. This means that BIFO conditioning improved the relative position of CHD-relevant pathways compared to unconditioned propagation in every single seed configuration tested, not just in the primary benchmark split. The consistency of this result across the full partition space establishes that the conditioning benefit is a property of the graph and the BIFO flow class mapping, not of the specific genes that happened to be chosen as seeds.</p>
+<p>Rank improvement was positive in all 3,003 splits, ranging from +57.7 to +166.0 with a mean of +118.3. This means that BIFO conditioning improved the relative position of CHD-relevant pathways compared to unconditioned propagation in every single seed configuration tested, not just in the primary benchmark split. The consistency of this result across the full partition space establishes that the conditioning benefit is a property of the graph and the BIFO flow class mapping, not of the specific genes that happened to be chosen as seeds.</p>
 <h3 id="pathway-precision-is-stable-across-nearly-all-configurations">6.2 Pathway precision is stable across nearly all configurations</h3>
-<p>Median P@10 across all 3,003 splits was 0.50, meaning the typical seed configuration recovers 5 of the 18 CHD reference pathways in the top 10 ranked results. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.10, BIFO-PPR retained detectable pathway signal above background. Average precision ranged from 0.136 to 0.448 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.</p>
+<p>Median P@10 across all 3,003 splits was 0.40, meaning the typical seed configuration recovers 5 of the 18 CHD reference pathways in the top 10 ranked results. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.10, BIFO-PPR retained detectable pathway signal above background. Average precision ranged from 0.142 to 0.438 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.</p>
 <h3 id="position-of-the-primary-benchmark-split">6.3 Position of the primary benchmark split</h3>
-<p>The primary split (GATA4, NKX2-5, TBX5, NOTCH1, NOTCH2, HAND1, HAND2, MYH6, GATA6, TBX1 as seeds) achieved P@10 = 0.70 and AP = 0.409, placing it at the maximum P@10 observed and at the 98th percentile of AP across all 3,003 splits. Rank improvement for the primary split was +128.9, at the 74th percentile (median +93.5). The primary split is therefore a favorable but not exceptional configuration: it represents what a well-chosen set of canonical disease genes can achieve, while the distribution shows that the method works robustly across a much broader range of starting points.</p>
+<p>The primary split (GATA4, NKX2-5, TBX5, NOTCH1, NOTCH2, HAND1, HAND2, MYH6, GATA6, TBX1 as seeds) achieved P@10 = 0.70 and AP = 0.409, placing it at the maximum P@10 observed and at the 98th percentile of AP across all 3,003 splits. Rank improvement for the primary split was +128.9, at the 74th percentile (median +118.4). The primary split is therefore a favorable but not exceptional configuration: it represents what a well-chosen set of canonical disease genes can achieve, while the distribution shows that the method works robustly across a much broader range of starting points.</p>
 <h3 id="relationship-to-seed-overlap-fisher-enrichment">6.4 Relationship to seed-overlap Fisher enrichment</h3>
 <p>BIFO-PPR achieved higher average precision than seed-overlap Fisher in 22.9% of splits (687 of 3,003). Fisher is competitive in this setting because many of the 15 CHD pool genes are directly annotated to cardiac pathways, so direct overlap enrichment works well when those genes are in the seed set. BIFO-PPR’s advantage lies in recovering pathways that are connected to the seeds through the graph but do not directly overlap them. Across all splits, rank improvement under BIFO-PPR is consistently positive regardless of whether BIFO-PPR or Fisher achieves higher AP on a given split, confirming that graph conditioning adds value beyond overlap-based enrichment even when Fisher is competitive on a specific configuration.</p>
 <div id="fig:resampling" class="fignos">
@@ -1271,7 +1271,7 @@ Each point is a scored pathway (grey: all pathways; blue: 16-pathway cilia refer
 <p>The mechanistic-only arm establishes this result directly. It is not intended as a competitive baseline. Its purpose is to prove that the zero-score outcome is structural, which is what justifies BIFO’s admission of bridge edges as a formally defined class rather than treating them as an implementation detail. A reviewer might ask: if mechanistic-only propagation yields zero pathway scores, what is the point of including mechanistic edges at all? The ablation arm answers this: mechanistic edges concentrate signal within biologically coherent gene neighborhoods before it transfers to the pathway layer through bridge edges, contributing a measurable improvement in pathway recovery (P@10 = 0.60 vs. 0.70 without vs. with bridge edges in the full arm). The mechanistic layer does not reach pathway nodes directly, but it shapes the signal that bridge edges ultimately transfer.</p>
 <h3 id="propagation-and-scoring-as-distinct-contributions">Propagation and scoring as distinct contributions</h3>
 <p>The baseline comparisons isolate two separable contributions to pathway recovery performance. The first is signal concentration through conditioned propagation. The second is pathway-level scoring via direct accumulation at pathway concept nodes rather than aggregation of gene-level scores.</p>
-<p>Conditioned PPR GSEA (B3b) uses BIFO-conditioned gene-level scores as input to standard GSEA, achieving AP = 0.114. BIFO-PPR full arm achieves AP = 0.403 on the same conditioned graph. The difference isolates the contribution of the degree_norm scoring function: scoring pathway nodes directly via the bridge layer is substantially more effective than aggregating conditioned gene-level scores through GSEA. This is because GSEA operates on a ranked gene list and does not require signal to accumulate at pathway concept nodes: it can find enrichment through any combination of member gene ranks. BIFO-PPR requires signal to travel through the bridge layer and arrive at the pathway node, which is more demanding but more specific. Pathways that score highly under BIFO-PPR have received propagated signal specifically because their member genes are connected to the seed neighborhood through admissible paths. Pathways that score highly under GSEA may do so because their member genes happen to rank well in the gene-level score distribution for reasons unrelated to pathway-specific signal.</p>
+<p>Conditioned PPR GSEA (B3b) uses BIFO-conditioned gene-level scores as input to standard GSEA, achieving AP = 0.088. BIFO-PPR full arm achieves AP = 0.408 on the same conditioned graph. The difference isolates the contribution of the degree_norm scoring function: scoring pathway nodes directly via the bridge layer is substantially more effective than aggregating conditioned gene-level scores through GSEA. This is because GSEA operates on a ranked gene list and does not require signal to accumulate at pathway concept nodes: it can find enrichment through any combination of member gene ranks. BIFO-PPR requires signal to travel through the bridge layer and arrive at the pathway node, which is more demanding but more specific. Pathways that score highly under BIFO-PPR have received propagated signal specifically because their member genes are connected to the seed neighborhood through admissible paths. Pathways that score highly under GSEA may do so because their member genes happen to rank well in the gene-level score distribution for reasons unrelated to pathway-specific signal.</p>
 <p>The degree_norm normalization contributes a second specificity gain. Large, highly connected pathways accumulate more propagated signal simply by having more member genes contributing bridge edge mass to the pathway node. The square root penalty down-weights this size effect without fully normalizing it away, preserving signal in pathways that are both large and biologically coherent while suppressing generic hub pathways. The rank vs. null_z landscape in Figure 8 illustrates the result: degree_norm rank and null_z are complementary rather than redundant. Pathways at the top of the degree_norm ranking but with null_z near zero are hub pathways whose scores reflect graph topology. WP_CILIOPATHIES ranks 43rd by degree_norm but carries the highest null_z (41.2) in KF-CHD, indicating that its signal is specifically attributable to its gene membership rather than to its size or connectivity.</p>
 <h3 id="the-kf-cohort-finding-and-its-biological-interpretation">The KF cohort finding and its biological interpretation</h3>
 <p>The recovery of WP_CILIOPATHIES as the top statistically enriched pathway in both KF-CHD and KF-NBL is consistent with a genuine shared developmental biology rather than a methodological artifact, for three independent reasons. First, the signal is recovered by two methods with fundamentally different mechanisms: BIFO-PPR through graph propagation and Fisher enrichment through direct gene-pathway overlap. Their concordance on the same top pathway supports that the result reflects the underlying gene set rather than propagation-specific behavior. Second, the signal requires aggregate cohort-scale variant burden: bootstrap resampling shows that neither method recovers cilia pathways reliably from 10 to 30 randomly drawn genes, establishing that the signal is distributed across many variant carriers rather than driven by a single gene or small cluster. Third, the cross-cohort convergence is biologically motivated: children with congenital heart disease have elevated neuroblastoma risk due to shared neural crest developmental origins <span class="citation" data-cites="zYFAupKx">[<a href="#ref-zYFAupKx" role="doc-biblioref">14</a>]</span>, and shared genetic architecture between neuroblastoma and ventricular septal defect has been identified at loci regulating neural crest cell formation <span class="citation" data-cites="pQnr5mcT">[<a href="#ref-pQnr5mcT" role="doc-biblioref">22</a>]</span>. Primary cilia are required for neural crest cell migration, cardiac septation, and left-right asymmetry, making them a mechanistically coherent shared vulnerability across both diseases.</p>
@@ -6415,13 +6415,13 @@ Send me the CHD companion result too, and I’ll synthesize the mechanistic over
 <div class="csl-left-margin">3. </div><div class="csl-right-inline"><strong>The Data Distillery: A Graph Framework for Semantic Integration and Querying of Biomedical Data</strong> <div class="csl-block">Taha Mohseni Ahooyi, Benjamin Stear, JAlan Simmons, Vincent T Metzger, Praveen Kumar, John Erol Evangelista, Daniel JB Clarke, Zhuorui Xie, Heesu Kim, Sherry L Jenkins, … Deanne M Taylor</div> <em>openRxiv</em> (2025-08-15) <a href="https://doi.org/hbxntw">https://doi.org/hbxntw</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1101/2025.08.11.666099">10.1101/2025.08.11.666099</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/40832351">40832351</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12363844">PMC12363844</a></div></div>
 </div>
 <div id="ref-ewr0v1mD" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline"><strong>Genenames.org: the HGNC resources in 2023</strong> <div class="csl-block">Ruth L Seal, Bryony Braschi, Kristian Gray, Tamsin EM Jones, Susan Tweedie, Liora Haim-Vilmovsky, Elspeth A Bruford</div> <em>Nucleic Acids Research</em> (2022-10-16) <a href="https://doi.org/g8rk4f">https://doi.org/g8rk4f</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkac888">10.1093/nar/gkac888</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/36243972">36243972</a></div></div>
+<div class="csl-left-margin">4. </div><div class="csl-right-inline"><strong>Genenames.org: the HGNC resources in 2023</strong> <div class="csl-block">Ruth L Seal, Bryony Braschi, Kristian Gray, Tamsin EM Jones, Susan Tweedie, Liora Haim-Vilmovsky, Elspeth A Bruford</div> <em>Nucleic Acids Research</em> (2022-10-16) <a href="https://doi.org/g8rk4f">https://doi.org/g8rk4f</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkac888">10.1093/nar/gkac888</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/36243972">36243972</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9825485">PMC9825485</a></div></div>
 </div>
 <div id="ref-1Grvn6wjr" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">5. </div><div class="csl-right-inline"><strong>The Gene Ontology resource: enriching a GOld mine</strong><div class="csl-block">, Seth Carbon, Eric Douglass, Benjamin M Good, Deepak R Unni, Nomi L Harris, Christopher J Mungall, Siddartha Basu, Rex L Chisholm, Robert J Dodson, … Justin Elser</div> <em>Nucleic Acids Research</em> (2020-12-08) <a href="https://doi.org/gh6tfm">https://doi.org/gh6tfm</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkaa1113">10.1093/nar/gkaa1113</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/33290552">33290552</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7779012">PMC7779012</a></div></div>
 </div>
 <div id="ref-1ENygunzG" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline"><strong>UniProt: the Universal Protein Knowledgebase in 2023</strong><div class="csl-block">, Alex Bateman, Maria-Jesus Martin, Sandra Orchard, Michele Magrane, Shadab Ahmad, Emanuele Alpi, Emily H Bowler-Barnett, Ramona Britto, Hema Bye-A-Jee, … Jian Zhang</div> <em>Nucleic Acids Research</em> (2022-11-21) <a href="https://doi.org/grn7tt">https://doi.org/grn7tt</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkac1052">10.1093/nar/gkac1052</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/36408920">36408920</a></div></div>
+<div class="csl-left-margin">6. </div><div class="csl-right-inline"><strong>UniProt: the Universal Protein Knowledgebase in 2023</strong><div class="csl-block">, Alex Bateman, Maria-Jesus Martin, Sandra Orchard, Michele Magrane, Shadab Ahmad, Emanuele Alpi, Emily H Bowler-Barnett, Ramona Britto, Hema Bye-A-Jee, … Jian Zhang</div> <em>Nucleic Acids Research</em> (2022-11-21) <a href="https://doi.org/grn7tt">https://doi.org/grn7tt</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkac1052">10.1093/nar/gkac1052</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/36408920">36408920</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9825514">PMC9825514</a></div></div>
 </div>
 <div id="ref-1EAIoygBW" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">7. </div><div class="csl-right-inline"><strong>The Human Phenotype Ontology in 2024: phenotypes around the world</strong> <div class="csl-block">Michael A Gargano, Nicolas Matentzoglu, Ben Coleman, Eunice B Addo-Lartey, Anna V Anagnostopoulos, Joel Anderton, Paul Avillach, Anita M Bagley, Eduard Bakštein, James P Balhoff, … Peter N Robinson</div> <em>Nucleic Acids Research</em> (2023-11-11) <a href="https://doi.org/gt6qm8">https://doi.org/gt6qm8</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/nar/gkad1005">10.1093/nar/gkad1005</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/37953324">37953324</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10767975">PMC10767975</a></div></div>
@@ -6469,7 +6469,7 @@ Send me the CHD companion result too, and I’ll synthesize the mechanistic over
 <div class="csl-left-margin">21. </div><div class="csl-right-inline"><strong>A comprehensive analysis of neuroblastoma incidence, survival, and racial and ethnic disparities from 2001 to 2019</strong> <div class="csl-block">Kevin Campbell, David A Siegel, Puja J Umaretiya, Shifan Dai, Andras Heczey, Philip J Lupo, Jeremy M Schraw, Trevor D Thompson, Michael E Scheurer, Jennifer H Foster</div> <em>Pediatric Blood &amp;amp; Cancer</em> (2023-10-22) <a href="https://doi.org/hbx8kt">https://doi.org/hbx8kt</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1002/pbc.30732">10.1002/pbc.30732</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/37867409">37867409</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11018254">PMC11018254</a></div></div>
 </div>
 <div id="ref-pQnr5mcT" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">22. </div><div class="csl-right-inline"><strong>Exploring Shared Susceptibility between Two Neural Crest Cells Originating Conditions: Neuroblastoma and Congenital Heart Disease</strong> <div class="csl-block">Alessandro Testori, Vito A Lasorsa, Flora Cimmino, Sueva Cantalupo, Antonella Cardinale, Marianna Avitabile, Giuseppe Limongelli, Maria Giovanna Russo, Sharon Diskin, John Maris, … Mario Capasso</div> <em>Genes</em> (2019-08-30) <a href="https://doi.org/gp2fzf">https://doi.org/gp2fzf</a> <div class="csl-block">DOI: <a href="https://doi.org/10.3390/genes10090663">10.3390/genes10090663</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/31480262">31480262</a></div></div>
+<div class="csl-left-margin">22. </div><div class="csl-right-inline"><strong>Exploring Shared Susceptibility between Two Neural Crest Cells Originating Conditions: Neuroblastoma and Congenital Heart Disease</strong> <div class="csl-block">Alessandro Testori, Vito A Lasorsa, Flora Cimmino, Sueva Cantalupo, Antonella Cardinale, Marianna Avitabile, Giuseppe Limongelli, Maria Giovanna Russo, Sharon Diskin, John Maris, … Mario Capasso</div> <em>Genes</em> (2019-08-30) <a href="https://doi.org/gp2fzf">https://doi.org/gp2fzf</a> <div class="csl-block">DOI: <a href="https://doi.org/10.3390/genes10090663">10.3390/genes10090663</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/31480262">31480262</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6771154">PMC6771154</a></div></div>
 </div>
 <div id="ref-p1f5DxRQ" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">23. </div><div class="csl-right-inline"><strong>The Ensembl Variant Effect Predictor</strong> <div class="csl-block">William McLaren, Laurent Gil, Sarah E Hunt, Harpreet Singh Riat, Graham RS Ritchie, Anja Thormann, Paul Flicek, Fiona Cunningham</div> <em>Genome Biology</em> (2016-06-06) <a href="https://doi.org/gdz75c">https://doi.org/gdz75c</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1186/s13059-016-0974-4">10.1186/s13059-016-0974-4</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/27268795">27268795</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4893825">PMC4893825</a></div></div>
