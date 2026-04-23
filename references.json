@@ -2,7 +2,7 @@
   {
     "publisher": "Wiley",
     "issue": "2",
-    "abstract": "<jats:title>ABSTRACT</jats:title>\n                  <jats:p>\n                    Children with congenital heart disease (CHD) have elevated neuroblastoma (NB) risk, potentially due to shared neural crest origins. We analyzed rare exonic de novo single‐nucleotide variants in 702 CHD and 454 NB trios from the Neuroblastoma Epidemiology in North America Study, Gabriella Miller Kids First Program, and a published cohort. Seven genes, including CHD risk genes\n                    <jats:italic>POGZ</jats:italic>\n                    and\n                    <jats:italic>LZTR1</jats:italic>\n                    (linked to Noonan syndrome and Schwannomatosis), showed nominal (\n                    <jats:italic>p</jats:italic>\n                    &lt; 0.05) enrichment in both cohorts.\n                    <jats:italic>CIC, IREB2, POGZ</jats:italic>\n                    , and\n                    <jats:italic>PCDHG</jats:italic>\n                    cluster are associated with neurodevelopmental disorders, supporting shared developmental mechanisms. Findings warrant investigation of pathways linking congenital anomalies and childhood cancer.\n                  </jats:p>",
+    "abstract": "<jats:title>ABSTRACT</jats:title>\n                  <jats:p>\n                    Children with congenital heart disease (CHD) have elevated neuroblastoma (NB) risk, potentially due to shared neural crest origins. We analyzed rare exonic de novo single\u2010nucleotide variants in 702 CHD and 454 NB trios from the Neuroblastoma Epidemiology in North America Study, Gabriella Miller Kids First Program, and a published cohort. Seven genes, including CHD risk genes\n                    <jats:italic>POGZ</jats:italic>\n                    and\n                    <jats:italic>LZTR1</jats:italic>\n                    (linked to Noonan syndrome and Schwannomatosis), showed nominal (\n                    <jats:italic>p</jats:italic>\n                    &lt; 0.05) enrichment in both cohorts.\n                    <jats:italic>CIC, IREB2, POGZ</jats:italic>\n                    , and\n                    <jats:italic>PCDHG</jats:italic>\n                    cluster are associated with neurodevelopmental disorders, supporting shared developmental mechanisms. Findings warrant investigation of pathways linking congenital anomalies and childhood cancer.\n                  </jats:p>",
     "DOI": "10.1002/1545-5017.70055",
     "type": "article-journal",
     "source": "Crossref",
@@ -62,7 +62,7 @@
   {
     "publisher": "Wiley",
     "issue": "1",
-    "abstract": "<jats:title>Abstract</jats:title><jats:sec><jats:title>Background</jats:title><jats:p>We characterize the incidence and 5‐year survival of children and adolescents with neuroblastoma stratified by demographic and clinical factors based on the comprehensive data from United States Cancer Statistics (USCS) and the National Program of Cancer Registries (NPCR).</jats:p></jats:sec><jats:sec><jats:title>Methods</jats:title><jats:p>We analyzed the incidence of neuroblastoma from USCS (2003–2019) and survival data from NPCR (2001–2018) for patients less than 20 years old. Incidence trends were calculated by average annual percent change (AAPC) using joinpoint regression. Differences in relative survival were estimated comparing non‐overlapping confidence intervals (CI).</jats:p></jats:sec><jats:sec><jats:title>Results</jats:title><jats:p>We identified 11,543 primary neuroblastoma cases in USCS. Age‐adjusted incidence was 8.3 per million persons [95% CI: 8.2, 8.5], with an AAPC of 0.4% [95% CI: −0.1, 0.9]. Five‐year relative survival from the NPCR dataset (<jats:italic>n</jats:italic> = 10,676) was 79.7% [95% CI: 78.9, 80.5]. Patients aged less than 1 year had the highest 5‐year relative survival (92.5%). Five‐year relative survival was higher for non‐Hispanic White patients (80.7%) or Hispanic patients (80.8%) compared to non‐Hispanic Black patients (72.6%).</jats:p></jats:sec><jats:sec><jats:title>Conclusion</jats:title><jats:p>Neuroblastoma incidence was stable during 2003–2019. Differences in relative survival exist by sex, age, race/ethnicity, and stage; patients who were male, older, non‐Hispanic Black, or with distant disease had worse survival. Future studies could seek to assess the upstream factors driving disparities in survival, and evaluate interventions to address inequities and improve survival across all groups.</jats:p></jats:sec>",
+    "abstract": "<jats:title>Abstract</jats:title><jats:sec><jats:title>Background</jats:title><jats:p>We characterize the incidence and 5\u2010year survival of children and adolescents with neuroblastoma stratified by demographic and clinical factors based on the comprehensive data from United States Cancer Statistics (USCS) and the National Program of Cancer Registries (NPCR).</jats:p></jats:sec><jats:sec><jats:title>Methods</jats:title><jats:p>We analyzed the incidence of neuroblastoma from USCS (2003\u20132019) and survival data from NPCR (2001\u20132018) for patients less than 20\u00a0years old. Incidence trends were calculated by average annual percent change (AAPC) using joinpoint regression. Differences in relative survival were estimated comparing non\u2010overlapping confidence intervals (CI).</jats:p></jats:sec><jats:sec><jats:title>Results</jats:title><jats:p>We identified 11,543 primary neuroblastoma cases in USCS. Age\u2010adjusted incidence was 8.3 per million persons [95% CI: 8.2, 8.5], with an AAPC of 0.4% [95% CI: \u22120.1, 0.9]. Five\u2010year relative survival from the NPCR dataset (<jats:italic>n</jats:italic>\u00a0=\u00a010,676) was 79.7% [95% CI: 78.9, 80.5]. Patients aged less than 1\u00a0year had the highest 5\u2010year relative survival (92.5%). Five\u2010year relative survival was higher for non\u2010Hispanic White patients (80.7%) or Hispanic patients (80.8%) compared to non\u2010Hispanic Black patients (72.6%).</jats:p></jats:sec><jats:sec><jats:title>Conclusion</jats:title><jats:p>Neuroblastoma incidence was stable during 2003\u20132019. Differences in relative survival exist by sex, age, race/ethnicity, and stage; patients who were male, older, non\u2010Hispanic Black, or with distant disease had worse survival. Future studies could seek to assess the upstream factors driving disparities in survival, and evaluate interventions to address inequities and improve survival across all groups.</jats:p></jats:sec>",
     "DOI": "10.1002/pbc.30732",
     "type": "article-journal",
     "source": "Crossref",
@@ -148,14 +148,14 @@
       },
       {
         "given": "Helga",
-        "family": "Thorvaldsdóttir"
+        "family": "Thorvaldsd\u00f3ttir"
       },
       {
         "given": "Mahmoud",
         "family": "Ghandi"
       },
       {
-        "given": "Jill P.",
+        "given": "Jill\u00a0P.",
         "family": "Mesirov"
       },
       {
@@ -256,7 +256,7 @@
     "type": "article-journal",
     "page": "440-442",
     "source": "Crossref",
-    "title": "Collective dynamics of ‘small-world’ networks",
+    "title": "Collective dynamics of \u2018small-world\u2019 networks",
     "volume": "393",
     "author": [
       {
@@ -313,7 +313,7 @@
       },
       {
         "given": "Jessica",
-        "family": "Alföldi"
+        "family": "Alf\u00f6ldi"
       },
       {
         "given": "Qingbo",
@@ -421,7 +421,7 @@
       },
       {
         "given": "Anne H.",
-        "family": "O’Donnell-Luria"
+        "family": "O\u2019Donnell-Luria"
       },
       {
         "given": "Eric Vallabh",
@@ -641,7 +641,7 @@
         "family": "Duggirala"
       },
       {
-        "given": "Josée",
+        "given": "Jos\u00e9e",
         "family": "Dupuis"
       },
       {
@@ -657,12 +657,12 @@
         "family": "Erdmann"
       },
       {
-        "given": "Tõnu",
+        "given": "T\u00f5nu",
         "family": "Esko"
       },
       {
         "given": "Martti",
-        "family": "Färkkilä"
+        "family": "F\u00e4rkkil\u00e4"
       },
       {
         "given": "Jose",
@@ -770,7 +770,7 @@
       },
       {
         "given": "Terho",
-        "family": "Lehtimäki"
+        "family": "Lehtim\u00e4ki"
       },
       {
         "given": "Ruth J. F.",
@@ -834,7 +834,7 @@
       },
       {
         "given": "Michael C.",
-        "family": "O’Donovan"
+        "family": "O\u2019Donovan"
       },
       {
         "given": "Dost",
@@ -1253,7 +1253,7 @@
   {
     "publisher": "Oxford University Press (OUP)",
     "issue": "3",
-    "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:sec>\n                    <jats:title>Summary</jats:title>\n                    <jats:p>With the increasing rates of exome and whole genome sequencing, the ability to classify large sets of germline sequencing variants using up-to-date American College of Medical Genetics—Association for Molecular Pathology (ACMG-AMP) criteria is crucial. Here, we present Automated Germline Variant Pathogenicity (AutoGVP), a tool that integrates germline variant pathogenicity annotations from ClinVar and sequence variant classifications from a modified version of InterVar (PVS1 strength adjustments, removal of PP5/BP6). This tool facilitates large-scale, clinically focused classification of germline sequence variants in a research setting.</jats:p>\n                  </jats:sec>\n                  <jats:sec>\n                    <jats:title>Availability and implementation</jats:title>\n                    <jats:p>AutoGVP is an open source dockerized workflow implemented in R and freely available on GitHub at https://github.com/diskin-lab-chop/AutoGVP.</jats:p>\n                  </jats:sec>",
+    "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:sec>\n                    <jats:title>Summary</jats:title>\n                    <jats:p>With the increasing rates of exome and whole genome sequencing, the ability to classify large sets of germline sequencing variants using up-to-date American College of Medical Genetics\u2014Association for Molecular Pathology (ACMG-AMP) criteria is crucial. Here, we present Automated Germline Variant Pathogenicity (AutoGVP), a tool that integrates germline variant pathogenicity annotations from ClinVar and sequence variant classifications from a modified version of InterVar (PVS1 strength adjustments, removal of PP5/BP6). This tool facilitates large-scale, clinically focused classification of germline sequence variants in a research setting.</jats:p>\n                  </jats:sec>\n                  <jats:sec>\n                    <jats:title>Availability and implementation</jats:title>\n                    <jats:p>AutoGVP is an open source dockerized workflow implemented in R and freely available on GitHub at https://github.com/diskin-lab-chop/AutoGVP.</jats:p>\n                  </jats:sec>",
     "DOI": "10.1093/bioinformatics/btae114",
     "type": "article-journal",
     "source": "Crossref",
@@ -1368,7 +1368,7 @@
         "family": "Waagmeester"
       },
       {
-        "given": "Denise N",
+        "given": "Denise\u00a0N",
         "family": "Slenter"
       },
       {
@@ -1377,14 +1377,14 @@
       },
       {
         "given": "Ryan",
-        "family": "A. Miller"
+        "family": "A.\u00a0Miller"
       },
       {
         "given": "Daniela",
         "family": "Digles"
       },
       {
-        "given": "Elisson N",
+        "given": "Elisson\u00a0N",
         "family": "Lopes"
       },
       {
@@ -1400,7 +1400,7 @@
         "family": "Winckers"
       },
       {
-        "given": "Susan L",
+        "given": "Susan\u00a0L",
         "family": "Coort"
       },
       {
@@ -1595,7 +1595,7 @@
       },
       {
         "given": "Milagros",
-        "family": "Rodríguez-López"
+        "family": "Rodr\u00edguez-L\u00f3pez"
       },
       {
         "given": "Marcio L",
@@ -1607,7 +1607,7 @@
       },
       {
         "given": "Astrid",
-        "family": "Lægreid"
+        "family": "L\u00e6greid"
       },
       {
         "given": "Colin",
@@ -1766,8 +1766,8 @@
         "family": "Hayles"
       },
       {
-        "given": "Jürg",
-        "family": "Bähler"
+        "given": "J\u00fcrg",
+        "family": "B\u00e4hler"
       },
       {
         "given": "Elizabeth R",
@@ -1815,7 +1815,7 @@
       },
       {
         "given": "Peter",
-        "family": "D’Eustachio"
+        "family": "D\u2019Eustachio"
       },
       {
         "given": "Lisa",
@@ -2194,7 +2194,7 @@
   {
     "publisher": "Oxford University Press (OUP)",
     "issue": "D1",
-    "abstract": "<jats:title>Abstract</jats:title><jats:p>The aim of the UniProt Knowledgebase is to provide users with a comprehensive, high-quality and freely accessible set of protein sequences annotated with functional information. In this publication we describe enhancements made to our data processing pipeline and to our website to adapt to an ever-increasing information content. The number of sequences in UniProtKB has risen to over 227 million and we are working towards including a reference proteome for each taxonomic group. We continue to extract detailed annotations from the literature to update or create reviewed entries, while unreviewed entries are supplemented with annotations provided by automated systems using a variety of machine-learning techniques. In addition, the scientific community continues their contributions of publications and annotations to UniProt entries of their interest. Finally, we describe our new website (https://www.uniprot.org/), designed to enhance our users’ experience and make our data easily accessible to the research community. This interface includes access to AlphaFold structures for more than 85% of all entries as well as improved visualisations for subcellular localisation of proteins.</jats:p>",
+    "abstract": "<jats:title>Abstract</jats:title><jats:p>The aim of the UniProt Knowledgebase is to provide users with a comprehensive, high-quality and freely accessible set of protein sequences annotated with functional information. In this publication we describe enhancements made to our data processing pipeline and to our website to adapt to an ever-increasing information content. The number of sequences in UniProtKB has risen to over 227 million and we are working towards including a reference proteome for each taxonomic group. We continue to extract detailed annotations from the literature to update or create reviewed entries, while unreviewed entries are supplemented with annotations provided by automated systems using a variety of machine-learning techniques. In addition, the scientific community continues their contributions of publications and annotations to UniProt entries of their interest. Finally, we describe our new website (https://www.uniprot.org/), designed to enhance our users\u2019 experience and make our data easily accessible to the research community. This interface includes access to AlphaFold structures for more than 85% of all entries as well as improved visualisations for subcellular localisation of proteins.</jats:p>",
     "DOI": "10.1093/nar/gkac1052",
     "type": "article-journal",
     "page": "D523-D531",
@@ -2737,7 +2737,7 @@
   {
     "publisher": "Oxford University Press (OUP)",
     "issue": "D1",
-    "abstract": "<jats:title>Abstract</jats:title>\n               <jats:p>The Human Phenotype Ontology (HPO) is a widely used resource that comprehensively organizes and defines the phenotypic features of human disease, enabling computational inference and supporting genomic and phenotypic analyses through semantic similarity and machine learning algorithms. The HPO has widespread applications in clinical diagnostics and translational research, including genomic diagnostics, gene-disease discovery, and cohort analytics. In recent years, groups around the world have developed translations of the HPO from English to other languages, and the HPO browser has been internationalized, allowing users to view HPO term labels and in many cases synonyms and definitions in ten languages in addition to English. Since our last report, a total of 2239 new HPO terms and 49235 new HPO annotations were developed, many in collaboration with external groups in the fields of psychiatry, arthrogryposis, immunology and cardiology. The Medical Action Ontology (MAxO) is a new effort to model treatments and other measures taken for clinical management. Finally, the HPO consortium is contributing to efforts to integrate the HPO and the GA4GH Phenopacket Schema into electronic health records (EHRs) with the goal of more standardized and computable integration of rare disease data in EHRs.</jats:p>",
+    "abstract": "<jats:title>Abstract</jats:title>\n               <jats:p>The Human Phenotype Ontology (HPO) is a widely used resource that comprehensively organizes and defines the phenotypic features of human disease, enabling computational inference and supporting genomic and phenotypic analyses through semantic similarity and machine learning algorithms. The HPO has widespread applications in clinical diagnostics and translational research, including genomic diagnostics, gene-disease discovery, and cohort analytics. In recent years, groups around the world have developed translations of the HPO from English to other languages, and the HPO browser has been internationalized, allowing users to view HPO term labels and in many cases synonyms and definitions in ten languages in addition to English. Since our last report, a total of 2239 new HPO terms and 49235 new HPO annotations were developed, many in collaboration with external groups in the fields of psychiatry, arthrogryposis, immunology\u00a0and cardiology. The Medical Action Ontology (MAxO) is a new effort to model treatments and other measures taken for clinical management. Finally, the HPO consortium is contributing to efforts to integrate the HPO and the GA4GH Phenopacket Schema into electronic health records (EHRs) with the goal of more standardized and computable integration of rare disease data in EHRs.</jats:p>",
     "DOI": "10.1093/nar/gkad1005",
     "type": "article-journal",
     "page": "D1333-D1346",
@@ -2762,7 +2762,7 @@
         "family": "Addo-Lartey"
       },
       {
-        "given": "Anna V",
+        "given": "Anna\u00a0V",
         "family": "Anagnostopoulos"
       },
       {
@@ -2779,7 +2779,7 @@
       },
       {
         "given": "Eduard",
-        "family": "Bakštein"
+        "family": "Bak\u0161tein"
       },
       {
         "given": "James P",
@@ -2823,7 +2823,7 @@
       },
       {
         "given": "Jolana",
-        "family": "Čady"
+        "family": "\u010cady"
       },
       {
         "given": "Tiffany J",
@@ -2834,7 +2834,7 @@
         "family": "Cameron"
       },
       {
-        "given": "Seth J",
+        "given": "Seth\u00a0J",
         "family": "Carbon"
       },
       {
@@ -2850,7 +2850,7 @@
         "family": "Chan"
       },
       {
-        "given": "Christopher G",
+        "given": "Christopher\u00a0G",
         "family": "Chute"
       },
       {
@@ -2858,7 +2858,7 @@
         "family": "Cruz-Rojo"
       },
       {
-        "given": "Noémi",
+        "given": "No\u00e9mi",
         "family": "Dahan-Oliel"
       },
       {
@@ -2875,7 +2875,7 @@
       },
       {
         "given": "Bert B A",
-        "family": "de Vries"
+        "family": "de\u00a0Vries"
       },
       {
         "given": "Esther",
@@ -2990,8 +2990,8 @@
         "family": "Hanauer"
       },
       {
-        "given": "Kateřina",
-        "family": "Hanušová"
+        "given": "Kate\u0159ina",
+        "family": "Hanu\u0161ov\u00e1"
       },
       {
         "given": "Yongqun (Oliver)",
@@ -3006,8 +3006,8 @@
         "family": "Helbig"
       },
       {
-        "given": "Kateřina",
-        "family": "Holasová"
+        "given": "Kate\u0159ina",
+        "family": "Holasov\u00e1"
       },
       {
         "given": "Charles Tapley",
@@ -3050,7 +3050,7 @@
         "family": "Koolen"
       },
       {
-        "given": "Megan L",
+        "given": "Megan\u00a0L",
         "family": "Kraus"
       },
       {
@@ -3119,7 +3119,7 @@
       },
       {
         "given": "Michaela",
-        "family": "Mihulová"
+        "family": "Mihulov\u00e1"
       },
       {
         "given": "Caitlin E",
@@ -3131,7 +3131,7 @@
       },
       {
         "given": "Veronika",
-        "family": "Moslerová"
+        "family": "Moslerov\u00e1"
       },
       {
         "given": "Kenji",
@@ -3150,8 +3150,8 @@
         "family": "Nierenberg"
       },
       {
-        "given": "Nikola Novák",
-        "family": "Čajbiková"
+        "given": "Nikola Nov\u00e1k",
+        "family": "\u010cajbikov\u00e1"
       },
       {
         "suffix": "Jr.",
@@ -3176,7 +3176,7 @@
       },
       {
         "given": "Guiomar",
-        "family": "Perez de Nanclares"
+        "family": "Perez\u00a0de\u00a0Nanclares"
       },
       {
         "given": "Amy",
@@ -3203,7 +3203,7 @@
         "family": "Rekerle"
       },
       {
-        "given": "Angharad M",
+        "given": "Angharad\u00a0M",
         "family": "Roberts"
       },
       {
@@ -3300,7 +3300,7 @@
       },
       {
         "given": "Jair A",
-        "family": "Tenorio Castano"
+        "family": "Tenorio\u00a0Castano"
       },
       {
         "given": "Pavel",
@@ -3320,15 +3320,15 @@
       },
       {
         "given": "Marielle E",
-        "family": "van Gijn"
+        "family": "van\u00a0Gijn"
       },
       {
         "given": "Nicole A",
         "family": "Vasilevsky"
       },
       {
-        "given": "Markéta",
-        "family": "Vlčková"
+        "given": "Mark\u00e9ta",
+        "family": "Vl\u010dkov\u00e1"
       },
       {
         "given": "Anita",
@@ -3396,7 +3396,7 @@
       },
       {
         "given": "Zafer",
-        "family": "Yüksel"
+        "family": "Y\u00fcksel"
       },
       {
         "given": "Peter P",
@@ -3412,7 +3412,7 @@
       },
       {
         "given": "Miroslav",
-        "family": "Zvolský"
+        "family": "Zvolsk\u00fd"
       },
       {
         "given": "Sabrina",
@@ -3440,7 +3440,7 @@
       },
       {
         "given": "Sebastian",
-        "family": "Köhler"
+        "family": "K\u00f6hler"
       },
       {
         "given": "Melissa A",
@@ -3642,7 +3642,7 @@
       },
       {
         "given": "Avi",
-        "family": "Ma’ayan"
+        "family": "Ma\u2019ayan"
       },
       {
         "given": "Jonathan C.",
@@ -3680,11 +3680,11 @@
     "volume": "286",
     "author": [
       {
-        "given": "Albert-László",
-        "family": "Barabási"
+        "given": "Albert-La\u0301szlo\u0301",
+        "family": "Baraba\u0301si"
       },
       {
-        "given": "Réka",
+        "given": "Re\u0301ka",
         "family": "Albert"
       }
     ],
@@ -3851,7 +3851,7 @@
   {
     "publisher": "MDPI AG",
     "issue": "9",
-    "abstract": "<jats:p>In the past years, genome wide association studies (GWAS) have provided evidence that inter-individual susceptibility to diverse pathological conditions can reveal a common genetic architecture. Through the analysis of congenital heart disease (CHD) and neuroblastoma (NB) GWAS data, we aimed to dissect the genetic susceptibility shared between these conditions, which are known to arise from neural crest cell (NCC) migration or development abnormalities, via identification and functional characterization of common regions of association. Two loci (2q35 and 3q25.32) harbor single nucleotide polymorphisms (SNPs) that are associated at a p-value &lt; 10−3 with conotruncal malformations and ventricular septal defect respectively, as well as with NB. In addition, the lead SNP in 4p16.2 for atrial septal defect and the lead SNP in 3q25.32 for tetralogy of Fallot are less than 250 Kb distant from the lead SNPs for NB at the same genomic regions. Some of these shared susceptibility loci regulate the expression of relevant genes involved in NCC formation and developmental processes (such as BARD1, MSX1, and SHOX2) and are enriched in several epigenetic markers from NB and fetal heart cell lines. Although the clinical correlation between NB and CHD is unclear, our exploration of a possible common genetic basis between NB and a subset of cardiac malformations can help shed light on their shared embryological origin and pathogenetic mechanisms.</jats:p>",
+    "abstract": "<jats:p>In the past years, genome wide association studies (GWAS) have provided evidence that inter-individual susceptibility to diverse pathological conditions can reveal a common genetic architecture. Through the analysis of congenital heart disease (CHD) and neuroblastoma (NB) GWAS data, we aimed to dissect the genetic susceptibility shared between these conditions, which are known to arise from neural crest cell (NCC) migration or development abnormalities, via identification and functional characterization of common regions of association. Two loci (2q35 and 3q25.32) harbor single nucleotide polymorphisms (SNPs) that are associated at a p-value &lt; 10\u22123 with conotruncal malformations and ventricular septal defect respectively, as well as with NB. In addition, the lead SNP in 4p16.2 for atrial septal defect and the lead SNP in 3q25.32 for tetralogy of Fallot are less than 250 Kb distant from the lead SNPs for NB at the same genomic regions. Some of these shared susceptibility loci regulate the expression of relevant genes involved in NCC formation and developmental processes (such as BARD1, MSX1, and SHOX2) and are enriched in several epigenetic markers from NB and fetal heart cell lines. Although the clinical correlation between NB and CHD is unclear, our exploration of a possible common genetic basis between NB and a subset of cardiac malformations can help shed light on their shared embryological origin and pathogenetic mechanisms.</jats:p>",
     "DOI": "10.3390/genes10090663",
     "type": "article-journal",
     "page": "663",
@@ -3937,43 +3937,6 @@
     "PMID": "31480262",
     "id": "pQnr5mcT",
     "note": "This CSL Item was generated by Manubot v0.6.1 from its persistent identifier (standard_id).\nstandard_id: doi:10.3390/genes10090663"
-  },
-  {
-    "title": "Digitoxin metabolism by rat liver microsomes.",
-    "volume": "24",
-    "issue": "17",
-    "page": "1639-41",
-    "container-title": "Biochemical pharmacology",
-    "container-title-short": "Biochem Pharmacol",
-    "ISSN": "1873-2968",
-    "issued": {
-      "date-parts": [
-        [
-          1975,
-          9,
-          1
-        ]
-      ]
-    },
-    "author": [
-      {
-        "given": "A",
-        "family": "Schmoldt"
-      },
-      {
-        "given": "H F",
-        "family": "Benthe"
-      },
-      {
-        "given": "G",
-        "family": "Haberland"
-      }
-    ],
-    "PMID": "10",
-    "URL": "https://www.ncbi.nlm.nih.gov/pubmed/10",
-    "type": "article-journal",
-    "id": "42xwDamm",
-    "note": "This CSL Item was generated by Manubot v0.6.1 from its persistent identifier (standard_id).\nstandard_id: pubmed:10"
   },
   {
     "id": "JkpD6jMa",
