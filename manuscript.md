@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T20:56:49+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T20:56:49+00:00" />
+  <meta name="dc.modified" content="2026-04-23T21:02:06+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T21:02:06+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/1b72db66e11a099c6c4bbcbae552570810979ec9/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -130,7 +130,7 @@ We further evaluate BIFO-PPR using rare variant cohorts from the Kids First prog
 Together, these results establish BIFO as an ontological framework for formally defining admissible biological information flow, and BIFO-PPR as an implemented system that enables mechanistically grounded pathway inference where standard approaches fail.
 
 
-**Methods**
+## Methods
 
 These Methods describe the BIFO framework and its application to benchmark evaluation and cohort analysis. Parts I through III define the core pipeline: graph conditioning, propagation, and significance testing. Parts IV and V describe benchmark evaluation and cohort application. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. The specific analyses instantiated on this pipeline and their relationship to the paper's results are described in Section 2.
 
@@ -451,7 +451,7 @@ Performance was measured as Precision@10 against the 16-pathway cilia reference,
 The bootstrap analysis addresses two questions: whether cilia pathway recovery requires the full cohort-scale variant burden or can emerge from small random gene subsets; and whether BIFO or Fisher enrichment is more sensitive for detecting cilia signal at reduced seed sizes. At bootstrap seed sizes of 10 to 30 genes against a pathway-member universe of approximately 22,600 genes, p-value floor collapse does not occur and standard-precision hypergeometric computation is sufficient.
 
 
-**Results**
+## Results
 
 BIFO conditioning was evaluated across three controlled benchmarks and two independent pediatric rare variant cohorts. In the curated CHD benchmark, BIFO conditioning of a controlled DDKG graph projection produced a structured propagation substrate in which pathway nodes are reachable only through a formally defined bridge edge class; a three-arm ablation design established that this bridge layer is structurally necessary for pathway-level signal transfer. BIFO achieved P@10 = 0.70 against an 18-pathway CHD reference, outperforming all standard enrichment baselines, and the result was stable across all 3,003 possible seed configurations of the 15-gene CHD pool. Pathway-split recovery controls confirmed that the method generalizes beyond disease-gene curation. Applied to two independent Kids First rare variant cohorts, BIFO-PPR recovered a coherent ciliopathy pathway cluster in both congenital heart disease and neuroblastoma in full discovery mode, with WP_CILIOPATHIES carrying the strongest statistical enrichment signal among well-calibrated pathways in KF-CHD (null_z = 41.2, q = 0.008, rank 43 of 2,130) and ranking third in KF-NBL (null_z = 18.4, q = 0.014). Correctly implemented Fisher enrichment independently ranked WP_CILIOPATHIES first in both cohorts, supporting that the recovered signal reflects underlying biology rather than a propagation artifact. Bootstrap resampling established that this signal requires aggregate cohort-scale variant burden and is not recoverable from small random gene subsets.
 
