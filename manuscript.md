@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T18:15:48+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T18:15:48+00:00" />
+  <meta name="dc.modified" content="2026-04-23T18:24:36+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T18:24:36+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82441b57823abc3813d5a1340ed109762baf1b4/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82441b57823abc3813d5a1340ed109762baf1b4/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d82441b57823abc3813d5a1340ed109762baf1b4/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -535,7 +535,7 @@ Each panel compares four PPR propagation arms (Raw, Metadata-filtered, BIFO-cond
 The three-arm ablation design evaluated pathway prioritization by varying the PPR operator while holding the scoring stage constant across all arms: identical pathway universe (550 pathways), identical CHD reference set (18 pathways), and identical degree_norm scoring function. Differences in outcomes are therefore directly attributable to operator composition.
 
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
-  **Arm**                          **Prop. edges**   **P@10**   **Enrich. @10**    **Mean rank**   **Rank imp.**
+  **Arm**                          **Prop. edges**   **P@10**   **Enrich.10**    **Mean rank**   **Rank imp.**
 
   **Full (BIFO conditioned)**      **57,005**        **0.70**   **21.4×**          **86.6**        **+125.4**
 
@@ -626,7 +626,7 @@ Five enrichment methods evaluated against a 21-pathway native cilia reference se
 The CHD curated benchmark is a discovery task: seed genes are transcription factors and structural cardiac genes that do not directly overlap the target pathway family. To evaluate BIFO independently of disease-gene curation and in a setting where the answer is known by construction, two recovery benchmarks were added. In a recovery benchmark, seeds are drawn directly from the members of a known pathway, and the correct answer (that pathway and its family) is specified before the analysis runs. This design tests a different question from the CHD benchmark: not whether BIFO can find a biologically relevant pathway from disease genes, but whether it can correctly identify the source pathway when the seeds are already members of it. Because the seed genes overlap substantially with the target pathway by construction, the raw PPR arm already has direct proximity to the target, and negative rank improvement is expected. The relevant metrics in this setting are whether the source pathway ranks first and how coherently the broader pathway family is recovered.
 
   ----------------------------- ----------- ------------- ----------------- ---------- ------------------ ------------- -----------------
-  **Context (task type)**       **Seeds**   **Heldout**   **Ref. paths.**   **P@10**   **Enrich. @10**   **BIFO AP**   **Source rank**
+  **Context (task type)**       **Seeds**   **Heldout**   **Ref. paths.**   **P@10**   **Enrich.10**   **BIFO AP**   **Source rank**
 
   CHD curated (discovery)       10          5             18                0.70       21.4×              0.403         1
 
