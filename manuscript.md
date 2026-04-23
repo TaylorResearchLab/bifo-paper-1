@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T19:03:12+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T19:03:12+00:00" />
+  <meta name="dc.modified" content="2026-04-23T20:51:52+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T20:51:52+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -209,6 +209,14 @@ $F_{\text{admissible}}$ is the set of flow classes designated as propagating in 
 The analyses in this paper use the Common Fund Data Ecosystem Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and inheriting Petagraph infrastructure [@doi:10.1101/2025.08.11.666099; @doi:10.1038/s41597-024-04070-w]. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a SAB identifier and each edge carries a predicate drawn from the source ontology's relation vocabulary, making edge provenance fully traceable and satisfying the predicate-mapping and entity resolution requirements of BIFO conditioning.
 
 For each analysis, the graph was queried as a 1-hop neighborhood centered on the relevant seed gene set, producing a mechanistic and association edge file and a separate gene-to-pathway membership edge file derived from MSigDB [@doi:10.1073/pnas.0506580102; @doi:10.1016/j.cels.2015.12.004], WikiPathways [@doi:10.1093/nar/gkaa1024], and Gene Ontology annotations. These were merged into a single edge file for conditioning. Node metadata was exported separately. The specific graph parameters, edge counts, and conditioning results for each analysis are described in the relevant benchmark and cohort sections.
+
+The analyses described above are instantiated on a set of graph projections and gene sets constructed to isolate distinct properties of the method. All benchmarks and cohort analyses use the same underlying DDKG representation and BIFO conditioning procedure, with differences arising from the choice of seed sets, graph export scope, and evaluation regime.
+
+The primary benchmark is defined on a controlled 1-hop projection of the DDKG centered on a curated set of congenital heart disease genes, producing a graph with fixed topology and known pathway reference structure (Section 6.3). Within this graph, separate benchmark cohorts are defined for discovery and recovery tasks, using curated disease genes and pathway-derived gene sets (Sections 6.1–6.4). This design allows evaluation of pathway inference under both indirect (discovery) and direct (recovery) signal regimes.
+
+To evaluate robustness to input gene selection, an exhaustive resampling analysis is performed over all C(15,10) = 3,003 possible seed/held-out partitions of the CHD gene pool, holding the graph structure and propagation operators fixed while varying only the seed vector (Section 9). This isolates the contribution of seed composition to pathway-level inference independently of graph topology.
+
+The same pipeline is then applied to two large-scale rare variant cohorts from the Kids First program (congenital heart disease and neuroblastoma), where gene sets are derived from germline variant aggregation and evaluated in discovery mode without predefined pathway targets (Sections 10–15). These cohort analyses represent a distinct regime from the curated benchmarks, characterized by large, heterogeneous gene sets and distributed biological signal, and are used to assess whether BIFO-conditioned propagation recovers coherent pathway structure under conditions where standard enrichment approaches lose discriminative power.
 
 ## Part II: Propagation and pathway scoring
 
