@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T22:10:40+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T22:10:40+00:00" />
+  <meta name="dc.modified" content="2026-04-23T23:04:07+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T23:04:07+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/4c693c16710828a4789a08fbdaca2aff5c145a81/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -285,7 +285,7 @@
 <p>BIFO pathway scores are made actionable by comparison to an empirical null that tests whether a pathway’s observed score exceeds what is expected given the propagated signal landscape. The null model uses degree-preserving rewiring of the bridge edge layer, keeping the seed set and propagation operator fixed while randomizing which genes are assigned as members of each pathway. For each permutation, bridge edges are rewired via random endpoint swaps that preserve each pathway’s member count and each gene’s pathway membership count exactly. PPR is rerun on the rewired graph with the same seeds and degree_norm scores are recomputed for all pathways. This process is repeated N = 1,000 times to build a per-pathway null distribution.</p>
 <p>Statistical significance is assessed using the finite-sample-corrected empirical p-value (Phipson and Smyth 2010):</p>
 <p><span class="math display">\[p = \frac{1 + \text{count}(\text{null} \geq \text{observed})}{1 + N}\]</span></p>
-<p>BH correction is applied across all scored pathways to obtain q-values. The null_z score for each pathway is the number of standard deviations the observed degree_norm score sits above the mean of its null distribution.</p>
+<p>BH correction is applied across all scored pathways to obtain q-values. The null_z score for each pathway is the number of standard deviations the observed degree_norm score sits above the mean of its null distribution. Rewiring is restricted to gene-to-pathway membership (bridge) edges; all mechanistic edges remain fixed across permutations.</p>
 <h3 id="null-calibration">5.1 Null calibration</h3>
 <p>The rewiring null can become degenerate for pathways where the null distribution mean is near zero. In this case all permutations produce scores far below the observed value, the null standard deviation collapses, and null_z inflates mechanically rather than reflecting biological enrichment. Pathways where the null mean is less than 10% of the observed score are excluded from BH correction and reported with null_z = NaN and empirical_q = NaN. The null_calibrated column in the output flags which pathways pass this filter.</p>
 <h3 id="dependence-on-graph-composition">5.2 Dependence on graph composition</h3>
@@ -361,7 +361,7 @@
 <h3 id="three-arm-ablation-design">6.5 Three-arm ablation design</h3>
 <p>The three-arm ablation design is applied to the CHD curated benchmark to isolate the contribution of specific edge classes to pathway scoring. The PPR operator is varied across three arms while the scoring stage (pathway membership map, pathway universe, and reference set) is held constant. Differences in scoring outcomes are therefore directly attributable to operator composition.</p>
 <p>The three arms are constructed from the 105,192 edges retained after Level 2 conditioning of the CHD benchmark graph. The <strong>full arm</strong> uses all 57,005 propagating edges, including Pathway Contribution bridge edges in the gene-to-pathway direction. The <strong>ablation arm</strong> conditions the mechanistic and association edges independently of the membership edges, retaining 14,413 propagating edges with no Pathway Contribution bridge edges; this isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes. The <strong>mechanistic-only arm</strong> retains only the 9,710 edges classified as strictly mechanistic (Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes), excluding Pathway Contribution, Observational Association, and all weak-mechanistic edges.</p>
-<p>Observational Association edges (9,909), Pathway Contribution edges in the pathway-to-gene direction (37,352), weak-mechanistic Genetic Regulatory Modulation edges (64), and Spatial constraint edges (862) are retained in kept_edges.csv but excluded from all three PPR adjacency matrices.</p>
+<p>Observational Association edges (9,909), Pathway Contribution edges in the pathway-to-gene direction (37,352), weak-mechanistic Genetic Regulatory Modulation edges (64), and Spatial constraint edges (862) are retained in kept_edges.csv but excluded from all three PPR adjacency matrices. Gene-level analyses additionally include raw propagation and random sparsification controls (Table 2); pathway-level ablation focuses on these three BIFO-derived operators.</p>
 <h2 id="baseline-enrichment-methods">7 Baseline enrichment methods</h2>
 <p>Baselines are designed to represent the strongest approaches a bioinformatician would realistically apply to the same data, not deliberately weak comparators. All baselines are evaluated on the identical pathway universe and reference set as the BIFO arms.</p>
 <p><strong>B0: Degree-weighted seed overlap.</strong> For each pathway <span class="math inline">\(p\)</span>, the score is the sum of conditioned-graph out-degrees of seed genes that are direct members of <span class="math inline">\(p\)</span>, normalized by pathway size:</p>
