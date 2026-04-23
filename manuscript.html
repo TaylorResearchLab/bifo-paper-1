@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T14:17:55+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T14:17:55+00:00" />
+  <meta name="dc.modified" content="2026-04-23T14:22:02+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T14:22:02+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/784ef91179a741dc8c2f842a331a987eb7d6fdd0/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/784ef91179a741dc8c2f842a331a987eb7d6fdd0/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/784ef91179a741dc8c2f842a331a987eb7d6fdd0/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1246,7 +1246,7 @@ Each point is a scored pathway (grey: all pathways; blue: 16-pathway cilia refer
 <p>BIFO provides a principled approach to a problem that affects any inference task on heterogeneous biological graphs: the inability to distinguish biologically meaningful signal from incidental connectivity when mechanistic, associative, and annotation edges are treated equivalently. By making admissibility explicit at the level of the propagation operator, BIFO converts graph complexity from a liability into a structured substrate for biological inference. The two-layer architecture finding establishes that ontology-aligned pathway annotations occupy a structurally distinct layer from mechanistic gene relationships, and that explicit bridge admission is necessary for pathway-level inference regardless of how rich the mechanistic layer is. The KF cohort results demonstrate that this framework recovers biologically coherent signal at a scale and in a regime where standard methods lose discriminative power. The convergence of graph-based propagation and direct overlap enrichment on the same ciliopathy signal, across two diseases with known shared developmental vulnerability, supports that the recovered biology is real. Extending BIFO to additional graph substrates, source vocabularies, and inference tasks is the natural direction for this work.</p>
 <h2 id="supplementary-methods">Supplementary Methods</h2>
 <h3 id="sm1-variant-processing-and-gene-aggregation">SM1: Variant Processing and Gene Aggregation</h3>
-<p><strong>Kids First harmonized sequencing and alignment.</strong> Whole-genome sequencing (WGS) data were obtained from two independent germline cohorts: NIH dbGAP phs001138 (congenital heart defects, n=1121 total probands; n=697 with complete WGS data used in this analysis) and NIH dbGAP phs001436 (neuroblastoma, n=554 total probands; n=460 used in this analysis). All samples were sequenced on Illumina platforms using paired-end protocols. Raw sequencing reads were processed by the Kids First Data Resource Center pipelines, aligned to the human reference genome build GRCh38 using BWA (Burrows–Wheeler alignment) algorithms, and variant discovery was performed with the Genome Analysis Toolkit (GATK) Best Practices workflow. Cohorts were harmonized to ensure consistent reference build, alignment parameters, and variant-calling procedures. For cohorts originally processed using joint genotyping in family-based designs (e.g., trios or duos), multi-sample VCFs were decomposed into proband-sample VCFs for downstream per-individual filtering and aggregation. Cohorts sequenced as proband-only were retained as individual-level VCFs. All variants analyzed represent germline calls.</p>
+<p><strong>Kids First harmonized sequencing and alignment.</strong> Whole-genome sequencing (WGS) data were obtained from two independent germline cohorts: NIH dbGAP phs001138 (congenital heart defects, n=1121 total probands; n=697 with complete WGS data used in this analysis) and NIH dbGAP phs001436 (neuroblastoma, n=554 total probands; n=460 used in this analysis). All samples were sequenced on Illumina platforms using paired-end protocols. Raw sequencing reads were processed by the Kids First Data Resource Center pipelines, aligned to the human reference genome build GRCh38 using BWA (Burrows-Wheeler alignment) algorithms, and variant discovery was performed with the Genome Analysis Toolkit (GATK) Best Practices workflow. Cohorts were harmonized to ensure consistent reference build, alignment parameters, and variant-calling procedures. For cohorts originally processed using joint genotyping in family-based designs (e.g., trios or duos), multi-sample VCFs were decomposed into proband-sample VCFs for downstream per-individual filtering and aggregation. Cohorts sequenced as proband-only were retained as individual-level VCFs. All variants analyzed represent germline calls.</p>
 <p><strong>Variant quality filtering.</strong>
 Multi-allelic sites were split into biallelic records to ensure consistent downstream filtering and annotation. Variant-level and genotype-level quality control was performed using bcftools (v1.30) to ensure consistency across all cohorts. Only variants annotated with FILTER=PASS, as determined by the GATK variant quality score recalibration (VQSR) or hard-filtering framework, were retained. At the genotype level, we required a minimum genotype quality (GQ) of 20, corresponding to an estimated posterior genotype accuracy of ≥99%, and a minimum read depth (DP) of 10 reads to ensure adequate sequencing support at each locus. An initial broad population frequency filter of MAF ≤1% in gnomAD was applied at this stage to remove common variants unlikely to be disease-relevant, consistent with standard rare disease variant processing pipelines. Genotype-level filtering was applied prior to aggregation across individuals to ensure that only high-confidence variant calls contributed to downstream analyses.</p>
 <p><strong>Pathogenicity classification.</strong> To enrich for variants with predicted functional impact, we implemented a complementary pathogenicity prioritization strategy integrating both consequence-based and model-based annotations. First, variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP) <span class="citation" data-cites="p1f5DxRQ">[<a href="#ref-p1f5DxRQ" role="doc-biblioref">23</a>]</span>, incorporating transcript consequence, gene assignment, and predicted functional impact categories. Variants annotated by Ensembl VEP as having HIGH impact (including predicted loss-of-function consequences such as stop-gain, frameshift, and canonical splice-site variants) were retained.
@@ -1316,10 +1316,10 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <p><strong>Note on KF cohort query generation.</strong> The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using <code>generate_export_cypher.py</code> rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.</p>
 <hr />
 <h2 id="supplementary-tables">Supplementary Tables</h2>
-<p><em>ST5 consists of downloadable CSV files and is not typeset.</em></p>
+<p><em>ST5 consists of downloadable CSV files and is not typeset. ST6 and ST7 are provided as Supplementary Tables below.</em></p>
 <h3 id="st1-top-10-ranked-pathways-per-propagation-arm-curated-chd-benchmark">ST1: Top-10 ranked pathways per propagation arm, curated CHD benchmark</h3>
-<p>Three-arm comparison: Full BIFO (57,005 propagating edges), Ablation (14,413 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8–300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count). Note: the curated benchmark universe includes all MSigDB collections (HALLMARK_, REACTOME_, WP_, KEGG_, PID_, BIOCARTA_, and CGP author-named sets); the CGP exclusion filter applies only to KF cohort analyses (ST3–ST4).</p>
-<p><strong>Full BIFO</strong></p>
+<p>Three-arm comparison: BIFO-PPR full-arm (57,005 propagating edges), Ablation (14,413 propagating edges, no Pathway Contribution bridge edges), and Mechanistic-only (9,710 edges). Pathway universe: 550 pathways (8-300 members). CHD reference pathways marked with ✓ in the Ref. column. Score = degree_norm (direct PPR score at pathway node / √member count). Note: the curated benchmark universe includes all MSigDB collections (HALLMARK_, REACTOME_, WP_, KEGG_, PID_, BIOCARTA_, and CGP author-named sets); the CGP exclusion filter applies only to KF cohort analyses (ST3-ST4). In the BIFO-PPR full-arm table, rows for WP_JOUBERT_SYNDROME (rank 34) and WP_CILIOPATHIES (rank 43) are shown out of sequence after rank 8 to highlight the top cilia pathway results alongside the top 10 ranked pathways.</p>
+<p><strong>BIFO-PPR full-arm</strong></p>
 <table style="width:100%;">
 <colgroup>
 <col style="width: 16%" />
@@ -2445,7 +2445,7 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 </tr>
 </tbody>
 </table>
-<p><strong>B4: BIFO full-arm (degree_norm)</strong></p>
+<p><strong>B4: BIFO-PPR full-arm (degree_norm)</strong></p>
 <table style="width:100%;">
 <colgroup>
 <col style="width: 16%" />
@@ -3364,7 +3364,7 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 </tr>
 </tbody>
 </table>
-<p><em>BIFO full-arm (B4)</em></p>
+<p><em>BIFO-PPR full-arm (B4)</em></p>
 <table style="width:100%;">
 <colgroup>
 <col style="width: 16%" />
@@ -4296,7 +4296,7 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 </tr>
 </tbody>
 </table>
-<p><em>BIFO full-arm (B4)</em></p>
+<p><em>BIFO-PPR full-arm (B4)</em></p>
 <table style="width:100%;">
 <colgroup>
 <col style="width: 16%" />
@@ -4677,6 +4677,994 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <p>Columns: pathway_name | source_db | member_count | bifo_rank | bifo_score | fisher_rank | fisher_bh_pvalue | cilia_ref_flag | hub_flag</p>
 <p><em>Source: <code>results/kf_chd/baseline_comparison.csv</code> and <code>results/kf_nbl/baseline_comparison.csv</code></em></p>
 <hr />
+<hr />
+<h3 id="st6-bifo-ppr-propagating-edge-composition-predicate-flow-class-and-source-vocabulary-attribution">ST6: BIFO-PPR propagating edge composition: predicate, flow class, and source vocabulary attribution</h3>
+<p>All predicates present in BIFO-conditioned kept_edges files across the benchmark (CHD curated, 15-gene pool) and KF cohort analyses (KF-CHD: 1,276 seeds; KF-NBL: 1,395 seeds). Counts reflect edges from the source node perspective; forward and inverse predicate directions are listed separately. Source SABs are derived by joining kept_edges source node IDs to the DDKG node SAB field. UNKNOWN indicates nodes without a resolvable source vocabulary. Propagating=True edges enter the PPR adjacency matrix; Propagating=False edges are retained in kept_edges for reference only and excluded from propagation. Flow class and classification tier are sourced directly from bifo_mapping.yaml v0.7.1. Predicates with classification non_flow_edge are in the YAML non_flow_edges list and received observational fallthrough classification during conditioning. All analyses used the August 2025 DDKG release.</p>
+<hr />
+<h4 id="propagating-edges-propagatingtrue-enter-ppr-operator">Propagating edges (Propagating=True; enter PPR operator)</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Predicate</th>
+<th>Flow class</th>
+<th>Classification tier</th>
+<th>Source SAB(s)</th>
+<th style="text-align: right;">Benchmark</th>
+<th style="text-align: right;">KF-CHD</th>
+<th style="text-align: right;">KF-NBL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inverse_pathway_associated_with_gene</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">36,502</td>
+<td style="text-align: right;">486,548</td>
+<td style="text-align: right;">494,298</td>
+</tr>
+<tr class="even">
+<td>regulated_by</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">2,675</td>
+<td style="text-align: right;">218,281</td>
+<td style="text-align: right;">249,602</td>
+</tr>
+<tr class="odd">
+<td>regulates</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">2,675</td>
+<td style="text-align: right;">218,281</td>
+<td style="text-align: right;">249,602</td>
+</tr>
+<tr class="even">
+<td>expresses</td>
+<td>Transcription</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">675</td>
+<td style="text-align: right;">56,250</td>
+<td style="text-align: right;">61,920</td>
+</tr>
+<tr class="odd">
+<td>expressed_in</td>
+<td>Transcription</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">675</td>
+<td style="text-align: right;">56,250</td>
+<td style="text-align: right;">61,920</td>
+</tr>
+<tr class="even">
+<td>inverse_targets_expression_of_gene</td>
+<td>Perturbational Effect</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">900</td>
+<td style="text-align: right;">42,529</td>
+<td style="text-align: right;">57,752</td>
+</tr>
+<tr class="odd">
+<td>targets_expression_of_gene</td>
+<td>Perturbational Effect</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">900</td>
+<td style="text-align: right;">42,529</td>
+<td style="text-align: right;">57,752</td>
+</tr>
+<tr class="even">
+<td>positively_correlated_with_chemical_or_drug</td>
+<td>Perturbational Effect</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1,028</td>
+<td style="text-align: right;">43,870</td>
+<td style="text-align: right;">48,833</td>
+</tr>
+<tr class="odd">
+<td>inverse_positively_correlated_with_chemical_or_drug</td>
+<td>Perturbational Effect</td>
+<td>weak_mechanistic_or_observational</td>
+<td>CHEBI, DRUGBANK, GS, HGNC, MMSL, MSH, NCI, PUBCHEM, SNOMEDCT_US</td>
+<td style="text-align: right;">1,028</td>
+<td style="text-align: right;">43,870</td>
+<td style="text-align: right;">48,833</td>
+</tr>
+<tr class="even">
+<td>negatively_correlated_with_chemical_or_drug</td>
+<td>Perturbational Effect</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">768</td>
+<td style="text-align: right;">37,045</td>
+<td style="text-align: right;">38,790</td>
+</tr>
+<tr class="odd">
+<td>inverse_negatively_correlated_with_chemical_or_drug</td>
+<td>Perturbational Effect</td>
+<td>weak_mechanistic_or_observational</td>
+<td>CHEBI, DRUGBANK, GS, HGNC, MMSL, MSH, NCI, PUBCHEM, SNOMEDCT_US</td>
+<td style="text-align: right;">768</td>
+<td style="text-align: right;">37,045</td>
+<td style="text-align: right;">38,790</td>
+</tr>
+<tr class="even">
+<td>gene_plays_role_in_process</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC, MONDO, MSH, NCI, OMIM, PUBCHEM</td>
+<td style="text-align: right;">3,104</td>
+<td style="text-align: right;">22,173</td>
+<td style="text-align: right;">22,403</td>
+</tr>
+<tr class="odd">
+<td>process_involves_gene</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>GO, HGNC, MSH, NCI, SNOMEDCT_US</td>
+<td style="text-align: right;">3,104</td>
+<td style="text-align: right;">22,173</td>
+<td style="text-align: right;">22,403</td>
+</tr>
+<tr class="even">
+<td>transcribed_from</td>
+<td>Transcription</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">17,153</td>
+<td style="text-align: right;">18,089</td>
+</tr>
+<tr class="odd">
+<td>transcribed_to</td>
+<td>Transcription</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">17,153</td>
+<td style="text-align: right;">18,089</td>
+</tr>
+<tr class="even">
+<td>positively_regulates</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">17,971</td>
+<td style="text-align: right;">17,152</td>
+</tr>
+<tr class="odd">
+<td>positively_regulated_by</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">17,971</td>
+<td style="text-align: right;">17,152</td>
+</tr>
+<tr class="even">
+<td>negatively_regulates</td>
+<td>Signal Termination</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">235</td>
+<td style="text-align: right;">17,400</td>
+<td style="text-align: right;">17,477</td>
+</tr>
+<tr class="odd">
+<td>negatively_regulated_by</td>
+<td>Signal Termination</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">235</td>
+<td style="text-align: right;">17,400</td>
+<td style="text-align: right;">17,477</td>
+</tr>
+<tr class="even">
+<td>inverse_has_signature_gene</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">850</td>
+<td style="text-align: right;">7,758</td>
+<td style="text-align: right;">7,812</td>
+</tr>
+<tr class="odd">
+<td>gene_product_of</td>
+<td>Translation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,148</td>
+<td style="text-align: right;">1,249</td>
+</tr>
+<tr class="even">
+<td>has_gene_product</td>
+<td>Translation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,148</td>
+<td style="text-align: right;">1,249</td>
+</tr>
+<tr class="odd">
+<td>causally_influences</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">976</td>
+<td style="text-align: right;">1,199</td>
+</tr>
+<tr class="even">
+<td>causally_influenced_by</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">976</td>
+<td style="text-align: right;">1,199</td>
+</tr>
+<tr class="odd">
+<td>inverse_gene_has_variants</td>
+<td>Genetic Regulatory Modulation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1,068</td>
+<td style="text-align: right;">1,074</td>
+</tr>
+<tr class="even">
+<td>gene_has_variants</td>
+<td>Genetic Regulatory Modulation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1,068</td>
+<td style="text-align: right;">1,074</td>
+</tr>
+<tr class="odd">
+<td>inverse_involved_in_pathway</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">884</td>
+<td style="text-align: right;">1,140</td>
+</tr>
+<tr class="even">
+<td>involved_in_pathway</td>
+<td>Pathway Contribution</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">884</td>
+<td style="text-align: right;">1,140</td>
+</tr>
+<tr class="odd">
+<td>directedinteraction</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">648</td>
+<td style="text-align: right;">890</td>
+</tr>
+<tr class="even">
+<td>stimulation</td>
+<td>Signal Transduction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: right;">225</td>
+</tr>
+<tr class="odd">
+<td>inhibition</td>
+<td>Signal Termination</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">221</td>
+</tr>
+<tr class="even">
+<td>binding</td>
+<td>Protein Interaction</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">169</td>
+<td style="text-align: right;">165</td>
+</tr>
+<tr class="odd">
+<td>gene_encodes_gene_product</td>
+<td>Translation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="even">
+<td>gene_product_encoded_by_gene</td>
+<td>Translation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="odd">
+<td>transcriptiontranslation</td>
+<td>Transcription</td>
+<td>weak_mechanistic_or_observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">73</td>
+</tr>
+<tr class="even">
+<td>part_of_a_fusion_gene_in</td>
+<td>Genetic Regulatory Modulation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td>conversion</td>
+<td>Biochemical Transformation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td>catalysis</td>
+<td>Biochemical Transformation</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>has_phenotype</td>
+<td>Molecular → Phenotype</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>phenotype_of</td>
+<td>Molecular → Phenotype</td>
+<td>mechanistic</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="non-propagating-edges-propagatingfalse-retained-in-kept_edges-excluded-from-ppr">Non-propagating edges (Propagating=False; retained in kept_edges, excluded from PPR)</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Predicate</th>
+<th>Flow class</th>
+<th>Classification tier</th>
+<th>Source SAB(s)</th>
+<th style="text-align: right;">Benchmark</th>
+<th style="text-align: right;">KF-CHD</th>
+<th style="text-align: right;">KF-NBL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pathway_associated_with_gene</td>
+<td>Pathway Contribution</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">36,502</td>
+<td style="text-align: right;">486,548</td>
+<td style="text-align: right;">494,298</td>
+</tr>
+<tr class="even">
+<td>associated_with</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">4,094</td>
+<td style="text-align: right;">149,547</td>
+<td style="text-align: right;">157,306</td>
+</tr>
+<tr class="odd">
+<td>inverse_associated_with</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>GO, HGNC, HP, MONDO, MSH, NCI, OMIM, SNOMEDCT_US</td>
+<td style="text-align: right;">4,094</td>
+<td style="text-align: right;">149,547</td>
+<td style="text-align: right;">157,306</td>
+</tr>
+<tr class="even">
+<td>overlaps</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">378</td>
+<td style="text-align: right;">47,194</td>
+<td style="text-align: right;">56,321</td>
+</tr>
+<tr class="odd">
+<td>inverse_overlaps</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">378</td>
+<td style="text-align: right;">47,194</td>
+<td style="text-align: right;">56,321</td>
+</tr>
+<tr class="even">
+<td>located_in</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">42,009</td>
+<td style="text-align: right;">35,161</td>
+</tr>
+<tr class="odd">
+<td>location_of</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">42,009</td>
+<td style="text-align: right;">35,161</td>
+</tr>
+<tr class="even">
+<td>inverse_gene_associated_with_disease_or_phenotype</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC, HP, MONDO, OMIM</td>
+<td style="text-align: right;">551</td>
+<td style="text-align: right;">16,196</td>
+<td style="text-align: right;">18,133</td>
+</tr>
+<tr class="odd">
+<td>gene_associated_with_disease_or_phenotype</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">551</td>
+<td style="text-align: right;">16,196</td>
+<td style="text-align: right;">18,133</td>
+</tr>
+<tr class="even">
+<td>has_signature_gene</td>
+<td>Pathway Contribution</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">850</td>
+<td style="text-align: right;">7,758</td>
+<td style="text-align: right;">7,812</td>
+</tr>
+<tr class="odd">
+<td>inverse_has_marker_gene</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">7,243</td>
+<td style="text-align: right;">7,490</td>
+</tr>
+<tr class="even">
+<td>has_marker_gene</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">109</td>
+<td style="text-align: right;">7,243</td>
+<td style="text-align: right;">7,490</td>
+</tr>
+<tr class="odd">
+<td>in_1_to_1_orthology_relationship_with</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">2,337</td>
+<td style="text-align: right;">2,617</td>
+</tr>
+<tr class="even">
+<td>inverse_in_1_to_1_orthology_relationship_with</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">2,337</td>
+<td style="text-align: right;">2,617</td>
+</tr>
+<tr class="odd">
+<td>has_human_ortholog</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">2,068</td>
+<td style="text-align: right;">2,240</td>
+</tr>
+<tr class="even">
+<td>inverse_has_human_ortholog</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">2,068</td>
+<td style="text-align: right;">2,240</td>
+</tr>
+<tr class="odd">
+<td>disease_mapped_to_gene</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC, MONDO</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">935</td>
+<td style="text-align: right;">1,896</td>
+</tr>
+<tr class="even">
+<td>gene_mapped_to_disease</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">935</td>
+<td style="text-align: right;">1,896</td>
+</tr>
+<tr class="odd">
+<td>inverse_us_5_prime</td>
+<td>Spatial constraint</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,191</td>
+<td style="text-align: right;">1,307</td>
+</tr>
+<tr class="even">
+<td>ds_3_prime</td>
+<td>Spatial constraint</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,191</td>
+<td style="text-align: right;">1,307</td>
+</tr>
+<tr class="odd">
+<td>inverse_ds_3_prime</td>
+<td>Spatial constraint</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,191</td>
+<td style="text-align: right;">1,307</td>
+</tr>
+<tr class="even">
+<td>us_5_prime</td>
+<td>Spatial constraint</td>
+<td>nonpropagating_context</td>
+<td>HGNC</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1,191</td>
+<td style="text-align: right;">1,307</td>
+</tr>
+<tr class="odd">
+<td>has_material_basis_in_germline_mutation_in</td>
+<td>Genetic Regulatory Modulation</td>
+<td>observational</td>
+<td>HGNC, MONDO</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">923</td>
+<td style="text-align: right;">920</td>
+</tr>
+<tr class="even">
+<td>gene_involved_in_molecular_abnormality</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">814</td>
+<td style="text-align: right;">778</td>
+</tr>
+<tr class="odd">
+<td>inverse_chr_band_contains_gene</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">733</td>
+<td style="text-align: right;">803</td>
+</tr>
+<tr class="even">
+<td>chr_band_contains_gene</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">733</td>
+<td style="text-align: right;">803</td>
+</tr>
+<tr class="odd">
+<td>disease_causing_germline_mutation_s__in</td>
+<td>Genetic Regulatory Modulation</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">705</td>
+<td style="text-align: right;">684</td>
+</tr>
+<tr class="even">
+<td>related_to_genetic_biomarker</td>
+<td>Observational Association</td>
+<td>non_flow_edge</td>
+<td>HGNC, MONDO, NCI, OMIM</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: right;">802</td>
+</tr>
+<tr class="odd">
+<td>genetic_biomarker_related_to</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: right;">802</td>
+</tr>
+<tr class="even">
+<td>gene_found_in_organism</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">607</td>
+<td style="text-align: right;">658</td>
+</tr>
+<tr class="odd">
+<td>inverse_gene_disease_validity</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC, MONDO</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">529</td>
+</tr>
+<tr class="even">
+<td>gene_disease_validity</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">529</td>
+</tr>
+<tr class="odd">
+<td>gene_involved_in_pathogenesis_of_disease</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">128</td>
+</tr>
+<tr class="even">
+<td>gene_associated_with_disease</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td>disease_has_associated_gene</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC, MONDO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td>has_marker_gene_in_kidney</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">63</td>
+</tr>
+<tr class="odd">
+<td>inverse_has_marker_gene_in_kidney</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">63</td>
+</tr>
+<tr class="even">
+<td>inverse_candidate_gene_tested_in</td>
+<td>Observational Association</td>
+<td>non_flow_edge</td>
+<td>HGNC, MONDO</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="odd">
+<td>candidate_gene_tested_in</td>
+<td>Observational Association</td>
+<td>non_flow_edge</td>
+<td>HGNC</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td>major_susceptibility_factor_in</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td>disease_causing_somatic_mutation_s__in</td>
+<td>Genetic Regulatory Modulation</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td>has_marker_gene_in_heart</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="odd">
+<td>inverse_has_marker_gene_in_heart</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td>gene_has_abnormality</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td>inverse_has_marker_gene_in_liver</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td>has_marker_gene_in_liver</td>
+<td>Observational Association</td>
+<td>observational</td>
+<td>HGNC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td>biomarker_tested_in</td>
+<td>Observational Association</td>
+<td>non_flow_edge</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>inverse_biomarker_tested_in</td>
+<td>Observational Association</td>
+<td>non_flow_edge</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td>gene_in_chromosomal_location</td>
+<td>Spatial constraint</td>
+<td>contextual_constraint</td>
+<td>HGNC</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="st7-source-vocabulary-sab-contributions-to-bifo-ppr-analyses">ST7: Source vocabulary (SAB) contributions to BIFO-PPR analyses</h3>
+<p>Source vocabularies (SABs) identified as source nodes in BIFO-conditioned kept_edges files. SAB attribution is based on the source node of each edge as resolved by the DDKG node SAB field. Only SABs with at least one edge across any analysis are shown. Predicate count reflects unique predicate types contributed by that SAB as source node. Edges where the source node SAB could not be resolved (UNKNOWN) are excluded. The dominant SAB is HGNC because gene concept nodes , the primary seed and propagation entity , resolve to HGNC identifiers under the node SAB priority ordering used in the Cypher export queries.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source SAB</th>
+<th>Source description</th>
+<th style="text-align: center;">Unique predicates</th>
+<th style="text-align: right;">Benchmark edges</th>
+<th style="text-align: right;">KF-CHD edges</th>
+<th style="text-align: right;">KF-NBL edges</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HGNC</td>
+<td>Hugo Gene Nomenclature Committee</td>
+<td style="text-align: center;">89</td>
+<td style="text-align: right;">52,516</td>
+<td style="text-align: right;">2,014,741</td>
+<td style="text-align: right;">2,176,916</td>
+</tr>
+<tr class="even">
+<td>GO</td>
+<td>Gene Ontology</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">2,044</td>
+<td style="text-align: right;">13,341</td>
+<td style="text-align: right;">13,394</td>
+</tr>
+<tr class="odd">
+<td>NCI</td>
+<td>NCI Thesaurus</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: right;">1,083</td>
+<td style="text-align: right;">7,703</td>
+<td style="text-align: right;">7,831</td>
+</tr>
+<tr class="even">
+<td>SNOMEDCT_US</td>
+<td>SNOMED CT</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">247</td>
+<td style="text-align: right;">253</td>
+</tr>
+<tr class="odd">
+<td>MSH</td>
+<td>MeSH (Medical Subject Headings)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">82</td>
+</tr>
+<tr class="even">
+<td>OMIM</td>
+<td>Online Mendelian Inheritance in Man</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: right;">1,248</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td>PUBCHEM</td>
+<td>PubChem</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: right;">379</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td>MONDO</td>
+<td>MONDO Disease Ontology</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: right;">980</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>GS</td>
+<td>Gene Symbol vocabulary</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr class="even">
+<td>MMSL</td>
+<td>Multum MediSource Lexicon</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr class="odd">
+<td>CHEBI</td>
+<td>ChEBI</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr class="even">
+<td>HP</td>
+<td>Human Phenotype Ontology</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">1,831</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr class="odd">
+<td>DRUGBANK</td>
+<td>DrugBank</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="ss1-llm-assisted-biological-interpretation-of-kf-chd-and-kf-nbl-pathway-results">SS1: LLM-assisted biological interpretation of KF-CHD and KF-NBL pathway results</h3>
+<p>GPT-4o interpretations of BIFO-PPR pathway results for KF-CHD and KF-NBL cohorts, generated from <code>pathway_results_llm.md</code> and <code>pathway_results_summary.tsv</code> output files. Provided as a separate supplementary file: <code>08.llm_interpretation.md</code>. These outputs are illustrative of the exploratory biological interpretation use case and are not part of the quantitative evaluation of BIFO-PPR.</p>
 <h2 id="supplementary-code-and-data-repository">Supplementary: Code and Data Repository</h2>
 <p>All code, configuration, benchmark data, and pre-computed results supporting
 this manuscript are available at:</p>
@@ -4714,7 +5702,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>baseline_enrichment.py</code></td>
-<td>Enrichment baselines B0–B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts <code>--kept-edges</code> and <code>--small-universe</code> flags</td>
+<td>Enrichment baselines B0-B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts <code>--kept-edges</code> and <code>--small-universe</code> flags</td>
 <td>Methods §6</td>
 </tr>
 <tr class="even">
@@ -5101,7 +6089,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="odd">
 <td><code>baseline_comparison.json</code></td>
-<td>Baseline enrichment method comparison metrics (B0–B4)</td>
+<td>Baseline enrichment method comparison metrics (B0-B4)</td>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.csv</code></td>
@@ -5212,7 +6200,7 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>baseline_comparison.json</code></td>
-<td>Baseline enrichment method comparison metrics (B1–B4)</td>
+<td>Baseline enrichment method comparison metrics (B1-B4)</td>
 </tr>
 <tr class="odd">
 <td><code>baseline_comparison.csv</code></td>
@@ -5433,7 +6421,7 @@ Send me the CHD companion result too, and I’ll synthesize the mechanistic over
 <div class="csl-left-margin">18. </div><div class="csl-right-inline"><strong>AutoGVP: a dockerized workflow integrating ClinVar and InterVar germline sequence variant classification</strong> <div class="csl-block">Jung Kim, Ammar S Naqvi, Ryan J Corbett, Rebecca S Kaufman, Zalman Vaksman, Miguel A Brown, Daniel P Miller, Saksham Phul, Zhuangzhuang Geng, Phillip B Storm, … Sharon J Diskin</div> <em>Bioinformatics</em> (2024-02-29) <a href="https://doi.org/g43zb4">https://doi.org/g43zb4</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1093/bioinformatics/btae114">10.1093/bioinformatics/btae114</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/38426335">38426335</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10955249">PMC10955249</a></div></div>
 </div>
 <div id="ref-55r9iVwk" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">19. </div><div class="csl-right-inline"><strong>The mutational constraint spectrum quantified from variation in 141,456 humans</strong> <div class="csl-block">Konrad J Karczewski, Laurent C Francioli, Grace Tiao, Beryl B Cummings, Jessica Alföldi, Qingbo Wang, Ryan L Collins, Kristen M Laricchia, Andrea Ganna, Daniel P Birnbaum, … Daniel G MacArthur</div> <em>Nature</em> (2020-05-27) <a href="https://doi.org/ggztw9">https://doi.org/ggztw9</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1038/s41586-020-2308-7">10.1038/s41586-020-2308-7</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/32461654">32461654</a></div></div>
+<div class="csl-left-margin">19. </div><div class="csl-right-inline"><strong>The mutational constraint spectrum quantified from variation in 141,456 humans</strong> <div class="csl-block">Konrad J Karczewski, Laurent C Francioli, Grace Tiao, Beryl B Cummings, Jessica Alföldi, Qingbo Wang, Ryan L Collins, Kristen M Laricchia, Andrea Ganna, Daniel P Birnbaum, … Daniel G MacArthur</div> <em>Nature</em> (2020-05-27) <a href="https://doi.org/ggztw9">https://doi.org/ggztw9</a> <div class="csl-block">DOI: <a href="https://doi.org/10.1038/s41586-020-2308-7">10.1038/s41586-020-2308-7</a> · PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/32461654">32461654</a> · PMCID: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7334197">PMC7334197</a></div></div>
 </div>
 <div id="ref-42xwDamm" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">20. </div><div class="csl-right-inline"><strong>Digitoxin metabolism by rat liver microsomes.</strong> <div class="csl-block">A Schmoldt, HF Benthe, G Haberland</div> <em>Biochemical pharmacology</em> (1975-09-01) <a href="https://www.ncbi.nlm.nih.gov/pubmed/10">https://www.ncbi.nlm.nih.gov/pubmed/10</a> <div class="csl-block">PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/10">10</a></div></div>
