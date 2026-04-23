@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T14:22:02+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T14:22:02+00:00" />
+  <meta name="dc.modified" content="2026-04-23T14:49:52+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T14:49:52+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/79843480f7586c91fc6b6c669752d530282d4fb5/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fff2736a0f029b22d29c587801bd3eff4e126e02/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fff2736a0f029b22d29c587801bd3eff4e126e02/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fff2736a0f029b22d29c587801bd3eff4e126e02/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -115,9 +115,9 @@ Modern biology generates large-scale, multi-modal datasets spanning genomic vari
 
 Biological function arises from directional, causal processes that are well established by decades of experimental observation: transcription proceeds from gene to RNA, signaling cascades propagate from upstream activators to downstream effectors, and metabolic transformations are constrained by biochemical feasibility and spatial context. These processes define not only which entities are connected, but which transformations between them are biologically meaningful. Individual entity classes in biomedical graphs are reasonably well specified by dedicated vocabularies: genes by HGNC [@doi:10.1093/nar/gkac888], transcripts by GENCODE [@doi:10.1093/nar/gkaa1113], proteins by UniProtKB [@doi:10.1093/nar/gkac1052], and phenotypes by HPO [@doi:10.1093/nar/gkad1005]. What has not existed is a unified definitional layer that ties these entity definitions together into a formal specification of admissible information flow between them: which transitions between entity classes are biologically valid, in which direction they operate, and what it means for signal to propagate from one domain to another. In heterogeneous knowledge graphs, this gap means that mechanistic relationships, statistical associations, and annotation edges are encoded within the same structure, and graph traversal treats them equivalently, collapsing causal and non-causal connections into a single topology. A path connecting a genetic variant to a disease phenotype may reflect a valid mechanistic process, an indirect regulatory association, or an incidental correlation; without a formal definition of admissibility, these possibilities are computationally indistinguishable.
 
-Standard approaches to pathway enrichment analysis perform reliably on focused, biologically coherent gene sets, typically in the range of tens to a few hundred genes, but encounter hard statistical limits outside that range [@doi:10.1371/journal.pcbi.1002375]. For small gene sets, overlap statistics are unstable and dominated by incidental matches. For large gene sets, particularly those derived from rare variant aggregation across disease cohorts, p-values collapse to numerical limits and lose discriminative power regardless of implementation. Graph-based neighborhood expansion introduces a complementary problem. Biological knowledge graphs exhibit small-world and scale-free topology [@doi:10.1038/44843; @doi:10.1126/science.286.5439.509], meaning that any seed set reaches a large fraction of the full graph within just a few hops. In the DDKG, median shortest path lengths between gene concept nodes are on the order of three hops [@doi:10.1038/s41597-024-04070-w], which is why neighborhood-based enrichment on such graphs effectively queries the entire graph and loses all discriminating power. These are not failures of any particular tool but reflect the statistical and topological properties of the problem: overlap-based enrichment works best when the input gene set is small and coherent, and neighborhood expansion works best when the graph has meaningful local structure rather than near-universal connectivity.
+Standard approaches to pathway enrichment analysis perform reliably on focused, biologically coherent gene sets, typically in the range of tens to a few hundred genes, but encounter hard statistical limits outside that range [@doi:10.1371/journal.pcbi.1002375]. For small gene sets, overlap statistics are unstable and dominated by incidental matches. For large gene sets, particularly those derived from rare variant aggregation across disease cohorts, p-values collapse to numerical limits and lose discriminative power regardless of implementation. Graph-based neighborhood expansion introduces a complementary problem. Biological knowledge graphs exhibit small-world and scale-free topology [@Watts1998; @doi:10.1126/science.286.5439.509], meaning that any seed set reaches a large fraction of the full graph within just a few hops. In the DDKG, median shortest path lengths between gene concept nodes are on the order of three hops [@doi:10.1038/s41597-024-04070-w], which is why neighborhood-based enrichment on such graphs effectively queries the entire graph and loses all discriminating power. These are not failures of any particular tool but reflect the statistical and topological properties of the problem: overlap-based enrichment works best when the input gene set is small and coherent, and neighborhood expansion works best when the graph has meaningful local structure rather than near-universal connectivity.
 
-Existing frameworks address parts of this problem but do not resolve it. Ontologies such as Gene Ontology and HPO provide structured representations of biological concepts but do not define propagation rules. Knowledge graph systems support typed traversal but rely on user-defined queries rather than biologically grounded constraints. Causal frameworks such as BEL [@pmid:23726889] and GO-CAM [@doi:10.1038/s41588-019-0500-1] encode mechanistic relationships but operate within curated representations and do not provide a general protocol for conditioning arbitrary heterogeneous graphs. Graph machine learning approaches can operate over heterogeneous structures but learn propagation behavior from data rather than enforcing biologically interpretable constraints.
+Existing frameworks address parts of this problem but do not resolve it. Ontologies such as Gene Ontology and HPO provide structured representations of biological concepts but do not define propagation rules. Knowledge graph systems support typed traversal but rely on user-defined queries rather than biologically grounded constraints. Causal frameworks such as BEL [@Slater2014] and GO-CAM [@doi:10.1038/s41588-019-0500-1] encode mechanistic relationships but operate within curated representations and do not provide a general protocol for conditioning arbitrary heterogeneous graphs. Graph machine learning approaches can operate over heterogeneous structures but learn propagation behavior from data rather than enforcing biologically interpretable constraints.
 
 To address this gap, we introduce the Biological Information Flow Ontology (BIFO), an ontological framework that formally defines admissible biological entities, entity states, and the information flows between them. BIFO specifies what kinds of biological entities can exist in a flow-aware network, what transformations between those entities are biologically meaningful, and in which directions information can propagate. Within this framework, we distinguish three categories of relationships. Mechanistic relationships encode directional, state-changing biological transformations, such as signal transduction, transcriptional regulation, and biochemical catalysis, and participate in propagation. Observational relationships, such as statistical co-expression or text-mining co-occurrence, capture correlative associations without encoding causal state transitions and are excluded from propagation. Contextual relationships encode spatial, temporal, or structural constraints that restrict which transitions are feasible without themselves carrying signal. Applied to a heterogeneous knowledge graph, these definitions produce a constrained propagation substrate: the constraint is a consequence of the definitions, not their purpose. BIFO is not designed to restrict graphs; it is designed to formalize what biology is in terms of admissible entities and flows. We refer to the full implemented system combining BIFO conditioning with Personalized PageRank propagation and degree-normalized pathway scoring as BIFO-PPR throughout this paper, to distinguish the implemented pipeline from the ontology specification.
 
@@ -211,6 +211,7 @@ $F_{\text{admissible}}$ is the set of flow classes designated as propagating in 
 The analyses in this paper use the Common Fund Data Ecosystem Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and inheriting Petagraph infrastructure [@doi:10.1101/2025.08.11.666099; @doi:10.1038/s41597-024-04070-w]. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a SAB identifier and each edge carries a predicate drawn from the source ontology's relation vocabulary, making edge provenance fully traceable and satisfying the predicate-mapping and entity resolution requirements of BIFO conditioning.
 
 For each analysis, the graph was queried as a 1-hop neighborhood centered on the relevant seed gene set, producing a mechanistic and association edge file and a separate gene-to-pathway membership edge file derived from MSigDB [@doi:10.1073/pnas.0506580102; @doi:10.1016/j.cels.2015.12.004], WikiPathways [@doi:10.1093/nar/gkaa1024], and Gene Ontology annotations. These were merged into a single edge file for conditioning. Node metadata was exported separately. The specific graph parameters, edge counts, and conditioning results for each analysis are described in the relevant benchmark and cohort sections.
+
 ---
 
 ## Part II: Propagation and pathway scoring
@@ -244,6 +245,7 @@ $$\text{score}(p) = \frac{f_{\text{direct}}(p)}{\sqrt{|\text{members}(p)|}}$$ {#
 where $f_{\text{direct}}(p)$ is the PPR score on the pathway concept node itself, representing signal mass that arrived via bridge edges, and $|\text{members}(p)|$ is the source-vocabulary-constrained member gene count. The square root penalty down-weights large generic pathways, which accumulate high PPR scores by virtue of having many members, without fully normalizing by size in a way that would over-penalize legitimate large biological programs. Pathways with no member genes receive a score of zero.
 
 This scoring function was specified before benchmark evaluation and was not modified after the first successful run.
+
 ---
 
 ## Part III: Significance testing
@@ -277,6 +279,7 @@ Empirical p-values use the same finite-sample correction as above; BH correction
 Statistical significance under the rewiring null establishes that a pathway score exceeds topological expectation for a given seed set. It does not establish whether that score is a stable property of the underlying biology or an artifact of the specific genes provided as input. A pathway that ranks highly and passes significance testing under many different seed configurations is more credible than one that does so only for a particular input.
 
 Stability is assessed by perturbing the seed set and measuring whether pathway recovery is preserved. For gene pools small enough to enumerate completely, all possible seed partitions are evaluated exhaustively. For large cohort gene sets where exhaustive enumeration is not feasible, bootstrap resampling draws random subsets of varying size from the full seed pool. In both cases, the primary question is whether the signal is a property of the biology represented in the gene set or a consequence of the specific input configuration. The implementations of these two approaches are described in the benchmark and cohort sections where they are applied.
+
 ---
 
 ## Part IV: Benchmark evaluation
@@ -400,6 +403,7 @@ The PPR operators and pathway membership map are built once and held in memory. 
 For each split the following are computed: BIFO-PPR full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions.
 
 The analysis is parallelized using Python multiprocessing; PPR operator components are serialized to worker processes at startup and each worker processes an assigned batch of splits independently. Results are summarized as distribution statistics across all 3,003 splits, robustness counts, and the primary benchmark split identified as an anchor point within the full distribution.
+
 ---
 
 ## Part V: Kids First cohort application
@@ -506,6 +510,7 @@ Of the 57,005 propagating edges in the conditioned arm, 43,698 (76.7%) are Pathw
 (**C**) Flow-class distribution of propagating edges. Pathway Contribution bridge edges (43,698; 76.7%) are the architectural element enabling gene-to-pathway signal transfer; mechanistic classes comprise the remaining 23.3%.
 (**D**) Concept-node entity resolution: 18,897 of 34,523 nodes (54.7%) resolve to a source vocabulary under the current SAB selection.
 ](images/fig1_conditioning.png){#fig:conditioning width="100%"}
+
 ---
 
 ## 2 Gene-level signal recovery
@@ -538,6 +543,7 @@ Each panel compares four PPR propagation arms (Raw, Metadata-filtered, BIFO-cond
 (**C**) Localization (mean held-out rank normalized by graph size; lower = more concentrated near seeds). BIFO-conditioned is lowest across Full and Ablation graphs.
 (**D**) PPR score entropy in nats. BIFO-conditioned achieves the lowest entropy in all three graph configurations, supporting that conditioning concentrates signal beyond what edge-count reduction alone achieves.
 ](images/fig2_gene_recovery.png){#fig:gene_recovery width="100%"}
+
 ---
 
 ## 3 Pathway prioritization and the role of bridge edges
@@ -588,6 +594,7 @@ This architectural property is a consequence of how curated pathway memberships 
 **Two-layer graph architecture and the role of Pathway Contribution bridge edges.**
 Schematic of the conditioned BIFO graph. The molecular layer (top) contains gene and protein concept nodes connected by mechanistic flow-class edges. The pathway layer (bottom) contains curated pathway concept nodes. The two layers are structurally separated in the mechanistic subgraph; connectivity between them is mediated by Pathway Contribution bridge edges (orange, dashed). Seed genes inject PPR probability mass into the molecular layer, which propagates through admissible bridge edges to the pathway layer. In the ablation arm, bridge edges are removed; pathway nodes cannot receive propagated mass directly and the modest rank improvement (+13.5) reflects pre-transfer signal organization in the molecular layer only. Mechanistic-only propagation yields exactly zero pathway scores, supporting that direct bridge transfer is required for pathway-level recovery in this graph construction.
 ](images/fig7_schematic.png){#fig:schematic width="100%"}
+
 ---
 
 ## 4 Comparison with standard enrichment methods
@@ -631,6 +638,7 @@ Five enrichment methods evaluated against a 21-pathway native cilia reference se
 (**B**) KF-NBL heatmap, same layout as A.
 (**C**) WP_CILIOPATHIES rank under BIFO-PPR full-arm and Seed Fisher (corrected). Seed Fisher ranks WP_CILIOPATHIES first in both cohorts. BIFO-PPR ranks WP_CILIOPATHIES 43rd in KF-CHD (null_z = 41.2) and 3rd in KF-NBL (null_z = 18.4). Seed Fisher results use log-space hypergeometric computation; standard implementations cause p-value floor collapse in the large-seed regime.
 ](images/fig4_baseline_heatmap.png){#fig:baseline_heatmap width="100%"}
+
 ---
 
 ## 5 Recovery controls: C4 pathway-split benchmarks
@@ -673,6 +681,7 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 (**C**) Mean rank of target pathways under BIFO-PPR-conditioned vs. raw PPR. Raw PPR achieves lower mean rank in both controls because seeds already have direct proximity to the target pathway.
 (**D**) Rank improvement is negative in both controls (Notch -31.5, MAPK -54.4), as expected when seeds are drawn from the target pathway's own membership. This contrasts with the +125.4 rank improvement in the CHD discovery benchmark, where seeds are not pathway members and conditioning must bridge the gap between the molecular and pathway layers.
 ](images/fig5_c4_controls.png){#fig:c4_controls width="100%"}
+
 ---
 
 ## 6 Robustness to seed set composition: exhaustive resampling
@@ -723,6 +732,7 @@ Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Prima
 (**C**) Seed Fisher Average Precision distribution (primary = 0.431).
 (**D**) Rank improvement distribution: all 3,003 splits show positive rank improvement (100% positive); primary split +128.9. BIFO-PPR beats Seed Fisher on AP in 24.0% of splits. All splits use identical conditioning operators and pathway universe; only the seed vector varies.
 ](images/fig6_resampling.png){#fig:resampling width="100%"}
+
 ---
 
 ## 7 Kids First cohort analysis: discovery-mode pathway recovery
