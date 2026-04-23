@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T18:24:36+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T18:24:36+00:00" />
+  <meta name="dc.modified" content="2026-04-23T18:32:39+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T18:32:39+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/5cdfa0826e370649b4d092f416be2875f061e95c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/67a72a7ea97e240b5b40ddab3da6a911966b693c/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -789,7 +789,7 @@ The two cohort seed sets share 570 genes (44.3% of the CHD set), reflecting shar
 
 The convergence on the same top pathway is also consistent with the companion U24 cross-cohort analysis (Stear et al. 2026), which independently identified cilia enrichment in Kids First cohorts using permutation-based GSEA, providing external replication from a methodologically distinct approach.
 
-Figure 9 shows the full rank vs. null_z landscape for all scored pathways in both cohorts. The cilia cluster occupies the upper-left region of both plots: high null_z at moderate degree_norm rank, clearly separated from the bulk of pathways whose null_z values cluster near zero. WP_CILIOPATHIES sits at the extreme upper left in KF-CHD (rank 43, null_z = 41.2) and near the top left in KF-NBL (rank 3, null_z = 18.4). Pathways ranking near the top by degree_norm but with null_z near zero represent hub pathways whose scores reflect generic graph topology.
+Figure 8 shows the full rank vs. null_z landscape for all scored pathways in both cohorts. The cilia cluster occupies the upper-left region of both plots: high null_z at moderate degree_norm rank, clearly separated from the bulk of pathways whose null_z values cluster near zero. WP_CILIOPATHIES sits at the extreme upper left in KF-CHD (rank 43, null_z = 41.2) and near the top left in KF-NBL (rank 3, null_z = 18.4). Pathways ranking near the top by degree_norm but with null_z near zero represent hub pathways whose scores reflect generic graph topology.
 
 ![**Rank vs. statistical enrichment landscape, KF-CHD and KF-NBL cohorts.**
 Each point is a scored pathway (grey: all pathways; blue: 16-pathway cilia reference set). X-axis: degree_norm rank (lower = better). Y-axis: pathway-node rewiring null_z (N = 1,000 permutations; pathways with degenerate null excluded). WP_CILIOPATHIES ranks 43rd/2,130 in KF-CHD (null_z = 41.2, q = 0.008) and 3rd/2,196 in KF-NBL (null_z = 18.4, q = 0.014). Degree_norm rank and null_z are complementary: rank reflects absolute propagated signal; null_z reflects signal relative to a graph-specific null. They are not interchangeable and null_z is not used for primary ranking.
@@ -858,7 +858,7 @@ The baseline comparisons isolate two separable contributions to pathway recovery
 
 Conditioned PPR GSEA (B3b) uses BIFO-conditioned gene-level scores as input to standard GSEA, achieving AP = 0.114. BIFO-PPR full arm achieves AP = 0.403 on the same conditioned graph. The difference isolates the contribution of the degree_norm scoring function: scoring pathway nodes directly via the bridge layer is substantially more effective than aggregating conditioned gene-level scores through GSEA. This is because GSEA operates on a ranked gene list and does not require signal to accumulate at pathway concept nodes: it can find enrichment through any combination of member gene ranks. BIFO-PPR requires signal to travel through the bridge layer and arrive at the pathway node, which is more demanding but more specific. Pathways that score highly under BIFO-PPR have received propagated signal specifically because their member genes are connected to the seed neighborhood through admissible paths. Pathways that score highly under GSEA may do so because their member genes happen to rank well in the gene-level score distribution for reasons unrelated to pathway-specific signal.
 
-The degree_norm normalization contributes a second specificity gain. Large, highly connected pathways accumulate more propagated signal simply by having more member genes contributing bridge edge mass to the pathway node. The square root penalty down-weights this size effect without fully normalizing it away, preserving signal in pathways that are both large and biologically coherent while suppressing generic hub pathways. The rank vs. null_z landscape in Figure 9 illustrates the result: degree_norm rank and null_z are complementary rather than redundant. Pathways at the top of the degree_norm ranking but with null_z near zero are hub pathways whose scores reflect graph topology. WP_CILIOPATHIES ranks 43rd by degree_norm but carries the highest null_z (41.2) in KF-CHD, indicating that its signal is specifically attributable to its gene membership rather than to its size or connectivity.
+The degree_norm normalization contributes a second specificity gain. Large, highly connected pathways accumulate more propagated signal simply by having more member genes contributing bridge edge mass to the pathway node. The square root penalty down-weights this size effect without fully normalizing it away, preserving signal in pathways that are both large and biologically coherent while suppressing generic hub pathways. The rank vs. null_z landscape in Figure 8 illustrates the result: degree_norm rank and null_z are complementary rather than redundant. Pathways at the top of the degree_norm ranking but with null_z near zero are hub pathways whose scores reflect graph topology. WP_CILIOPATHIES ranks 43rd by degree_norm but carries the highest null_z (41.2) in KF-CHD, indicating that its signal is specifically attributable to its gene membership rather than to its size or connectivity.
 
 ### The KF cohort finding and its biological interpretation
 
