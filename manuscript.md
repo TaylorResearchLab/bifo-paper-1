@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T15:59:04+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T15:59:04+00:00" />
+  <meta name="dc.modified" content="2026-04-23T17:26:32+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T17:26:32+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/90e1b256f814b977ca34f453bbec8da7d907c598/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/90e1b256f814b977ca34f453bbec8da7d907c598/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/90e1b256f814b977ca34f453bbec8da7d907c598/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/d5dabc3547217fc32e44c3a4174446c787443a5c/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d5dabc3547217fc32e44c3a4174446c787443a5c/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/d5dabc3547217fc32e44c3a4174446c787443a5c/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -917,7 +917,6 @@ Multi-allelic sites were split into biallelic records to ensure consistent downs
 **Pathogenicity classification.** To enrich for variants with predicted functional impact, we implemented a complementary pathogenicity prioritization strategy integrating both consequence-based and model-based annotations. First, variants were functionally annotated using the Ensembl Variant Effect Predictor (VEP) [@doi:10.1186/s13059-016-0974-4], incorporating transcript consequence, gene assignment, and predicted functional impact categories. Variants annotated by Ensembl VEP as having HIGH impact (including predicted loss-of-function consequences such as stop-gain, frameshift, and canonical splice-site variants) were retained. 
 Second, variants were evaluated using AutoGVP [@doi:10.1093/bioinformatics/btae114], a supervised pathogenicity prediction framework that integrates functional, evolutionary, and annotation-based features. Variants classified as “Pathogenic” or “Likely_Pathogenic” by AutoGVP were retained. Variants meeting either criterion (VEP HIGH impact or AutoGVP “Pathogenic/Likely pathogenic” classification) were included in the final analysis set. This approach enabled capture of canonical loss-of-function alleles as well as predicted deleterious missense or regulatory variants with strong pathogenic support. Both annotation steps were performed against the GRCh38 reference and corresponding Ensembl gene models. The final analytical dataset comprised high-confidence germline variants that passed GATK variant-level filters, met stringent genotype-level depth and quality thresholds, and were predicted to be deleterious by VEP and/or AutoGVP. This harmonized filtering framework ensured consistent variant quality across both cohorts and enriched the dataset for variants with a high prior probability of functional relevance. All downstream gene-level aggregation, cross-cohort comparisons, and enrichment analyses were performed using this curated set of high-confidence pathogenic variants. 
 
-
 **Population allele frequency filtering.** Variants were filtered against population allele frequency estimates from the Genome Aggregation Database (gnomAD) v3.1 [@doi:10.1038/s41586-020-2308-7], which provides allele frequencies across diverse global populations aligned to GRCh38. For this study, we applied a more stringent analytical threshold of MAF ≤0.001 (0.1%) using the gnomAD v3.1 non-cancer popmax allele frequency (the maximum allele frequency observed across any gnomAD ancestry group, excluding cancer cohorts). This threshold is tenfold more stringent than the initial processing filter, restricts analyses to ultra-rare variants consistent with Mendelian or strong-effect rare disease genetics, and matches the filtering parameters used in the companion U24 cross-cohort enrichment analysis (Stear et al., CFDE Meeting 2026). Variants exceeding this frequency threshold in any gnomAD ancestry group were excluded regardless of their pathogenicity classification.
 
 **Gene aggregation.** For each cohort, genes harboring at least one qualifying P/LP variant in any proband were aggregated into a per-cohort gene list. Carrier count-filtered subsets requiring ≥2 or ≥3 independent probands carrying qualifying variants in the same gene were generated to assess signal stability under increasingly stringent filters.
@@ -927,8 +926,6 @@ Second, variants were evaluated using AutoGVP [@doi:10.1093/bioinformatics/btae1
 **UMLS CUI resolution.** Gene symbols were mapped to UMLS Concept Unique Identifiers (CUIs) for use as pipeline seed inputs using `seed_cui_lookup.py`, which queries the DDKG for HGNC-SAB concept nodes matching each gene symbol. Of 1,287 CHD seed genes, 1,276 (99.1%) resolved to UMLS CUIs; of 1,406 NBL seed genes, 1,395 (99.2%) resolved. Genes failing CUI resolution were excluded from graph analysis. Final seed counts used in all reported analyses are 1,276 (KF-CHD) and 1,395 (KF-NBL).
 
 **Output.** Seed gene files for both cohorts at all carrier-count filter levels are provided in the repository at `data/cohorts/chd/` and `data/cohorts/nbl/`.
-
----
 
 ### SM2: Neo4j Export Queries
 
@@ -956,8 +953,6 @@ All query files are provided in the repository at `cypher/`. The four-query stru
 
 **Note on KF cohort query generation.** The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using `generate_export_cypher.py` rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.
 
----
-
 ## Supplementary Tables
 
 *ST5 consists of downloadable CSV files and is not typeset. ST6 and ST7 are provided as Supplementary Tables below.*
@@ -981,7 +976,6 @@ Three-arm comparison: BIFO-PPR full-arm (57,005 propagating edges), Ablation (14
 | 9 | REACTOME_CARDIAC_CONDUCTION | MSIGDB | 9.104e-05 | 39 | ✓ |
 | 10 | MEISSNER_BRAIN_HCP_WITH_H3K27ME3 | MSIGDB | 8.695e-05 | 145 | — |
 
-
 **Ablation (no bridge edges)**
 
 | Rank | Pathway name | SAB | Score (degree_norm) | Members | Ref. |
@@ -997,13 +991,9 @@ Three-arm comparison: BIFO-PPR full-arm (57,005 propagating edges), Ablation (14
 | 9 | RIZ_ERYTHROID_DIFFERENTIATION_HBZ | MSIGDB | 5.171e-05 | 12 | — |
 | 10 | RIZ_ERYTHROID_DIFFERENTIATION_HEMGN | MSIGDB | 5.171e-05 | 12 | — |
 
-
 **Mechanistic-only**
 
 *All 550 pathway scores are exactly zero under mechanistic-only propagation. Pathway nodes are structurally unreachable from seed genes through mechanistic edges alone; gene-to-pathway connectivity requires Pathway Contribution bridge edges. P@10 = 0.00, Enrichment@10 = 0×.*
-
-
----
 
 ### ST2: Baseline enrichment method comparison, curated CHD benchmark
 
@@ -1034,7 +1024,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 19 | REACTOME_NOTCH1_INTRACELLULAR_DOMAIN_REGULATES_TRANSCRIPTION | MSIGDB | 615.8900 | 8 | ✓ |
 | 20 | WP_PTF1A_RELATED_REGULATORY_PATHWAY | MSIGDB | 615.8900 | 8 | — |
 
-
 **B1: Seed-only Fisher (hypergeometric)**
 
 | Rank | Pathway name | SAB | Score / stat | Members | Ref. |
@@ -1059,7 +1048,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 18 | REACTOME_TRANSCRIPTIONAL_REGULATION_BY_RUNX3 | MSIGDB | 0.000e+00 | 21 | — |
 | 19 | GOZGIT_ESR1_TARGETS_DN | MSIGDB | 0.000e+00 | 238 | — |
 | 20 | VART_KSHV_INFECTION_ANGIOGENIC_MARKERS_UP | MSIGDB | 0.000e+00 | 73 | — |
-
 
 **B2: 1-hop neighborhood Fisher**
 
@@ -1086,7 +1074,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 19 | PEDERSEN_METASTASIS_BY_ERBB2_ISOFORM_7 | MSIGDB | 0.0205 | 127 | — |
 | 20 | BOCHKIS_FOXA2_TARGETS | MSIGDB | 0.0221 | 117 | — |
 
-
 **B3: Raw PPR preranked GSEA**
 
 | Rank | Pathway name | SAB | Score / stat | Members | Ref. |
@@ -1111,7 +1098,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 18 | SWEET_KRAS_ONCOGENIC_SIGNATURE | MSIGDB | 0.9237 | — | — |
 | 19 | PID_IL5_PATHWAY | MSIGDB | 0.9224 | — | — |
 | 20 | REACTOME_NOTCH3_ACTIVATION_AND_TRANSMISSION_OF_SIGNAL_TO_THE_NUCLEUS | MSIGDB | 0.9212 | — | — |
-
 
 **B3b: Conditioned PPR preranked GSEA**
 
@@ -1138,7 +1124,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 19 | PETROVA_PROX1_TARGETS_UP | MSIGDB | 0.9457 | — | — |
 | 20 | REACTOME_REGULATION_OF_IFNG_SIGNALING | MSIGDB | 0.9456 | — | — |
 
-
 **B4: BIFO-PPR full-arm (degree_norm)**
 
 | Rank | Pathway name | SAB | Score / stat | Members | Ref. |
@@ -1163,10 +1148,6 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 | 18 | Transcriptional Regulation | GO | 7.400e-05 | — | — |
 | 19 | INGRAM_SHH_TARGETS_UP | MSIGDB | 7.100e-05 | — | — |
 | 20 | WP_MESODERMAL_COMMITMENT_PATHWAY | MSIGDB | 6.900e-05 | — | — |
-
-
-
----
 
 ### ST3: Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts
 
@@ -1199,7 +1180,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | WP_NEPHROTIC_SYNDROME | MSIGDB | 3.012e-12 | 44 | — |
 | 20 | WP_DNA_REPAIR_PATHWAYS_FULL_NETWORK | MSIGDB | 4.623e-12 | 120 | — |
 
-
 *Neighborhood Fisher (B2)*
 
 | Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
@@ -1224,7 +1204,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 18 | RAO_BOUND_BY_SALL4 | MSIGDB | 3.645e-19 | 220 | — |
 | 19 | REACTOME_SIGNALING_BY_WNT | MSIGDB | 3.880e-19 | 266 | — |
 | 20 | PURBEY_TARGETS_OF_CTBP1_NOT_SATB1_UP | MSIGDB | 9.115e-19 | 284 | — |
-
 
 *Raw PPR GSEA (B3)*
 
@@ -1251,7 +1230,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | REACTOME_DOWNREGULATION_OF_ERBB4_SIGNALING | MSIGDB | 0.8055 | — | — |
 | 20 | INAMURA_LUNG_CANCER_SCC_UP | MSIGDB | 0.8039 | — | — |
 
-
 *Conditioned PPR GSEA (B3b)*
 
 | Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
@@ -1276,7 +1254,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 18 | REACTOME_SIGNALING_BY_KIT_IN_DISEASE | MSIGDB | 0.8648 | — | — |
 | 19 | WP_ALPHA_6_BETA_4_SIGNALING_PATHWAY | MSIGDB | 0.8640 | — | — |
 | 20 | ZHU_SKIL_TARGETS_DN | MSIGDB | 0.8638 | — | — |
-
 
 *BIFO-PPR full-arm (B4)*
 
@@ -1305,7 +1282,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | PUJANA_ATM_PCC_NETWORK | MSIGDB | 4.000e-06 | — | — |
 | 20 | NABA_CORE_MATRISOME | MSIGDB | 4.000e-06 | — | — |
 
-
 **KF-NBL**
 
 *Seed Fisher corrected (B1)*
@@ -1333,7 +1309,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | WAKASUGI_HAVE_ZNF143_BINDING_SITES | MSIGDB | 8.162e-12 | 54 | — |
 | 20 | REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION | MSIGDB | 9.358e-12 | 296 | — |
 
-
 *Neighborhood Fisher (B2)*
 
 | Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
@@ -1358,7 +1333,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 18 | REACTOME_SIGNALING_BY_ROBO_RECEPTORS | MSIGDB | 4.531e-18 | 213 | — |
 | 19 | Apoptosis | GO | 5.290e-18 | 263 | — |
 | 20 | REACTOME_ANTI_INFLAMMATORY_RESPONSE_FAVOURING_LEISHMANIA_PARASITE_INFECTION | MSIGDB | 6.985e-18 | 219 | — |
-
 
 *Raw PPR GSEA (B3)*
 
@@ -1385,7 +1359,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | WP_BLOOD_CLOTTING_CASCADE | MSIGDB | 0.7948 | — | — |
 | 20 | REACTOME_SIGNALING_BY_FGFR3_FUSIONS_IN_CANCER | MSIGDB | 0.7942 | — | — |
 
-
 *Conditioned PPR GSEA (B3b)*
 
 | Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
@@ -1410,7 +1383,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 18 | REACTOME_CONSTITUTIVE_SIGNALING_BY_LIGAND_RESPONSIVE_EGFR_CANCER_VARIANTS | MSIGDB | 0.8603 | — | — |
 | 19 | BIOCARTA_AMI_PATHWAY | MSIGDB | 0.8600 | — | — |
 | 20 | REACTOME_DOWNREGULATION_OF_ERBB4_SIGNALING | MSIGDB | 0.8599 | — | — |
-
 
 *BIFO-PPR full-arm (B4)*
 
@@ -1437,10 +1409,6 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 | 19 | PID_CONE_PATHWAY | MSIGDB | 4.000e-06 | — | — |
 | 20 | MOOTHA_HUMAN_MITODB_6_2002 | MSIGDB | 4.000e-06 | — | — |
 
-
-
----
-
 ### ST4: Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL
 
 All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean > 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §8.4).
@@ -1464,10 +1432,7 @@ All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe
 | WP_INTRAFLAGELLAR_TRANSPORT_PROTEINS_BINDING_TO_DYNEIN | MSIGDB | 1634 | 7.254e-09 | -3.78 | 532 | 7.313e-07 | 1.61 |
 | REACTOME_VXPX_CARGO_TARGETING_TO_CILIUM | MSIGDB | 1924 | 3.677e-09 | -3.26 | 1437 | 3.202e-07 | -0.58 |
 
-
 *16 of 17 reference pathways matched in the scored universe (YAUCH_HEDGEHOG_SIGNALING_PARACRINE_UP not present after canonical-collection filtering). Null_z values from pathway-node membership rewiring null (N=1000 permutations). Negative null_z indicates depletion relative to null expectation.*
-
----
 
 ### ST5: Head-to-head rank comparison, seed Fisher vs. BIFO (downloadable data files)
 
@@ -1481,17 +1446,9 @@ Columns: pathway_name | source_db | member_count | bifo_rank | bifo_score | fish
 
 *Source: `results/kf_chd/baseline_comparison.csv` and `results/kf_nbl/baseline_comparison.csv`*
 
----
-
-
----
-
 ### ST6: BIFO-PPR propagating edge composition: predicate, flow class, and source vocabulary attribution
 
-
 All predicates present in BIFO-conditioned kept_edges files across the benchmark (CHD curated, 15-gene pool) and KF cohort analyses (KF-CHD: 1,276 seeds; KF-NBL: 1,395 seeds). Counts reflect edges from the source node perspective; forward and inverse predicate directions are listed separately. Source SABs are derived by joining kept_edges source node IDs to the DDKG node SAB field. UNKNOWN indicates nodes without a resolvable source vocabulary. Propagating=True edges enter the PPR adjacency matrix; Propagating=False edges are retained in kept_edges for reference only and excluded from propagation. Flow class and classification tier are sourced directly from bifo_mapping.yaml v0.7.1. Predicates with classification non_flow_edge are in the YAML non_flow_edges list and received observational fallthrough classification during conditioning. All analyses used the August 2025 DDKG release.
-
----
 
 #### Propagating edges (Propagating=True; enter PPR operator)
 
@@ -1537,8 +1494,6 @@ All predicates present in BIFO-conditioned kept_edges files across the benchmark
 | catalysis | Biochemical Transformation | mechanistic | HGNC | — | 3 | 4 |
 | has_phenotype | Molecular → Phenotype | mechanistic | HGNC | — | 2 | 2 |
 | phenotype_of | Molecular → Phenotype | mechanistic | HGNC | — | 2 | 2 |
-
----
 
 #### Non-propagating edges (Propagating=False; retained in kept_edges, excluded from PPR)
 
@@ -1594,10 +1549,7 @@ All predicates present in BIFO-conditioned kept_edges files across the benchmark
 | inverse_biomarker_tested_in | Observational Association | non_flow_edge | HGNC | — | 2 | 2 |
 | gene_in_chromosomal_location | Spatial constraint | contextual_constraint | HGNC | — | 1 | — |
 
----
-
 ### ST7: Source vocabulary (SAB) contributions to BIFO-PPR analyses
-
 
 Source vocabularies (SABs) identified as source nodes in BIFO-conditioned kept_edges files. SAB attribution is based on the source node of each edge as resolved by the DDKG node SAB field. Only SABs with at least one edge across any analysis are shown. Predicate count reflects unique predicate types contributed by that SAB as source node. Edges where the source node SAB could not be resolved (UNKNOWN) are excluded. The dominant SAB is HGNC because gene concept nodes , the primary seed and propagation entity , resolve to HGNC identifiers under the node SAB priority ordering used in the Cypher export queries.
 
@@ -1616,12 +1568,10 @@ Source vocabularies (SABs) identified as source nodes in BIFO-conditioned kept_e
 | CHEBI | ChEBI | 2 | 24 | — | — |
 | HP | Human Phenotype Ontology | 2 | 1,831 | — | — |
 | DRUGBANK | DrugBank | 2 | 44 | — | — |
----
 
 ### SS1: LLM-assisted biological interpretation of KF-CHD and KF-NBL pathway results
 
 GPT-4o interpretations of BIFO-PPR pathway results for KF-CHD and KF-NBL cohorts, generated from `pathway_results_llm.md` and `pathway_results_summary.tsv` output files. Provided as a separate supplementary file: `08.llm_interpretation.md`. These outputs are illustrative of the exploratory biological interpretation use case and are not part of the quantitative evaluation of BIFO-PPR.
-
 
 ## Supplementary: Code and Data Repository
 
