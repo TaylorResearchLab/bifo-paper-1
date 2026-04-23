@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-23" />
   <meta name="citation_publication_date" content="2026-04-23" />
   <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T20:51:52+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T20:51:52+00:00" />
+  <meta name="dc.modified" content="2026-04-23T20:56:49+00:00" />
+  <meta property="article:modified_time" content="2026-04-23T20:56:49+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/24174e41410c0fcfbf88a59a5288100592b33a93/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/a208866dda63fa500a3e98e3e9ae196f73ac0874/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -132,7 +132,7 @@ Together, these results establish BIFO as an ontological framework for formally 
 
 **Methods**
 
-These Methods describe the BIFO framework and its application across three benchmarks and two cohort analyses. The first benchmark uses a curated set of congenital heart disease genes applied to a controlled projection of the Data Distillery Knowledge Graph, establishing pathway prioritization performance against standard enrichment baselines and characterizing the contribution of each edge class through a three-arm ablation design. The second benchmark uses pathway-split recovery controls, in which seed genes are drawn directly from known pathway members, to test whether BIFO can recover source pathways from partial membership. The third exhaustively evaluates all 3,003 possible 10-gene/5-gene partitions of the CHD gene pool to assess whether results depend on the specific seed configuration. The same pipeline is then applied to two independent pediatric rare variant cohorts from the Kids First program, where standard enrichment methods become unreliable due to the size and heterogeneity of the input gene sets. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. Parts I through III describe the core pipeline: graph conditioning, propagation, and significance testing. Parts IV through VI describe benchmark evaluation, cohort application, and implementation.
+These Methods describe the BIFO framework and its application to benchmark evaluation and cohort analysis. Parts I through III define the core pipeline: graph conditioning, propagation, and significance testing. Parts IV and V describe benchmark evaluation and cohort application. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. The specific analyses instantiated on this pipeline and their relationship to the paper's results are described in Section 2.
 
 ## Part I: Graph and conditioning
 
@@ -217,6 +217,8 @@ The primary benchmark is defined on a controlled 1-hop projection of the DDKG ce
 To evaluate robustness to input gene selection, an exhaustive resampling analysis is performed over all C(15,10) = 3,003 possible seed/held-out partitions of the CHD gene pool, holding the graph structure and propagation operators fixed while varying only the seed vector (Section 9). This isolates the contribution of seed composition to pathway-level inference independently of graph topology.
 
 The same pipeline is then applied to two large-scale rare variant cohorts from the Kids First program (congenital heart disease and neuroblastoma), where gene sets are derived from germline variant aggregation and evaluated in discovery mode without predefined pathway targets (Sections 10–15). These cohort analyses represent a distinct regime from the curated benchmarks, characterized by large, heterogeneous gene sets and distributed biological signal, and are used to assess whether BIFO-conditioned propagation recovers coherent pathway structure under conditions where standard enrichment approaches lose discriminative power.
+
+With the conditioned graph $G_C$ and propagation operator defined, Parts II and III describe how signal is propagated and scored.
 
 ## Part II: Propagation and pathway scoring
 
