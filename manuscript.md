@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T02:29:52+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T02:29:52+00:00" />
+  <meta name="dc.modified" content="2026-04-24T02:35:02+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T02:35:02+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/9f1be2f492ab5c2689f3da2e1bfd629029c233cb/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9f1be2f492ab5c2689f3da2e1bfd629029c233cb/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9f1be2f492ab5c2689f3da2e1bfd629029c233cb/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -404,7 +404,7 @@ The PPR operators and pathway membership map are built once and held in memory. 
 
 For each split the following are computed: BIFO-PPR full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions.
 
-The analysis is parallelized using Python multiprocessing; PPR operator components are serialized to worker processes at startup and each worker processes an assigned batch of splits independently. Results are summarized as distribution statistics across all 3,003 splits, robustness counts, and the primary benchmark split identified as an anchor point within the full distribution.
+The analysis is parallelized using Python multiprocessing; PPR operator components are serialized to worker processes at startup and each worker processes an assigned batch of splits independently. Results are summarized as distribution statistics across all 3,003 splits, robustness counts, and the primary benchmark split identified as an anchor point within the full distribution. The primary split corresponds to the first 10 genes in the defined CHD pool ordering. The pathway universe for resampling is filtered to the BIFO-scored pathway universe, ensuring direct comparability with the primary benchmark; the gene universe is derived from all C-prefixed nodes in the merged edge file. Membership construction applies the same size and name-pattern filters as the primary scoring pipeline; the BIFO universe restriction provides equivalent coverage of cross-vocabulary exclusions applied by the SAB-aware membership construction in the primary scoring pipeline.
 
 ## Part V: Kids First cohort application
 
