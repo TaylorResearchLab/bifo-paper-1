@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T01:50:53+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T01:50:53+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:56:00+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:56:00+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/186472ecb3afde0587e88b82871a7cbe06192d5a/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/186472ecb3afde0587e88b82871a7cbe06192d5a/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/186472ecb3afde0587e88b82871a7cbe06192d5a/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1666,7 +1666,7 @@ validation without requiring access to the full graph database.
 
 | File | Description |
 |------|-------------|
-| `chd_curated_nodes.csv` | Node list for the CHD curated benchmark; used as `--node-index` input to the scoring pipeline |
+| `chd_curated_nodes.csv` | Node list for the CHD curated benchmark; used as `--nodes` input to the scoring pipeline (`results_node_index.json` is the `--node-index` input) |
 | `chd_curated_edges_raw.csv.zip` | 94,790 seed-centered mechanistic and association edges for the curated CHD benchmark graph |
 | `chd_curated_pathway_membership_edges.csv.zip` | 79,562 gene-to-pathway membership edges (MSigDB, WikiPathways, GO) |
 | `chd_pathway_reference.txt` | 18 CHD reference pathway CUIs used for evaluation |
