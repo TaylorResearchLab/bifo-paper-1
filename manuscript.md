@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T00:58:23+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T00:58:23+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:21:54+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:21:54+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -710,7 +710,7 @@ The primary split (GATA4, NKX2-5, TBX5, NOTCH1, NOTCH2, HAND1, HAND2, MYH6, GATA
 
 ### 6.4 Relationship to seed-overlap Fisher enrichment
 
-BIFO-PPR achieved higher average precision than seed-overlap Fisher in 22.9% of splits (687 of 3,003). Fisher is competitive in this setting because many of the 15 CHD pool genes are directly annotated to cardiac pathways, so direct overlap enrichment works well when those genes are in the seed set. BIFO-PPR's advantage lies in recovering pathways that are connected to the seeds through the graph but do not directly overlap them. Across all splits, rank improvement under BIFO-PPR is consistently positive regardless of whether BIFO-PPR or Fisher achieves higher AP on a given split, confirming that graph conditioning adds value beyond overlap-based enrichment even when Fisher is competitive on a specific configuration.
+BIFO-PPR achieved higher average precision than seed-overlap Fisher in 24.0% of splits (722 of 3,003). Fisher is competitive in this setting because many of the 15 CHD pool genes are directly annotated to cardiac pathways, so direct overlap enrichment works well when those genes are in the seed set. BIFO-PPR's advantage lies in recovering pathways that are connected to the seeds through the graph but do not directly overlap them. Across all splits, rank improvement under BIFO-PPR is consistently positive regardless of whether BIFO-PPR or Fisher achieves higher AP on a given split, confirming that graph conditioning adds value beyond overlap-based enrichment even when Fisher is competitive on a specific configuration.
 
 ![
 **BIFO-PPR pathway recovery is stable across 3,003 seed partitions, curated CHD benchmark.**
@@ -1161,7 +1161,7 @@ Top-20 ranked pathways under each enrichment method, evaluated on the identical 
 
 ### ST3: Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts
 
-Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 2,130 pathways scored (canonical collections only); KF-NBL: 2,196 pathways scored. Cilia reference pathways marked with ✓.
+Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 2,130 pathways scored (canonical collections only); KF-NBL: 2,196 pathways scored. Cilia reference pathways marked with ✓. For BIFO-PPR, both the unfiltered degree_norm rank (all pathways) and the filtered rank (null-calibrated pathways only, signal_to_null_mean ≤ 10) are shown. †Pathways excluded from null calibration (signal_to_null_mean > 10): null_z is not interpretable and filtered rank is not assigned. In KF-CHD the entire top 20 by degree_norm consists of excluded pathways; WP_CILIOPATHIES ranks 43rd overall but 1st among null-calibrated pathways.
 
 **KF-CHD**
 
@@ -1267,30 +1267,38 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 
 *BIFO-PPR full-arm (B4)*
 
-| Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Protein phosphorylation | GO | 2.217e-05 | 21 | — |
-| 2 | REACTOME_CROSS_PRESENTATION_OF_PARTICULATE_EXOGENOUS_ANTIGENS_PHAGOSOMES | MSIGDB | 2.100e-05 | 8 | — |
-| 3 | WP_NAD_METABOLISM_SIRTUINS_AND_AGING | MSIGDB | 2.085e-05 | 11 | — |
-| 4 | REACTOME_FREE_FATTY_ACIDS_REGULATE_INSULIN_SECRETION | MSIGDB | 1.845e-05 | 11 | — |
-| 5 | WP_ARYL_HYDROCARBON_RECEPTOR_NETPATH | MSIGDB | 1.510e-05 | 45 | — |
-| 6 | WP_FGF23_SIGNALLING_IN_HYPOPHOSPHATEMIC_RICKETS_AND_RELATED_DISORDERS | MSIGDB | 1.477e-05 | 22 | — |
-| 7 | REACTOME_ACTIVATION_OF_PUMA_AND_TRANSLOCATION_TO_MITOCHONDRIA | MSIGDB | 1.370e-05 | 9 | — |
-| 8 | BIOCARTA_FBW7_PATHWAY | MSIGDB | 1.366e-05 | 9 | — |
-| 34 | WP_JOUBERT_SYNDROME | MSIGDB | 9.280e-06 | 76 | ✓ |
-| 43 | WP_CILIOPATHIES | MSIGDB | 8.509e-06 | 170 | ✓ |
-| 9 | ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY | MSIGDB | 5.000e-06 | — | — |
-| 10 | HSIAO_LIVER_SPECIFIC_GENES | MSIGDB | 4.000e-06 | — | — |
-| 11 | REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS | MSIGDB | 4.000e-06 | — | — |
-| 12 | REACTOME_DEVELOPMENTAL_BIOLOGY | MSIGDB | 4.000e-06 | — | — |
-| 13 | REACTOME_SLC_TRANSPORTER_DISORDERS | MSIGDB | 4.000e-06 | — | — |
-| 14 | PID_RHODOPSIN_PATHWAY | MSIGDB | 4.000e-06 | — | — |
-| 15 | PUJANA_BRCA1_PCC_NETWORK | MSIGDB | 4.000e-06 | — | — |
-| 16 | GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN | MSIGDB | 4.000e-06 | — | — |
-| 17 | BENPORATH_ES_WITH_H3K27ME3 | MSIGDB | 4.000e-06 | — | — |
-| 18 | MEISSNER_BRAIN_HCP_WITH_H3K4ME3_AND_H3K27ME3 | MSIGDB | 4.000e-06 | — | — |
-| 19 | PUJANA_ATM_PCC_NETWORK | MSIGDB | 4.000e-06 | — | — |
-| 20 | NABA_CORE_MATRISOME | MSIGDB | 4.000e-06 | — | — |
+| Rank | Pathway name | SAB | degree_norm | null_z | Filtered rank | Cilia ref. |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Protein phosphorylation | GO | 2.245e-05 | —† | —† | — |
+| 2 | REACTOME_CROSS_PRESENTATION_OF_PARTICULATE_EXOGENOUS_ANTIGENS_PHAGOSOMES | MSIGDB | 2.115e-05 | —† | —† | — |
+| 3 | WP_NAD_METABOLISM_SIRTUINS_AND_AGING | MSIGDB | 2.059e-05 | —† | —† | — |
+| 4 | REACTOME_FREE_FATTY_ACIDS_REGULATE_INSULIN_SECRETION | MSIGDB | 1.804e-05 | —† | —† | — |
+| 5 | WP_ARYL_HYDROCARBON_RECEPTOR_NETPATH | MSIGDB | 1.502e-05 | —† | —† | — |
+| 6 | WP_FGF23_SIGNALLING_IN_HYPOPHOSPHATEMIC_RICKETS_AND_RELATED_DISORDERS | MSIGDB | 1.462e-05 | —† | —† | — |
+| 7 | REACTOME_ACTIVATION_OF_PUMA_AND_TRANSLOCATION_TO_MITOCHONDRIA | MSIGDB | 1.361e-05 | —† | —† | — |
+| 8 | BIOCARTA_FBW7_PATHWAY | MSIGDB | 1.361e-05 | —† | —† | — |
+| 9 | Ionophore activity | GO | 1.357e-05 | —† | —† | — |
+| 10 | REACTOME_REGULATION_OF_TLR_BY_ENDOGENOUS_LIGAND | MSIGDB | 1.338e-05 | —† | —† | — |
+| 11 | BIOCARTA_SKP2E2F_PATHWAY | MSIGDB | 1.291e-05 | —† | —† | — |
+| 12 | WP_MAMMARY_GLAND_DEVELOPMENT_PATHWAY_INVOLUTION_STAGE_4_OF_4 | MSIGDB | 1.291e-05 | —† | —† | — |
+| 13 | cell motility | GO | 1.251e-05 | —† | —† | — |
+| 14 | REACTOME_CDC6_ASSOCIATION_WITH_THE_ORC_ORIGIN_COMPLEX | MSIGDB | 1.231e-05 | —† | —† | — |
+| 15 | REACTOME_REGULATION_OF_PYRUVATE_DEHYDROGENASE_PDH_COMPLEX | MSIGDB | 1.200e-05 | —† | —† | — |
+| 16 | REACTOME_INHIBITION_OF_REPLICATION_INITIATION_OF_DAMAGED_DNA_BY_RB1_E2F1 | MSIGDB | 1.178e-05 | —† | —† | — |
+| 17 | WP_GENES_CONTROLLING_NEPHROGENESIS | MSIGDB | 1.138e-05 | —† | —† | — |
+| 18 | BIOCARTA_P27_PATHWAY | MSIGDB | 1.132e-05 | —† | —† | — |
+| 19 | REACTOME_TRANSPORT_OF_ORGANIC_ANIONS | MSIGDB | 1.124e-05 | —† | —† | — |
+| 20 | REACTOME_SLC_TRANSPORTER_DISORDERS | MSIGDB | 1.119e-05 | —† | —† | — |
+| ... | | | | | | |
+| 34 | WP_JOUBERT_SYNDROME | MSIGDB | 9.280e-06 | —† | —† | ✓ |
+| ... | | | | | | |
+| 43 | WP_CILIOPATHIES | MSIGDB | 8.509e-06 | 41.2 | 1 | ✓ |
+| ... | | | | | | |
+| 163 | REACTOME_CILIUM_ASSEMBLY | MSIGDB | 4.219e-06 | 18.5 | 59 | ✓ |
+| ... | | | | | | |
+| 171 | WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 3.977e-06 | 17.9 | 65 | ✓ |
+| ... | | | | | | |
+| 216 | REACTOME_HEDGEHOG_OFF_STATE | MSIGDB | 3.163e-06 | 14.4 | 103 | ✓ |
 
 **KF-NBL**
 
@@ -1396,32 +1404,41 @@ Five enrichment methods evaluated in discovery mode (no reference pathway pre-sp
 
 *BIFO-PPR full-arm (B4)*
 
-| Rank | Pathway name | SAB | Score / stat | Members | Cilia ref. |
-| --- | --- | --- | --- | --- | --- |
-| 1 | WP_CILIOPATHIES | MSIGDB | 6.000e-06 | — | ✓ |
-| 2 | YOSHIMURA_MAPK8_TARGETS_UP | MSIGDB | 5.000e-06 | — | — |
-| 3 | REACTOME_TRANSPORT_OF_SMALL_MOLECULES | MSIGDB | 5.000e-06 | — | — |
-| 4 | NABA_MATRISOME | MSIGDB | 5.000e-06 | — | — |
-| 5 | REACTOME_DISEASES_OF_METABOLISM | MSIGDB | 5.000e-06 | — | — |
-| 6 | GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN | MSIGDB | 4.000e-06 | — | — |
-| 7 | Ionophore activity | GO | 4.000e-06 | — | — |
-| 8 | PUJANA_BRCA1_PCC_NETWORK | MSIGDB | 4.000e-06 | — | — |
-| 9 | Signal Transduction | GO | 4.000e-06 | — | — |
-| 10 | DESERT_PERIPORTAL_HEPATOCELLULAR_CARCINOMA_SUBCLASS_UP | MSIGDB | 4.000e-06 | — | — |
-| 11 | Transmembrane Transport | GO | 4.000e-06 | — | — |
-| 12 | ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY | MSIGDB | 4.000e-06 | — | — |
-| 13 | BENPORATH_SUZ12_TARGETS | MSIGDB | 4.000e-06 | — | — |
-| 14 | PUJANA_ATM_PCC_NETWORK | MSIGDB | 4.000e-06 | — | — |
-| 15 | BENPORATH_EED_TARGETS | MSIGDB | 4.000e-06 | — | — |
-| 16 | BLALOCK_ALZHEIMERS_DISEASE_UP | MSIGDB | 4.000e-06 | — | — |
-| 17 | DODD_NASOPHARYNGEAL_CARCINOMA_DN | MSIGDB | 4.000e-06 | — | — |
-| 18 | DODD_NASOPHARYNGEAL_CARCINOMA_UP | MSIGDB | 4.000e-06 | — | — |
-| 19 | PID_CONE_PATHWAY | MSIGDB | 4.000e-06 | — | — |
-| 20 | MOOTHA_HUMAN_MITODB_6_2002 | MSIGDB | 4.000e-06 | — | — |
+| Rank | Pathway name | SAB | degree_norm | null_z | Filtered rank | Cilia ref. |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Ionophore activity | GO | 4.692e-06 | 17.8 | 1 | — |
+| 2 | Transmembrane Transport | GO | 4.367e-06 | 16.3 | 2 | — |
+| 3 | WP_CILIOPATHIES | MSIGDB | 4.241e-06 | 18.4 | 3 | ✓ |
+| 4 | Regulation of Cell Shape | GO | 3.637e-06 | 13.4 | 4 | — |
+| 5 | DNA Repair | GO | 3.558e-06 | 11.7 | 5 | — |
+| 6 | REACTOME_DISEASES_OF_METABOLISM | MSIGDB | 3.256e-06 | 13.1 | 6 | — |
+| 7 | Blood coagulation | GO | 3.250e-06 | 13.7 | 7 | — |
+| 8 | Skeletal Development | GO | 2.863e-06 | 14.2 | 8 | — |
+| 9 | Myogenesis | GO | 2.829e-06 | 10.4 | 9 | — |
+| 10 | WP_AMINO_ACID_METABOLISM | MSIGDB | 2.706e-06 | 11.2 | 10 | — |
+| 11 | Heparin Binding | GO | 2.703e-06 | 14.8 | 11 | — |
+| 12 | Carbohydrate Metabolism | GO | 2.684e-06 | 9.0 | 12 | — |
+| 13 | PID_CONE_PATHWAY | MSIGDB | 2.672e-06 | 13.8 | 13 | — |
+| 14 | Vision | GO | 2.636e-06 | 10.1 | 14 | — |
+| 15 | Xenobiotic Metabolism | GO | 2.609e-06 | 9.2 | 15 | — |
+| 16 | Nucleotide Metabolism | GO | 2.545e-06 | 8.5 | 16 | — |
+| 17 | WP_JOUBERT_SYNDROME | MSIGDB | 2.536e-06 | 9.9 | 17 | ✓ |
+| 18 | REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS | MSIGDB | 2.467e-06 | 9.5 | 18 | — |
+| 19 | Homeostasis | GO | 2.440e-06 | 8.4 | 19 | — |
+| 20 | Amino Acid Biosynthesis | GO | 2.438e-06 | 9.4 | 20 | — |
+| ... | | | | | | |
+| 31 | WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR | MSIGDB | 2.154e-06 | 8.3 | 31 | ✓ |
+| 32 | REACTOME_CILIUM_ASSEMBLY | MSIGDB | 2.154e-06 | 6.7 | 32 | ✓ |
+| ... | | | | | | |
+| 228 | REACTOME_SIGNALING_BY_HEDGEHOG | MSIGDB | 1.134e-06 | 2.0 | 228 | ✓ |
+| ... | | | | | | |
+| 233 | WP_CILIARY_LANDSCAPE | MSIGDB | 1.125e-06 | 1.0 | 233 | ✓ |
+| ... | | | | | | |
+| 245 | REACTOME_INTRAFLAGELLAR_TRANSPORT | MSIGDB | 1.100e-06 | 3.4 | 245 | ✓ |
 
 ### ST4: Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL
 
-All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean > 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §8.4).
+All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean > 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §5.1).
 
 | Pathway name | Source DB | KF-CHD rank | KF-CHD score | KF-CHD null_z | KF-NBL rank | KF-NBL score | KF-NBL null_z |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1602,14 +1619,14 @@ validation without requiring access to the full graph database.
 | Script | Purpose | Paper section |
 |--------|---------|---------------|
 | `bifo_conditioning.py` | BIFO edge conditioning (entity resolution, flow class filtering) and PPR propagation. Primary analysis script. | Methods §2, §3 |
-| `score_pathways.py` | Pathway scoring from PPR score vectors using degree_norm and alternative variants; implements pathway-node membership rewiring null and stratified member-level null (Methods §4, §8.4) |
-| `baseline_enrichment.py` | Enrichment baselines B0-B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts `--kept-edges` and `--small-universe` flags | Methods §6 |
+| `score_pathways.py` | Pathway scoring from PPR score vectors using degree_norm and alternative variants; implements pathway-node membership rewiring null and stratified member-level null (Methods §4, §5) |
+| `baseline_enrichment.py` | Enrichment baselines B0-B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts `--kept-edges` and `--small-universe` flags | Methods §7 |
 | `chd_resampling_exhaustive.py` | Exhaustive in-memory resampling over all C(15,10) = 3,003 possible 10-gene/5-gene partitions of the CHD gene pool | Methods §9 |
-| `kf_resampling.py` | Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort) | Methods §10.7 |
-| `seed_cui_lookup.py` | Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs | Methods §10.2 |
-| `generate_export_cypher.py` | Generate cohort-specific Neo4j export Cypher queries from a seed gene list | Methods §10.3 |
-| `build_cilia_reference.py` | Build the cilia pathway reference set by matching pathway names against cilia-related terms | Methods §10.4 |
-| `clean_cypher_output.py` | Clean artifact characters introduced by cypher-shell CSV export | Methods §10.3 |
+| `kf_resampling.py` | Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort) | Methods §13 |
+| `seed_cui_lookup.py` | Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs | Methods §11 |
+| `generate_export_cypher.py` | Generate cohort-specific Neo4j export Cypher queries from a seed gene list | Methods §11 |
+| `build_cilia_reference.py` | Build the cilia pathway reference set by matching pathway names against cilia-related terms | Methods §12 |
+| `clean_cypher_output.py` | Clean artifact characters introduced by cypher-shell CSV export | Methods §11 |
 
 ### S6.2 Shell pipeline wrappers (`scripts/`)
 

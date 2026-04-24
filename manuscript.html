@@ -60,8 +60,8 @@
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T00:58:23+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T00:58:23+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:21:54+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:21:54+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -93,9 +93,9 @@
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -1013,7 +1013,7 @@ Two pathway-family controls using seeds drawn from curated pathway gene lists ra
 <h3 id="position-of-the-primary-benchmark-split">6.3 Position of the primary benchmark split</h3>
 <p>The primary split (GATA4, NKX2-5, TBX5, NOTCH1, NOTCH2, HAND1, HAND2, MYH6, GATA6, TBX1 as seeds) achieved P@10 = 0.70 and AP = 0.409, placing it at the maximum P@10 observed and at the 98th percentile of AP across all 3,003 splits. Rank improvement for the primary split was +128.9, at the 74th percentile (median +118.4). The primary split is therefore a favorable but not exceptional configuration: it represents what a well-chosen set of canonical disease genes can achieve, while the distribution shows that the method works robustly across a much broader range of starting points.</p>
 <h3 id="relationship-to-seed-overlap-fisher-enrichment">6.4 Relationship to seed-overlap Fisher enrichment</h3>
-<p>BIFO-PPR achieved higher average precision than seed-overlap Fisher in 22.9% of splits (687 of 3,003). Fisher is competitive in this setting because many of the 15 CHD pool genes are directly annotated to cardiac pathways, so direct overlap enrichment works well when those genes are in the seed set. BIFO-PPR’s advantage lies in recovering pathways that are connected to the seeds through the graph but do not directly overlap them. Across all splits, rank improvement under BIFO-PPR is consistently positive regardless of whether BIFO-PPR or Fisher achieves higher AP on a given split, confirming that graph conditioning adds value beyond overlap-based enrichment even when Fisher is competitive on a specific configuration.</p>
+<p>BIFO-PPR achieved higher average precision than seed-overlap Fisher in 24.0% of splits (722 of 3,003). Fisher is competitive in this setting because many of the 15 CHD pool genes are directly annotated to cardiac pathways, so direct overlap enrichment works well when those genes are in the seed set. BIFO-PPR’s advantage lies in recovering pathways that are connected to the seeds through the graph but do not directly overlap them. Across all splits, rank improvement under BIFO-PPR is consistently positive regardless of whether BIFO-PPR or Fisher achieves higher AP on a given split, confirming that graph conditioning adds value beyond overlap-based enrichment even when Fisher is competitive on a specific configuration.</p>
 <div id="fig:resampling" class="fignos">
 <figure>
 <img src="images/fig6_resampling.png" style="width:100.0%" alt="Figure 7: BIFO-PPR pathway recovery is stable across 3,003 seed partitions, curated CHD benchmark. Each split: 10 seeds and 5 held-out genes drawn from the 15-gene CHD pool. Primary split shown as red dashed line in each panel. (A) Precision@10 distribution across all 3,003 splits. 94.4% of splits achieve P@10 at least 0.30; 43.8% achieve P@10 at least 0.50; primary split P@10 = 0.70. (B) BIFO-PPR Average Precision distribution (primary = 0.408). (C) Seed Fisher Average Precision distribution (primary = 0.431). (D) Rank improvement distribution: all 3,003 splits show positive rank improvement (100% positive); primary split +128.9. BIFO-PPR beats Seed Fisher on AP in 24.0% of splits. All splits use identical conditioning operators and pathway universe; only the seed vector varies." />
@@ -2677,7 +2677,7 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 </tbody>
 </table>
 <h3 id="st3-top-20-ranked-pathways-per-method-kf-chd-and-kf-nbl-cohorts">ST3: Top-20 ranked pathways per method, KF-CHD and KF-NBL cohorts</h3>
-<p>Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 2,130 pathways scored (canonical collections only); KF-NBL: 2,196 pathways scored. Cilia reference pathways marked with ✓.</p>
+<p>Five enrichment methods evaluated in discovery mode (no reference pathway pre-specified). KF-CHD: 2,130 pathways scored (canonical collections only); KF-NBL: 2,196 pathways scored. Cilia reference pathways marked with ✓. For BIFO-PPR, both the unfiltered degree_norm rank (all pathways) and the filtered rank (null-calibrated pathways only, signal_to_null_mean ≤ 10) are shown. †Pathways excluded from null calibration (signal_to_null_mean &gt; 10): null_z is not interpretable and filtered rank is not assigned. In KF-CHD the entire top 20 by degree_norm consists of excluded pathways; WP_CILIOPATHIES ranks 43rd overall but 1st among null-calibrated pathways.</p>
 <p><strong>KF-CHD</strong></p>
 <p><em>Seed Fisher corrected (B1)</em></p>
 <table style="width:100%;">
@@ -3414,20 +3414,22 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <p><em>BIFO-PPR full-arm (B4)</em></p>
 <table style="width:100%;">
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Rank</th>
 <th>Pathway name</th>
 <th>SAB</th>
-<th>Score / stat</th>
-<th>Members</th>
+<th>degree_norm</th>
+<th>null_z</th>
+<th>Filtered rank</th>
 <th>Cilia ref.</th>
 </tr>
 </thead>
@@ -3436,177 +3438,271 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <td>1</td>
 <td>Protein phosphorylation</td>
 <td>GO</td>
-<td>2.217e-05</td>
-<td>21</td>
+<td>2.245e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td>REACTOME_CROSS_PRESENTATION_OF_PARTICULATE_EXOGENOUS_ANTIGENS_PHAGOSOMES</td>
 <td>MSIGDB</td>
-<td>2.100e-05</td>
-<td>8</td>
+<td>2.115e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>WP_NAD_METABOLISM_SIRTUINS_AND_AGING</td>
 <td>MSIGDB</td>
-<td>2.085e-05</td>
-<td>11</td>
+<td>2.059e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>REACTOME_FREE_FATTY_ACIDS_REGULATE_INSULIN_SECRETION</td>
 <td>MSIGDB</td>
-<td>1.845e-05</td>
-<td>11</td>
+<td>1.804e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>5</td>
 <td>WP_ARYL_HYDROCARBON_RECEPTOR_NETPATH</td>
 <td>MSIGDB</td>
-<td>1.510e-05</td>
-<td>45</td>
+<td>1.502e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>6</td>
 <td>WP_FGF23_SIGNALLING_IN_HYPOPHOSPHATEMIC_RICKETS_AND_RELATED_DISORDERS</td>
 <td>MSIGDB</td>
-<td>1.477e-05</td>
-<td>22</td>
+<td>1.462e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>7</td>
 <td>REACTOME_ACTIVATION_OF_PUMA_AND_TRANSLOCATION_TO_MITOCHONDRIA</td>
 <td>MSIGDB</td>
-<td>1.370e-05</td>
-<td>9</td>
+<td>1.361e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>8</td>
 <td>BIOCARTA_FBW7_PATHWAY</td>
 <td>MSIGDB</td>
-<td>1.366e-05</td>
-<td>9</td>
+<td>1.361e-05</td>
+<td>—†</td>
+<td>—†</td>
 <td>—</td>
 </tr>
 <tr class="odd">
+<td>9</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>1.357e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>REACTOME_REGULATION_OF_TLR_BY_ENDOGENOUS_LIGAND</td>
+<td>MSIGDB</td>
+<td>1.338e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>BIOCARTA_SKP2E2F_PATHWAY</td>
+<td>MSIGDB</td>
+<td>1.291e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>WP_MAMMARY_GLAND_DEVELOPMENT_PATHWAY_INVOLUTION_STAGE_4_OF_4</td>
+<td>MSIGDB</td>
+<td>1.291e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>cell motility</td>
+<td>GO</td>
+<td>1.251e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>REACTOME_CDC6_ASSOCIATION_WITH_THE_ORC_ORIGIN_COMPLEX</td>
+<td>MSIGDB</td>
+<td>1.231e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>REACTOME_REGULATION_OF_PYRUVATE_DEHYDROGENASE_PDH_COMPLEX</td>
+<td>MSIGDB</td>
+<td>1.200e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>REACTOME_INHIBITION_OF_REPLICATION_INITIATION_OF_DAMAGED_DNA_BY_RB1_E2F1</td>
+<td>MSIGDB</td>
+<td>1.178e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>WP_GENES_CONTROLLING_NEPHROGENESIS</td>
+<td>MSIGDB</td>
+<td>1.138e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>BIOCARTA_P27_PATHWAY</td>
+<td>MSIGDB</td>
+<td>1.132e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>REACTOME_TRANSPORT_OF_ORGANIC_ANIONS</td>
+<td>MSIGDB</td>
+<td>1.124e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>REACTOME_SLC_TRANSPORTER_DISORDERS</td>
+<td>MSIGDB</td>
+<td>1.119e-05</td>
+<td>—†</td>
+<td>—†</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
 <td>34</td>
 <td>WP_JOUBERT_SYNDROME</td>
 <td>MSIGDB</td>
 <td>9.280e-06</td>
-<td>76</td>
+<td>—†</td>
+<td>—†</td>
 <td>✓</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>43</td>
 <td>WP_CILIOPATHIES</td>
 <td>MSIGDB</td>
 <td>8.509e-06</td>
-<td>170</td>
+<td>41.2</td>
+<td>1</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
-<td>9</td>
-<td>ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY</td>
-<td>MSIGDB</td>
-<td>5.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
-<td>10</td>
-<td>HSIAO_LIVER_SPECIFIC_GENES</td>
+<td>163</td>
+<td>REACTOME_CILIUM_ASSEMBLY</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>4.219e-06</td>
+<td>18.5</td>
+<td>59</td>
+<td>✓</td>
 </tr>
 <tr class="odd">
-<td>11</td>
-<td>REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
-<td>12</td>
-<td>REACTOME_DEVELOPMENTAL_BIOLOGY</td>
+<td>171</td>
+<td>WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>3.977e-06</td>
+<td>17.9</td>
+<td>65</td>
+<td>✓</td>
 </tr>
 <tr class="odd">
-<td>13</td>
-<td>REACTOME_SLC_TRANSPORTER_DISORDERS</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
-<td>14</td>
-<td>PID_RHODOPSIN_PATHWAY</td>
+<td>216</td>
+<td>REACTOME_HEDGEHOG_OFF_STATE</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>PUJANA_BRCA1_PCC_NETWORK</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td>16</td>
-<td>GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td>17</td>
-<td>BENPORATH_ES_WITH_H3K27ME3</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td>18</td>
-<td>MEISSNER_BRAIN_HCP_WITH_H3K4ME3_AND_H3K27ME3</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td>19</td>
-<td>PUJANA_ATM_PCC_NETWORK</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td>20</td>
-<td>NABA_CORE_MATRISOME</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>3.163e-06</td>
+<td>14.4</td>
+<td>103</td>
+<td>✓</td>
 </tr>
 </tbody>
 </table>
@@ -4346,188 +4442,291 @@ Second, variants were evaluated using AutoGVP <span class="citation" data-cites=
 <p><em>BIFO-PPR full-arm (B4)</em></p>
 <table style="width:100%;">
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Rank</th>
 <th>Pathway name</th>
 <th>SAB</th>
-<th>Score / stat</th>
-<th>Members</th>
+<th>degree_norm</th>
+<th>null_z</th>
+<th>Filtered rank</th>
 <th>Cilia ref.</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>WP_CILIOPATHIES</td>
-<td>MSIGDB</td>
-<td>6.000e-06</td>
+<td>Ionophore activity</td>
+<td>GO</td>
+<td>4.692e-06</td>
+<td>17.8</td>
+<td>1</td>
 <td>—</td>
-<td>✓</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>YOSHIMURA_MAPK8_TARGETS_UP</td>
-<td>MSIGDB</td>
-<td>5.000e-06</td>
-<td>—</td>
+<td>Transmembrane Transport</td>
+<td>GO</td>
+<td>4.367e-06</td>
+<td>16.3</td>
+<td>2</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>REACTOME_TRANSPORT_OF_SMALL_MOLECULES</td>
+<td>WP_CILIOPATHIES</td>
 <td>MSIGDB</td>
-<td>5.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>4.241e-06</td>
+<td>18.4</td>
+<td>3</td>
+<td>✓</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>NABA_MATRISOME</td>
-<td>MSIGDB</td>
-<td>5.000e-06</td>
-<td>—</td>
+<td>Regulation of Cell Shape</td>
+<td>GO</td>
+<td>3.637e-06</td>
+<td>13.4</td>
+<td>4</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>REACTOME_DISEASES_OF_METABOLISM</td>
-<td>MSIGDB</td>
-<td>5.000e-06</td>
-<td>—</td>
+<td>DNA Repair</td>
+<td>GO</td>
+<td>3.558e-06</td>
+<td>11.7</td>
+<td>5</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>GRAESSMANN_APOPTOSIS_BY_DOXORUBICIN_DN</td>
+<td>REACTOME_DISEASES_OF_METABOLISM</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>3.256e-06</td>
+<td>13.1</td>
+<td>6</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td>Ionophore activity</td>
+<td>Blood coagulation</td>
 <td>GO</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>3.250e-06</td>
+<td>13.7</td>
+<td>7</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>8</td>
-<td>PUJANA_BRCA1_PCC_NETWORK</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Skeletal Development</td>
+<td>GO</td>
+<td>2.863e-06</td>
+<td>14.2</td>
+<td>8</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>Signal Transduction</td>
+<td>Myogenesis</td>
 <td>GO</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>2.829e-06</td>
+<td>10.4</td>
+<td>9</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td>DESERT_PERIPORTAL_HEPATOCELLULAR_CARCINOMA_SUBCLASS_UP</td>
+<td>WP_AMINO_ACID_METABOLISM</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>2.706e-06</td>
+<td>11.2</td>
+<td>10</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>11</td>
-<td>Transmembrane Transport</td>
+<td>Heparin Binding</td>
 <td>GO</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>2.703e-06</td>
+<td>14.8</td>
+<td>11</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>12</td>
-<td>ZWANG_TRANSIENTLY_UP_BY_2ND_EGF_PULSE_ONLY</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Carbohydrate Metabolism</td>
+<td>GO</td>
+<td>2.684e-06</td>
+<td>9.0</td>
+<td>12</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>13</td>
-<td>BENPORATH_SUZ12_TARGETS</td>
+<td>PID_CONE_PATHWAY</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>2.672e-06</td>
+<td>13.8</td>
+<td>13</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>14</td>
-<td>PUJANA_ATM_PCC_NETWORK</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Vision</td>
+<td>GO</td>
+<td>2.636e-06</td>
+<td>10.1</td>
+<td>14</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>15</td>
-<td>BENPORATH_EED_TARGETS</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Xenobiotic Metabolism</td>
+<td>GO</td>
+<td>2.609e-06</td>
+<td>9.2</td>
+<td>15</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>16</td>
-<td>BLALOCK_ALZHEIMERS_DISEASE_UP</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Nucleotide Metabolism</td>
+<td>GO</td>
+<td>2.545e-06</td>
+<td>8.5</td>
+<td>16</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>17</td>
-<td>DODD_NASOPHARYNGEAL_CARCINOMA_DN</td>
+<td>WP_JOUBERT_SYNDROME</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>2.536e-06</td>
+<td>9.9</td>
+<td>17</td>
+<td>✓</td>
 </tr>
 <tr class="even">
 <td>18</td>
-<td>DODD_NASOPHARYNGEAL_CARCINOMA_UP</td>
+<td>REACTOME_DISORDERS_OF_TRANSMEMBRANE_TRANSPORTERS</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>2.467e-06</td>
+<td>9.5</td>
+<td>18</td>
 <td>—</td>
 </tr>
 <tr class="odd">
 <td>19</td>
-<td>PID_CONE_PATHWAY</td>
-<td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
+<td>Homeostasis</td>
+<td>GO</td>
+<td>2.440e-06</td>
+<td>8.4</td>
+<td>19</td>
 <td>—</td>
 </tr>
 <tr class="even">
 <td>20</td>
-<td>MOOTHA_HUMAN_MITODB_6_2002</td>
+<td>Amino Acid Biosynthesis</td>
+<td>GO</td>
+<td>2.438e-06</td>
+<td>9.4</td>
+<td>20</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>31</td>
+<td>WP_GENES_RELATED_TO_PRIMARY_CILIUM_DEVELOPMENT_BASED_ON_CRISPR</td>
 <td>MSIGDB</td>
-<td>4.000e-06</td>
-<td>—</td>
-<td>—</td>
+<td>2.154e-06</td>
+<td>8.3</td>
+<td>31</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>32</td>
+<td>REACTOME_CILIUM_ASSEMBLY</td>
+<td>MSIGDB</td>
+<td>2.154e-06</td>
+<td>6.7</td>
+<td>32</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>228</td>
+<td>REACTOME_SIGNALING_BY_HEDGEHOG</td>
+<td>MSIGDB</td>
+<td>1.134e-06</td>
+<td>2.0</td>
+<td>228</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>233</td>
+<td>WP_CILIARY_LANDSCAPE</td>
+<td>MSIGDB</td>
+<td>1.125e-06</td>
+<td>1.0</td>
+<td>233</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>245</td>
+<td>REACTOME_INTRAFLAGELLAR_TRANSPORT</td>
+<td>MSIGDB</td>
+<td>1.100e-06</td>
+<td>3.4</td>
+<td>245</td>
+<td>✓</td>
 </tr>
 </tbody>
 </table>
 <h3 id="st4-full-cilia-pathway-cluster-ranking-under-bifo-kf-chd-and-kf-nbl">ST4: Full cilia pathway cluster ranking under BIFO, KF-CHD and KF-NBL</h3>
-<p>All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean &gt; 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §8.4).</p>
+<p>All cilia, ciliopathy, and hedgehog pathway annotations from the scored universe (16 matched in KF-CHD, 16 in KF-NBL from the 16-pathway reference), ordered by KF-CHD BIFO rank. Score = degree_norm. Also shown: null_z (pathway-node rewiring null). One reference pathway (MSIGDB:M9331, a CGP collection gene expression signature set) was not present in the scored universe after canonical-collection filtering and is excluded from this table. †NaN: null distribution is degenerate (signal_to_null_mean &gt; 10); null_z is not interpretable and the pathway is excluded from BH correction (see Methods §5.1).</p>
 <table>
 <colgroup>
 <col style="width: 12%" />
@@ -5736,13 +5935,13 @@ validation without requiring access to the full graph database.</p>
 </tr>
 <tr class="even">
 <td><code>score_pathways.py</code></td>
-<td>Pathway scoring from PPR score vectors using degree_norm and alternative variants; implements pathway-node membership rewiring null and stratified member-level null (Methods §4, §8.4)</td>
+<td>Pathway scoring from PPR score vectors using degree_norm and alternative variants; implements pathway-node membership rewiring null and stratified member-level null (Methods §4, §5)</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td><code>baseline_enrichment.py</code></td>
 <td>Enrichment baselines B0-B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts <code>--kept-edges</code> and <code>--small-universe</code> flags</td>
-<td>Methods §6</td>
+<td>Methods §7</td>
 </tr>
 <tr class="even">
 <td><code>chd_resampling_exhaustive.py</code></td>
@@ -5752,27 +5951,27 @@ validation without requiring access to the full graph database.</p>
 <tr class="odd">
 <td><code>kf_resampling.py</code></td>
 <td>Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort)</td>
-<td>Methods §10.7</td>
+<td>Methods §13</td>
 </tr>
 <tr class="even">
 <td><code>seed_cui_lookup.py</code></td>
 <td>Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs</td>
-<td>Methods §10.2</td>
+<td>Methods §11</td>
 </tr>
 <tr class="odd">
 <td><code>generate_export_cypher.py</code></td>
 <td>Generate cohort-specific Neo4j export Cypher queries from a seed gene list</td>
-<td>Methods §10.3</td>
+<td>Methods §11</td>
 </tr>
 <tr class="even">
 <td><code>build_cilia_reference.py</code></td>
 <td>Build the cilia pathway reference set by matching pathway names against cilia-related terms</td>
-<td>Methods §10.4</td>
+<td>Methods §12</td>
 </tr>
 <tr class="odd">
 <td><code>clean_cypher_output.py</code></td>
 <td>Clean artifact characters introduced by cypher-shell CSV export</td>
-<td>Methods §10.3</td>
+<td>Methods §11</td>
 </tr>
 </tbody>
 </table>
