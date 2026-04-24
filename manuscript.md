@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T01:43:58+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T01:43:58+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:50:53+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:50:53+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/0a705896e866e593c4e752d4ab00d42ba23b619e/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -702,7 +702,7 @@ Rank improvement was positive in all 3,003 splits, ranging from +57.7 to +166.0 
 
 ### 6.2 Pathway precision is stable across nearly all configurations
 
-Median P@10 across all 3,003 splits was 0.40, meaning the typical seed configuration recovers 5 of the 18 CHD reference pathways in the top 10 ranked results. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.00, BIFO-PPR retained detectable pathway signal above background in nearly all configurations. Average precision ranged from 0.142 to 0.438 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.
+Median P@10 across all 3,003 splits was 0.40, meaning the typical seed configuration recovers 4 of the top 10 ranked pathways from the 18-pathway CHD reference set. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.00, BIFO-PPR retained detectable pathway signal above background in nearly all configurations. Average precision ranged from 0.142 to 0.438 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.
 
 ### 6.3 Position of the primary benchmark split
 
@@ -1625,7 +1625,7 @@ validation without requiring access to the full graph database.
 | `kf_resampling.py` | Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort) | Methods §15 |
 | `seed_cui_lookup.py` | Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs | Methods §11 |
 | `generate_export_cypher.py` | Generate cohort-specific Neo4j export Cypher queries from a seed gene list | Methods §11 |
-| `build_cilia_reference.py` | Build the cilia pathway reference set by matching pathway names against cilia-related terms | Methods §12 |
+| `build_cilia_reference.py` | Build the cilia pathway reference set by matching pathway names against cilia-related terms | Methods §13 |
 | `clean_cypher_output.py` | Clean artifact characters introduced by cypher-shell CSV export | Methods §11 |
 
 ### S6.2 Shell pipeline wrappers (`scripts/`)
@@ -1666,6 +1666,7 @@ validation without requiring access to the full graph database.
 
 | File | Description |
 |------|-------------|
+| `chd_curated_nodes.csv` | Node list for the CHD curated benchmark; used as `--node-index` input to the scoring pipeline |
 | `chd_curated_edges_raw.csv.zip` | 94,790 seed-centered mechanistic and association edges for the curated CHD benchmark graph |
 | `chd_curated_pathway_membership_edges.csv.zip` | 79,562 gene-to-pathway membership edges (MSigDB, WikiPathways, GO) |
 | `chd_pathway_reference.txt` | 18 CHD reference pathway CUIs used for evaluation |
