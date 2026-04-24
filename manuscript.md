@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T02:11:50+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T02:11:50+00:00" />
+  <meta name="dc.modified" content="2026-04-24T02:26:04+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T02:26:04+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fc34cfa1dbb33734ebc71d28368c6670b8e4771c/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fc34cfa1dbb33734ebc71d28368c6670b8e4771c/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fc34cfa1dbb33734ebc71d28368c6670b8e4771c/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/8162809c8e83ea38da880533792197fefd06fffb/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8162809c8e83ea38da880533792197fefd06fffb/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8162809c8e83ea38da880533792197fefd06fffb/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -130,11 +130,9 @@ We further evaluate BIFO-PPR using rare variant cohorts from the Kids First prog
 Together, these results establish BIFO as an ontological framework for formally defining admissible biological information flow, and BIFO-PPR as an implemented system that enables mechanistically grounded pathway inference where standard approaches fail.
 
 
-**Methods**
+## Methods
 
-These Methods describe the BIFO framework and its application across three benchmarks and two cohort analyses. The first benchmark uses a curated set of congenital heart disease genes applied to a controlled projection of the Data Distillery Knowledge Graph, establishing pathway prioritization performance against standard enrichment baselines and characterizing the contribution of each edge class through a three-arm ablation design. The second benchmark uses pathway-split recovery controls, in which seed genes are drawn directly from known pathway members, to test whether BIFO can recover source pathways from partial membership. The third exhaustively evaluates all 3,003 possible 10-gene/5-gene partitions of the CHD gene pool to assess whether results depend on the specific seed configuration. The same pipeline is then applied to two independent pediatric rare variant cohorts from the Kids First program, where standard enrichment methods become unreliable due to the size and heterogeneity of the input gene sets. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. Parts I through III describe the core pipeline: graph conditioning, propagation, and significance testing. Parts IV through VI describe benchmark evaluation, cohort application, and implementation.
-
----
+These Methods describe the BIFO framework and its application to benchmark evaluation and cohort analysis. All analyses follow a common pipeline: (1) BIFO conditioning defines an admissible edge set, (2) a directed propagation operator is constructed, (3) signal is propagated via Personalized PageRank, (4) pathway scores are computed at pathway concept nodes, and (5) significance is assessed using empirical null models. Parts I through III define this core pipeline: graph conditioning, propagation, and significance testing. Parts IV and V describe benchmark evaluation and cohort application. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. The specific analyses instantiated on this pipeline and their relationship to the paper's results are described in Section 2.
 
 ## Part I: Graph and conditioning
 
@@ -146,7 +144,7 @@ BIFO transforms a heterogeneous knowledge graph into a propagation-ready structu
 
 Propagation is restricted to edges designated as **admissible**, defined as the union of mechanistic edges, selected weak-mechanistic relationships, and gene-to-pathway membership relationships. Edges classified as observational or contextual are retained in the conditioning output for completeness but are excluded from the propagation operator. This produces a conditioned graph $G_C = (V, E_C)$, where $E_C \subseteq E$ contains only admissible edges.
 
-Within the admissible edge set, gene-to-pathway membership relationships are treated as a distinct class, referred to as **bridge edges**, which connect molecular entities to pathway-level representations. These edges do not represent direct mechanistic interactions; rather, they enable signal transfer between the molecular layer of the graph and the pathway annotation layer. Without them, signal propagating through mechanistic gene-gene relationships has no path to pathway nodes, making pathway-level inference structurally impossible regardless of how strong the molecular signal is. BIFO admits bridge edges as a formally defined propagation-eligible class, with signal flowing unidirectionally from gene nodes to pathway nodes. All other admissible edges operate within the molecular layer and represent mechanistic or near-mechanistic biological relationships.
+Within the admissible edge set, gene-to-pathway membership relationships are treated as a distinct class, referred to as **bridge edges**, which connect molecular entities to pathway-level representations. These edges do not represent direct mechanistic interactions; rather, they enable signal transfer between the molecular layer of the graph and the pathway annotation layer. Without them, signal propagating through mechanistic gene-gene relationships has no path to pathway nodes, making pathway-level inference structurally impossible regardless of how strong the molecular signal is. BIFO admits bridge edges as a formally defined propagation-eligible class, with signal flowing unidirectionally from gene nodes to pathway nodes. Only gene-to-pathway membership edges are admissible for propagation; the reverse direction (pathway-to-gene) is explicitly excluded and classified as nonpropagating in the conditioning output. All other admissible edges operate within the molecular layer and represent mechanistic or near-mechanistic biological relationships.
 
 Mechanistic edges encode directional, state-changing biological transformations such as protein-protein signaling, transcriptional regulation, or biochemical reactions. Weak-mechanistic edges represent relationships with partial or indirect mechanistic support that may contribute to information transfer in specific contexts. Observational edges capture statistical or correlative associations without encoding state transitions and are excluded from propagation. Contextual edges encode spatial, temporal, or structural constraints; they are retained in the conditioning output for entity typing purposes but do not carry signal.
 
@@ -211,8 +209,16 @@ $F_{\text{admissible}}$ is the set of flow classes designated as propagating in 
 The analyses in this paper use the Common Fund Data Ecosystem Data Distillery Knowledge Graph (DDKG), built on the Unified Biomedical Knowledge Graph (UBKG) and inheriting Petagraph infrastructure [@doi:10.1101/2025.08.11.666099; @doi:10.1038/s41597-024-04070-w]. DDKG integrates heterogeneous biological knowledge from multiple source ontologies and databases into a unified concept-and-relationship graph. Each concept node carries a SAB identifier and each edge carries a predicate drawn from the source ontology's relation vocabulary, making edge provenance fully traceable and satisfying the predicate-mapping and entity resolution requirements of BIFO conditioning.
 
 For each analysis, the graph was queried as a 1-hop neighborhood centered on the relevant seed gene set, producing a mechanistic and association edge file and a separate gene-to-pathway membership edge file derived from MSigDB [@doi:10.1073/pnas.0506580102; @doi:10.1016/j.cels.2015.12.004], WikiPathways [@doi:10.1093/nar/gkaa1024], and Gene Ontology annotations. These were merged into a single edge file for conditioning. Node metadata was exported separately. The specific graph parameters, edge counts, and conditioning results for each analysis are described in the relevant benchmark and cohort sections.
--e 
----
+
+The analyses described above are instantiated on a set of graph projections and gene sets constructed to isolate distinct properties of the method. All benchmarks and cohort analyses use the same underlying DDKG representation and BIFO conditioning procedure, with differences arising from the choice of seed sets, graph export scope, and evaluation regime.
+
+The primary benchmark is defined on a controlled 1-hop projection of the DDKG centered on a curated set of congenital heart disease genes, producing a graph with fixed topology and known pathway reference structure (Section 6.3). Within this graph, separate benchmark cohorts are defined for discovery and recovery tasks, using curated disease genes and pathway-derived gene sets (Sections 6.1–6.4). This design allows evaluation of pathway inference under both indirect (discovery) and direct (recovery) signal regimes.
+
+To evaluate robustness to input gene selection, an exhaustive resampling analysis is performed over all C(15,10) = 3,003 possible seed/held-out partitions of the CHD gene pool, holding the graph structure and propagation operators fixed while varying only the seed vector (Section 9). This isolates the contribution of seed composition to pathway-level inference independently of graph topology.
+
+The same pipeline is then applied to two large-scale rare variant cohorts from the Kids First program (congenital heart disease and neuroblastoma), where gene sets are derived from germline variant aggregation and evaluated in discovery mode without predefined pathway targets (Sections 10–15). These cohort analyses represent a distinct regime from the curated benchmarks, characterized by large, heterogeneous gene sets and distributed biological signal, and are used to assess whether BIFO-conditioned propagation recovers coherent pathway structure under conditions where standard enrichment approaches lose discriminative power.
+
+With the conditioned graph $G_C$ and propagation operator defined, Parts II and III describe how signal is propagated and scored.
 
 ## Part II: Propagation and pathway scoring
 
@@ -232,7 +238,7 @@ The restart probability $\alpha$ controls the trade-off between local signal ret
 
 ### 4.1 Membership map construction
 
-Pathway scoring requires a map from gene nodes to the pathway nodes they belong to. Membership is determined from gene-to-pathway edges using the designated bridge edge predicate types. Membership edges are source-vocabulary constrained: a gene is counted as a member of a pathway only if its SAB matches the pathway's source vocabulary, preventing cross-vocabulary membership contamination. Duplicate memberships are removed.
+Pathway scoring requires a map from gene nodes to the pathway nodes they belong to. Membership is determined from gene-to-pathway edges using the designated bridge edge predicate types, drawn from the pre-conditioning edge file. Because gene-to-pathway Pathway Contribution edges are admissible under BIFO by definition and are not selectively excluded, using the pre-conditioning edge file is equivalent to using the conditioned edge set for membership construction. Membership edges are source-vocabulary constrained: a gene is counted as a member of a pathway only if its SAB matches the pathway's source vocabulary, preventing cross-vocabulary membership contamination. Duplicate memberships are removed.
 
 Pathways are filtered by size, retaining those with at least 8 and at most 300 members. Pathways below the minimum are too small for enrichment analysis to be meaningful; pathways above the maximum are too broad to be biologically informative. A name-pattern filter additionally excludes gene expression quantile sets and microRNA sets, which represent statistical partitions rather than curated biological programs. The resulting pathway universe is held constant across all scoring arms and baseline methods within a given analysis.
 
@@ -244,9 +250,7 @@ $$\text{score}(p) = \frac{f_{\text{direct}}(p)}{\sqrt{|\text{members}(p)|}}$$ {#
 
 where $f_{\text{direct}}(p)$ is the PPR score on the pathway concept node itself, representing signal mass that arrived via bridge edges, and $|\text{members}(p)|$ is the source-vocabulary-constrained member gene count. The square root penalty down-weights large generic pathways, which accumulate high PPR scores by virtue of having many members, without fully normalizing by size in a way that would over-penalize legitimate large biological programs. Pathways with no member genes receive a score of zero.
 
-This scoring function was specified before benchmark evaluation and was not modified after the first successful run.
--e 
----
+This scoring function was specified before benchmark evaluation and was not modified after the first successful run. A diagnostic scoring variant, **local_bg**, is computed as the direct PPR score minus the mean PPR score of the pathway node's immediate graph neighbors. This variant is included in output files for exploratory analysis but is not used in any reported evaluation metrics.
 
 ## Part III: Significance testing
 
@@ -258,7 +262,7 @@ Statistical significance is assessed using the finite-sample-corrected empirical
 
 $$p = \frac{1 + \text{count}(\text{null} \geq \text{observed})}{1 + N}$$
 
-BH correction is applied across all scored pathways to obtain q-values. The null_z score for each pathway is the number of standard deviations the observed degree_norm score sits above the mean of its null distribution.
+BH correction is applied across all scored pathways to obtain q-values. The null_z score for each pathway is the number of standard deviations the observed degree_norm score sits above the mean of its null distribution. Rewiring is restricted to gene-to-pathway membership (bridge) edges; all mechanistic edges remain fixed across permutations. The null seed universe is restricted to genes connected to pathways retained after size and name-pattern filtering; genes connected only to excluded pathways do not contribute to null permutations.
 
 ### 5.1 Null calibration
 
@@ -279,8 +283,6 @@ Empirical p-values use the same finite-sample correction as above; BH correction
 Statistical significance under the rewiring null establishes that a pathway score exceeds topological expectation for a given seed set. It does not establish whether that score is a stable property of the underlying biology or an artifact of the specific genes provided as input. A pathway that ranks highly and passes significance testing under many different seed configurations is more credible than one that does so only for a particular input.
 
 Stability is assessed by perturbing the seed set and measuring whether pathway recovery is preserved. For gene pools small enough to enumerate completely, all possible seed partitions are evaluated exhaustively. For large cohort gene sets where exhaustive enumeration is not feasible, bootstrap resampling draws random subsets of varying size from the full seed pool. In both cases, the primary question is whether the signal is a property of the biology represented in the gene set or a consequence of the specific input configuration. The implementations of these two approaches are described in the benchmark and cohort sections where they are applied.
--e 
----
 
 ## Part IV: Benchmark evaluation
 
@@ -330,11 +332,11 @@ Because seeds in the recovery setting are drawn from pathway members, direct ove
 
 ### 6.5 Three-arm ablation design
 
-The three-arm ablation design is applied to the CHD curated benchmark to isolate the contribution of specific edge classes to pathway scoring. The PPR operator is varied across three arms while the scoring stage — pathway membership map, pathway universe, and reference set — is held constant. Differences in scoring outcomes are therefore directly attributable to operator composition.
+The three-arm ablation design is applied to the CHD curated benchmark to isolate the contribution of specific edge classes to pathway scoring. The PPR operator is varied across three arms while the scoring stage (pathway membership map, pathway universe, and reference set) is held constant. Differences in scoring outcomes are therefore directly attributable to operator composition.
 
 The three arms are constructed from the 105,192 edges retained after Level 2 conditioning of the CHD benchmark graph. The **full arm** uses all 57,005 propagating edges, including Pathway Contribution bridge edges in the gene-to-pathway direction. The **ablation arm** conditions the mechanistic and association edges independently of the membership edges, retaining 14,413 propagating edges with no Pathway Contribution bridge edges; this isolates the effect of removing the gene-to-pathway bridge while preserving all other admissible flow classes. The **mechanistic-only arm** retains only the 9,710 edges classified as strictly mechanistic (Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes), excluding Pathway Contribution, Observational Association, and all weak-mechanistic edges.
 
-Observational Association edges (9,909), Pathway Contribution edges in the pathway-to-gene direction (37,352), weak-mechanistic Genetic Regulatory Modulation edges (64), and Spatial constraint edges (862) are retained in kept_edges.csv but excluded from all three PPR adjacency matrices.
+Observational Association edges (9,909), Pathway Contribution edges in the pathway-to-gene direction (37,352), weak-mechanistic Genetic Regulatory Modulation edges (64), and Spatial constraint edges (862) are retained in kept_edges.csv but excluded from all three PPR adjacency matrices. Gene-level analyses additionally include raw propagation and random sparsification controls (Table 2); pathway-level ablation focuses on these three BIFO-derived operators.
 
 ## 7 Baseline enrichment methods
 
@@ -350,9 +352,9 @@ This baseline uses graph structure but not propagation: it scores pathways based
 
 The choice of gene universe matters substantially. For the curated benchmark (10 seeds against a universe of approximately 13,000 graph-connected genes), standard-precision computation is used and produces the honest result: non-specific hits dominate because a ten-gene query cannot discriminate against a large background. For large gene sets such as the KF cohort analyses (1,276 to 1,395 seeds against a universe of approximately 22,600 genes), standard-precision hypergeometric computation returns p = 0.0 for every pathway with any meaningful overlap, eliminating rank discrimination entirely. In this regime, log-space computation is required to recover correct relative ordering, and the gene universe is restricted to pathway member genes rather than all graph-connected genes. These two modes test different statistical hypotheses and produce numerically incomparable results; the appropriate mode for each analysis is specified where results are reported.
 
-**B2: 1-hop neighborhood hypergeometric enrichment.** The query set is expanded to include all gene-concept neighbors of the seed genes in the merged edge file, and the same hypergeometric test is applied to the expanded query. This represents the natural workflow of extracting a graph neighborhood and running standard enrichment. The neighborhood inflation problem — in which the expanded query covers the majority of the pathway gene universe, eliminating discriminative power — is itself an informative result about the limitations of this approach.
+**B2: 1-hop neighborhood hypergeometric enrichment.** The query set is expanded to include all gene-concept neighbors of the seed genes in the merged edge file, and the same hypergeometric test is applied to the expanded query. This represents the natural workflow of extracting a graph neighborhood and running standard enrichment. The neighborhood inflation problem, in which the expanded query covers the majority of the pathway gene universe and eliminates discriminative power, is itself an informative result about the limitations of this approach.
 
-**B3 / B3b: Preranked GSEA on PPR scores.** Genes are ranked by their PPR scores (raw graph for B3; BIFO-conditioned graph for B3b) and a weighted running-sum enrichment score is computed following the preranked GSEA algorithm [@doi:10.1073/pnas.0506580102]. B3 tests whether propagation alone recovers pathway-relevant signal without BIFO conditioning. B3b tests whether BIFO-conditioned gene-level scores, used as input to GSEA, improve over raw propagation. The difference between B3b and the BIFO full arm isolates the contribution of the degree_norm pathway-level scoring function beyond what gene-level score ordering provides.
+**B3 / B3b: Preranked GSEA on PPR scores.** Genes are ranked by their PPR scores (raw graph for B3; BIFO-conditioned graph for B3b) and a weighted running-sum enrichment score is computed following the preranked GSEA algorithm [@doi:10.1073/pnas.0506580102]. B3 tests whether propagation alone recovers pathway-relevant signal without BIFO conditioning. B3b tests whether BIFO-conditioned gene-level scores, used as input to GSEA, improve over raw propagation. The difference between B3b and the BIFO-PPR full arm isolates the contribution of the degree_norm pathway-level scoring function beyond what gene-level score ordering provides.
 
 ## 8 Evaluation metrics
 
@@ -400,11 +402,9 @@ The CHD curated benchmark evaluates BIFO from a single fixed seed configuration,
 
 The PPR operators and pathway membership map are built once and held in memory. For each of the 3,003 splits only the seed vector is modified; the adjacency matrices, pathway universe, and reference set remain identical to the primary benchmark. Per-split metrics are accumulated in memory and written as a single output file at the end of the run, avoiding thousands of intermediate files.
 
-For each split the following are computed: BIFO full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions.
+For each split the following are computed: BIFO-PPR full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions.
 
 The analysis is parallelized using Python multiprocessing; PPR operator components are serialized to worker processes at startup and each worker processes an assigned batch of splits independently. Results are summarized as distribution statistics across all 3,003 splits, robustness counts, and the primary benchmark split identified as an anchor point within the full distribution.
--e 
----
 
 ## Part V: Kids First cohort application
 
@@ -412,7 +412,7 @@ The analysis is parallelized using Python multiprocessing; PPR operator componen
 
 Standard pathway enrichment methods were designed for gene sets produced by differential expression or GWAS association, where input lists are typically small, focused, and biologically coherent. Rare variant cohort analysis occupies a different regime. Aggregating pathogenic and likely pathogenic (P/LP) variants across a disease cohort using AutoGVP [@doi:10.1093/bioinformatics/btae114] typically produces gene lists of hundreds to thousands of genes, with biologically relevant signal distributed across a minority of genes embedded in a larger heterogeneous background.
 
-This creates a fundamental tension for enrichment testing. When carrier frequency filters are strict, the gene list shrinks to tens of genes but becomes dominated by severe recessive disease genes incidentally present in the cohort — lysosomal storage disorders, hereditary hearing loss, retinal dystrophy — obscuring the distributed developmental signal of interest. When filters are relaxed to capture the full P/LP burden, the gene list expands to 1,000 to 1,500 genes, large enough that hypergeometric p-values collapse to zero for virtually every pathway with any overlap, eliminating rank discrimination entirely. As described in Section 7, log-space computation and a restricted gene universe recover correct relative ordering in this regime, but the fundamental problem remains: a gene list of this size and heterogeneity carries weak enrichment structure regardless of implementation.
+This creates a fundamental tension for enrichment testing. When carrier frequency filters are strict, the gene list shrinks to tens of genes but becomes dominated by severe recessive disease genes incidentally present in the cohort (lysosomal storage disorders, hereditary hearing loss, retinal dystrophy), obscuring the distributed developmental signal of interest. When filters are relaxed to capture the full P/LP burden, the gene list expands to 1,000 to 1,500 genes, large enough that hypergeometric p-values collapse to zero for virtually every pathway with any overlap, eliminating rank discrimination entirely. As described in Section 7, log-space computation and a restricted gene universe recover correct relative ordering in this regime, but the fundamental problem remains: a gene list of this size and heterogeneity carries weak enrichment structure regardless of implementation.
 
 BIFO addresses this directly. By propagating signal from all seeds simultaneously through the conditioned graph, coherent biological signal from a functionally related gene subset concentrates at relevant pathway nodes while incoherent background signal diffuses away. The approach does not require the input gene set to be small or homogeneous.
 
@@ -440,7 +440,7 @@ Results were evaluated post-hoc against a 16-pathway cilia reference set pre-spe
 
 The same baseline methods described in Section 7 are applied to the KF cohort analyses using the cohort-appropriate settings: log-space hypergeometric computation and a gene universe restricted to pathway member genes plus seed genes, as described in Section 7 (B1). All methods are evaluated on identical pathway universes to enable direct rank comparison.
 
-The primary comparison metric is the rank of WP_CILIOPATHIES and other cilia-related pathways under each method in full discovery mode. Secondary comparisons examine the top-20 ranked pathways per method, the head-to-head rank correlation between Fisher enrichment and BIFO across all pathways, and the full cilia pathway cluster ranking under BIFO. Concordance between BIFO and correctly implemented Fisher enrichment on the top cilia hit is reported as independent validation of the biological signal rather than a competitive comparison, for the reasons described in Section 6.1.
+The primary comparison metric is the rank of WP_CILIOPATHIES and other cilia-related pathways under each method in full discovery mode. Secondary comparisons examine the top-20 ranked pathways per method, the head-to-head rank correlation between Fisher enrichment and BIFO across all pathways, and the full cilia pathway cluster ranking under BIFO-PPR. Concordance between BIFO and correctly implemented Fisher enrichment on the top cilia hit is reported as independent validation of the biological signal rather than a competitive comparison, for the reasons described in Section 6.1.
 
 ## 15 Bootstrap resampling
 
