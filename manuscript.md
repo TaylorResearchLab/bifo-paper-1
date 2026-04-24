@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T01:40:37+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T01:40:37+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:43:58+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:43:58+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/16d91933754df7d1bf3a5cfd65d3b35d8b127d23/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -132,7 +132,7 @@ Together, these results establish BIFO as an ontological framework for formally 
 
 ## Methods
 
-These Methods describe the BIFO framework and its application to benchmark evaluation and cohort analysis. Parts I through III define the core pipeline: graph conditioning, propagation, and significance testing. Parts IV and V describe benchmark evaluation and cohort application. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. The specific analyses instantiated on this pipeline and their relationship to the paper's results are described in Section 2.
+These Methods describe the BIFO framework and its application to benchmark evaluation and cohort analysis. All analyses follow a common pipeline: (1) BIFO conditioning defines an admissible edge set, (2) a directed propagation operator is constructed, (3) signal is propagated via Personalized PageRank, (4) pathway scores are computed at pathway concept nodes, and (5) significance is assessed using empirical null models. Parts I through III define this core pipeline: graph conditioning, propagation, and significance testing. Parts IV and V describe benchmark evaluation and cohort application. Across all analyses, pathway scores are evaluated against an empirical rewiring null that tests whether recovered signals exceed what is expected from graph topology alone. The specific analyses instantiated on this pipeline and their relationship to the paper's results are described in Section 2.
 
 ## Part I: Graph and conditioning
 
@@ -144,7 +144,7 @@ BIFO transforms a heterogeneous knowledge graph into a propagation-ready structu
 
 Propagation is restricted to edges designated as **admissible**, defined as the union of mechanistic edges, selected weak-mechanistic relationships, and gene-to-pathway membership relationships. Edges classified as observational or contextual are retained in the conditioning output for completeness but are excluded from the propagation operator. This produces a conditioned graph $G_C = (V, E_C)$, where $E_C \subseteq E$ contains only admissible edges.
 
-Within the admissible edge set, gene-to-pathway membership relationships are treated as a distinct class, referred to as **bridge edges**, which connect molecular entities to pathway-level representations. These edges do not represent direct mechanistic interactions; rather, they enable signal transfer between the molecular layer of the graph and the pathway annotation layer. Without them, signal propagating through mechanistic gene-gene relationships has no path to pathway nodes, making pathway-level inference structurally impossible regardless of how strong the molecular signal is. BIFO admits bridge edges as a formally defined propagation-eligible class, with signal flowing unidirectionally from gene nodes to pathway nodes. All other admissible edges operate within the molecular layer and represent mechanistic or near-mechanistic biological relationships.
+Within the admissible edge set, gene-to-pathway membership relationships are treated as a distinct class, referred to as **bridge edges**, which connect molecular entities to pathway-level representations. These edges do not represent direct mechanistic interactions; rather, they enable signal transfer between the molecular layer of the graph and the pathway annotation layer. Without them, signal propagating through mechanistic gene-gene relationships has no path to pathway nodes, making pathway-level inference structurally impossible regardless of how strong the molecular signal is. BIFO admits bridge edges as a formally defined propagation-eligible class, with signal flowing unidirectionally from gene nodes to pathway nodes. Only gene-to-pathway membership edges are admissible for propagation; the reverse direction (pathway-to-gene) is explicitly excluded and classified as nonpropagating in the conditioning output. All other admissible edges operate within the molecular layer and represent mechanistic or near-mechanistic biological relationships.
 
 Mechanistic edges encode directional, state-changing biological transformations such as protein-protein signaling, transcriptional regulation, or biochemical reactions. Weak-mechanistic edges represent relationships with partial or indirect mechanistic support that may contribute to information transfer in specific contexts. Observational edges capture statistical or correlative associations without encoding state transitions and are excluded from propagation. Contextual edges encode spatial, temporal, or structural constraints; they are retained in the conditioning output for entity typing purposes but do not carry signal.
 
