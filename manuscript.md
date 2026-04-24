@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T01:21:54+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T01:21:54+00:00" />
+  <meta name="dc.modified" content="2026-04-24T01:40:37+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T01:40:37+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acc3e9adb716e7604f8d8ab7ab93aa289be21e/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/2749a78e950d3e55eee8316e85fa74a9a4276b8a/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -625,7 +625,7 @@ Taken together, standard enrichment methods fail at both ends of the gene set si
 
 ![
 **Baseline enrichment method comparison, KF-CHD and KF-NBL cohorts.**
-Five enrichment methods evaluated against a 21-pathway native cilia reference set.
+Five enrichment methods evaluated against the 16-pathway quantitative cilia reference set (metrics); 21-pathway extended set used for visualization context only.
 (**A**) KF-CHD heatmap: five methods × five metrics (P@10, P@20, P@50, Average Precision, Mean Cilia Ref Rank). Colour scaled within each metric column; darker = better. Mean Ref Rank colour is inverted so lower rank shows darker.
 (**B**) KF-NBL heatmap, same layout as A.
 (**C**) WP_CILIOPATHIES rank under BIFO-PPR full-arm and Seed Fisher (corrected). Seed Fisher ranks WP_CILIOPATHIES first in both cohorts. BIFO-PPR ranks WP_CILIOPATHIES 43rd in KF-CHD (null_z = 41.2) and 3rd in KF-NBL (null_z = 18.4). Seed Fisher results use log-space hypergeometric computation; standard implementations cause p-value floor collapse in the large-seed regime.
@@ -727,7 +727,7 @@ Applied to two independent pediatric rare variant cohorts from the Kids First pr
 
 ### 7.1 The enrichment challenge at cohort scale
 
-Rare variant aggregation across a disease cohort typically produces gene lists of 1,000 to 1,500 genes, far larger than the gene sets standard enrichment methods were designed for. At this scale, hypergeometric p-values collapse to zero for virtually every pathway with any overlap, eliminating rank discrimination entirely. As described in Methods Section 10, this problem is not unique to naive implementations: even with correct log-space computation, a gene list of this size and heterogeneity carries weak enrichment structure because the biologically relevant signal is distributed across a small subset of genes embedded in a large background of incidental carriers.
+Rare variant aggregation across a disease cohort typically produces gene lists of 1,000 to 1,500 genes, far larger than the gene sets standard enrichment methods were designed for. At this scale, hypergeometric p-values collapse to near-zero floor values for a large fraction of pathways, compressing rank discrimination. As described in Methods Section 10, this problem is not unique to naive implementations: even with correct log-space computation, a gene list of this size and heterogeneity carries distributed enrichment structure because the biologically relevant signal spans a small subset of genes embedded in a large background of incidental carriers. Fisher can identify the top hit when the signal is strong enough, but struggles to recover distributed signal across many pathways coherently.
 
 BIFO-PPR addresses this by propagating signal from all seeds simultaneously through the conditioned graph. Coherent biological signal from a functionally related gene subset, such as the 22 cilia-associated genes in the KF-CHD seed pool, concentrates at relevant pathway nodes while incoherent background signal from the remaining 1,254 genes diffuses away. The approach does not require the input gene set to be small or homogeneous.
 
@@ -839,7 +839,7 @@ The core finding is that the cilia signal in these cohorts is distributed across
 
 ![
 **Cross-cohort convergence: KF-CHD and KF-NBL independently recover cilia pathways.**
-(**A**) WP_CILIOPATHIES ranks first under both BIFO-PPR and corrected Seed Fisher in both cohorts.
+(**A**) WP_CILIOPATHIES ranks 43rd (KF-CHD) and 3rd (KF-NBL) under BIFO-PPR full-arm; ranks 1st under corrected Seed Fisher in both cohorts.
 (**B**) BIFO-PPR pathway rank scatter (top 3,000 shown) with cilia pathways highlighted. Cilia pathways cluster in the top-left corner of both axes, indicating concordant prioritization across cohorts.
 (**C**) Cilia pathway cluster: BIFO-PPR rank of each detected cilia-related pathway in KF-CHD (blue circle) vs. KF-NBL (orange triangle). All detected cilia pathways rank in the top half of the scored pathway universe in both cohorts.
 (**D**) Bootstrap resampling against a 16-pathway cilia reference: P@10 distribution for BIFO-PPR (blue) and Seed Fisher (red) at seed sizes n=10, 20, 30 (500 runs per seed size). Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10 to 30 random genes.
@@ -1622,7 +1622,7 @@ validation without requiring access to the full graph database.
 | `score_pathways.py` | Pathway scoring from PPR score vectors using degree_norm and alternative variants; implements pathway-node membership rewiring null and stratified member-level null (Methods §4, §5) |
 | `baseline_enrichment.py` | Enrichment baselines B0-B3 (degree overlap, Fisher, neighborhood Fisher, preranked GSEA). Accepts `--kept-edges` and `--small-universe` flags | Methods §7 |
 | `chd_resampling_exhaustive.py` | Exhaustive in-memory resampling over all C(15,10) = 3,003 possible 10-gene/5-gene partitions of the CHD gene pool | Methods §9 |
-| `kf_resampling.py` | Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort) | Methods §13 |
+| `kf_resampling.py` | Bootstrap resampling for KF cohort analyses (500 draws × 3 seed sizes per cohort) | Methods §15 |
 | `seed_cui_lookup.py` | Map HGNC gene symbols to UMLS CUIs for use as pipeline seed inputs | Methods §11 |
 | `generate_export_cypher.py` | Generate cohort-specific Neo4j export Cypher queries from a seed gene list | Methods §11 |
 | `build_cilia_reference.py` | Build the cilia pathway reference set by matching pathway names against cilia-related terms | Methods §12 |
