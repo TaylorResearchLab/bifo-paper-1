@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T02:35:02+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T02:35:02+00:00" />
+  <meta name="dc.modified" content="2026-04-24T02:39:05+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T02:39:05+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/15f657889929a2e5778617804878b03f9e95f5dd/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/9d3497939dafc8a597a0d8a0839c6fabb3325cd9/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9d3497939dafc8a597a0d8a0839c6fabb3325cd9/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/9d3497939dafc8a597a0d8a0839c6fabb3325cd9/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -448,7 +448,7 @@ Stability of cilia pathway recovery across seed set sizes is assessed by bootstr
 
 Performance was measured as Precision@10 against the 16-pathway cilia reference, average precision, and rank improvement. The full cohort run (1,276 seeds for KF-CHD; 1,395 for KF-NBL) was included as a reference point. All 1,500 bootstrap runs per cohort were parallelized across 192 cores; total runtime was approximately 150 seconds per cohort.
 
-The bootstrap analysis addresses two questions: whether cilia pathway recovery requires the full cohort-scale variant burden or can emerge from small random gene subsets; and whether BIFO or Fisher enrichment is more sensitive for detecting cilia signal at reduced seed sizes. At bootstrap seed sizes of 10 to 30 genes against a pathway-member universe of approximately 22,600 genes, p-value floor collapse does not occur and standard-precision hypergeometric computation is sufficient.
+The bootstrap analysis addresses two questions: whether cilia pathway recovery requires the full cohort-scale variant burden or can emerge from small random gene subsets; and whether BIFO or Fisher enrichment is more sensitive for detecting cilia signal at reduced seed sizes. At bootstrap seed sizes of 10 to 30 genes against a pathway-member universe of approximately 22,600 genes, p-value floor collapse does not occur and standard-precision hypergeometric computation is sufficient. The gene universe consists of pathway-connected genes derived from membership edges in the merged edge file. The bootstrap uses the same BIFO-filtered pathway universe as the primary cohort analysis; membership construction applies the same size and name-pattern filters as the primary scoring pipeline, with SAB-constraint differences documented in Methods §9.
 
 
 ## Results
