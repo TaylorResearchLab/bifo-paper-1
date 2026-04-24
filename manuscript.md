@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-23'
+date-meta: '2026-04-24'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-23" />
-  <meta name="citation_publication_date" content="2026-04-23" />
-  <meta property="article:published_time" content="2026-04-23" />
-  <meta name="dc.modified" content="2026-04-23T23:04:07+00:00" />
-  <meta property="article:modified_time" content="2026-04-23T23:04:07+00:00" />
+  <meta name="dc.date" content="2026-04-24" />
+  <meta name="citation_publication_date" content="2026-04-24" />
+  <meta property="article:published_time" content="2026-04-24" />
+  <meta name="dc.modified" content="2026-04-24T00:58:23+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T00:58:23+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/e26106bac06ec709723b7266beaa33d20a499cb1/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/fe3fcb35da65bd0dfe0a8a8372b798986002f956/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -596,7 +596,7 @@ To place BIFO performance in context, four baseline enrichment methods were eval
   --------------------------------- ----------- ----------- ------------- ---------------- ---------------
   **Method**                        **P@10**    **P@20**    **NDCG@10**   **Avg. Prec.**   **Mean rank**
 
-  Degree overlap (B0)               0.400       0.400       0.492         0.342            84
+  Degree overlap (B0)               0.400       0.400       0.492         0.343            84
 
   Seed-only Fisher (B1)             0.300       0.200       0.215         0.156            120
 
@@ -611,11 +611,11 @@ To place BIFO performance in context, four baseline enrichment methods were eval
 
 **Table 4.** *Baseline comparison for the curated CHD benchmark. All methods evaluated on identical 550-pathway universe (background rate 3.3%). P@10 = fraction of the top-10 ranked pathways that belong to the CHD reference set. NDCG@10 = normalized discounted cumulative gain at rank 10, which rewards recovering reference pathways at higher ranks more than lower ranks. Avg. Prec. = average precision, the area under the precision-recall curve across all ranks; a single-number summary of how well reference pathways are recovered throughout the full ranked list, not just in the top 10.*
 
-BIFO-PPR full-arm outperformed all baselines across every metric: P@10 = 0.70, meaning 7 of the top 10 ranked pathways were disease-relevant; NDCG@10 = 0.757, reflecting that those hits were concentrated at the very top of the list rather than scattered through the top 10; and AP = 0.408, indicating that CHD reference pathways were recovered consistently throughout the full ranked list. These compare to the next best method (B0) at P@10 = 0.40, NDCG@10 = 0.492, and AP = 0.342.
+BIFO-PPR full-arm outperformed all baselines across every metric: P@10 = 0.70, meaning 7 of the top 10 ranked pathways were disease-relevant; NDCG@10 = 0.753, reflecting that those hits were concentrated at the very top of the list rather than scattered through the top 10; and AP = 0.408, indicating that CHD reference pathways were recovered consistently throughout the full ranked list. These compare to the next best method (B0) at P@10 = 0.40, NDCG@10 = 0.492, and AP = 0.343.
 
 **Seed-only Fisher (B1)** achieved P@10 = 0.30, meaning 3 of the top 10 were CHD-relevant, but the top hits included non-specific entries such as bladder cancer gene sets, TP63 targets, and TNF response pathways. With only ten seed genes, any pathway with even minimal overlap receives a low p-value, so cancer-associated gene sets that happen to share a gene or two with the seed set rank above biologically specific cardiac pathways. AP = 0.156 reflects that this non-specificity persists throughout the ranked list, not just at the top.
 
-**Degree-weighted seed overlap (B0)** performed better than Fisher despite using no statistical test, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.342). This result is informative: it shows that the top cardiac pathways are directly accessible from the seed genes through the membership map, and that graph connectivity alone (out-degree of overlapping seed genes) is enough to surface them. BIFO's advantage over B0 on both P@10 (0.70 vs. 0.40) and AP (0.408 vs. 0.342) reflects recovery of additional reference pathways that are connected to the seeds through the graph but do not directly overlap them, which requires propagation rather than local overlap scoring.
+**Degree-weighted seed overlap (B0)** performed better than Fisher despite using no statistical test, recovering BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT at ranks 1 and 2 through direct membership overlap (P@10 = 0.40, AP = 0.343). This result is informative: it shows that the top cardiac pathways are directly accessible from the seed genes through the membership map, and that graph connectivity alone (out-degree of overlapping seed genes) is enough to surface them. BIFO's advantage over B0 on both P@10 (0.70 vs. 0.40) and AP (0.408 vs. 0.343) reflects recovery of additional reference pathways that are connected to the seeds through the graph but do not directly overlap them, which requires propagation rather than local overlap scoring.
 
 **Neighborhood Fisher (B2)** failed entirely, producing P@10 = 0.000 and AP = 0.036. The 1-hop gene neighborhood around the ten seed genes contained 11,146 genes, which is 86% of the full gene universe. At that coverage, virtually every pathway has substantial neighborhood overlap, and p-values are near-identical across pathways, eliminating all rank discrimination. This illustrates a fundamental problem with graph-derived gene sets: expanding to a neighborhood before enrichment testing inflates the query to the point where the test loses all power.
 
@@ -702,7 +702,7 @@ Rank improvement was positive in all 3,003 splits, ranging from +57.7 to +166.0 
 
 ### 6.2 Pathway precision is stable across nearly all configurations
 
-Median P@10 across all 3,003 splits was 0.40, meaning the typical seed configuration recovers 5 of the 18 CHD reference pathways in the top 10 ranked results. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.10, BIFO-PPR retained detectable pathway signal above background. Average precision ranged from 0.142 to 0.438 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.
+Median P@10 across all 3,003 splits was 0.40, meaning the typical seed configuration recovers 5 of the 18 CHD reference pathways in the top 10 ranked results. In 94.4% of splits (2,835 of 3,003), P@10 was at least 0.30, meaning at least 3 of the top 10 were disease-relevant. In 43.8% of splits (1,314 of 3,003), P@10 was at least 0.50. Even in the least favorable splits, where P@10 reached a minimum of 0.00, BIFO-PPR retained detectable pathway signal above background in nearly all configurations. Average precision ranged from 0.142 to 0.438 with a median of 0.312, indicating that CHD reference pathway recovery is consistent throughout the ranked list across essentially all seed configurations, not just at the top.
 
 ### 6.3 Position of the primary benchmark split
 
