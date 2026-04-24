@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-24" />
   <meta name="citation_publication_date" content="2026-04-24" />
   <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T02:51:25+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T02:51:25+00:00" />
+  <meta name="dc.modified" content="2026-04-24T02:56:16+00:00" />
+  <meta property="article:modified_time" content="2026-04-24T02:56:16+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6c9c3a97cce68a0ba3996bc53fca7e42eba5fa02/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6c9c3a97cce68a0ba3996bc53fca7e42eba5fa02/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6c9c3a97cce68a0ba3996bc53fca7e42eba5fa02/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/adac25c01ccdfc133d891d4bd490514d3461c4ff/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/adac25c01ccdfc133d891d4bd490514d3461c4ff/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/adac25c01ccdfc133d891d4bd490514d3461c4ff/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -581,7 +581,7 @@ This architectural property is a consequence of how curated pathway memberships 
 (**A**) Precision@10: Full 0.70, Ablation 0.60, Mechanistic 0.00. Mechanistic-only scores are zero because pathway nodes are not reached by propagation under this operator.
 (**B**) Enrichment@10 over background rate: Full 21.4×, Ablation 18.3×, Mechanistic 0×.
 (**C**) Rank improvement: Full +125.4, Ablation +13.5, Mechanistic uninterpretable (all scores zero).
-(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 2,130 pathways scored). Seed Fisher (corrected) ranks WP_CILIOPATHIES first; BIFO-PPR full-arm ranks it 43rd (null_z = 41.2); Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 1,994, 456, and 2,126 respectively.
+(**D**) WP_CILIOPATHIES rank under five enrichment methods in the KF-CHD discovery cohort (1,276 variant genes, 2,130 pathways scored), shown here to illustrate performance across all methods including the KF cohort setting; full KF results are in §7. Seed Fisher (corrected) ranks WP_CILIOPATHIES first; BIFO-PPR full-arm ranks it 43rd (null_z = 41.2); Raw PPR GSEA, Conditioned PPR GSEA, and Neighborhood Fisher rank it 1,994, 456, and 2,126 respectively.
 ](images/fig3_ablation.png){#fig:ablation width="100%"}
 
 ![
@@ -719,7 +719,7 @@ Applied to two independent pediatric rare variant cohorts from the Kids First pr
 
 ### 7.1 The enrichment challenge at cohort scale
 
-Rare variant aggregation across a disease cohort typically produces gene lists of 1,000 to 1,500 genes, far larger than the gene sets standard enrichment methods were designed for. At this scale, hypergeometric p-values collapse to near-zero floor values for a large fraction of pathways, compressing rank discrimination. As described in Methods Section 10, this problem is not unique to naive implementations: even with correct log-space computation, a gene list of this size and heterogeneity carries distributed enrichment structure because the biologically relevant signal spans a small subset of genes embedded in a large background of incidental carriers. Fisher can identify the strongest hit when the signal is strong enough -- as it does for WP_CILIOPATHIES in both KF cohorts -- but provides weaker statistical specificity than the rewiring null and less coherent recovery of the full pathway cluster. BIFO-PPR adds graph-propagation signal concentration and pathway-node scoring that is independent of and complementary to direct overlap enrichment.
+Rare variant aggregation across a disease cohort typically produces gene lists of 1,000 to 1,500 genes, far larger than the gene sets standard enrichment methods were designed for. At this scale, hypergeometric p-values collapse to near-zero floor values for a large fraction of pathways, compressing rank discrimination. As described in Methods Section 10, this problem is not unique to naive implementations: even with correct log-space computation, a gene list of this size and heterogeneity carries distributed enrichment structure because the biologically relevant signal spans a small subset of genes embedded in a large background of incidental carriers. Fisher identifies the top-hit overlap when the signal is strong enough -- as it does for WP_CILIOPATHIES in both KF cohorts -- but does not provide pathway-level statistical specificity (distinguishing signal from graph-topology artifacts) or coherent cluster recovery across the full cilia pathway family. BIFO-PPR adds these through the rewiring null and pathway-node scoring, which are structurally independent of direct gene-pathway overlap and therefore provide complementary rather than redundant evidence.
 
 BIFO-PPR addresses this by propagating signal from all seeds simultaneously through the conditioned graph. Coherent biological signal from a functionally related gene subset, such as the 22 cilia-associated genes in the KF-CHD seed pool, concentrates at relevant pathway nodes while incoherent background signal from the remaining 1,254 genes diffuses away. The approach does not require the input gene set to be small or homogeneous.
 
@@ -834,7 +834,7 @@ The cohort-scale cilia signal raises a natural question: does recovery require t
 
 **Table 7.5.** *Bootstrap resampling results. BIFO-PPR vs. Fisher cilia pathway recovery at reduced seed sizes (500 draws per seed size). P@10 and AP are computed against the 16-pathway cilia reference. Primary run rows use the full cohort seed set and are shown as reference points.*
 
-Neither method reliably recovers cilia pathways from small random gene subsets. At n=10 to 30 randomly drawn genes, P@10 is near zero for both methods (BIFO-PPR: 0.008 to 0.011; Fisher: 0.018 to 0.035 in KF-CHD). Fisher finds any cilia pathway in the top 10 in 13 to 21% of bootstrap runs at these seed sizes, compared to 7 to 9% for BIFO-PPR, making Fisher modestly more sensitive at small seed sizes. This reflects a mechanistic difference: Fisher recovers cilia pathways when seed genes directly overlap pathway members, which is more likely at small random samples than establishing distributed propagation signal across the cilia cluster. At cohort scale, both methods converge on WP_CILIOPATHIES as the top or near-top cilia pathway, but through fundamentally different mechanisms.
+Neither method reliably recovers cilia pathways from small random gene subsets, in contrast to the robust recovery observed at full cohort scale. At n=10 to 30 randomly drawn genes, P@10 is near zero for both methods (BIFO-PPR: 0.008 to 0.011; Fisher: 0.018 to 0.035 in KF-CHD). Fisher finds any cilia pathway in the top 10 in 13 to 21% of bootstrap runs at these seed sizes, compared to 7 to 9% for BIFO-PPR, making Fisher modestly more sensitive at small seed sizes. This reflects a mechanistic difference: Fisher recovers cilia pathways when seed genes directly overlap pathway members, which is more likely at small random samples than establishing distributed propagation signal across the cilia cluster. At cohort scale, both methods converge on WP_CILIOPATHIES as the top or near-top cilia pathway, but through fundamentally different mechanisms.
 
 The core finding is that the cilia signal in these cohorts is distributed across many variant genes and requires aggregate cohort-scale burden to emerge reliably. No method recovers it consistently from 10 to 30 randomly drawn genes. This is itself a biological result: it means the signal is not driven by a single highly penetrant gene or a small cluster of genes, but by the collective contribution of many cilia-associated variant carriers across the cohort. BIFO-PPR's graph propagation and pathway-node scoring provide an independent view of that distributed signal, complementary to the direct overlap enrichment that Fisher uses to identify the strongest individual hit.
 
@@ -842,7 +842,7 @@ The core finding is that the cilia signal in these cohorts is distributed across
 **Cross-cohort convergence: KF-CHD and KF-NBL independently recover cilia pathways.**
 (**A**) WP_CILIOPATHIES ranks 43rd (KF-CHD) and 3rd (KF-NBL) under BIFO-PPR full-arm; ranks 1st under corrected Seed Fisher in both cohorts.
 (**B**) BIFO-PPR pathway rank scatter (top 3,000 shown) with cilia pathways highlighted. Cilia pathways cluster in the top-left corner of both axes, indicating concordant prioritization across cohorts.
-(**C**) Cilia pathway cluster: BIFO-PPR rank of each detected cilia-related pathway in KF-CHD (blue circle) vs. KF-NBL (orange triangle). Most detected cilia pathways rank in the upper portion of the scored pathway universe, with WP_CILIOPATHIES and the core ciliopathy cluster ranking highest in both cohorts.
+(**C**) Cilia pathway cluster: BIFO-PPR rank of each detected cilia-related pathway in KF-CHD (blue circle) vs. KF-NBL (orange triangle). Detected cilia pathways cluster in the upper portion of the scored pathway universe, with WP_CILIOPATHIES and the core ciliopathy cluster ranking highest in both cohorts.
 (**D**) Bootstrap resampling against a 16-pathway cilia reference: P@10 distribution for BIFO-PPR (blue) and Seed Fisher (red) at seed sizes n=10, 20, 30 (500 runs per seed size). Cilia signal requires full cohort-scale seed sets; neither method recovers it reliably from 10 to 30 random genes.
 ](images/fig8_crosscohort.png){#fig:crosscohort width="100%"}
 
