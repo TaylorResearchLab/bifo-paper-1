@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-24'
+date-meta: '2026-04-25'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-24" />
-  <meta name="citation_publication_date" content="2026-04-24" />
-  <meta property="article:published_time" content="2026-04-24" />
-  <meta name="dc.modified" content="2026-04-24T04:18:50+00:00" />
-  <meta property="article:modified_time" content="2026-04-24T04:18:50+00:00" />
+  <meta name="dc.date" content="2026-04-25" />
+  <meta name="citation_publication_date" content="2026-04-25" />
+  <meta property="article:published_time" content="2026-04-25" />
+  <meta name="dc.modified" content="2026-04-25T22:36:03+00:00" />
+  <meta property="article:modified_time" content="2026-04-25T22:36:03+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/46c961a6997696bb0101948472913c7922226605/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/46c961a6997696bb0101948472913c7922226605/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/46c961a6997696bb0101948472913c7922226605/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -542,7 +542,7 @@ Each panel compares four PPR propagation arms (Raw, Metadata-filtered, BIFO-cond
 
 ## 3 Pathway prioritization and the role of bridge edges
 
-The three-arm ablation design evaluated pathway prioritization by varying the PPR operator while holding the scoring stage constant across all arms: identical pathway universe (550 pathways), identical CHD reference set (18 pathways), and identical degree_norm scoring function. Differences in outcomes are therefore directly attributable to operator composition.
+The three-arm ablation design evaluated pathway prioritization by varying the PPR operator while holding the scoring stage constant across all arms: identical pathway universe (563 pathways), identical CHD reference set (18 pathways), and identical degree_norm scoring function. Differences in outcomes are therefore directly attributable to operator composition.
 
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
   **Arm**                          **Prop. edges**   **P@10**   **Enrich.10**    **Mean rank**   **Rank imp.**
@@ -554,11 +554,11 @@ The three-arm ablation design evaluated pathway prioritization by varying the PP
   Mechanistic-only                 9,710             0.00       0.0×               177             uninterpretable*
   -------------------------------- ----------------- ---------- ------------------ --------------- --------------------
 
-**Table 3.** *Three-arm pathway prioritization for the curated CHD benchmark. Pathway universe: 550 pathways. CHD reference: 18 pathways. Background rate: 3.3%. Rank improvement = mean_rank(raw) minus mean_rank(conditioned); positive values indicate conditioning improves pathway rank relative to unconditioned propagation. *Mechanistic-only rank improvement is uninterpretable: all pathway scores are exactly zero and tie-ordering is arbitrary.*
+**Table 3.** *Three-arm pathway prioritization for the curated CHD benchmark. Pathway universe: 563 pathways. CHD reference: 18 pathways. Background rate: 3.3%. Rank improvement = mean_rank(raw) minus mean_rank(conditioned); positive values indicate conditioning improves pathway rank relative to unconditioned propagation. *Mechanistic-only rank improvement is uninterpretable: all pathway scores are exactly zero and tie-ordering is arbitrary.*
 
 ### 3.1 Full arm
 
-Under full BIFO conditioning, the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score, yielding rank improvement of +125.4. The top cardiac pathways showed strong separation from the rewiring null: BRUNEAU_SEPTATION_VENTRICULAR (null_z = 15.6, q = 0.034), WP_HEART_DEVELOPMENT (null_z = 16.3, q = 0.034), and WP_CARDIAC_PROGENITOR_DIFFERENTIATION (null_z = 12.3, q = 0.034). Of 550 scored pathways, 16 (2.9%) were significant at q < 0.05 after BH correction, with all top cardiac pathways showing null_z > 9. The member-level null independently supported these results: BRUNEAU_SEPTATION_VENTRICULAR showed member_mean null_z = 10.7 (q = 0.032), WP_HEART_DEVELOPMENT null_z = 10.1 (q = 0.032), and REACTOME_CARDIAC_CONDUCTION null_z = 8.6 (q = 0.032), with 7 of the 17 member-level significant pathways carrying CHD reference annotations.
+Under full BIFO conditioning, the top-10 pathways contained 7 of 18 CHD reference pathways (P@10 = 0.70; enrichment = 21.4× background). BRUNEAU_SEPTATION_VENTRICULAR and WP_HEART_DEVELOPMENT ranked first and second. Mean rank of CHD reference pathways under the conditioned score was 86.6, compared with 212.0 under the raw score, yielding rank improvement of +125.4. The top cardiac pathways showed strong separation from the rewiring null: BRUNEAU_SEPTATION_VENTRICULAR (null_z = 15.6, q = 0.034), WP_HEART_DEVELOPMENT (null_z = 16.3, q = 0.034), and WP_CARDIAC_PROGENITOR_DIFFERENTIATION (null_z = 12.3, q = 0.034). Of 563 scored pathways, 16 (2.9%) were significant at q < 0.05 after BH correction, with all top cardiac pathways showing null_z > 9. The member-level null independently supported these results: BRUNEAU_SEPTATION_VENTRICULAR showed member_mean null_z = 10.7 (q = 0.032), WP_HEART_DEVELOPMENT null_z = 10.1 (q = 0.032), and REACTOME_CARDIAC_CONDUCTION null_z = 8.6 (q = 0.032), with 7 of the 17 member-level significant pathways carrying CHD reference annotations.
 
 ### 3.2 Ablation arm
 
@@ -566,7 +566,7 @@ Removing Pathway Contribution bridge edges from the propagation operator while r
 
 ### 3.3 Mechanistic-only arm
 
-Restricting propagation to strictly mechanistic edges (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes) produced exactly zero scores across all 550 pathways (P@10 = 0.00). This is a structural result, not a performance result. In the present benchmark graph, pathway nodes are not reachable from seed genes through mechanistic edges alone; connectivity between the molecular layer and the pathway annotation layer is mediated exclusively by Pathway Contribution bridge edges. No amount of mechanistic propagation can produce pathway scores in this graph representation without them. The significance of this finding for knowledge graph architecture more broadly is discussed in the Discussion.
+Restricting propagation to strictly mechanistic edges (9,710 edges: Signal Transduction 5,786, Transcription 1,568, Signal Termination 484, and minor mechanistic classes) produced exactly zero scores across all 563 pathways (P@10 = 0.00). This is a structural result, not a performance result. In the present benchmark graph, pathway nodes are not reachable from seed genes through mechanistic edges alone; connectivity between the molecular layer and the pathway annotation layer is mediated exclusively by Pathway Contribution bridge edges. No amount of mechanistic propagation can produce pathway scores in this graph representation without them. The significance of this finding for knowledge graph architecture more broadly is discussed in the Discussion.
 
 ### 3.4 Two-layer graph architecture
 
@@ -591,7 +591,7 @@ Schematic of the conditioned BIFO graph. The molecular layer (top) contains gene
 
 ## 4 Comparison with standard enrichment methods
 
-To place BIFO performance in context, four baseline enrichment methods were evaluated on the identical 550-pathway universe and 18-pathway CHD reference set used in Section 3. The baselines represent approaches a bioinformatician would realistically apply to the same graph-derived data: direct seed overlap with graph structure (B0), seed-only hypergeometric enrichment (B1), 1-hop neighborhood hypergeometric enrichment (B2), and preranked GSEA on PPR scores (B3/B3b). The goal is not to select the best method but to characterize where and why standard approaches fail, and what BIFO adds beyond them.
+To place BIFO performance in context, four baseline enrichment methods were evaluated on the identical 563-pathway universe and 18-pathway CHD reference set used in Section 3. The baselines represent approaches a bioinformatician would realistically apply to the same graph-derived data: direct seed overlap with graph structure (B0), seed-only hypergeometric enrichment (B1), 1-hop neighborhood hypergeometric enrichment (B2), and preranked GSEA on PPR scores (B3/B3b). The goal is not to select the best method but to characterize where and why standard approaches fail, and what BIFO adds beyond them.
 
   --------------------------------- ----------- ----------- ------------- ---------------- ---------------
   **Method**                        **P@10**    **P@20**    **NDCG@10**   **Avg. Prec.**   **Mean rank**
@@ -609,7 +609,7 @@ To place BIFO performance in context, four baseline enrichment methods were eval
   **BIFO-PPR full-arm (degree_norm)**   **0.700**   **0.350**   **0.753**     **0.408**        **87**
   --------------------------------- ----------- ----------- ------------- ---------------- ---------------
 
-**Table 4.** *Baseline comparison for the curated CHD benchmark. All methods evaluated on identical 550-pathway universe (background rate 3.3%). P@10 = fraction of the top-10 ranked pathways that belong to the CHD reference set. NDCG@10 = normalized discounted cumulative gain at rank 10, which rewards recovering reference pathways at higher ranks more than lower ranks. Avg. Prec. = average precision, the area under the precision-recall curve across all ranks; a single-number summary of how well reference pathways are recovered throughout the full ranked list, not just in the top 10.*
+**Table 4.** *Baseline comparison for the curated CHD benchmark. All methods evaluated on identical 563-pathway universe (background rate 3.3%). P@10 = fraction of the top-10 ranked pathways that belong to the CHD reference set. NDCG@10 = normalized discounted cumulative gain at rank 10, which rewards recovering reference pathways at higher ranks more than lower ranks. Avg. Prec. = average precision, the area under the precision-recall curve across all ranks; a single-number summary of how well reference pathways are recovered throughout the full ranked list, not just in the top 10.*
 
 BIFO-PPR full-arm outperformed all baselines across every metric: P@10 = 0.70, meaning 7 of the top 10 ranked pathways were disease-relevant; NDCG@10 = 0.753, reflecting that those hits were concentrated at the very top of the list rather than scattered through the top 10; and AP = 0.408, indicating that CHD reference pathways were recovered consistently throughout the full ranked list. These compare to the next best method (B0) at P@10 = 0.40, NDCG@10 = 0.492, and AP = 0.343.
 
@@ -643,7 +643,7 @@ The CHD curated benchmark is a discovery task: seed genes are transcription fact
 
 Notch signaling was chosen as the first recovery control because it is a well-defined, biologically coherent pathway with clear cardiac relevance: Notch pathway mutations are among the best-characterized causes of congenital heart defects, making it a meaningful test of whether BIFO can recover a pathway family that is directly connected to the disease biology used in the CHD benchmark. Seeds were 30 genes drawn from REACTOME_SIGNALING_BY_NOTCH (44 total members), with 14 members withheld as held-out genes. If BIFO is working correctly, the source pathway should rank first and the broader Notch family should be coherently recovered in the top results.
 
-BIFO-PPR ranked REACTOME_SIGNALING_BY_NOTCH first of 550 pathways, with three additional Notch-family pathways in the top 10 (P@10 = 0.50, enrichment = 25.0×, AP = 0.450). P@10 = 0.50 means 5 of the top 10 ranked pathways belong to the Notch reference family, at 25 times the background rate. AP = 0.450 indicates that Notch-family pathways are recovered coherently throughout the full ranked list, not just clustered at the top. Seed-only Fisher and neighborhood Fisher both produced P@10 = 0.000 in this setting, while raw PPR GSEA achieved P@10 = 0.40 but AP = 0.308. BIFO's AP advantage over raw GSEA (0.450 vs. 0.308) reflects more coherent ordering of the full Notch pathway family at deeper ranks.
+BIFO-PPR ranked REACTOME_SIGNALING_BY_NOTCH first of 563 pathways, with three additional Notch-family pathways in the top 10 (P@10 = 0.50, enrichment = 25.0×, AP = 0.450). P@10 = 0.50 means 5 of the top 10 ranked pathways belong to the Notch reference family, at 25 times the background rate. AP = 0.450 indicates that Notch-family pathways are recovered coherently throughout the full ranked list, not just clustered at the top. Seed-only Fisher and neighborhood Fisher both produced P@10 = 0.000 in this setting, while raw PPR GSEA achieved P@10 = 0.40 but AP = 0.308. BIFO's AP advantage over raw GSEA (0.450 vs. 0.308) reflects more coherent ordering of the full Notch pathway family at deeper ranks.
 
 ### 5.2 C4/MAPK: recovering a broader, less cohesive pathway family
 
@@ -686,7 +686,7 @@ The primary CHD benchmark used a single hand-curated 10-gene seed set. Any singl
   Seed Fisher AP           0.351       0.062      0.171       0.308       0.350        0.394        0.532
   ------------------------ ----------- ---------- ----------- ----------- ------------ ------------ ------------
 
-**Table 6.** *Distribution of BIFO-PPR pathway metrics across all 3,003 exhaustive seed partitions of the 15-gene CHD pool. All splits use identical conditioning (alpha=0.5), 550-pathway universe, and 18-pathway CHD reference. Rank improvement = mean_rank(raw) minus mean_rank(conditioned); positive values indicate conditioning improves pathway rank. Seed Fisher AP is an internal comparator within the split space and is not numerically comparable to the Table 4 Fisher baseline, which uses a different query construction.*
+**Table 6.** *Distribution of BIFO-PPR pathway metrics across all 3,003 exhaustive seed partitions of the 15-gene CHD pool. All splits use identical conditioning (alpha=0.5), 563-pathway universe, and 18-pathway CHD reference. Rank improvement = mean_rank(raw) minus mean_rank(conditioned); positive values indicate conditioning improves pathway rank. Seed Fisher AP is an internal comparator within the split space and is not numerically comparable to the Table 4 Fisher baseline, which uses a different query construction.*
 
 ### 6.1 Rank improvement is positive across every split
 
