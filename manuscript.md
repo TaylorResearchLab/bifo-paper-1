@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-26" />
   <meta name="citation_publication_date" content="2026-04-26" />
   <meta property="article:published_time" content="2026-04-26" />
-  <meta name="dc.modified" content="2026-04-26T01:46:35+00:00" />
-  <meta property="article:modified_time" content="2026-04-26T01:46:35+00:00" />
+  <meta name="dc.modified" content="2026-04-26T01:58:11+00:00" />
+  <meta property="article:modified_time" content="2026-04-26T01:58:11+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acfda8da1d8113e9dd561f1fed551c324e7b3e/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acfda8da1d8113e9dd561f1fed551c324e7b3e/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c9acfda8da1d8113e9dd561f1fed551c324e7b3e/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -140,7 +140,7 @@ These Methods describe the BIFO framework and its application to benchmark evalu
 
 ### 1.1 Ontology design
 
-BIFO transforms a heterogeneous knowledge graph into a propagation-ready structure by restricting information flow to edges consistent with biologically admissible transformations. Starting from an input graph $G = (V, E)$, each edge is classified according to a predefined mapping that assigns it to one of four categories: mechanistic, weak-mechanistic, observational, or contextual. This mapping is implemented through a fixed configuration (bifo_mapping.yaml v0.7.1; 251 predicate-to-flow entries, 96 explicit non-flow designations, 46 observational edge definitions) and is applied uniformly across all analyses.
+BIFO transforms a heterogeneous knowledge graph into a propagation-ready structure by restricting information flow to edges consistent with biologically admissible transformations. Starting from an input graph $G = (V, E)$, each edge is classified according to a predefined mapping that assigns it to one of four categories: mechanistic, weak-mechanistic, observational, or contextual. This mapping is implemented through a fixed configuration (bifo_mapping.yaml v0.7.1; 252 predicate-to-flow entries, 96 explicit non-flow designations, 46 observational edge definitions) and is applied uniformly across all analyses.
 
 Propagation is restricted to edges designated as **admissible**, defined as the union of mechanistic edges, selected weak-mechanistic relationships, and gene-to-pathway membership relationships. Edges classified as observational or contextual are retained in the conditioning output for completeness but are excluded from the propagation operator. This produces a conditioned graph $G_C = (V, E_C)$, where $E_C \subseteq E$ contains only admissible edges.
 
@@ -171,7 +171,7 @@ BIFO classifies each predicate type into one of these categories and assigns a c
 
   **Biochemical Transformation**      24                 mechanistic / weak-mech          Catalysis, synthesis, metabolic conversion
 
-  **Pathway Contribution**            27                 mechanistic / weak-mech          Gene-to-pathway membership bridge edges, see note
+  **Pathway Contribution**            28                 mechanistic / weak-mech          Gene-to-pathway membership bridge edges, see note
 
   **Observational Association**       41                 observational                    Co-expression, text-mining, statistical association
 
@@ -179,7 +179,7 @@ BIFO classifies each predicate type into one of these categories and assigns a c
 
   **State Progression**               19                 mechanistic / weak-mech          Developmental and temporal transitions
 
-  **Other (6 classes)**               15                 mechanistic                      Complex formation, transport, chromatin topology, etc.
+  **Other (7 classes)**               16                 mechanistic                      Complex formation, transport, chromatin topology, etc.
   ----------------------------------- ------------------ -------------------------------- ------------------------------------------------------------------------------------------------
 
 **Table M1.** *BIFO flow class definitions. N predicates = number of DDKG predicate types assigned to this class in v0.7.1. Classification(s) indicates which tier(s) apply within the class. Classes with mixed classifications contain predicates of different evidential quality, classified at the predicate level rather than the class level.*
