@@ -12,7 +12,7 @@ keywords:
 - UBKG
 - bioinformatics
 lang: en-US
-date-meta: '2026-04-25'
+date-meta: '2026-04-26'
 author-meta:
 - Deanne M. Taylor
 - Taha Mohseni Ahooyi
@@ -33,11 +33,11 @@ header-includes: |
   <meta name="citation_title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="og:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
   <meta property="twitter:title" content="BIFO: A Biological Information Flow Ontology for Knowledge Graph-Directed Pathway Analysis of Rare Variant Cohort Data" />
-  <meta name="dc.date" content="2026-04-25" />
-  <meta name="citation_publication_date" content="2026-04-25" />
-  <meta property="article:published_time" content="2026-04-25" />
-  <meta name="dc.modified" content="2026-04-25T22:36:03+00:00" />
-  <meta property="article:modified_time" content="2026-04-25T22:36:03+00:00" />
+  <meta name="dc.date" content="2026-04-26" />
+  <meta name="citation_publication_date" content="2026-04-26" />
+  <meta property="article:published_time" content="2026-04-26" />
+  <meta name="dc.modified" content="2026-04-26T00:45:19+00:00" />
+  <meta property="article:modified_time" content="2026-04-26T00:45:19+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7bbce8a0c19ecc4dfbc9b370f96f1cd51bf0b37b/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/c2a16a19c59e7e3c05e20af1e696eefe8c1ead90/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c2a16a19c59e7e3c05e20af1e696eefe8c1ead90/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/c2a16a19c59e7e3c05e20af1e696eefe8c1ead90/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -432,7 +432,7 @@ Export queries were generated dynamically from each seed list. The KF-CHD export
 
 ## 13 Pathway scoring and reference set
 
-Pathway scoring used degree_norm against a universe of 2,130 pathways for KF-CHD and 2,196 for KF-NBL, each passing the size, name-pattern, and canonical-collection filters described in Section 4.1. Canonical collections retained were Hallmarks, Reactome, WikiPathways, KEGG, BioCarta, and PID; C2.CGP author-named gene expression signature sets were excluded. All pathways were scored and ranked in discovery mode with no reference pathway set pre-specified.
+Pathway scoring used degree_norm against a universe of 2,130 pathways for KF-CHD and 2,196 for KF-NBL, each passing the size, name-pattern, and canonical-collection filters described in Section 4.1. Canonical collections retained were Hallmarks, Reactome, WikiPathways, KEGG, BioCarta, and PID; C2.CGP author-named gene expression signature sets were excluded. All pathways were scored and ranked in discovery mode with no reference pathway set pre-specified. Full pathway-level scoring results for both cohorts, including per-pathway seed gene membership, PPR-normalized member scores, and influential node z-score summaries, are provided as Supplementary Data SD1 (KF-CHD) and SD2 (KF-NBL). Structured input documents for LLM-assisted biological interpretation of these results, including column definitions, analytical task instructions, and provenance records, are provided as Supplementary Tables ST8 (KF-CHD) and ST9 (KF-NBL); verbatim LLM responses are in Supplementary Section S1.
 
 Results were evaluated post-hoc against a 16-pathway cilia reference set pre-specified before scoring, consisting of MSigDB canonical cilia, ciliopathy, and related pathway CUIs (ciliopathies, ciliary, intraflagellar transport, Joubert syndrome, Bardet-Biedl syndrome, primary ciliary dyskinesia, and related terms). Of 17 candidate reference pathways, 16 were present in the scored universe after canonical-collection filtering; this 16-pathway subset is used for all quantitative metrics. A broader 21-pathway expanded reference set including additional GO and Reactome cilia annotations is used for visualization in Figure 4 only.
 
@@ -806,7 +806,7 @@ Figure 8 shows the full rank vs. null_z landscape for all scored pathways in bot
 Each point is a scored pathway (grey: all pathways; blue: 16-pathway cilia reference set). X-axis: degree_norm rank (lower = better). Y-axis: pathway-node rewiring null_z (N = 1,000 permutations; pathways with degenerate null excluded). WP_CILIOPATHIES ranks 43rd/2,130 in KF-CHD (null_z = 41.2, q = 0.008) and 3rd/2,196 in KF-NBL (null_z = 18.4, q = 0.014). Degree_norm rank and null_z are complementary: rank reflects absolute propagated signal; null_z reflects signal relative to a graph-specific null. They are not interchangeable and null_z is not used for primary ranking.
 ](images/fig9_rank_vs_nullz.png){#fig:rank_vs_nullz width="100%"}
 
-Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3. Full cilia pathway cluster rankings are provided in Supplementary Table ST4. Head-to-head rank comparison between Fisher and BIFO-PPR for all scored pathways is provided in Supplementary Table ST5.
+Full top-20 ranked pathways per method for KF-CHD and KF-NBL are provided in Supplementary Table ST3. Full cilia pathway cluster rankings are provided in Supplementary Table ST4. Head-to-head rank comparison between Fisher and BIFO-PPR for all scored pathways is provided in Supplementary Table ST5. Complete scored pathway results for all 2,130 KF-CHD pathways and 2,196 KF-NBL pathways — including per-pathway seed gene membership sorted by PPR score, PPR-normalized member scores, influential node z-score summaries (local and global), and neighbor z-score distribution quantiles — are provided as Supplementary Data SD1 (KF-CHD) and SD2 (KF-NBL). LLM-structured interpretation input documents are provided as Supplementary Tables ST8 (KF-CHD) and ST9 (KF-NBL). Biological interpretation of these results by Claude Opus 4.7 and GPT-5.3 is provided in Supplementary Section S1 and in the main text file `08.llm_interpretation.md` in the manuscript repository.
 
 ### 7.5 Bootstrap resampling: cilia signal requires aggregate variant burden
 
@@ -876,6 +876,8 @@ The degree_norm normalization contributes a second specificity gain. Large, high
 The recovery of WP_CILIOPATHIES as the top statistically enriched pathway in both KF-CHD and KF-NBL is consistent with a genuine shared developmental biology rather than a methodological artifact, for three independent reasons. First, the signal is recovered by two methods with fundamentally different mechanisms: BIFO-PPR through graph propagation and Fisher enrichment through direct gene-pathway overlap. Their concordance on the same top pathway supports that the result reflects the underlying gene set rather than propagation-specific behavior. Second, the signal requires aggregate cohort-scale variant burden: bootstrap resampling shows that neither method recovers cilia pathways reliably from 10 to 30 randomly drawn genes, establishing that the signal is distributed across many variant carriers rather than driven by a single gene or small cluster. Third, the cross-cohort convergence is biologically motivated: children with congenital heart disease have elevated neuroblastoma risk due to shared neural crest developmental origins [@doi:10.1002/1545-5017.70055], and shared genetic architecture between neuroblastoma and ventricular septal defect has been identified at loci regulating neural crest cell formation [@doi:10.3390/genes10090663]. Primary cilia are required for neural crest cell migration, cardiac septation, and left-right asymmetry, making them a mechanistically coherent shared vulnerability across both diseases.
 
 The distinction between degree_norm rank and null_z is biologically important in interpreting the KF results. WP_CILIOPATHIES ranks 43rd in KF-CHD, placing it in the top 2% of 2,130 pathways, but it does not appear in the top 10. The top-ranked pathways by degree_norm include broad hub terms (protein phosphorylation, transmembrane transport, cross-presentation) that accumulate high propagated signal through graph connectivity rather than specific biological relevance to the seed set. WP_CILIOPATHIES has the highest null_z of any well-calibrated pathway (41.2), meaning its score is 41 standard deviations above what is expected from degree-preserving random rewiring of its membership. This establishes that the cilia signal is specific to the gene membership of WP_CILIOPATHIES rather than to its position in the graph. In KF-NBL, WP_CILIOPATHIES ranks 3rd by degree_norm and also carries the highest null_z (18.4), suggesting the NBL seed neighborhood has stronger direct cilia connectivity than the CHD neighborhood, consistent with the neural crest origin of neuroblastoma.
+
+To illustrate the exploratory biological interpretation use case enabled by structured BIFO-PPR outputs, the complete scored pathway results for both KF cohorts — including per-pathway seed gene membership sorted by PPR score, PPR-normalized member scores, influential node z-score summaries (local and global), and a structured analytical task framework — were provided to two large language models (Claude Opus 4.7 and GPT-5.3) in isolated chat sessions. Both models independently recovered the ciliopathy signal as a primary theme, identified DNA repair burden as a secondary theme in KF-NBL, flagged non-obvious network driver genes (E2F1, CD36) in KF-CHD, and issued appropriate skeptical caveats about single-gene-dominated pathways and pathway redundancy. The structured output format and analytical task instructions are described in Supplementary Tables ST8 and ST9; verbatim LLM responses are in Supplementary Section S1.
 
 The Hedgehog depletion finding adds biological precision. Generic Hedgehog signaling pathways show negative null_z values in KF-CHD, indicating depletion rather than enrichment, while cilia-specific pathway terms (basal body anchoring, cilium assembly, intraflagellar transport) show strong positive null_z values. This specificity, with cilia structure and trafficking enriched and broad Hedgehog transcriptional programs depleted, is consistent with the known biology: primary cilia are the cellular compartment in which Hedgehog signaling is transduced, but the developmental vulnerability in these cohorts appears to map to the structural and trafficking functions of the cilium rather than to downstream Hedgehog transcriptional output.
 
@@ -1614,6 +1616,24 @@ are documented in `config/bifo_mapping.yaml` (v0.7.1); all pipeline
 scripts are self-contained with documented inputs and outputs; and a
 self-contained end-to-end test (`examples/minimal_test/`) is provided for
 validation without requiring access to the full graph database.
+
+### ST8: BIFO-PPR LLM interpretation input document — KF-CHD
+
+Structured input document generated by `pipeline/summarize_results.py` and provided to large language models (Claude Opus 4.7 and GPT-5.3) for biological interpretation of KF-CHD pathway results. The document includes: a full column guide with definitions for all output fields (`rank`, `pathway_name`, `source`, `n_members`, `degree_norm`, `null_calibrated`, `null_z`, `empirical_q`, `member_mean_null_z`, `member_mean_q`, `in_reference`, `seed_members`, `seed_member_scores`, `influential_nodes_local`, `influential_nodes_global`, `neighbor_z_local`, `neighbor_z_global`); a structured set of analytical task instructions including investigation of non-obvious network drivers, convergent process analysis, cross-check against cohort phenotype, skeptical pass for single-gene-dominated signals, and drill-down into top pathway score distributions; a data provenance and FAIR assessment section with explicit LLM instructions to assess completeness before interpreting results; an analysis summary with run-level metadata; the full list of 1,276 resolved seed genes as gene symbols; and the top-50 pathways by BIFO score in tabular format. The full input document is available as Supplementary Data SD1 alongside the complete pathway results table. Verbatim LLM responses to this document are provided in Supplementary Section S1 and in `content/08.llm_interpretation.md` in the manuscript repository.
+
+---
+
+### ST9: BIFO-PPR LLM interpretation input document — KF-NBL
+
+Structured input document generated by `pipeline/summarize_results.py` and provided to large language models (Claude Opus 4.7 and GPT-5.3) for biological interpretation of KF-NBL pathway results. The document has identical structure to ST8 but reflects the KF-NBL cohort: 1,395 resolved seed genes from 460 neuroblastoma probands, 2,196 scored pathways, and a provenance record specifying germline rare variant analysis with explicit notation that canonical somatic neuroblastoma drivers (MYCN amplification, TERT rearrangements, LIN28B, somatic ALK) are not expected in the seed list. The document includes the analytical task instructions described in ST8, with the additional context that the large seed set (1,395 genes) is expected to saturate the global influential-node threshold, such that non-seed network drivers may not emerge in this run — an expected regime property rather than a method failure, noted explicitly in the provenance and column guide. The full input document is available as Supplementary Data SD2 alongside the complete pathway results table. Verbatim LLM responses to this document are provided in Supplementary Section S1 and in `content/08.llm_interpretation.md` in the manuscript repository.
+
+---
+
+### S1: LLM biological interpretation of KF cohort BIFO-PPR results
+
+Verbatim biological interpretation responses from Claude Opus 4.7 and GPT-5.3 (instant), run in parallel on isolated chat sessions using the input documents described in ST8 and ST9. Both models were instructed to follow the analytical task framework defined in the input documents, including FAIR provenance assessment, investigation of non-obvious network drivers, cross-check against cohort phenotype, skeptical pass, and drill-down into top pathway scores. Full verbatim responses for KF-CHD and KF-NBL from both models are provided in `content/08.llm_interpretation.md` in the manuscript repository. These outputs are illustrative of the exploratory biological interpretation use case enabled by the structured BIFO-PPR output format and are not part of the quantitative evaluation of BIFO-PPR.
+
+---
 
 ### S6.1 Pipeline scripts (`pipeline/`)
 
