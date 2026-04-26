@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-26" />
   <meta name="citation_publication_date" content="2026-04-26" />
   <meta property="article:published_time" content="2026-04-26" />
-  <meta name="dc.modified" content="2026-04-26T04:33:38+00:00" />
-  <meta property="article:modified_time" content="2026-04-26T04:33:38+00:00" />
+  <meta name="dc.modified" content="2026-04-26T04:38:51+00:00" />
+  <meta property="article:modified_time" content="2026-04-26T04:38:51+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/7b439a114236e32e3906cb150445384de111bfc4/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7b439a114236e32e3906cb150445384de111bfc4/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/7b439a114236e32e3906cb150445384de111bfc4/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/298986e4a6584580eccc53a1c80e51be067575d4/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/298986e4a6584580eccc53a1c80e51be067575d4/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/298986e4a6584580eccc53a1c80e51be067575d4/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -350,11 +350,11 @@ This baseline uses graph structure but not propagation: it scores pathways based
 
 **B1: Seed-only hypergeometric enrichment.** A one-tailed hypergeometric test is applied for each pathway, testing whether seed genes are over-represented among pathway members relative to a background gene universe. P-values are BH-corrected across all pathways. This baseline represents what a bioinformatician would do with the seed gene list alone and no graph information.
 
-The choice of gene universe matters substantially. For the curated benchmark (10 seeds against a universe of approximately 13,000 graph-connected genes), standard-precision computation is used and produces the honest result: non-specific hits dominate because a ten-gene query cannot discriminate against a large background. For large gene sets such as the KF cohort analyses (1,276 to 1,395 seeds against a universe of approximately 22,600 genes), standard-precision hypergeometric computation returns p = 0.0 for every pathway with any meaningful overlap, eliminating rank discrimination entirely. In this regime, log-space computation is required to recover correct relative ordering, and the gene universe is restricted to pathway member genes (excluding seed genes) rather than all graph-connected genes. These two modes test different statistical hypotheses and produce numerically incomparable results; the appropriate mode for each analysis is specified where results are reported.
+B1 is run in two regimes that differ in numerical precision and gene universe definition. The standard regime is appropriate when the seed query is small relative to the gene universe, as in the curated benchmark (10 seeds against approximately 13,000 graph-connected genes); in this regime non-specific hits dominate because a ten-gene query cannot discriminate against a large background, but rank ordering is preserved. The log-space regime is required for the KF cohort analyses (1,276 to 1,395 seeds), where standard-precision hypergeometric computation returns p = 0.0 for every pathway with any meaningful overlap and rank discrimination collapses; the log-space regime restricts the gene universe to pathway-member genes and computes survival probabilities in log space to preserve ranking. The two regimes answer different statistical questions on different gene universes and produce numerically incomparable results. The appropriate regime for each analysis is specified where results are reported. Implementation details, including the scipy functions used in each regime, the relationship between universe size and the K parameter, and the underflow-floor handling, are provided in Supplementary §SM3.1.
 
 **B2: 1-hop neighborhood hypergeometric enrichment.** The query set is expanded to include all gene-concept neighbors of the seed genes in the merged edge file, and the same hypergeometric test is applied to the expanded query. This represents the natural workflow of extracting a graph neighborhood and running standard enrichment. The neighborhood inflation problem, in which the expanded query covers the majority of the pathway gene universe and eliminates discriminative power, is itself an informative result about the limitations of this approach.
 
-**B3 / B3b: Preranked GSEA on PPR scores.** Genes are ranked by descending PPR score (raw graph for B3; BIFO-conditioned graph for B3b) and a weighted running-sum enrichment score is computed for each pathway following the preranked GSEA algorithm of Subramanian et al. [@doi:10.1073/pnas.0506580102]. The implementation is a from-scratch numpy-based computation in `pipeline/baseline_enrichment.py` rather than a third-party package such as `fgsea` or `gseapy`, because the standard packages return permutation-based p-values and our evaluation framework requires rank-based metrics directly comparable to the BIFO-PPR pathway ranking. The hit weighting uses absolute PPR score (the `p = 1` weighted variant in the original GSEA formulation); the miss penalty is uniform across non-member genes (`1 / n_misses`). The pathway membership map is identical to the one used by BIFO-PPR, drawn from the same MSigDB and WikiPathways pathway concept nodes (n = 2,130 pathways for the KF cohorts after the 8–300 member size filter), so that the gene set universe is matched 1:1 across methods. For each pathway, the algorithm reports the maximum-deviation enrichment score and the leading-edge gene set; pathways are then ranked by enrichment score for evaluation against the reference pathway set. No permutation-based null distribution is computed for the GSEA arms, since the comparison metric (Average Precision and Precision@k against the held-out reference pathway set) operates on the pathway ranking directly. B3 tests whether propagation alone recovers pathway-relevant signal without BIFO conditioning. B3b tests whether BIFO-conditioned gene-level scores, used as input to GSEA, improve over raw propagation. The difference between B3b and the BIFO-PPR full arm isolates the contribution of the degree_norm pathway-level scoring function beyond what gene-level score ordering provides.
+**B3 / B3b: Preranked GSEA on PPR scores.** Genes are ranked by descending PPR score (raw graph for B3; BIFO-conditioned graph for B3b) and a weighted running-sum enrichment score is computed for each pathway following the preranked GSEA algorithm of Subramanian et al. [@doi:10.1073/pnas.0506580102]. The pathway membership map is identical to the one used by BIFO-PPR, drawn from the same MSigDB and WikiPathways pathway concept nodes, so that the gene set universe is matched 1:1 across methods. Pathways are ranked by enrichment score for evaluation against the reference pathway set. B3 tests whether propagation alone recovers pathway-relevant signal without BIFO conditioning. B3b tests whether BIFO-conditioned gene-level scores, used as input to GSEA, improve over raw propagation. The difference between B3b and the BIFO-PPR full arm isolates the contribution of the degree_norm pathway-level scoring function beyond what gene-level score ordering provides. Implementation details, including the from-scratch numpy-based computation, the weighting and miss-penalty parameters, the size filter, and the rationale for not computing a permutation-based null, are provided in Supplementary §SM3.2.
 ## 8 Evaluation metrics
 
 Metrics are computed at two levels. Gene-level metrics evaluate how well PPR propagation recovers held-out disease genes, testing signal localization. Pathway-level metrics evaluate how well pathway scoring ranks disease-relevant pathways, which is the primary evaluation target.
@@ -401,7 +401,7 @@ The CHD curated benchmark evaluates BIFO from a single fixed seed configuration,
 
 The PPR operators and pathway membership map are built once and held in memory. For each of the 3,003 splits only the seed vector is modified; the adjacency matrices, pathway universe, and reference set remain identical to the primary benchmark. Per-split metrics are accumulated in memory and written as a single output file at the end of the run, avoiding thousands of intermediate files.
 
-For each split the following are computed: BIFO-PPR full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions.
+For each split the following are computed: BIFO-PPR full-arm pathway metrics (P@10, P@20, enrichment@10, NDCG@10, average precision, mean reference pathway rank, and rank improvement); gene-level AUPRC for held-out gene recovery; and a seed-overlap Fisher baseline. The seed-overlap Fisher computed here uses the split seed genes directly as the query set, testing whether those specific genes are over-represented as pathway members. This is distinct from the B1 and B2 baselines in Section 7, which use the full seed set or its graph neighborhood; the two are not numerically comparable and address different questions. The resampling Fisher uses standard-precision hypergeometric computation throughout; query sizes in the resampling regime (n = 10 to 30 split seeds; n = 10 to 30 bootstrap seeds in §15) do not trigger the p-value floor collapse that necessitates the log-space regime in the full-cohort analyses (see Supplementary §SM3.3).
 
 The analysis is parallelized using Python multiprocessing; PPR operator components are serialized to worker processes at startup and each worker processes an assigned batch of splits independently. Results are summarized as distribution statistics across all 3,003 splits, robustness counts, and the primary benchmark split identified as an anchor point within the full distribution. The primary split corresponds to the first 10 genes in the defined CHD pool ordering. The pathway universe for resampling is filtered to the BIFO-scored pathway universe, ensuring direct comparability with the primary benchmark; the gene universe is derived from all C-prefixed nodes in the merged edge file. Membership construction applies the same size and name-pattern filters as the primary scoring pipeline; the BIFO universe restriction provides equivalent coverage of cross-vocabulary exclusions applied by the SAB-aware membership construction in the primary scoring pipeline.
 
@@ -970,6 +970,51 @@ All query files are provided in the repository at `cypher/`. The four-query stru
 | `kf_nbl_export_queries.cypher` | KF-NBL cohort | 1,395 seed CUIs | Generated by `generate_export_cypher.py` from seed list |
 
 **Note on KF cohort query generation.** The KF cohort cypher files were generated programmatically from CUI-resolved seed lists using `generate_export_cypher.py` rather than hand-authored, due to the large number of seed genes. The generated queries follow the same four-query structure as the curated benchmark files. The header comment in each KF query file records the MAF threshold and carrier-count filter parameters used to select the seed set.
+
+
+### SM3: Baseline implementation details
+
+The baseline enrichment methods described in Methods §7 (B0–B3b) are implemented in `pipeline/baseline_enrichment.py`. This section documents implementation details that are relevant to reproducibility and to interpreting the numerical comparison between BIFO-PPR and the baselines, but that would crowd the main Methods text.
+
+#### SM3.1 Hypergeometric (Fisher) baselines: precision regimes
+
+The B1 and B2 baselines are one-tailed hypergeometric tests applied per pathway. Both baselines run in one of two regimes selected by the `--small-universe` command-line flag. The two regimes are not interchangeable: they answer different statistical questions on different gene universes and produce numerically incomparable results. The appropriate regime is selected based on query size relative to the gene universe, and is reported alongside results in Methods §§7, 9, 13, 14, 15.
+
+The two regimes differ in three coupled ways:
+
+| Parameter | Standard regime (default) | Log-space regime (`--small-universe`) |
+|---|---|---|
+| Library function | `scipy.stats.hypergeom.sf(k-1, N, K, n)` | `scipy.stats.hypergeom.logsf(k-1, N_full, K, n_full)` |
+| Returns | Survival probability (linear-space p-value) | Log of survival probability |
+| Gene universe (N) | Graph-connected genes (~13,000 for benchmark; ~22,600 for KF cohorts) | Pathway-member genes only (~4,000) |
+| Pathway positives (K) | members ∩ universe | full pathway membership |
+| Query (n) | seeds in universe | seeds projected to pathway-member universe |
+| Floor behavior | Returns p = 0.0 below ~10^-300 (float64 underflow), eliminating rank discrimination | Preserves rank ordering down to the precision of `logsf` (~10^-300 in log space, far below where it matters for ranking) |
+
+The standard regime is appropriate when the seed query is small relative to the universe, in which case the survival function does not underflow and rank ordering is preserved naturally. It is used for the curated CHD benchmark (10 seeds), the C4 controls, and the resampling Fisher analyses (10–30 seeds per draw). It is not appropriate for the full KF cohort analyses, where 1,276–1,395 seeds against ~22,600 background genes drives the survival function below 10^-300 for every pathway with any meaningful overlap, returning p = 0.0 from `hypergeom.sf` and eliminating rank discrimination entirely.
+
+The log-space regime addresses this by computing `hypergeom.logsf` directly and ranking pathways by log-p-value rather than by p-value. The displayed p-value is reconstructed via `np.exp(log_p)` only when `log_p > -700`; below that threshold the displayed p is reported as 0.0 to avoid `np.exp` underflow, but the underlying log-p-value is preserved internally for ranking. This means rank ordering is preserved down to whatever precision `logsf` provides, which extends well below the float64 floor that defeats `sf`. Benjamini–Hochberg correction is applied across the log-p-values by sorting on log-p and adjusting; the correction is mathematically valid in either regime since BH is monotone in p-value.
+
+The change of universe between regimes is structural rather than cosmetic. In the standard regime, restricting the universe to ~4,000 pathway-member genes would change the test's null hypothesis (it would test whether seeds are over-represented among one specific subset of the gene universe, rather than against the genome-equivalent background). In the log-space regime, the smaller universe is appropriate because the question being asked is whether the seed gene list is enriched for pathway membership conditional on being a pathway-annotated gene, not whether it is enriched relative to the full genome. The two questions are biologically different but each is sensible for its setting.
+
+#### SM3.2 Preranked GSEA (B3 / B3b)
+
+The B3 and B3b baselines compute the preranked GSEA enrichment score of Subramanian et al. [@doi:10.1073/pnas.0506580102]. The implementation is a from-scratch numpy-based computation in `pipeline/baseline_enrichment.py` (function `preranked_gsea_enrichment`) rather than a third-party package such as `fgsea` or `gseapy`. The reason is that standard packages return permutation-based p-values, and our evaluation framework requires rank-based metrics (Average Precision, Precision@k against a held-out reference pathway set) directly comparable to the BIFO-PPR pathway ranking, which does not produce p-values at all.
+
+For each pathway, the algorithm computes the maximum signed deviation of a running-sum statistic over genes ranked by descending PPR score (raw graph for B3; BIFO-conditioned graph for B3b):
+
+- Hit weighting uses absolute PPR score for member genes, the `p = 1` weighted variant in the original GSEA formulation. When all hit genes have zero PPR score, the implementation falls back to unweighted hit counts (a defensive case that is rarely triggered with PPR-propagated seeds).
+- Miss penalty is uniform across non-member genes: `1 / n_misses`, where `n_misses` is the count of non-member genes in the gene universe.
+- The maximum-deviation enrichment score (which can be positive for enrichment or negative for depletion) is the standard GSEA enrichment score; for this paper only positive enrichment is reported.
+- The leading-edge gene fraction is reported alongside the enrichment score.
+
+The pathway membership map is identical to the one used by BIFO-PPR: drawn from the same MSigDB and WikiPathways pathway concept nodes, with the same 8–300 member size filter applied. For the KF cohorts this gives n = 2,130 pathways evaluated. The gene set universe is matched 1:1 across BIFO-PPR and the GSEA arms.
+
+Pathways are ranked by enrichment score for evaluation against the reference pathway set. No permutation-based null distribution is computed for the GSEA arms. The standard GSEA permutation null is designed for hypothesis testing on transcriptomic ranking and provides a normalized enrichment score (NES) and FDR-adjusted p-value; neither is needed for our rank-based comparison metrics. Computing one would require defining a permutation procedure for PPR scores (which themselves arise from a deterministic graph computation given fixed seeds, with no obvious null perturbation); we did not pursue this. The omission is a design choice tied to the rank-based evaluation framework, not a failure to compute a needed statistic.
+
+#### SM3.3 Resampling Fisher precision
+
+The resampling Fisher baselines in `pipeline/chd_resampling_exhaustive.py` (benchmark exhaustive resampling) and `pipeline/kf_resampling.py` (KF cohort bootstrap resampling) use standard-precision `hypergeom.sf` exclusively. These scripts do not implement a log-space regime. This is appropriate because the query sizes in the resampling settings (10 to 30 seeds per draw) do not trigger the p-value floor collapse that necessitates the log-space regime in the full-cohort analyses; standard-precision computation preserves rank ordering throughout.
 
 ## Supplementary Tables
 
