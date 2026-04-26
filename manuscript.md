@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-26" />
   <meta name="citation_publication_date" content="2026-04-26" />
   <meta property="article:published_time" content="2026-04-26" />
-  <meta name="dc.modified" content="2026-04-26T03:52:41+00:00" />
-  <meta property="article:modified_time" content="2026-04-26T03:52:41+00:00" />
+  <meta name="dc.modified" content="2026-04-26T04:01:07+00:00" />
+  <meta property="article:modified_time" content="2026-04-26T04:01:07+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/f1bc078219ac97541cd45cba6918c6e00492566d/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f1bc078219ac97541cd45cba6918c6e00492566d/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/f1bc078219ac97541cd45cba6918c6e00492566d/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/89d31b8e0f57a8574cbd28a7ce52cb99ae589bed/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/89d31b8e0f57a8574cbd28a7ce52cb99ae589bed/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/89d31b8e0f57a8574cbd28a7ce52cb99ae589bed/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -861,7 +861,7 @@ The three-arm ablation reveals something about the structure of ontology-aligned
 
 This two-layer architecture has a practical implication for any graph-based inference method operating on similar representations. Propagation methods that do not explicitly admit bridge edges as a propagation-eligible class will produce zero pathway scores regardless of how rich the mechanistic layer is. The contribution of BIFO is not to add information to the graph but to make the admissibility decision explicit: bridge edges are formally defined as a propagation-eligible class, signal flows unidirectionally from gene nodes to pathway nodes, and the conditioning operator encodes this asymmetry in the adjacency matrix. Without this explicit admission, the two layers remain structurally disconnected for propagation purposes even when the edges connecting them are present in the graph.
 
-The mechanistic-only arm establishes this result directly. It is not intended as a competitive baseline. Its purpose is to prove that the zero-score outcome is structural, which is what justifies BIFO's admission of bridge edges as a formally defined class rather than treating them as an implementation detail. A reviewer might ask: if mechanistic-only propagation yields zero pathway scores, what is the point of including mechanistic edges at all? The ablation arm answers this: mechanistic edges concentrate signal within biologically coherent gene neighborhoods before it transfers to the pathway layer through bridge edges, contributing a measurable improvement in pathway recovery (P@10 = 0.60 vs. 0.70 without vs. with bridge edges in the full arm). The mechanistic layer does not reach pathway nodes directly, but it shapes the signal that bridge edges ultimately transfer.
+The mechanistic-only arm establishes this result directly. It is not intended as a competitive baseline. Its purpose is to show that the zero-score outcome is structural, which is what justifies BIFO's admission of bridge edges as a formally defined class rather than treating them as an implementation detail. The result raises an apparent puzzle: if mechanistic-only propagation yields zero pathway scores, mechanistic edges might appear to contribute nothing to pathway inference. The full ablation resolves this. Mechanistic edges concentrate signal within biologically coherent gene neighborhoods before it transfers to the pathway layer through bridge edges, contributing a measurable improvement in pathway recovery (P@10 = 0.60 vs. 0.70 without vs. with bridge edges in the full arm). The mechanistic layer does not reach pathway nodes directly, but it shapes the signal that bridge edges ultimately transfer.
 
 ### Propagation and scoring as distinct contributions
 
