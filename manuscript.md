@@ -36,8 +36,8 @@ header-includes: |
   <meta name="dc.date" content="2026-04-26" />
   <meta name="citation_publication_date" content="2026-04-26" />
   <meta property="article:published_time" content="2026-04-26" />
-  <meta name="dc.modified" content="2026-04-26T01:58:11+00:00" />
-  <meta property="article:modified_time" content="2026-04-26T01:58:11+00:00" />
+  <meta name="dc.modified" content="2026-04-26T02:10:53+00:00" />
+  <meta property="article:modified_time" content="2026-04-26T02:10:53+00:00" />
   <meta name="dc.language" content="en-US" />
   <meta name="citation_language" content="en-US" />
   <meta name="dc.relation.ispartof" content="Manubot" />
@@ -69,9 +69,9 @@ header-includes: |
   <meta name="citation_fulltext_html_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/" />
   <meta name="citation_pdf_url" content="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
   <link rel="alternate" type="application/pdf" href="https://TaylorResearchLab.github.io/bifo-paper-1/manuscript.pdf" />
-  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/" />
-  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/" />
-  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/8a0ffca3d53bd00b10ad68eb1267c017620e66ac/manuscript.pdf" />
+  <link rel="alternate" type="text/html" href="https://TaylorResearchLab.github.io/bifo-paper-1/v/6f92d9501867529093f44d94d9cc3785a93c5769/" />
+  <meta name="manubot_html_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6f92d9501867529093f44d94d9cc3785a93c5769/" />
+  <meta name="manubot_pdf_url_versioned" content="https://TaylorResearchLab.github.io/bifo-paper-1/v/6f92d9501867529093f44d94d9cc3785a93c5769/manuscript.pdf" />
   <meta property="og:type" content="article" />
   <meta property="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://manubot.org/favicon-192x192.png" />
@@ -102,9 +102,9 @@ Deanne M. Taylor^1,2^✉^^, Taha Mohseni Ahooyi^1^, Benjamin Stear^1^, Yuanchao 
 
 Biological knowledge graphs integrate heterogeneous data across molecular, cellular, and phenotypic domains, but graph traversal treats mechanistic relationships, statistical associations, and annotation edges equivalently, propagating signal along biologically invalid paths and making causal and non-causal explanations computationally indistinguishable. Standard enrichment approaches compound this problem: they lose statistical power at small gene set sizes and collapse numerically at the large gene set sizes produced by rare variant aggregation.
 
-We introduce the Biological Information Flow Ontology (BIFO), a formal specification of admissible biological entities, states, and the directional information flows between them. Applied to a heterogeneous knowledge graph, BIFO conditioning produces a constrained propagation substrate in which signal traverses only biologically valid paths. We implement this as BIFO-PPR, combining BIFO conditioning with Personalized PageRank propagation and degree-normalized pathway scoring. In a three-arm ablation, we establish that pathway inference in ontology-aligned knowledge graphs depends on a structurally distinct bridge layer: mechanistic-only propagation yields zero pathway scores because pathway nodes are unreachable through mechanistic edges alone, while BIFO-conditioned propagation with explicit bridge admission enables signal transfer between the molecular and pathway annotation layers.
+We introduce the Biological Information Flow Ontology (BIFO), a formal specification of admissible biological entities, states, and the directional information flows between them. Applied to a heterogeneous knowledge graph, BIFO conditioning produces a constrained propagation substrate in which signal traverses only biologically valid paths. We implement this as BIFO-PPR, combining BIFO conditioning with Personalized PageRank propagation and degree-normalized pathway scoring. BIFO-PPR is the implementation through which we evaluate BIFO; the experiments that follow test whether ontology-grounded constraints on information flow produce measurable improvements in pathway inference relative to standard methods that treat all edges equivalently. In a three-arm ablation, we establish that pathway inference in ontology-aligned knowledge graphs depends on a structurally distinct bridge layer: mechanistic-only propagation yields zero pathway scores because pathway nodes are unreachable through mechanistic edges alone, while BIFO-conditioned propagation with explicit bridge admission enables signal transfer between the molecular and pathway annotation layers.
 
-Across a curated congenital heart disease benchmark, BIFO-PPR achieves P@10 = 0.70 versus 0.30 for correctly implemented Fisher enrichment and 0.10 for propagation-based baselines. In two independent rare variant cohorts from the Kids First program, BIFO-PPR recovers a coherent ciliopathy pathway cluster in both congenital heart disease and neuroblastoma. WP_CILIOPATHIES carries the strongest statistical enrichment signal among well-calibrated pathways in KF-CHD (null_z = 41.2, q = 0.008, rank 43 of 2,130) and ranks third in KF-NBL (null_z = 18.4, q = 0.014). Correctly implemented Fisher enrichment independently ranks WP_CILIOPATHIES first in both cohorts, supporting that the ciliopathy signal reflects underlying biology. BIFO-PPR additionally recovers this signal in the large gene set regime where Fisher enrichment loses discriminative power.
+Across a curated congenital heart disease benchmark, BIFO-PPR achieves P@10 = 0.70 versus 0.30 for correctly implemented Fisher enrichment and 0.10 for propagation-based baselines. In two independent rare variant cohorts from the Kids First program, BIFO-PPR recovers a coherent ciliopathy pathway cluster in both congenital heart disease and neuroblastoma. WP_CILIOPATHIES carries the strongest statistical enrichment signal under the rewiring null among well-calibrated pathways in KF-CHD (null_z = 41.2, q = 0.008, rank 43 of 2,130) and ranks third in KF-NBL (null_z = 18.4, q = 0.014). Correctly implemented Fisher enrichment independently ranks WP_CILIOPATHIES first in both cohorts, supporting that the ciliopathy signal reflects underlying biology. BIFO-PPR additionally recovers this signal where Fisher enrichment loses discriminative power or pathway-level specificity.
 
 BIFO provides a principled approach to a problem that affects any inference task on heterogeneous biological graphs: the inability to distinguish biologically meaningful signal from incidental connectivity when edge types are treated equivalently.
 
