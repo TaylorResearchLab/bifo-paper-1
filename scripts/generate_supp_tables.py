@@ -4,8 +4,8 @@ generate_supp_tables.py
 Generates Supplementary Tables ST1–ST4 as markdown from BIFO pipeline outputs.
 
 Usage (on HPC):
-    cd /mnt/isilon/taylor_lab/data/projects/BIFO_2026/
-    python3 generate_supp_tables.py
+    cd /path/to/example/projects/BIFO_2026/
+    BIFO_ROOT=/path/to/example/projects/BIFO_2026 python3 generate_supp_tables.py
 
 Output:
     supp_tables_ST1_ST4.md  — review, then paste sections into 07.supplementary.md
@@ -20,9 +20,10 @@ import sys
 # PATHS
 # =============================================================================
 
-CHD_BENCHMARK  = "/mnt/isilon/taylor_lab/data/projects/BIFO_2026/results/chd_curated"
-KF_CHD_RESULTS = "/mnt/isilon/taylor_lab/data/projects/BIFO_2026/bifo_run_chd/kf_chd_results"
-KF_NBL_RESULTS = "/mnt/isilon/taylor_lab/data/projects/BIFO_2026/bifo_run_nbl/kf_nbl_results"
+BIFO_ROOT = os.environ.get("BIFO_ROOT", "/path/to/example/projects/BIFO_2026")
+CHD_BENCHMARK = os.path.join(BIFO_ROOT, "results/chd_curated")
+KF_CHD_RESULTS = os.path.join(BIFO_ROOT, "bifo_run_chd/kf_chd_results")
+KF_NBL_RESULTS = os.path.join(BIFO_ROOT, "bifo_run_nbl/kf_nbl_results")
 
 OUTPUT_FILE = "supp_tables_ST1_ST4.md"
 
